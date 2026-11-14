@@ -1,5 +1,4 @@
-
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="so">
 <head>
     <meta charset="UTF-8">
@@ -272,36 +271,33 @@
             font-size: 0.85rem;
             color: rgba(0, 255, 65, 0.7);
             margin-top: auto;
-            margin-bottom: 60px; /* Space for floating button */
+            margin-bottom: 60px;
         }
 
-        /* ================= FIXED FLOATING CORNER BUTTON ================= */
+        /* ================= 100% WORKING FLOATING BUTTON ================= */
         .floating-game-btn {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            background: linear-gradient(135deg, #0055ff, #00f3ff);
-            color: #fff;
-            border: 2px solid var(--ef-yellow);
-            padding: 16px 26px;
+            background: linear-gradient(135deg, #ff0055, #ffd700);
+            color: #000;
+            border: 3px solid #fff;
+            padding: 16px 28px;
             border-radius: 50px;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 1.05rem;
             cursor: pointer;
-            z-index: 99999; /* La hubiyo inuu kor joogo wax walba */
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.9);
+            z-index: 9999999;
+            box-shadow: 0 0 35px rgba(255, 0, 85, 0.9);
             display: flex;
             align-items: center;
             gap: 12px;
             animation: bounceFloat 2s infinite;
             font-family: 'Segoe UI', sans-serif;
-            pointer-events: auto;
         }
 
         .floating-game-btn:hover {
-            transform: scale(1.08);
-            background: linear-gradient(135deg, #ff0055, #ffd700);
-            color: #000;
+            transform: scale(1.1);
         }
 
         /* ================= POPUP eFOOTBALL MODAL ================= */
@@ -311,7 +307,7 @@
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             background: rgba(2, 6, 12, 0.96);
-            z-index: 999999;
+            z-index: 99999999;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -536,8 +532,8 @@
                 <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
             </div>
             <div class="terminal-body" id="term-out">
-                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v6.1 ===</div>
-                <div>Nidaamku wuu shaqaynayaa. Guji badhanka buluugga ah ee geeska hoose si aad u ciyaarto eFootball!</div>
+                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v6.2 ===</div>
+                <div>Guji badhanka cas/jaalaha ah ee geeska hoose si aad u furto eFootball!</div>
                 <br>
             </div>
             <div class="input-bar">
@@ -560,8 +556,8 @@
         &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | All Rights Reserved
     </footer>
 
-    <!-- ================= FIXED & CLICKABLE FLOATING BUTTON ================= -->
-    <button id="openGameBtn" class="floating-game-btn" type="button">
+    <!-- ================= 100% CLICKABLE ONCLICK FLOATING BUTTON ================= -->
+    <button class="floating-game-btn" onclick="openGameModal()">
         <span>⚽</span>
         <span>eFOOTBALL ONLINE (PVP)</span>
     </button>
@@ -585,7 +581,7 @@
                     <span style="color: #4da6ff;">BLUE</span> <span id="s-blue" style="color: var(--ef-yellow);">0</span> - <span id="s-red" style="color: var(--ef-yellow);">0</span> <span style="color: #ff4d6d;">RED</span>
                 </div>
 
-                <button id="closeGameBtn" class="close-modal-btn" type="button">✖ XIDH</button>
+                <button class="close-modal-btn" onclick="closeGameModal()">✖ XIDH</button>
             </div>
 
             <div class="arena-layout">
@@ -616,6 +612,248 @@
             <div class="controls-strip">
                 <div class="pad-group">
                     <button class="g-btn" onmousedown="keys['ArrowLeft']=true" onmouseup="keys['ArrowLeft']=false" ontouchstart="keys['ArrowLeft']=true" ontouchend="keys['ArrowLeft']=false">◀</button>
-                    <button class="g-btn" onmousedown="keys['ArrowUp']=true
+                    <button class="g-btn" onmousedown="keys['ArrowUp']=true" onmouseup="keys['ArrowUp']=false" ontouchstart="keys['ArrowUp']=true" ontouchend="keys['ArrowUp']=false">▲</button>
+                    <button class="g-btn" onmousedown="keys['ArrowDown']=true" onmouseup="keys['ArrowDown']=false" ontouchstart="keys['ArrowDown']=true" ontouchend="keys['ArrowDown']=false">▼</button>
+                    <button class="g-btn" onmousedown="keys['ArrowRight']=true" onmouseup="keys['ArrowRight']=false" ontouchstart="keys['ArrowRight']=true" ontouchend="keys['ArrowRight']=false">▶</button>
+                </div>
+                <div style="font-size: 0.75rem; color: #aaa;">P1: Fallaaraha + [SPACE] | P2: W,A,S,D + [F]</div>
+                <div class="pad-group">
+                    <button class="g-btn" style="background: #cc0044; border-color: #fff;" onclick="shoot(p1)">⚽ LAAD</button>
+                    <button class="g-btn" style="background: #006622;" onclick="resetBall()">↻ KICK OFF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Background
+        const mCanvas = document.getElementById('matrix-bg');
+        const mCtx = mCanvas.getContext('2d');
+        function resizeM() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeM);
+        resizeM();
+        const chars = '01MAWLIIDSHEIKH2026@#$%';
+        let drops = Array(Math.floor(mCanvas.width / 15)).fill(1);
+        setInterval(() => {
+            mCtx.fillStyle = 'rgba(3, 5, 4, 0.08)';
+            mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+            mCtx.fillStyle = '#00ff41';
+            mCtx.font = '14px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                mCtx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 15, drops[i] * 15);
+                if (drops[i] * 15 > mCanvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }, 40);
+
+        // Terminal
+        setInterval(() => { document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0]; }, 1000);
+        const out = document.getElementById('term-out');
+        const input = document.getElementById('cmd-input');
+        function print(msg, color = '#00ff41') {
+            const d = document.createElement('div');
+            d.style.color = color; d.style.marginBottom = '6px'; d.innerHTML = msg;
+            out.appendChild(d); out.scrollTop = out.scrollHeight;
+        }
+        function execCmd(raw) {
+            const c = raw.trim().toLowerCase();
+            if (!c) return;
+            print(`<span style="color:#00f3ff">root@mawliid:~$</span> ${c}`);
+            if (c === 'help') print('Amarrada: scan, hack, trace, decrypt, clear', '#00f3ff');
+            else if (c === 'scan') print('[+] Ports 80, 443: SECURE', '#00f3ff');
+            else if (c === 'hack') print('[GUUL] Mainframe Simulation active!', '#00f3ff');
+            else if (c === 'trace') print('Node: East Africa // Ping: 12ms', '#00f3ff');
+            else if (c === 'decrypt') print('Key: MS-CYBER-2026', '#00f3ff');
+            else if (c === 'about') print('Mawliid Sheikh Cyber Lab - Security Training Hub.', '#00f3ff');
+            else if (c === 'clear') out.innerHTML = '';
+            else print('Amarkaas lama yaqaan.', '#ff0055');
+        }
+        input.addEventListener('keypress', e => { if (e.key === 'Enter') { execCmd(input.value); input.value = ''; } });
+
+        // 100% RELIABLE ONCLICK FUNCTIONS FOR MODAL
+        let isGameOpen = false;
+        let isTwoPlayer = false;
+
+        function openGameModal() {
+            isGameOpen = true;
+            document.getElementById('gameModal').classList.add('open');
+        }
+
+        function closeGameModal() {
+            isGameOpen = false;
+            document.getElementById('gameModal').classList.remove('open');
+        }
+
+        function copyRoomLink() {
+            const code = document.getElementById('room-code').value || 'MAWLIID-77';
+            const link = `${window.location.origin}${window.location.pathname}?room=${code}`;
+            navigator.clipboard.writeText(link);
+            addChat('System', `Room link (${code}) copied!`, '#ffd700');
+        }
+
+        function toggle2PMode() {
+            isTwoPlayer = !isTwoPlayer;
+            const btn = document.getElementById('mode-btn');
+            const status = document.getElementById('p2-status');
+            if (isTwoPlayer) {
+                btn.textContent = 'MODE: 2P (PVP)';
+                status.innerHTML = '🟢 <strong>Player_2</strong> (W,A,S,D + F)';
+                addChat('System', '2-Player Mode active!', '#00ff41');
+            } else {
+                btn.textContent = 'MODE: 1P vs AI';
+                status.innerHTML = '🟡 <strong>Cyber_AI</strong> (Active)';
+                addChat('System', 'Switched to 1P vs AI.', '#00f3ff');
+            }
+        }
+
+        function addChat(sender, text, color = '#00f3ff') {
+            const box = document.getElementById('chat-box');
+            const div = document.createElement('div');
+            div.style.marginBottom = '4px';
+            div.innerHTML = `<strong style="color:${color}">${sender}:</strong> ${text}`;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function sendChat() {
+            const inp = document.getElementById('chat-input');
+            const txt = inp.value.trim();
+            if (!txt) return;
+            addChat('Mawliid', txt, '#4da6ff');
+            inp.value = '';
+            if (!isTwoPlayer) {
+                setTimeout(() => {
+                    addChat('Cyber_AI', 'Nice play! 🔥', '#ff4d6d');
+                }, 1000);
+            }
+        }
+
+        // eFootball Engine
+        const canvas = document.getElementById('efPitch');
+        const ctx = canvas.getContext('2d');
+        const W = 760, H = 380;
+        const GOAL_T = 130, GOAL_B = 250;
+
+        let sBlue = 0, sRed = 0;
+        const keys = {};
+
+        const ball = { x: W / 2, y: H / 2, r: 8, vx: 0, vy: 0 };
+        const p1 = { x: 200, y: H / 2, r: 16, speed: 4.5, color: '#0066ff', num: '10' };
+        const p2 = { x: 560, y: H / 2, r: 16, speed: 3.8, color: '#ff0055', num: '9' };
+
+        window.addEventListener('keydown', e => {
+            if (isGameOpen && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
+            keys[e.key] = true;
+            if (isGameOpen && e.key === ' ') shoot(p1);
+            if (isGameOpen && (e.key === 'f' || e.key === 'F')) shoot(p2);
+        });
+        window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+        function shoot(player) {
+            const dx = ball.x - player.x;
+            const dy = ball.y - player.y;
+            if (Math.hypot(dx, dy) < player.r + ball.r + 25) {
+                const angle = Math.atan2(dy, dx);
+                ball.vx = Math.cos(angle) * 14;
+                ball.vy = Math.sin(angle) * 14;
+            }
+        }
+
+        function resetBall() {
+            ball.x = W / 2; ball.y = H / 2; ball.vx = 0; ball.vy = 0;
+            p1.x = 200; p1.y = H / 2; p2.x = 560; p2.y = H / 2;
+        }
+
+        function updateGame() {
+            if (!isGameOpen) return;
+
+            if (keys['ArrowUp']) p1.y -= p1.speed;
+            if (keys['ArrowDown']) p1.y += p1.speed;
+            if (keys['ArrowLeft']) p1.x -= p1.speed;
+            if (keys['ArrowRight']) p1.x += p1.speed;
+
+            if (isTwoPlayer) {
+                if (keys['w'] || keys['W']) p2.y -= p2.speed;
+                if (keys['s'] || keys['S']) p2.y += p2.speed;
+                if (keys['a'] || keys['A']) p2.x -= p2.speed;
+                if (keys['d'] || keys['D']) p2.x += p2.speed;
+            } else {
+                const ang = Math.atan2(ball.y - p2.y, (ball.x + 10) - p2.x);
+                p2.x += Math.cos(ang) * 3.2;
+                p2.y += Math.sin(ang) * 3.2;
+            }
+
+            [p1, p2].forEach(p => {
+                p.x = Math.max(20, Math.min(W - 20, p.x));
+                p.y = Math.max(20, Math.min(H - 20, p.y));
+
+                const dx = ball.x - p.x;
+                const dy = ball.y - p.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < p.r + ball.r) {
+                    const a = Math.atan2(dy, dx);
+                    ball.vx = Math.cos(a) * 6;
+                    ball.vy = Math.sin(a) * 6;
+                }
+            });
+
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            ball.vx *= 0.975;
+            ball.vy *= 0.975;
+
+            if (ball.x + ball.r >= W - 12 && ball.y > GOAL_T && ball.y < GOAL_B) {
+                sBlue++;
+                document.getElementById('s-blue').textContent = sBlue;
+                addChat('GOAL!', '⚽ Mawliid (Blue) scored!', '#4da6ff');
+                resetBall();
+            } else if (ball.x - ball.r <= 12 && ball.y > GOAL_T && ball.y < GOAL_B) {
+                sRed++;
+                document.getElementById('s-red').textContent = sRed;
+                addChat('GOAL!', '⚽ Red Team scored!', '#ff4d6d');
+                resetBall();
+            }
+
+            if (ball.y - ball.r < 12) { ball.y = 12 + ball.r; ball.vy *= -0.8; }
+            if (ball.y + ball.r > H - 12) { ball.y = H - 12 - ball.r; ball.vy *= -0.8; }
+            if (ball.x - ball.r < 12) { ball.x = 12 + ball.r; ball.vx *= -0.8; }
+            if (ball.x + ball.r > W - 12) { ball.x = W - 12 - ball.r; ball.vx *= -0.8; }
+        }
+
+        function drawGame() {
+            for (let i = 0; i < 10; i++) {
+                ctx.fillStyle = i % 2 === 0 ? '#0b4f1e' : '#0e5e24';
+                ctx.fillRect(i * (W / 10), 0, W / 10, H);
+            }
+            ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+            ctx.strokeRect(12, 12, W - 24, H - 24);
+            ctx.beginPath(); ctx.moveTo(W / 2, 12); ctx.lineTo(W / 2, H - 12); ctx.stroke();
+            ctx.beginPath(); ctx.arc(W / 2, H / 2, 55, 0, Math.PI * 2); ctx.stroke();
+
+            ctx.fillStyle = 'rgba(0, 102, 255, 0.4)'; ctx.fillRect(0, GOAL_T, 12, GOAL_B - GOAL_T);
+            ctx.fillStyle = 'rgba(255, 0, 85, 0.4)'; ctx.fillRect(W - 12, GOAL_T, 12, GOAL_B - GOAL_T);
+
+            [p1, p2].forEach(p => {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.stroke();
+                ctx.fillStyle = '#fff'; ctx.font = 'bold 11px Arial'; ctx.textAlign = 'center';
+                ctx.fillText(p.num, p.x, p.y + 4);
+            });
+
+            ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+            ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#000'; ctx.stroke();
+        }
+
+        function loop() {
+            updateGame();
+            if (isGameOpen) drawGame();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>
+
+
 
        
