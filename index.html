@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+            <!DOCTYPE html>
 <html lang="so">
 <head>
     <meta charset="UTF-8">
@@ -40,7 +41,7 @@
             opacity: 0.25;
         }
 
-        /* ================= MAIN WEBSITE (CYBER LAB) ================= */
+        /* MAIN WEBSITE HEADER */
         header {
             width: 96%;
             max-width: 1400px;
@@ -271,44 +272,46 @@
             font-size: 0.85rem;
             color: rgba(0, 255, 65, 0.7);
             margin-top: auto;
+            margin-bottom: 60px; /* Space for floating button */
         }
 
-        /* ================= FLOATING CORNER GAME BUTTON ================= */
+        /* ================= FIXED FLOATING CORNER BUTTON ================= */
         .floating-game-btn {
             position: fixed;
-            bottom: 22px;
-            right: 22px;
+            bottom: 25px;
+            right: 25px;
             background: linear-gradient(135deg, #0055ff, #00f3ff);
             color: #fff;
             border: 2px solid var(--ef-yellow);
-            padding: 14px 22px;
+            padding: 16px 26px;
             border-radius: 50px;
             font-weight: 900;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
-            z-index: 900;
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+            z-index: 99999; /* La hubiyo inuu kor joogo wax walba */
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.9);
             display: flex;
             align-items: center;
-            gap: 10px;
-            animation: bounceFloat 2.5s infinite;
+            gap: 12px;
+            animation: bounceFloat 2s infinite;
             font-family: 'Segoe UI', sans-serif;
+            pointer-events: auto;
         }
 
         .floating-game-btn:hover {
-            transform: scale(1.06);
+            transform: scale(1.08);
             background: linear-gradient(135deg, #ff0055, #ffd700);
             color: #000;
         }
 
-        /* ================= POPUP eFOOTBALL ONLINE MODAL ================= */
+        /* ================= POPUP eFOOTBALL MODAL ================= */
         .game-modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(2, 6, 12, 0.95);
-            z-index: 1000;
+            background: rgba(2, 6, 12, 0.96);
+            z-index: 999999;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -322,19 +325,19 @@
 
         .modal-box {
             width: 100%;
-            max-width: 1150px;
+            max-width: 1100px;
             background: #07131f;
             border: 2px solid var(--ef-yellow);
             border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(0, 102, 255, 0.7);
+            box-shadow: 0 0 50px rgba(0, 102, 255, 0.8);
             display: flex;
             flex-direction: column;
         }
 
         .modal-top {
             background: linear-gradient(90deg, #003399, #091526, #80002a);
-            padding: 10px 18px;
+            padding: 12px 18px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -357,7 +360,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             font-size: 0.85rem;
-            width: 140px;
+            width: 130px;
         }
 
         .room-btn {
@@ -375,10 +378,11 @@
             background: var(--neon-pink);
             color: #fff;
             border: none;
-            padding: 7px 14px;
+            padding: 8px 16px;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .arena-layout {
@@ -400,15 +404,17 @@
             border: 2px solid #fff;
             border-radius: 8px;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
         }
 
         #efPitch {
             width: 100%;
             height: auto;
             display: block;
+            max-width: 760px;
         }
 
-        /* Online Match Chat & Lobby Side */
         .online-sidebar {
             background: #0b1929;
             border: 1px solid rgba(0, 243, 255, 0.3);
@@ -417,8 +423,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
-            min-height: 320px;
+            min-height: 280px;
         }
 
         .online-players-list {
@@ -426,7 +431,7 @@
             padding: 8px;
             border-radius: 6px;
             font-size: 0.82rem;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .chat-messages {
@@ -435,7 +440,7 @@
             border-radius: 6px;
             padding: 8px;
             overflow-y: auto;
-            max-height: 180px;
+            max-height: 140px;
             font-size: 0.82rem;
             margin-bottom: 8px;
             color: #e0f7fa;
@@ -460,7 +465,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 15px;
+            padding: 10px 15px;
             background: #040b14;
             border-top: 1px solid #1e3a5f;
             flex-wrap: wrap;
@@ -484,7 +489,7 @@
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes bounceFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-8px); }
         }
     </style>
 </head>
@@ -492,7 +497,7 @@
 
     <canvas id="matrix-bg"></canvas>
 
-    <!-- ================= MAIN WEBSITE HEADER ================= -->
+    <!-- HEADER -->
     <header>
         <div class="brand-section">
             <div class="logo-wrapper">
@@ -501,19 +506,17 @@
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH CYBER LAB</h1>
-                <p>// CYBERSECURITY COMMAND CENTER & NETWORK LAB</p>
+                <p>// CYBERSECURITY COMMAND CENTER</p>
             </div>
         </div>
-
         <div class="status-pill">
             <span class="pulse-dot"></span>
             <span>SYSTEM: <strong>ONLINE</strong></span>
         </div>
     </header>
 
-    <!-- ================= MAIN WEBSITE DASHBOARD ================= -->
+    <!-- DASHBOARD -->
     <main class="dashboard">
-        <!-- Left Tools -->
         <aside class="panel">
             <div class="panel-title"><span>[ CYBER MODULES ]</span><span>⚡</span></div>
             <div class="tool-list">
@@ -526,7 +529,6 @@
             </div>
         </aside>
 
-        <!-- Center Terminal -->
         <section class="panel terminal-window">
             <div class="terminal-bar">
                 <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
@@ -534,9 +536,8 @@
                 <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
             </div>
             <div class="terminal-body" id="term-out">
-                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v6.0 ===</div>
-                <div>Ku soo dhawaaw xarunta shaqada iyo cilmi-baarista.</div>
-                <div>Haddii aad rabto madadaalo, guji badhanka <strong>eFOOTBALL ONLINE</strong> ee geeska hoose!</div>
+                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v6.1 ===</div>
+                <div>Nidaamku wuu shaqaynayaa. Guji badhanka buluugga ah ee geeska hoose si aad u ciyaarto eFootball!</div>
                 <br>
             </div>
             <div class="input-bar">
@@ -545,13 +546,12 @@
             </div>
         </section>
 
-        <!-- Right Radar -->
         <aside class="panel">
             <div class="panel-title"><span>[ LIVE RADAR ]</span><span>ACTIVE</span></div>
             <div class="radar-container"><div class="radar-sweep"></div></div>
             <div class="log-feed" id="live-logs">
-                <div>> Firewall active...</div>
-                <div>> eFootball Online Server Ready...</div>
+                <div>> Firewall operational...</div>
+                <div>> eFootball PvP Ready...</div>
             </div>
         </aside>
     </main>
@@ -560,250 +560,62 @@
         &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | All Rights Reserved
     </footer>
 
-    <!-- ================= FLOATING CORNER BUTTON ================= -->
-    <button class="floating-game-btn" onclick="toggleGameModal(true)">
+    <!-- ================= FIXED & CLICKABLE FLOATING BUTTON ================= -->
+    <button id="openGameBtn" class="floating-game-btn" type="button">
         <span>⚽</span>
         <span>eFOOTBALL ONLINE (PVP)</span>
     </button>
 
-    <!-- ================= POPUP eFOOTBALL MULTIPLAYER MODAL ================= -->
+    <!-- ================= POPUP eFOOTBALL MODAL ================= -->
     <div class="game-modal" id="gameModal">
         <div class="modal-box">
-            <!-- Top Bar with Online Room Invite -->
             <div class="modal-top">
-                <div style="color: var(--ef-yellow); font-weight: 900; font-size: 1.05rem;">
+                <div style="color: var(--ef-yellow); font-weight: 900; font-size: 1rem;">
                     ⚽ MAWLIID eFOOTBALL ONLINE
                 </div>
 
                 <div class="room-controls">
-                    <span style="font-size: 0.8rem; color: #ccc;">ROOM ID:</span>
-                    <input type="text" id="room-code" class="room-input" value="MAWLIID-77" placeholder="Geli Room ID">
-                    <button class="room-btn" onclick="copyRoomLink()">📋 INVITE FRIEND</button>
+                    <span style="font-size: 0.8rem; color: #ccc;">ROOM:</span>
+                    <input type="text" id="room-code" class="room-input" value="MAWLIID-77">
+                    <button class="room-btn" onclick="copyRoomLink()">📋 INVITE</button>
                     <button class="room-btn" style="background: var(--ef-yellow);" onclick="toggle2PMode()" id="mode-btn">MODE: 1P vs AI</button>
                 </div>
 
-                <div style="background: #000; padding: 5px 14px; border-radius: 6px; border: 1px solid var(--ef-yellow); font-weight: bold;">
+                <div style="background: #000; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--ef-yellow); font-weight: bold; font-size: 0.9rem;">
                     <span style="color: #4da6ff;">BLUE</span> <span id="s-blue" style="color: var(--ef-yellow);">0</span> - <span id="s-red" style="color: var(--ef-yellow);">0</span> <span style="color: #ff4d6d;">RED</span>
                 </div>
 
-                <button class="close-modal-btn" onclick="toggleGameModal(false)">✖ XIDH GAME-KA</button>
+                <button id="closeGameBtn" class="close-modal-btn" type="button">✖ XIDH</button>
             </div>
 
-            <!-- Stadium + Live Online Chat -->
             <div class="arena-layout">
                 <div class="pitch-container">
-                    <canvas id="efPitch" width="760" height="420"></canvas>
+                    <canvas id="efPitch" width="760" height="380"></canvas>
                 </div>
 
-                <!-- Online Players & Live Chat -->
                 <div class="online-sidebar">
                     <div>
-                        <div style="color: var(--neon-cyan); font-weight: bold; margin-bottom: 6px; font-size: 0.9rem;">
-                            🌐 ONLINE LOBBY & CHAT
-                        </div>
+                        <div style="color: var(--neon-cyan); font-weight: bold; margin-bottom: 4px; font-size: 0.85rem;">🌐 ONLINE LOBBY</div>
                         <div class="online-players-list">
-                            <div>🟢 <strong>Mawliid_Admin</strong> (Host - Blue)</div>
-                            <div id="p2-status">🟡 <strong>Cyber_Pro_99</strong> (Connected - Red)</div>
+                            <div>🟢 <strong>Mawliid_Admin</strong> (Host)</div>
+                            <div id="p2-status">🟡 <strong>Cyber_AI</strong> (Connected)</div>
                         </div>
                     </div>
 
                     <div class="chat-messages" id="chat-box">
-                        <div style="color: var(--ef-yellow);">[System]: Ku soo dhawaaw qolka ciyaarta! La wadaag Room ID-ga saaxiibkaa.</div>
-                        <div><strong style="color: #ff4d6d;">Cyber_Pro_99:</strong> Diyaar baan u ahay ciyaarta! 🔥</div>
+                        <div style="color: var(--ef-yellow);">[System]: Ku soo dhawaaw qolka ciyaarta!</div>
                     </div>
 
                     <div class="chat-input-box">
-                        <input type="text" id="chat-input" placeholder="Fariin u dir ciyaartoyda..." onkeypress="if(event.key==='Enter') sendChat()">
+                        <input type="text" id="chat-input" placeholder="Fariin qor..." onkeypress="if(event.key==='Enter') sendChat()">
                         <button class="room-btn" onclick="sendChat()">DIR</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Touch & Keyboard Controls -->
             <div class="controls-strip">
                 <div class="pad-group">
                     <button class="g-btn" onmousedown="keys['ArrowLeft']=true" onmouseup="keys['ArrowLeft']=false" ontouchstart="keys['ArrowLeft']=true" ontouchend="keys['ArrowLeft']=false">◀</button>
-                    <button class="g-btn" onmousedown="keys['ArrowUp']=true" onmouseup="keys['ArrowUp']=false" ontouchstart="keys['ArrowUp']=true" ontouchend="keys['ArrowUp']=false">▲</button>
-                    <button class="g-btn" onmousedown="keys['ArrowDown']=true" onmouseup="keys['ArrowDown']=false" ontouchstart="keys['ArrowDown']=true" ontouchend="keys['ArrowDown']=false">▼</button>
-                    <button class="g-btn" onmousedown="keys['ArrowRight']=true" onmouseup="keys['ArrowRight']=false" ontouchstart="keys['ArrowRight']=true" ontouchend="keys['ArrowRight']=false">▶</button>
-                </div>
-
-                <div style="font-size: 0.78rem; color: #aaa;">
-                    <strong>P1 (Blue):</strong> Fallaaraha + [SPACE] Laad | <strong>P2 (Red - 2P Mode):</strong> W,A,S,D + [F] Laad
-                </div>
-
-                <div class="pad-group">
-                    <button class="g-btn" style="background: #cc0044; border-color: #fff;" onclick="shoot(p1)">⚽ LAAD (SHOOT)</button>
-                    <button class="g-btn" style="background: #006622;" onclick="resetBall()">↻ KICK OFF</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // 1. Matrix Background
-        const mCanvas = document.getElementById('matrix-bg');
-        const mCtx = mCanvas.getContext('2d');
-        function resizeM() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
-        window.addEventListener('resize', resizeM);
-        resizeM();
-        const chars = '01MAWLIIDSHEIKH2026@#$%';
-        let drops = Array(Math.floor(mCanvas.width / 15)).fill(1);
-        setInterval(() => {
-            mCtx.fillStyle = 'rgba(3, 5, 4, 0.08)';
-            mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
-            mCtx.fillStyle = '#00ff41';
-            mCtx.font = '14px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                mCtx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 15, drops[i] * 15);
-                if (drops[i] * 15 > mCanvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }, 40);
-
-        // 2. Main Website Terminal
-        setInterval(() => { document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0]; }, 1000);
-        const out = document.getElementById('term-out');
-        const input = document.getElementById('cmd-input');
-        function print(msg, color = '#00ff41') {
-            const d = document.createElement('div');
-            d.style.color = color; d.style.marginBottom = '6px'; d.innerHTML = msg;
-            out.appendChild(d); out.scrollTop = out.scrollHeight;
-        }
-        function execCmd(raw) {
-            const c = raw.trim().toLowerCase();
-            if (!c) return;
-            print(`<span style="color:#00f3ff">root@mawliid:~$</span> ${c}`);
-            if (c === 'help') print('Amarrada: scan, hack, trace, decrypt, about, clear', '#00f3ff');
-            else if (c === 'scan') print('[+] Network Ports 80, 443: SECURE', '#00f3ff');
-            else if (c === 'hack') print('[GUUL] Mainframe Simulation la furay!', '#00f3ff');
-            else if (c === 'trace') print('IP Node: Horn of Africa // Latency: 12ms', '#00f3ff');
-            else if (c === 'decrypt') print('Key: MS-CYBER-2026-PRO', '#00f3ff');
-            else if (c === 'about') print('Mawliid Sheikh Cyber Lab - Madal amniga internet-ka iyo tijaabada.', '#00f3ff');
-            else if (c === 'clear') out.innerHTML = '';
-            else print('Amarkaas lama yaqaan. Qor help.', '#ff0055');
-        }
-        input.addEventListener('keypress', e => { if (e.key === 'Enter') { execCmd(input.value); input.value = ''; } });
-
-        // 3. Modal & Online Multiplayer Controls
-        let isGameOpen = false;
-        let isTwoPlayer = false;
-
-        function toggleGameModal(state) {
-            isGameOpen = state;
-            const modal = document.getElementById('gameModal');
-            if (state) modal.classList.add('open');
-            else modal.classList.remove('open');
-        }
-
-        function copyRoomLink() {
-            const code = document.getElementById('room-code').value || 'MAWLIID-77';
-            const link = `${window.location.origin}${window.location.pathname}?room=${code}`;
-            navigator.clipboard.writeText(link);
-            addChat('System', `Link-ga qolka (${code}) waa la koobiyeeyay! U dir saaxiibkaa si aad u wada ciyaartaan.`, '#ffd700');
-        }
-
-        function toggle2PMode() {
-            isTwoPlayer = !isTwoPlayer;
-            const btn = document.getElementById('mode-btn');
-            const status = document.getElementById('p2-status');
-            if (isTwoPlayer) {
-                btn.textContent = 'MODE: 2 PLAYERS (PVP)';
-                status.innerHTML = '🟢 <strong>Player_2 (Guest)</strong> (Active - W,A,S,D)';
-                addChat('System', '2-Player PvP Mode ayaa shidmay! P2 wuxuu ku ciyaarayaa W,A,S,D + F.', '#00ff41');
-            } else {
-                btn.textContent = 'MODE: 1P vs AI';
-                status.innerHTML = '🟡 <strong>Cyber_Pro_99 (AI)</strong> (Online)';
-                addChat('System', 'Waxaad ku soo laabatay 1P vs Cyber AI.', '#00f3ff');
-            }
-        }
-
-        function addChat(sender, text, color = '#00f3ff') {
-            const box = document.getElementById('chat-box');
-            const div = document.createElement('div');
-            div.style.marginBottom = '4px';
-            div.innerHTML = `<strong style="color:${color}">${sender}:</strong> ${text}`;
-            box.appendChild(div);
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function sendChat() {
-            const inp = document.getElementById('chat-input');
-            const txt = inp.value.trim();
-            if (!txt) return;
-            addChat('Mawliid_Admin', txt, '#4da6ff');
-            inp.value = '';
-            if (!isTwoPlayer) {
-                setTimeout(() => {
-                    const replies = ['Ciyaar fiican! ⚽', 'Goolkaas waa mid cajiib ah!', 'Aan aragno cidda badisa 🔥', 'Pase fiican!'];
-                    addChat('Cyber_Pro_99', replies[Math.floor(Math.random() * replies.length)], '#ff4d6d');
-                }, 1200);
-            }
-        }
-
-        // Check if user opened an invite room link
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('room')) {
-            document.getElementById('room-code').value = urlParams.get('room');
-            toggleGameModal(true);
-            addChat('System', `Waxaad ku soo biirtay qolka: ${urlParams.get('room')}`, '#00ff41');
-        }
-
-        // 4. eFOOTBALL GAME ENGINE
-        const canvas = document.getElementById('efPitch');
-        const ctx = canvas.getContext('2d');
-        const W = 760, H = 420;
-        const GOAL_T = 145, GOAL_B = 275;
-
-        let sBlue = 0, sRed = 0;
-        const keys = {};
-
-        const ball = { x: W / 2, y: H / 2, r: 9, vx: 0, vy: 0 };
-        const p1 = { x: 220, y: H / 2, r: 17, speed: 4.5, color: '#0066ff', num: '10' };
-        const p2 = { x: 540, y: H / 2, r: 17, speed: 3.8, color: '#ff0055', num: '9' };
-
-        window.addEventListener('keydown', e => {
-            if (isGameOpen && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
-            keys[e.key] = true;
-            if (isGameOpen && e.key === ' ') shoot(p1);
-            if (isGameOpen && (e.key === 'f' || e.key === 'F')) shoot(p2);
-        });
-        window.addEventListener('keyup', e => { keys[e.key] = false; });
-
-        function shoot(player) {
-            const dx = ball.x - player.x;
-            const dy = ball.y - player.y;
-            if (Math.hypot(dx, dy) < player.r + ball.r + 25) {
-                const angle = Math.atan2(dy, dx);
-                ball.vx = Math.cos(angle) * 14;
-                ball.vy = Math.sin(angle) * 14;
-            }
-        }
-
-        function resetBall() {
-            ball.x = W / 2; ball.y = H / 2; ball.vx = 0; ball.vy = 0;
-            p1.x = 220; p1.y = H / 2;
-            p2.x = 540; p2.y = H / 2;
-        }
-
-        function updateGame() {
-            if (!isGameOpen) return;
-
-            // P1 Controls (Arrows)
-            if (keys['ArrowUp']) p1.y -= p1.speed;
-            if (keys['ArrowDown']) p1.y += p1.speed;
-            if (keys['ArrowLeft']) p1.x -= p1.speed;
-            if (keys['ArrowRight']) p1.x += p1.speed;
-
-            // P2 Controls (2P Keyboard or Smart AI)
-            if (isTwoPlayer) {
-                if (keys['w'] || keys['W']) p2.y -= p2.speed;
-                if (keys['s'] || keys['S']) p2.y += p2.speed;
-                if (keys['a'] || keys['A']) p2.x -= p2.speed;
-                if (keys['d'] || keys['D']) p2.x += p2.speed;
-            } else {
-                const ang = Math.atan2(ball.y - p2.y, (ball.x + 12) - p2.x);
-                p2.x += Math.cos(ang) * 3.1;
-                p2.y += Math.sin(ang
+                    <button class="g-btn" onmousedown="keys['ArrowUp']=true
 
        
