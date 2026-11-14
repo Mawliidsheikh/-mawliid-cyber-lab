@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | UNKNOWN PEOPLE SOC & SOLAR SYSTEM</title>
+    <title>MAWLIID SHEIKH | SOC COMMAND & DYNAMIC AI ADDER</title>
     <style>
         :root {
             --neon-green: #00ff41;
@@ -197,7 +197,6 @@
             gap: 15px;
         }
 
-        /* THREAT MAP & SOLAR SYSTEM CONTAINER */
         .threat-map-box {
             background: #020813;
             border: 1.5px solid var(--neon-cyan);
@@ -282,7 +281,6 @@
             filter: drop-shadow(0 0 10px var(--neon-cyan));
         }
 
-        /* TERMINAL WINDOW */
         .terminal-box {
             background: rgba(2, 8, 15, 0.95);
             border: 1.5px solid var(--neon-green);
@@ -370,6 +368,28 @@
             gap: 5px;
         }
 
+        /* DYNAMIC AI ADDED WIDGETS CONTAINER */
+        #ai-widgets-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .ai-custom-widget {
+            background: rgba(0, 243, 255, 0.08);
+            border: 1px dashed var(--neon-cyan);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         footer {
             text-align: center;
             padding: 12px;
@@ -379,7 +399,7 @@
             border-top: 1px solid rgba(0, 243, 255, 0.2);
         }
 
-        /* UNKNOWN PEOPLE GROUP CHAT MODAL & BUTTON */
+        /* UNKNOWN PEOPLE GROUP CHAT + AI */
         .chat-float-btn {
             position: fixed !important;
             bottom: 25px !important;
@@ -485,6 +505,11 @@
             border-left-color: var(--neon-green);
             text-align: right;
         }
+        .msg.ai-msg {
+            background: rgba(255, 0, 85, 0.15);
+            border-left-color: var(--neon-pink);
+            color: #ff88bb;
+        }
         .msg.admin-notice {
             background: rgba(255, 153, 0, 0.1);
             border-left-color: var(--neon-orange);
@@ -539,7 +564,7 @@
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH SOC COMMAND</h1>
-                <p>// ADVANCED CYBERSECURITY & ORBITAL MONITORING</p>
+                <p>// ADVANCED CYBERSECURITY & AI DYNAMIC WIDGETS</p>
             </div>
         </div>
         <div class="soc-status-badges">
@@ -568,18 +593,17 @@
                 <div style="font-size: 0.75rem; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 4px; border: 1px solid rgba(0,243,255,0.2); display: flex; flex-direction: column; gap: 6px;">
                     <div>• Core Status: <span style="color:var(--neon-green)">STABLE</span></div>
                     <div>• Active Sockets: <span style="color:var(--neon-cyan)">2,418</span></div>
-                    <div>• Threat Level: <span style="color:var(--neon-green)">NOMINAL</span></div>
+                    <div>• AI Builder: <span style="color:var(--neon-pink)">ONLINE</span></div>
                     <div>• Orbital Sync: <span style="color:var(--neon-cyan)">ONLINE</span></div>
                 </div>
             </div>
         </aside>
 
-        <!-- CENTER PANEL: THREAT MAP + SOLAR SYSTEM + TERMINAL -->
+        <!-- CENTER PANEL -->
         <div class="center-stack">
             <div class="threat-map-box">
                 <div class="map-grid-overlay"></div>
                 
-                <!-- Rotating Solar System in corner -->
                 <div class="solar-system-view">
                     <div class="sun"></div>
                     <div class="planet"></div>
@@ -592,7 +616,6 @@
                 </div>
                 <div class="map-content">
                     <svg class="world-map-svg" viewBox="0 0 1000 500" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <!-- Continents Outline Simulation -->
                         <path d="M150,120 Q180,100 220,130 T300,110 T380,140 T450,120" stroke="var(--neon-cyan)" />
                         <path d="M600,100 Q650,80 720,120 T850,110" stroke="var(--neon-cyan)" />
                         <path d="M120,250 Q200,220 280,280 T400,260" stroke="var(--neon-green)" />
@@ -616,7 +639,7 @@
                     <span id="clock" style="color: var(--neon-cyan);">00:00:00</span>
                 </div>
                 <div class="terminal-body" id="term-out">
-                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v20.0 ===</div>
+                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v22.0 ===</div>
                     <div>Nidaamku wuu wada shaqaynayaa. Qor amarka <span style="color:var(--neon-green);">help</span>.</div>
                     <br>
                 </div>
@@ -627,7 +650,7 @@
             </div>
         </div>
 
-        <!-- RIGHT PANEL -->
+        <!-- RIGHT PANEL: ANALYTICS & AI DYNAMIC WIDGETS -->
         <aside class="soc-panel">
             <div class="panel-header"><span>[ TRAFFIC ANALYTICS ]</span><span>LIVE</span></div>
             <div class="chart-box">
@@ -639,6 +662,14 @@
                     <div class="bar" style="height: 90%;"></div>
                     <div class="bar" style="height: 65%;"></div>
                     <div class="bar" style="height: 80%;"></div>
+                </div>
+            </div>
+
+            <div class="panel-header" style="margin-top: 5px;"><span>[ AI DYNAMIC WIDGETS ]</span><span>ACTIVE</span></div>
+            <!-- AI will inject custom widgets here when requested in group chat -->
+            <div id="ai-widgets-container">
+                <div class="ai-custom-widget">
+                    <div style="color:var(--neon-green); font-weight:bold;">[AI Status]: Ready to add widgets via Group Chat.</div>
                 </div>
             </div>
 
@@ -657,7 +688,7 @@
         &copy; 2026 <strong>Mawliid Sheikh Cyber Security Command Center</strong> | All Rights Reserved
     </footer>
 
-    <!-- UNKNOWN PEOPLE GROUP CHAT BUTTON & MODAL -->
+    <!-- UNKNOWN PEOPLE GROUP CHAT + AI BUILDER -->
     <button class="chat-float-btn" onclick="toggleChat()">
         <span>💬</span>
         <span>UNKNOWN PEOPLE (<span id="msgCount">1</span>)</span>
@@ -667,31 +698,31 @@
         <div class="chat-box">
             <div class="chat-header">
                 <div class="group-info">
-                    <div style="font-weight: bold; color: var(--neon-cyan);">👥 UNKNOWN PEOPLE</div>
-                    <div style="font-size: 0.72rem; color: #aaa;" id="memberCountText">Admin: Mawliid Sheikh | Members: 3</div>
+                    <div style="font-weight: bold; color: var(--neon-cyan);">👥 UNKNOWN PEOPLE + AI BUILDER</div>
+                    <div style="font-size: 0.72rem; color: #aaa;" id="memberCountText">Admin: Mawliid Sheikh | Members: AI Bot, Ghost, CyberX</div>
                 </div>
                 <button onclick="toggleChat()" style="background:var(--neon-pink); color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold;">✖</button>
             </div>
             
             <div class="member-list-bar">
-                <span id="activeMembersList">Xubnaha: Mawliid (Admin), Ghost, CyberX</span>
+                <span id="activeMembersList">Xubnaha: Mawliid (Admin), AI Assistant, Ghost, CyberX</span>
                 <button class="add-member-btn" onclick="addNewMember()">+ Ku dar Qof</button>
             </div>
 
             <div class="chat-messages" id="chatMsgs">
-                <div class="msg admin-notice">[System]: Mawliid Sheikh ayaa furay group-ka "Unknown People" wuxuuna u yahay Admin.</div>
-                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid (Admin):</strong> Soo dhowaada kooxda, halkan waxaan ka wadaynaa hawlgallada.</div>
+                <div class="msg admin-notice">[System]: Mawliid Sheikh ayaa furay group-ka "Unknown People". Ku dheh "iigu dar [waxaad rabto]" si uu AI shaashada ugu soo daro.</div>
+                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid (Admin):</strong> Soo dhowaada kooxda!</div>
             </div>
 
             <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="Fariin qor..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
+                <input type="text" id="chatInput" placeholder="Tiri tusaale: iigu dar radar ama cyber monitor..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
                 <button class="chat-send-btn" onclick="sendTeamMsg()">DIR</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Matrix Background Animation
+        // Matrix Background
         const mCanvas = document.getElementById('matrix-bg');
         const mCtx = mCanvas.getContext('2d');
         function resizeM() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
@@ -711,7 +742,7 @@
             }
         }, 40);
 
-        // Clock & Terminal
+        // Terminal Clock & Commands
         setInterval(() => { document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0]; }, 1000);
         const out = document.getElementById('term-out');
         const input = document.getElementById('cmd-input');
@@ -760,8 +791,8 @@
             if(logAnalysis.children.length > 7) logAnalysis.removeChild(logAnalysis.firstChild);
         }, 2500);
 
-        // UNKNOWN PEOPLE GROUP CHAT LOGIC (Admin: Mawliid)
-        let members = ["Mawliid (Admin)", "Ghost", "CyberX"];
+        // UNKNOWN PEOPLE GROUP CHAT + AI DYNAMIC BUILDER LOGIC
+        let members = ["Mawliid (Admin)", "AI Assistant", "Ghost", "CyberX"];
         let unreadCount = 1;
 
         function toggleChat() {
@@ -799,22 +830,29 @@
             msgs.scrollTop = msgs.scrollHeight;
             txtInp.value = '';
 
-            // Simulated response from random group member
+            // AI Dynamic Screen Injector Logic
             setTimeout(() => {
-                const activeMembersWithoutAdmin = members.filter(m => !m.includes("Admin"));
-                const randomMember = activeMembersWithoutAdmin[Math.floor(Math.random() * activeMembersWithoutAdmin.length)] || "Ghost";
-                
-                const responses = [
-                    "Waan helay fariintaada Commander! 🛡️",
-                    "Unknown People node-ka waa la xaqiijiyay.",
-                    "Wax walba waa secure halkan, sug warbixin.",
-                    "Ready for the next operation!"
-                ];
-                const randomResp = responses[Math.floor(Math.random() * responses.length)];
-                
                 const resp = document.createElement('div');
-                resp.className = 'msg';
-                resp.innerHTML = `<strong style="color:var(--neon-cyan)">${randomMember}:</strong> ${randomResp}`;
+                resp.className = 'msg ai-msg';
+
+                let lowerTxt = txt.toLowerCase();
+                if (lowerTxt.includes('iigu dar') || lowerTxt.includes('ku dar') || lowerTxt.includes('soo dar')) {
+                    // Extract what user requested to add
+                    let itemName = txt.replace(/iigu dar|ku dar|soo dar/gi, '').trim();
+                    if (!itemName) itemName = "Custom Cyber Tool";
+
+                    // Inject dynamic widget into the right panel screen
+                    const widgetsContainer = document.getElementById('ai-widgets-container');
+                    const newWidget = document.createElement('div');
+                    newWidget.className = 'ai-custom-widget';
+                    newWidget.innerHTML = `<strong style="color:var(--neon-green)">[AI Widget Added]:</strong> ${itemName} <div style="color:var(--neon-cyan); margin-top:2px;">Status: Active & Connected (Root)</div>`;
+                    widgetsContainer.appendChild(newWidget);
+
+                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan ku guuleystay! Waxaan shaashadaada ku soo daray element-ka: <b style="color:#fff;">"${itemName}"</b>. Ka eeg dhinaca midig ee panel-ka!`;
+                } else {
+                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan helay fariintaada Commander. Si aad wax ugu darto shaashada, kaliya ku qor: <i style="color:#fff;">"iigu dar [magaca shayga]"</i>.`;
+                }
+
                 msgs.appendChild(resp);
                 msgs.scrollTop = msgs.scrollHeight;
                 
