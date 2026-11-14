@@ -523,4 +523,418 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes konamiPulse {
-            0%,
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0, 243, 255, 0.8); }
+            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 0, 85, 1); }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand-section">
+            <div class="logo-wrapper">
+                <div class="logo-ring"></div>
+                <img src="logo.jpg" onerror="this.src='https://github.com/Mawliidsheikh.png'" alt="Mawliid Sheikh" class="logo-img">
+            </div>
+            <div class="title-box">
+                <h1>MAWLIID SHEIKH CYBER LAB</h1>
+                <p>// CYBERSECURITY COMMAND CENTER & eFOOTBALL PRO</p>
+            </div>
+        </div>
+        <div class="live-badge">
+            <span class="pulse-dot"></span>
+            <span>SYSTEM: <strong>ONLINE</strong></span>
+        </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <main class="dashboard">
+        <aside class="panel">
+            <div class="panel-title"><span>[ CYBER MODULES ]</span><span>⚡</span></div>
+            <div class="tool-list">
+                <button class="cyber-btn" onclick="execCmd('scan')">[01] Port Scan</button>
+                <button class="cyber-btn" onclick="execCmd('hack')">[02] Exploit Server</button>
+                <button class="cyber-btn" onclick="execCmd('trace')">[03] Trace IP</button>
+                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Decrypt Key</button>
+                <button class="cyber-btn" onclick="execCmd('about')">[05] About Owner</button>
+                <button class="cyber-btn" style="border-color: var(--neon-pink); color: var(--neon-pink);" onclick="execCmd('clear')">[XX] Clear Screen</button>
+            </div>
+        </aside>
+
+        <section class="panel terminal-window">
+            <div class="terminal-bar">
+                <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-lab:~#</span>
+                <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
+            </div>
+            <div class="terminal-body" id="term-out">
+                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v9.0 ===</div>
+                <div>Nidaamku wuu wada shaqaynayaa. Guji badhanka **KONAMI eFOOTBALL PVP** ee geeska hoose si aad u ciyaarto!</div>
+                <br>
+            </div>
+            <div class="input-bar">
+                <span style="color: var(--neon-cyan); font-weight: bold;">root@mawliid:~$</span>
+                <input type="text" id="cmd-input" placeholder="Geli amarkaaga (help)..." autocomplete="off">
+            </div>
+        </section>
+
+        <aside class="panel">
+            <div class="panel-title"><span>[ LIVE RADAR ]</span><span>ACTIVE</span></div>
+            <div class="radar-container"><div class="radar-sweep"></div></div>
+            <div class="log-feed" id="live-logs">
+                <div>> Firewall operational...</div>
+                <div>> Konami eFootball Engine Ready...</div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | All Rights Reserved
+    </footer>
+
+    <!-- ================= 100% WORKING KONAMI eFOOTBALL FLOATING BUTTON ================= -->
+    <button class="konami-float-btn" onclick="openGameModal()">
+        <span>⚽</span>
+        <span>KONAMI eFOOTBALL PVP</span>
+    </button>
+
+    <!-- ================= POPUP eFOOTBALL MODAL ================= -->
+    <div class="game-modal" id="gameModal">
+        <div class="modal-box">
+            <div class="modal-top">
+                <div style="color: var(--ef-yellow); font-weight: 900; font-size: 1.05rem;">
+                    ⚽ KONAMI eFOOTBALL MATCH ROOM
+                </div>
+
+                <div class="room-controls">
+                    <span style="font-size: 0.8rem; color: #ccc;">ROOM:</span>
+                    <input type="text" id="room-code" class="room-input" value="MAWLIID-PVP">
+                    <button class="room-btn" onclick="copyRoomLink()">📋 INVITE</button>
+                    <button class="room-btn" style="background: var(--ef-yellow);" onclick="toggleTeamSide()" id="side-btn">SIDE: HOME (BLUE)</button>
+                </div>
+
+                <div style="background: #000; padding: 5px 14px; border-radius: 6px; border: 1px solid var(--ef-yellow); font-weight: bold; font-size: 0.95rem;">
+                    <span style="color: #0055ff;">MAWLIID FC</span> <span id="s-home" style="color: var(--ef-yellow);">0</span> - <span id="s-away" style="color: var(--ef-yellow);">0</span> <span style="color: #ff0055;">OPPONENT</span>
+                </div>
+
+                <button class="close-modal-btn" onclick="closeGameModal()">✖ XIDH</button>
+            </div>
+
+            <div class="arena-layout">
+                <div class="pitch-container">
+                    <canvas id="konamiPitch" width="740" height="370"></canvas>
+                </div>
+
+                <div class="online-sidebar">
+                    <div>
+                        <div style="color: var(--neon-cyan); font-weight: bold; margin-bottom: 6px; font-size: 0.88rem;">🌐 MATCH LOBBY</div>
+                        <div class="online-players-list">
+                            <div>🔵 <strong>Mawliid_Admin</strong> (Home Team)</div>
+                            <div id="guest-status">🔴 <strong>Opponent / AI</strong> (Away Team)</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages" id="chat-box">
+                        <div style="color: var(--ef-yellow);">[Konami System]: Ku soo dhawaaw qolka ciyaarta! Dir link-ga INVITE si aad saaxiibkaaga ula ciyaarto.</div>
+                    </div>
+
+                    <div class="chat-input-box">
+                        <input type="text" id="chat-input" placeholder="Fariin qor..." onkeypress="if(event.key==='Enter') sendChat()">
+                        <button class="room-btn" onclick="sendChat()">DIR</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Konami Touch Controls (Mobile & PC) -->
+            <div class="controls-strip">
+                <div class="dpad-group">
+                    <div></div>
+                    <button class="d-btn" onmousedown="keys['ArrowUp']=true" onmouseup="keys['ArrowUp']=false" ontouchstart="keys['ArrowUp']=true" ontouchend="keys['ArrowUp']=false">▲</button>
+                    <div></div>
+                    <button class="d-btn" onmousedown="keys['ArrowLeft']=true" onmouseup="keys['ArrowLeft']=false" ontouchstart="keys['ArrowLeft']=true" ontouchend="keys['ArrowLeft']=false">◀</button>
+                    <button class="d-btn" onmousedown="keys['ArrowDown']=true" onmouseup="keys['ArrowDown']=false" ontouchstart="keys['ArrowDown']=true" ontouchend="keys['ArrowDown']=false">▼</button>
+                    <button class="d-btn" onmousedown="keys['ArrowRight']=true" onmouseup="keys['ArrowRight']=false" ontouchstart="keys['ArrowRight']=true" ontouchend="keys['ArrowRight']=false">▶</button>
+                </div>
+
+                <div style="font-size: 0.75rem; color: #aaa; text-align: center;">
+                    <strong>PC:</strong> Fallaaraha + [SPACE] Laad<br><strong>Mobile:</strong> Isticmaal badhammada taabashada
+                </div>
+
+                <div class="action-group">
+                    <button class="konami-action-btn btn-pass" onclick="playerPass()">PASS</button>
+                    <button class="konami-action-btn btn-shoot" onclick="playerShoot()">SHOOT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Background
+        const mCanvas = document.getElementById('matrix-bg');
+        const mCtx = mCanvas.getContext('2d');
+        function resizeM() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeM);
+        resizeM();
+        const chars = '01MAWLIIDSHEIKH2026@#$%';
+        let drops = Array(Math.floor(mCanvas.width / 15)).fill(1);
+        setInterval(() => {
+            mCtx.fillStyle = 'rgba(2, 5, 3, 0.08)';
+            mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+            mCtx.fillStyle = '#00ff41';
+            mCtx.font = '14px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                mCtx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 15, drops[i] * 15);
+                if (drops[i] * 15 > mCanvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }, 40);
+
+        // Terminal Clock & Commands
+        setInterval(() => { document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0]; }, 1000);
+        const out = document.getElementById('term-out');
+        const input = document.getElementById('cmd-input');
+        function print(msg, color = '#00ff41') {
+            const d = document.createElement('div');
+            d.style.color = color; d.style.marginBottom = '6px'; d.innerHTML = msg;
+            out.appendChild(d); out.scrollTop = out.scrollHeight;
+        }
+        function execCmd(raw) {
+            const c = raw.trim().toLowerCase();
+            if (!c) return;
+            print(`<span style="color:#00f3ff">root@mawliid:~$</span> ${c}`);
+            if (c === 'help') print('Amarrada: scan, hack, trace, decrypt, clear', '#00f3ff');
+            else if (c === 'scan') print('[+] Ports 80, 443: SECURE', '#00f3ff');
+            else if (c === 'hack') print('[GUUL] Mainframe Simulation active!', '#00f3ff');
+            else if (c === 'trace') print('Node: East Africa // Ping: 12ms', '#00f3ff');
+            else if (c === 'decrypt') print('Key: MS-CYBER-2026', '#00f3ff');
+            else if (c === 'about') print('Mawliid Sheikh Cyber Lab - Security Training Hub.', '#00f3ff');
+            else if (c === 'clear') out.innerHTML = '';
+            else print('Amarkaas lama yaqaan.', '#ff0055');
+        }
+        input.addEventListener('keypress', e => { if (e.key === 'Enter') { execCmd(input.value); input.value = ''; } });
+
+        // Modal Controls & Room Share
+        let isGameOpen = false;
+        let isHomeTeam = true;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('room')) {
+            document.getElementById('room-code').value = urlParams.get('room');
+            isHomeTeam = false;
+            document.getElementById('side-btn').textContent = 'SIDE: AWAY (RED)';
+            document.getElementById('guest-status').innerHTML = '🟢 <strong>Mawliid_Guest</strong> (Connected)';
+        }
+
+        function openGameModal() {
+            isGameOpen = true;
+            document.getElementById('gameModal').classList.add('open');
+        }
+
+        function closeGameModal() {
+            isGameOpen = false;
+            document.getElementById('gameModal').classList.remove('open');
+        }
+
+        function copyRoomLink() {
+            const code = document.getElementById('room-code').value || 'MAWLIID-PVP';
+            const link = `${window.location.origin}${window.location.pathname}?room=${code}`;
+            navigator.clipboard.writeText(link);
+            addChat('Konami System', `Link-ga qolka (${code}) waa la koobiyeeyay!`, '#ffd700');
+        }
+
+        function toggleTeamSide() {
+            isHomeTeam = !isHomeTeam;
+            document.getElementById('side-btn').textContent = isHomeTeam ? 'SIDE: HOME (BLUE)' : 'SIDE: AWAY (RED)';
+        }
+
+        function addChat(sender, text, color = '#00f3ff') {
+            const box = document.getElementById('chat-box');
+            const div = document.createElement('div');
+            div.style.marginBottom = '4px';
+            div.innerHTML = `<strong style="color:${color}">${sender}:</strong> ${text}`;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function sendChat() {
+            const inp = document.getElementById('chat-input');
+            const txt = inp.value.trim();
+            if (!txt) return;
+            addChat('Mawliid', txt, '#0055ff');
+            inp.value = '';
+            setTimeout(() => {
+                addChat('Opponent', 'Ciyaar fiican! 🔥', '#ff0055');
+            }, 1000);
+        }
+
+        // Konami eFootball Engine
+        const canvas = document.getElementById('konamiPitch');
+        const ctx = canvas.getContext('2d');
+        const W = 740, H = 370;
+        const GOAL_T = 125, GOAL_B = 245;
+
+        let sHome = 0, sAway = 0;
+        const keys = {};
+
+        const ball = { x: W / 2, y: H / 2, r: 8, vx: 0, vy: 0, friction: 0.975 };
+
+        const homeSquad = [
+            { x: 45, y: H / 2, r: 15, speed: 4.0, color: '#0055ff', num: '1' },
+            { x: 230, y: 110, r: 16, speed: 4.6, color: '#0055ff', num: '8' },
+            { x: 270, y: 260, r: 16, speed: 4.6, color: '#0055ff', num: '10' }
+        ];
+
+        const awaySquad = [
+            { x: W - 45, y: H / 2, r: 15, speed: 4.0, color: '#ff0055', num: '1' },
+            { x: W - 230, y: 110, r: 16, speed: 4.5, color: '#ff0055', num: '7' },
+            { x: W - 270, y: 260, r: 16, speed: 4.5, color: '#ff0055', num: '9' }
+        ];
+
+        window.addEventListener('keydown', e => {
+            if (isGameOpen && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
+            keys[e.key] = true;
+            if (isGameOpen && e.key === ' ') playerShoot();
+        });
+        window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+        function getActivePlayer() {
+            const squad = isHomeTeam ? homeSquad : awaySquad;
+            return Math.hypot(ball.x - squad[1].x, ball.y - squad[1].y) < Math.hypot(ball.x - squad[2].x, ball.y - squad[2].y) ? squad[1] : squad[2];
+        }
+
+        function playerShoot() {
+            const active = getActivePlayer();
+            const targetX = isHomeTeam ? W - 12 : 12;
+            const targetY = H / 2;
+            const angle = Math.atan2(targetY - ball.y, targetX - ball.x);
+            ball.vx = Math.cos(angle) * 15;
+            ball.vy = Math.sin(angle) * 15;
+        }
+
+        function playerPass() {
+            const active = getActivePlayer();
+            const squad = isHomeTeam ? homeSquad : awaySquad;
+            const target = active === squad[1] ? squad[2] : squad[1];
+            const angle = Math.atan2(target.y - ball.y, target.x - ball.x);
+            ball.vx = Math.cos(angle) * 11;
+            ball.vy = Math.sin(angle) * 11;
+        }
+
+        function resetBall() {
+            ball.x = W / 2; ball.y = H / 2; ball.vx = 0; ball.vy = 0;
+            homeSquad[1].x = 230; homeSquad[1].y = 110;
+            homeSquad[2].x = 270; homeSquad[2].y = 260;
+            awaySquad[1].x = W - 230; awaySquad[1].y = 110;
+            awaySquad[2].x = W - 270; awaySquad[2].y = 260;
+        }
+
+        function updateGame() {
+            if (!isGameOpen) return;
+
+            const active = getActivePlayer();
+            const spd = active.speed;
+            if (keys['ArrowUp']) active.y -= spd;
+            if (keys['ArrowDown']) active.y += spd;
+            if (keys['ArrowLeft']) active.x -= spd;
+            if (keys['ArrowRight']) active.x += spd;
+
+            active.x = Math.max(20, Math.min(W - 20, active.x));
+            active.y = Math.max(20, Math.min(H - 20, active.y));
+
+            homeSquad.forEach((p, idx) => {
+                if (p === active) return;
+                if (idx === 0) p.y += (Math.max(GOAL_T + 12, Math.min(GOAL_B - 12, ball.y)) - p.y) * 0.08;
+                else { p.x += ((ball.x - 50) - p.x) * 0.03; p.y += (ball.y - p.y) * 0.03; }
+            });
+
+            awaySquad.forEach((p, idx) => {
+                if (idx === 0) p.y += (Math.max(GOAL_T + 12, Math.min(GOAL_B - 12, ball.y)) - p.y) * 0.08;
+                else { p.x += (ball.x - p.x) * 0.035; p.y += (ball.y - p.y) * 0.035; }
+            });
+
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            ball.vx *= ball.friction;
+            ball.vy *= ball.friction;
+
+            if (ball.x + ball.r >= W - 12 && ball.y > GOAL_T && ball.y < GOAL_B) {
+                sHome++;
+                document.getElementById('s-home').textContent = sHome;
+                addChat('KONAMI', '⚽ Mawliid FC (Home) scored a goal!', '#0055ff');
+                resetBall();
+            } else if (ball.x - ball.r <= 12 && ball.y > GOAL_T && ball.y < GOAL_B) {
+                sAway++;
+                document.getElementById('s-away').textContent = sAway;
+                addChat('KONAMI', '⚽ Away Team scored a goal!', '#ff0055');
+                resetBall();
+            }
+
+            if (ball.y - ball.r < 12) { ball.y = 12 + ball.r; ball.vy *= -0.8; }
+            if (ball.y + ball.r > H - 12) { ball.y = H - 12 - ball.r; ball.vy *= -0.8; }
+            if (ball.x - ball.r < 12) { ball.x = 12 + ball.r; ball.vx *= -0.8; }
+            if (ball.x + ball.r > W - 12) { ball.x = W - 12 - ball.r; ball.vx *= -0.8; }
+
+            [...homeSquad, ...awaySquad].forEach(p => {
+                const dx = ball.x - p.x;
+                const dy = ball.y - p.y;
+                if (Math.hypot(dx, dy) < p.r + ball.r) {
+                    const a = Math.atan2(dy, dx);
+                    ball.vx = Math.cos(a) * 6;
+                    ball.vy = Math.sin(a) * 6;
+                }
+            });
+        }
+
+        function drawGame() {
+            for (let i = 0; i < 10; i++) {
+                ctx.fillStyle = i % 2 === 0 ? '#0b4f1e' : '#0e5e24';
+                ctx.fillRect(i * (W / 10), 0, W / 10, H);
+            }
+            ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+            ctx.strokeRect(12, 12, W - 24, H - 24);
+            ctx.beginPath(); ctx.moveTo(W / 2, 12); ctx.lineTo(W / 2, H - 12); ctx.stroke();
+            ctx.beginPath(); ctx.arc(W / 2, H / 2, 55, 0, Math.PI * 2); ctx.stroke();
+
+            ctx.fillStyle = 'rgba(0, 85, 255, 0.4)'; ctx.fillRect(0, GOAL_T, 12, GOAL_B - GOAL_T);
+            ctx.fillStyle = 'rgba(255, 0, 85, 0.4)'; ctx.fillRect(W - 12, GOAL_T, 12, GOAL_B - GOAL_T);
+
+            homeSquad.forEach(p => {
+                const isC = isHomeTeam && p === getActivePlayer();
+                if (isC) {
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r + 5, 0, Math.PI * 2);
+                    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2.5; ctx.stroke();
+                }
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.stroke();
+                ctx.fillStyle = '#fff'; ctx.font = 'bold 11px Arial'; ctx.textAlign = 'center';
+                ctx.fillText(p.num, p.x, p.y + 4);
+            });
+
+            awaySquad.forEach(p => {
+                const isC = !isHomeTeam && p === getActivePlayer();
+                if (isC) {
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r + 5, 0, Math.PI * 2);
+                    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2.5; ctx.stroke();
+                }
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.stroke();
+                ctx.fillStyle = '#fff'; ctx.font = 'bold 11px Arial'; ctx.textAlign = 'center';
+                ctx.fillText(p.num, p.x, p.y + 4);
+            });
+
+            ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+            ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#000'; ctx.stroke();
+        }
+
+        function loop() {
+            updateGame();
+            if (isGameOpen) drawGame();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>
