@@ -1,18 +1,18 @@
 
 
-       <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="so">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | CYBER COMMAND CENTER</title>
+    <title>MAWLIID SHEIKH | CYBER COMMAND & ARCADE</title>
     <style>
         :root {
             --neon-green: #00ff41;
             --neon-cyan: #00f3ff;
             --neon-pink: #ff0055;
             --dark-bg: #030504;
-            --panel-bg: rgba(8, 18, 12, 0.88);
+            --panel-bg: rgba(8, 18, 12, 0.9);
             --glow-green: 0 0 15px rgba(0, 255, 65, 0.6);
             --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.5);
         }
@@ -34,29 +34,14 @@
             position: relative;
         }
 
-        /* Matrix Rain Background */
         #matrix-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
-            opacity: 0.3;
+            opacity: 0.25;
         }
 
-        /* CRT Scanline Effect */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 999;
-            pointer-events: none;
-        }
-
-        /* Top Navigation / Header with Animated Logo */
+        /* Header with Your Photo Logo */
         header {
             width: 96%;
             max-width: 1400px;
@@ -71,7 +56,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            animation: slideDown 0.8s ease-out;
         }
 
         .brand-section {
@@ -80,11 +64,10 @@
             gap: 18px;
         }
 
-        /* Animated Logo Container */
         .logo-wrapper {
             position: relative;
-            width: 70px;
-            height: 70px;
+            width: 76px;
+            height: 76px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -94,8 +77,7 @@
 
         .logo-ring {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 50%;
             border: 3px dashed var(--neon-cyan);
             border-top-color: var(--neon-green);
@@ -105,16 +87,17 @@
         }
 
         .logo-img {
-            width: 56px;
-            height: 56px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             object-fit: cover;
+            object-position: top;
             border: 2px solid var(--neon-green);
             z-index: 2;
         }
 
         .title-box h1 {
-            font-size: clamp(1.3rem, 3vw, 2.1rem);
+            font-size: clamp(1.3rem, 3vw, 2rem);
             letter-spacing: 2px;
             text-shadow: 0 0 10px var(--neon-green);
             animation: glitchText 3s infinite;
@@ -138,14 +121,13 @@
         }
 
         .pulse-dot {
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             background: var(--neon-green);
             border-radius: 50%;
             animation: pulse 1.2s infinite;
         }
 
-        /* Wide Main Dashboard Grid */
+        /* Dashboard Grid */
         .dashboard {
             width: 96%;
             max-width: 1400px;
@@ -156,9 +138,9 @@
             flex-grow: 1;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1024px) {
             .dashboard {
-                grid-template-columns: 280px 1fr 320px;
+                grid-template-columns: 260px 1fr 340px;
             }
         }
 
@@ -166,60 +148,50 @@
             background: var(--panel-bg);
             border: 1px solid var(--neon-green);
             border-radius: 10px;
-            padding: 18px;
+            padding: 16px;
             box-shadow: var(--glow-green);
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-
-        .panel:hover {
-            border-color: var(--neon-cyan);
         }
 
         .panel-title {
             color: var(--neon-cyan);
             font-size: 1.05rem;
             border-bottom: 1px solid rgba(0, 243, 255, 0.4);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        /* Left Panel: Quick Attack Tools */
+        /* Left Tools */
         .tool-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
 
-        @media (min-width: 992px) {
-            .tool-list {
-                grid-template-columns: 1fr;
-            }
+        @media (min-width: 1024px) {
+            .tool-list { grid-template-columns: 1fr; }
         }
 
         .cyber-btn {
             background: rgba(0, 255, 65, 0.05);
             color: var(--neon-green);
             border: 1px solid var(--neon-green);
-            padding: 12px;
+            padding: 11px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             text-align: left;
-            transition: all 0.25s;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.2s;
         }
 
         .cyber-btn:hover, .cyber-btn:active {
             background: var(--neon-green);
             color: var(--dark-bg);
-            box-shadow: 0 0 15px var(--neon-green);
-            transform: translateX(4px);
+            box-shadow: 0 0 12px var(--neon-green);
         }
 
         .cyber-btn.danger {
@@ -230,56 +202,49 @@
         .cyber-btn.danger:hover {
             background: var(--neon-pink);
             color: #fff;
-            box-shadow: 0 0 15px var(--neon-pink);
         }
 
-        /* Center Panel: Giant Terminal */
+        /* Center Terminal */
         .terminal-window {
-            height: 520px;
+            height: 480px;
             padding: 0;
             overflow: hidden;
         }
 
         .terminal-bar {
             background: #0b1c12;
-            padding: 12px 18px;
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--neon-green);
         }
 
-        .dots { display: flex; gap: 7px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .r { background: #ff5f56; }
-        .y { background: #ffbd2e; }
-        .g { background: #27c93f; }
+        .dots { display: flex; gap: 6px; }
+        .dot { width: 11px; height: 11px; border-radius: 50%; }
+        .r { background: #ff5f56; } .y { background: #ffbd2e; } .g { background: #27c93f; }
 
         .terminal-body {
-            padding: 18px;
+            padding: 15px;
             flex-grow: 1;
             overflow-y: auto;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.92rem;
+            line-height: 1.5;
         }
 
-        .line { margin-bottom: 8px; word-wrap: break-word; }
+        .line { margin-bottom: 7px; word-wrap: break-word; }
         .cyan { color: var(--neon-cyan); }
         .warn { color: #ffcc00; }
         .err { color: var(--neon-pink); }
 
         .input-bar {
             display: flex;
-            padding: 12px 18px;
+            padding: 10px 15px;
             background: #060f09;
             border-top: 1px solid rgba(0, 255, 65, 0.3);
         }
 
-        .prompt {
-            color: var(--neon-cyan);
-            font-weight: bold;
-            margin-right: 10px;
-        }
+        .prompt { color: var(--neon-cyan); font-weight: bold; margin-right: 8px; }
 
         #cmd-input {
             background: transparent;
@@ -290,74 +255,77 @@
             outline: none;
         }
 
-        /* Right Panel: Radar & Live Telemetry */
-        .radar-container {
-            width: 180px;
-            height: 180px;
-            margin: 10px auto 20px;
-            border-radius: 50%;
-            border: 2px solid var(--neon-green);
-            position: relative;
-            background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,0,0,0.8) 70%);
-            box-shadow: var(--glow-green);
-            overflow: hidden;
+        /* Right Panel: MINI CYBER GAME */
+        .game-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .radar-sweep {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 50%; height: 50%;
-            background: linear-gradient(45deg, rgba(0, 255, 65, 0.7), transparent);
-            transform-origin: 0 0;
-            animation: spin 3s linear infinite;
-        }
-
-        .radar-blip {
-            position: absolute;
-            width: 8px; height: 8px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-            top: 30%; left: 65%;
-            box-shadow: 0 0 8px var(--neon-pink);
-            animation: pulse 1.5s infinite;
-        }
-
-        .stat-bar {
-            margin-bottom: 14px;
-        }
-
-        .stat-label {
+        .score-board {
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-        }
-
-        .progress-bg {
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--neon-cyan);
-            width: 65%;
-            transition: width 0.5s ease;
-            box-shadow: var(--glow-cyan);
-        }
-
-        .log-feed {
-            margin-top: auto;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
             background: rgba(0,0,0,0.6);
-            padding: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+        }
+
+        #snake-canvas {
+            background: #020804;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
             border-radius: 6px;
-            font-size: 0.78rem;
-            border-left: 3px solid var(--neon-pink);
-            height: 110px;
-            overflow: hidden;
+            max-width: 100%;
+        }
+
+        /* Mobile D-Pad Controls */
+        .d-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 50px);
+            grid-template-rows: repeat(2, 45px);
+            gap: 6px;
+            margin-top: 12px;
+            justify-content: center;
+        }
+
+        .pad-btn {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .pad-btn:active {
+            background: var(--neon-cyan);
+            color: #000;
+        }
+
+        .start-game-btn {
+            margin-top: 12px;
+            width: 100%;
+            padding: 10px;
+            background: var(--neon-green);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: var(--glow-green);
+        }
+
+        .start-game-btn:hover {
+            background: var(--neon-cyan);
         }
 
         footer {
@@ -366,25 +334,15 @@
             font-size: 0.85rem;
             color: rgba(0, 255, 65, 0.7);
             border-top: 1px solid rgba(0, 255, 65, 0.2);
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
-        /* Animations */
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.8); }
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes glitchText {
             0%, 95%, 100% { text-shadow: 0 0 10px var(--neon-green); transform: skew(0deg); }
-            96% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-cyan); transform: skew(-5deg); }
-            98% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-cyan); transform: skew(5deg); }
+            96% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-cyan); transform: skew(-4deg); }
+            98% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-cyan); transform: skew(4deg); }
         }
     </style>
 </head>
@@ -392,47 +350,46 @@
 
     <canvas id="matrix-bg"></canvas>
 
-    <!-- Header with Animated Logo -->
+    <!-- Header with Your Photo Logo -->
     <header>
         <div class="brand-section">
             <div class="logo-wrapper">
                 <div class="logo-ring"></div>
-                <!-- HALKAN KU BEDDEL LINK-GA SAWIRKAAGA HADDII AAD RABTO -->
-                <img src="https://github.com/Mawliidsheikh.png" alt="Mawliid Sheikh Logo" class="logo-img">
+                <!-- Sawirkaaga logo.jpg ayuu halkan ka soo qaadanayaa -->
+                <img src="logo.jpg" onerror="this.src='https://github.com/Mawliidsheikh.png'" alt="Mawliid Sheikh" class="logo-img">
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH CYBER LAB</h1>
-                <p>// GLOBAL CYBER COMMAND & HACKER SIMULATOR v4.0</p>
+                <p>// CYBER COMMAND CENTER & HACKER ARCADE v5.0</p>
             </div>
         </div>
 
         <div class="live-badge">
             <span class="pulse-dot"></span>
-            <span>ENCRYPTED CONNECTION: <strong>ACTIVE</strong></span>
+            <span>ADMIN: <strong>MAWLIID SHEIKH</strong></span>
         </div>
     </header>
 
-    <!-- Main 3-Column Wide Dashboard -->
+    <!-- Main Dashboard -->
     <main class="dashboard">
         
-        <!-- Left Column: Hacker Modules -->
+        <!-- Left Panel: Hacker Commands -->
         <aside class="panel">
             <div class="panel-title">
-                <span>[ CYBER MODULES ]</span>
+                <span>[ CYBER TOOLS ]</span>
                 <span>⚡</span>
             </div>
             <div class="tool-list">
-                <button class="cyber-btn" onclick="execCmd('scan')">[01] Deep Port Scan</button>
-                <button class="cyber-btn" onclick="execCmd('hack')">[02] Exploit Mainframe</button>
-                <button class="cyber-btn" onclick="execCmd('trace')">[03] Satellite IP Trace</button>
-                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Quantum Decrypt</button>
-                <button class="cyber-btn" onclick="execCmd('ddos')">[05] Stress Test Net</button>
-                <button class="cyber-btn" onclick="execCmd('about')">[06] System Info</button>
-                <button class="cyber-btn danger" onclick="execCmd('clear')">[XX] Wipe Terminal</button>
+                <button class="cyber-btn" onclick="execCmd('scan')">[01] Port Scan</button>
+                <button class="cyber-btn" onclick="execCmd('hack')">[02] Exploit Server</button>
+                <button class="cyber-btn" onclick="execCmd('trace')">[03] Trace IP</button>
+                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Decrypt Key</button>
+                <button class="cyber-btn" onclick="execCmd('about')">[05] About Owner</button>
+                <button class="cyber-btn danger" onclick="execCmd('clear')">[XX] Clear Screen</button>
             </div>
         </aside>
 
-        <!-- Center Column: Main Interactive Terminal -->
+        <!-- Center Panel: Interactive Terminal -->
         <section class="panel terminal-window">
             <div class="terminal-bar">
                 <div class="dots">
@@ -440,71 +397,66 @@
                     <span class="dot y"></span>
                     <span class="dot g"></span>
                 </div>
-                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-cyber-lab:~#</span>
+                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-lab:~#</span>
                 <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
             </div>
 
             <div class="terminal-body" id="term-out">
-                <div class="line">==========================================================</div>
-                <div class="line cyan">   KU SOO DHAWAAW MAWLIID SHEIKH CYBER COMMAND CENTER</div>
-                <div class="line">==========================================================</div>
-                <div class="line">Nidaamku wuu diyaar yahay. Guji badhammada bidix ama qor <span class="warn">'help'</span>.</div>
+                <div class="line cyan">=== MAWLIID SHEIKH CYBER SYSTEM v5.0 ===</div>
+                <div class="line">Ku soo dhawaaw xarunta amniga iyo madadaalada!</div>
+                <div class="line">Qor <span class="warn">'help'</span> ama ciyaar game-ka dhanka midig yaalla.</div>
                 <br>
             </div>
 
             <div class="input-bar">
                 <span class="prompt">root@mawliid:~$</span>
-                <input type="text" id="cmd-input" placeholder="Geli amarka hacker-ka..." autocomplete="off">
+                <input type="text" id="cmd-input" placeholder="Qor amar (tusaale: hack)..." autocomplete="off">
             </div>
         </section>
 
-        <!-- Right Column: Live Radar & Telemetry -->
-        <aside class="panel">
-            <div class="panel-title">
-                <span>[ LIVE RADAR ]</span>
-                <span class="cyan">SCANNING</span>
+        <!-- Right Panel: CYBER SNAKE GAME -->
+        <aside class="panel game-box">
+            <div class="panel-title" style="width: 100%;">
+                <span>[ CYBER SNAKE GAME ]</span>
+                <span>🎮</span>
             </div>
 
-            <div class="radar-container">
-                <div class="radar-sweep"></div>
-                <div class="radar-blip"></div>
+            <div class="score-board">
+                <span>DATA: <strong id="score" class="cyan">0</strong></span>
+                <span>BEST: <strong id="high-score" style="color: var(--neon-pink);">0</strong></span>
             </div>
 
-            <div class="stat-bar">
-                <div class="stat-label"><span>CPU OVERCLOCK</span><span id="cpu-val">72%</span></div>
-                <div class="progress-bg"><div class="progress-fill" id="cpu-bar" style="width: 72%;"></div></div>
+            <canvas id="snake-canvas" width="280" height="240"></canvas>
+
+            <!-- Touch Controls for Mobile & Mouse -->
+            <div class="d-pad">
+                <div></div>
+                <button class="pad-btn" onclick="changeDir('UP')">▲</button>
+                <div></div>
+                <button class="pad-btn" onclick="changeDir('LEFT')">◀</button>
+                <button class="pad-btn" onclick="changeDir('DOWN')">▼</button>
+                <button class="pad-btn" onclick="changeDir('RIGHT')">▶</button>
             </div>
 
-            <div class="stat-bar">
-                <div class="stat-label"><span>NEURAL FIREWALL</span><span id="ram-val">94%</span></div>
-                <div class="progress-bg"><div class="progress-fill" id="ram-bar" style="width: 94%; background: var(--neon-green);"></div></div>
-            </div>
-
-            <div class="log-feed" id="live-logs">
-                <div>> Initializing proxy chains...</div>
-                <div>> Masking MAC address... OK</div>
-            </div>
+            <button class="start-game-btn" onclick="startGame()">▶ BILOW / CUSBOONAYSII GAME-KA</button>
         </aside>
 
     </main>
 
     <footer>
-        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | All Systems Operational | Designed for Cybersecurity Training
+        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | Designed & Developed by Mawliid Sheikh
     </footer>
 
     <script>
-        // 1. Matrix Rain Animation
+        // 1. Matrix Background
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize);
         resize();
 
-        const letters = '01MAWLIIDSHEIKHCYBERLAB@#$%&*987654321';
-        const fontSize = 15;
+        const letters = '01MAWLIIDSHEIKH@#$%&*987654321';
+        const fontSize = 14;
         let drops = Array(Math.floor(canvas.width / fontSize)).fill(1);
 
         function drawMatrix() {
@@ -512,7 +464,6 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#00ff41';
             ctx.font = fontSize + 'px monospace';
-
             for (let i = 0; i < drops.length; i++) {
                 const text = letters.charAt(Math.floor(Math.random() * letters.length));
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
@@ -522,34 +473,12 @@
         }
         setInterval(drawMatrix, 35);
 
-        // 2. Live Clock & Dynamic System Stats
+        // 2. Clock
         setInterval(() => {
-            const now = new Date();
-            document.getElementById('clock').textContent = now.toTimeString().split(' ')[0];
+            document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0];
+        }, 1000);
 
-            const cpu = Math.floor(Math.random() * 35) + 55;
-            document.getElementById('cpu-val').textContent = cpu + '%';
-            document.getElementById('cpu-bar').style.width = cpu + '%';
-        }, 1500);
-
-        // Live Security Logs Feed
-        const logMessages = [
-            "> Packet intercepted on port 443",
-            "> Tor circuit rebuilt successfully",
-            "> SSH tunnel encrypted [AES-256]",
-            "> Ping sweep blocked from unknown IP",
-            "> Mawliid_Core_v4 running smoothly"
-        ];
-        setInterval(() => {
-            const feed = document.getElementById('live-logs');
-            const msg = logMessages[Math.floor(Math.random() * logMessages.length)];
-            const div = document.createElement('div');
-            div.textContent = msg;
-            feed.appendChild(div);
-            if (feed.children.length > 5) feed.removeChild(feed.firstChild);
-        }, 2500);
-
-        // 3. Interactive Terminal Logic
+        // 3. Terminal Logic
         const out = document.getElementById('term-out');
         const input = document.getElementById('cmd-input');
 
@@ -568,48 +497,148 @@
 
             switch (cmd) {
                 case 'help':
-                    print('Amarrada: <span class="cyan">scan, hack, trace, decrypt, ddos, about, clear</span>');
+                    print('Amarrada: <span class="cyan">scan, hack, trace, decrypt, about, clear</span>');
                     break;
                 case 'scan':
-                    print('Baadhitaan qoto dheer ayaa ka socda shabakadda...', 'warn');
-                    setTimeout(() => print('[+] 10.0.0.1 - Gateway (Vulnerable)'), 600);
-                    setTimeout(() => print('[+] 10.0.0.45 - Database Server [Port 3306 OPEN]', 'cyan'), 1200);
+                    print('Baadhitaanka shabakadda ayaa socda...', 'warn');
+                    setTimeout(() => print('[+] Port 80 & 443: ACTIVE // Firewall Secure', 'cyan'), 700);
                     break;
                 case 'hack':
-                    print('Bilowga weerarka tijaabada (Mainframe Exploit)...', 'warn');
-                    setTimeout(() => print('>> Injecting SQL Payload... [30%]'), 500);
-                    setTimeout(() => print('>> Escalating Root Privileges... [78%]'), 1100);
-                    setTimeout(() => print('[GUUL] Waxaad si buuxda ula wareegtay Root Access!', 'cyan'), 1800);
+                    print('Jebinta sirta tijaabada...', 'warn');
+                    setTimeout(() => print('>> Accessing Mainframe... [100%] GUUL!', 'cyan'), 1000);
                     break;
                 case 'trace':
-                    print('Raadinta IP-ga dayax-gacmeedka...', 'warn');
-                    setTimeout(() => print('>> Location Locked: Horn of Africa Node // Ping: 14ms', 'cyan'), 900);
+                    print('Raadinta IP-ga: <span class="cyan">102.68.14.99 (East Africa Node)</span>');
                     break;
                 case 'decrypt':
-                    const code = Math.random().toString(36).substring(2, 14).toUpperCase();
-                    print(`Sirta waa la furay: <span class="cyan">MS-LAB-${code}-99</span>`);
-                    break;
-                case 'ddos':
-                    print('Dirista xog badan (Simulated Traffic)...', 'err');
-                    setTimeout(() => print('>> 150,000 Requests/sec la diray. Server-ku wuu cuslaaday!', 'warn'), 1000);
+                    const code = Math.random().toString(36).substring(2, 12).toUpperCase();
+                    print(`Furaha la furay: <span class="cyan">MS-${code}-2026</span>`);
                     break;
                 case 'about':
-                    print('<strong>Mawliid Sheikh Cyber Lab</strong> - Madal casri ah oo loogu talagalay barashada amniga internet-ka iyo tijaabinta nidaamyada.', 'cyan');
+                    print('<strong>Mawliid Sheikh</strong> - Aasaasaha Mawliid Cyber Lab.', 'cyan');
                     break;
                 case 'clear':
                     out.innerHTML = '';
                     break;
                 default:
-                    print(`Cilad: Amarka '${cmd}' lama yaqaan. Qor 'help'.`, 'err');
+                    print(`Cilad: Amarka '${cmd}' lama yaqaan.`, 'err');
             }
         }
 
         input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                execCmd(input.value);
-                input.value = '';
+            if (e.key === 'Enter') { execCmd(input.value); input.value = ''; }
+        });
+
+        // 4. CYBER SNAKE GAME LOGIC
+        const gCanvas = document.getElementById('snake-canvas');
+        const gCtx = gCanvas.getContext('2d');
+        const box = 14;
+        let snake = [];
+        let food = {};
+        let dir = 'RIGHT';
+        let score = 0;
+        let highScore = localStorage.getItem('cyberSnakeBest') || 0;
+        document.getElementById('high-score').textContent = highScore;
+        let gameLoop = null;
+
+        function spawnFood() {
+            food = {
+                x: Math.floor(Math.random() * (gCanvas.width / box)) * box,
+                y: Math.floor(Math.random() * (gCanvas.height / box)) * box
+            };
+        }
+
+        function changeDir(newDir) {
+            if (newDir === 'LEFT' && dir !== 'RIGHT') dir = 'LEFT';
+            if (newDir === 'UP' && dir !== 'DOWN') dir = 'UP';
+            if (newDir === 'RIGHT' && dir !== 'LEFT') dir = 'RIGHT';
+            if (newDir === 'DOWN' && dir !== 'UP') dir = 'DOWN';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+                if (e.key === 'ArrowLeft') changeDir('LEFT');
+                if (e.key === 'ArrowUp') changeDir('UP');
+                if (e.key === 'ArrowRight') changeDir('RIGHT');
+                if (e.key === 'ArrowDown') changeDir('DOWN');
             }
         });
+
+        function startGame() {
+            snake = [{ x: 5 * box, y: 5 * box }];
+            dir = 'RIGHT';
+            score = 0;
+            document.getElementById('score').textContent = score;
+            spawnFood();
+            if (gameLoop) clearInterval(gameLoop);
+            gameLoop = setInterval(drawGame, 130);
+        }
+
+        function drawGame() {
+            gCtx.fillStyle = '#020804';
+            gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+
+            // Draw Food (Neon Pink Data Packet)
+            gCtx.fillStyle = '#ff0055';
+            gCtx.shadowBlur = 10;
+            gCtx.shadowColor = '#ff0055';
+            gCtx.fillRect(food.x, food.y, box - 2, box - 2);
+
+            // Draw Snake (Neon Green)
+            gCtx.shadowColor = '#00ff41';
+            for (let i = 0; i < snake.length; i++) {
+                gCtx.fillStyle = i === 0 ? '#00f3ff' : '#00ff41';
+                gCtx.fillRect(snake[i].x, snake[i].y, box - 2, box - 2);
+            }
+            gCtx.shadowBlur = 0;
+
+            let headX = snake[0].x;
+            let headY = snake[0].y;
+
+            if (dir === 'LEFT') headX -= box;
+            if (dir === 'UP') headY -= box;
+            if (dir === 'RIGHT') headX += box;
+            if (dir === 'DOWN') headY += box;
+
+            // Wrap around walls for smoother play
+            if (headX < 0) headX = gCanvas.width - box;
+            if (headX >= gCanvas.width) headX = 0;
+            if (headY < 0) headY = gCanvas.height - box;
+            if (headY >= gCanvas.height) headY = 0;
+
+            // Check self collision
+            for (let i = 0; i < snake.length; i++) {
+                if (headX === snake[i].x && headY === snake[i].y) {
+                    clearInterval(gameLoop);
+                    gCtx.fillStyle = '#ff0055';
+                    gCtx.font = 'bold 18px Courier New';
+                    gCtx.fillText('SYSTEM CRASH! GAME OVER', 15, gCanvas.height / 2);
+                    return;
+                }
+            }
+
+            // Eat Food
+            if (headX === food.x && headY === food.y) {
+                score += 10;
+                document.getElementById('score').textContent = score;
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem('cyberSnakeBest', highScore);
+                    document.getElementById('high-score').textContent = highScore;
+                }
+                spawnFood();
+            } else {
+                snake.pop();
+            }
+
+            snake.unshift({ x: headX, y: headY });
+        }
+
+        // Draw initial screen
+        gCtx.fillStyle = '#00f3ff';
+        gCtx.font = '14px Courier New';
+        gCtx.fillText('Guji "BILOW GAME-KA"', 55, 120);
     </script>
 </body>
 </html>
