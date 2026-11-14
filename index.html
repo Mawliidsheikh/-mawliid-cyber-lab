@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | SOC COMMAND & AI BUILDER CENTER</title>
+    <title>MAWLIID SHEIKH | SOC COMMAND & AI IMAGE BUILDER</title>
     <style>
         :root {
             --neon-green: #00ff41;
@@ -368,22 +368,32 @@
             gap: 5px;
         }
 
-        /* DYNAMIC AI DASHBOARD ELEMENTS */
+        /* AI DYNAMIC IMAGES CONTAINER */
         #ai-widgets-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             margin-top: 10px;
         }
 
-        .ai-dashboard-card {
-            background: rgba(0, 243, 255, 0.1);
+        .ai-image-card {
+            background: rgba(0, 243, 255, 0.08);
             border: 1.5px solid var(--neon-cyan);
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            box-shadow: 0 0 10px rgba(0,243,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            box-shadow: 0 0 12px rgba(0,243,255,0.3);
             animation: fadeIn 0.4s ease-in-out;
+            text-align: center;
+        }
+
+        .ai-image-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--neon-green);
+            margin-top: 6px;
         }
 
         @keyframes fadeIn {
@@ -400,7 +410,7 @@
             border-top: 1px solid rgba(0, 243, 255, 0.2);
         }
 
-        /* LARGE PROMINENT FLOATING BUTTON FOR UNKNOWN PEOPLE / AI CHAT */
+        /* LARGE PROMINENT FLOATING BUTTON */
         .chat-float-btn {
             position: fixed !important;
             bottom: 30px !important;
@@ -574,7 +584,7 @@
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH SOC COMMAND</h1>
-                <p>// ADVANCED CYBERSECURITY & AI DASHBOARD BUILDER</p>
+                <p>// ADVANCED CYBERSECURITY & AI IMAGE BUILDER</p>
             </div>
         </div>
         <div class="soc-status-badges">
@@ -649,7 +659,7 @@
                     <span id="clock" style="color: var(--neon-cyan);">00:00:00</span>
                 </div>
                 <div class="terminal-body" id="term-out">
-                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v23.0 ===</div>
+                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v24.0 ===</div>
                     <div>Nidaamku wuu wada shaqaynayaa. Qor amarka <span style="color:var(--neon-green);">help</span>.</div>
                     <br>
                 </div>
@@ -660,7 +670,7 @@
             </div>
         </div>
 
-        <!-- RIGHT PANEL: AI DYNAMIC DASHBOARD WIDGETS -->
+        <!-- RIGHT PANEL: AI DYNAMIC IMAGES -->
         <aside class="soc-panel">
             <div class="panel-header"><span>[ TRAFFIC ANALYTICS ]</span><span>LIVE</span></div>
             <div class="chart-box">
@@ -675,12 +685,12 @@
                 </div>
             </div>
 
-            <div class="panel-header" style="margin-top: 5px;"><span>[ AI DASHBOARD BUILDER ]</span><span>ACTIVE</span></div>
-            <!-- AI will inject fully functional live dashboard widgets here -->
+            <div class="panel-header" style="margin-top: 5px;"><span>[ AI DYNAMIC IMAGES ]</span><span>ACTIVE</span></div>
+            <!-- AI will inject real images here when requested -->
             <div id="ai-widgets-container">
-                <div class="ai-dashboard-card">
-                    <div style="color:var(--neon-green); font-weight:bold;">🤖 AI Dashboard Ready</div>
-                    <div style="font-size: 0.75rem; color:#aaa; margin-top:2px;">Kala hadal AI-ga group-ka oo u sheeg waxaad rabto inuu dashboard-ka ku daro.</div>
+                <div class="ai-image-card">
+                    <div style="color:var(--neon-green); font-weight:bold;">🖼️ AI Image Gallery Ready</div>
+                    <div style="font-size: 0.75rem; color:#aaa; margin-top:2px;">Kala hadal AI-ga group-ka oo u sheeg inuu sawir ku daro.</div>
                 </div>
             </div>
 
@@ -699,7 +709,7 @@
         &copy; 2026 <strong>Mawliid Sheikh Cyber Security Command Center</strong> | All Rights Reserved
     </footer>
 
-    <!-- PROMINENT LARGE FLOATING BUTTON FOR UNKNOWN PEOPLE CHAT & AI -->
+    <!-- PROMINENT LARGE FLOATING BUTTON -->
     <button class="chat-float-btn" onclick="toggleChat()">
         <span>👥</span>
         <span>UNKNOWN PEOPLE & AI (<span id="msgCount">1</span>)</span>
@@ -709,7 +719,7 @@
         <div class="chat-box">
             <div class="chat-header">
                 <div class="group-info">
-                    <div style="font-weight: bold; color: var(--neon-cyan);">👥 UNKNOWN PEOPLE + AI BUILDER</div>
+                    <div style="font-weight: bold; color: var(--neon-cyan);">👥 UNKNOWN PEOPLE + AI IMAGE BUILDER</div>
                     <div style="font-size: 0.72rem; color: #aaa;" id="memberCountText">Admin: Mawliid Sheikh | Members: AI Bot, Ghost, CyberX</div>
                 </div>
                 <button onclick="toggleChat()" style="background:var(--neon-pink); color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold;">✖</button>
@@ -721,13 +731,13 @@
             </div>
 
             <div class="chat-messages" id="chatMsgs">
-                <div class="msg admin-notice">[System]: Mawliid Sheikh ayaa furay group-ka "Unknown People". Ku dheh tusaale: "iigu dar radar", "iigu dar live crypto chart", ama "iigu dar security scanner" si AI uu si toos ah dashboard-ka ugu darsado!</div>
-                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid (Admin):</strong> AI, ma diyaar u tahay inaad dashboard-ka wax ku darto?</div>
-                <div class="msg ai-msg"><strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Haa Commander Mawliid! Si buuxda ayaan u diyaar ahay. Hal-ku-dheggayga waa inaan si toos ah shaashadaada ugu soo daro qalabka aad codsato. Halkee ka bilaabanaa?</div>
+                <div class="msg admin-notice">[System]: Mawliid Sheikh ayaa furay group-ka. Ku dheh tusaale: "iigu dar image ee hacker" ama "iigu dar sawir" si AI uu si toos ah sawir ugala soo dhex baxo internetka oo ugu darsado dashboard-ka!</div>
+                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid (Admin):</strong> AI, maanta sawir iigu dar shaashada.</div>
+                <div class="msg ai-msg"><strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Haa Commander Mawliid! Hal-ku-dheggayga waa inaan sawir dhab ah dashboard-kaaga ka soo dhex muujiyo. Qor amarkaaga!</div>
             </div>
 
             <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="Tiri tusaale: iigu dar radar ama live crypto chart..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
+                <input type="text" id="chatInput" placeholder="Tiri tusaale: iigu dar image ee hacker..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
                 <button class="chat-send-btn" onclick="sendTeamMsg()">DIR</button>
             </div>
         </div>
@@ -803,7 +813,7 @@
             if(logAnalysis.children.length > 7) logAnalysis.removeChild(logAnalysis.firstChild);
         }, 2500);
 
-        // UNKNOWN PEOPLE GROUP CHAT + REAL AI DASHBOARD BUILDER
+        // UNKNOWN PEOPLE GROUP CHAT + REAL AI IMAGE INJECTOR
         let members = ["Mawliid (Admin)", "AI Assistant", "Ghost", "CyberX"];
         let unreadCount = 1;
 
@@ -842,35 +852,42 @@
             msgs.scrollTop = msgs.scrollHeight;
             txtInp.value = '';
 
-            // AI Builder Action & Response
+            // AI Image Injection Action & Response
             setTimeout(() => {
                 const resp = document.createElement('div');
                 resp.className = 'msg ai-msg';
 
                 let lowerTxt = txt.toLowerCase();
-                if (lowerTxt.includes('iigu dar') || lowerTxt.includes('ku dar') || lowerTxt.includes('soo dar') || lowerTxt.includes('abuur')) {
-                    let itemName = txt.replace(/iigu dar|ku dar|soo dar|abuur/gi, '').trim();
-                    if (!itemName) itemName = "Custom Security Module";
+                if (lowerTxt.includes('image') || lowerTxt.includes('sawir') || lowerTxt.includes('iigu dar') || lowerTxt.includes('ku dar')) {
+                    let imageName = txt.replace(/image|sawir|iigu dar|ku dar|ee/gi, '').trim();
+                    if (!imageName) imageName = "Cyber Security Operations";
 
-                    // Create real functional widget on the dashboard
+                    // Select a cool high-tech cyber image URL from Unsplash
+                    const cyberImages = [
+                        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&auto=format&fit=crop&q=60",
+                        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&auto=format&fit=crop&q=60",
+                        "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&auto=format&fit=crop&q=60",
+                        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60"
+                    ];
+                    const randomImgUrl = cyberImages[Math.floor(Math.random() * cyberImages.length)];
+
+                    // Inject real Image into dashboard
                     const widgetsContainer = document.getElementById('ai-widgets-container');
-                    const newWidget = document.createElement('div');
-                    newWidget.className = 'ai-dashboard-card';
-                    newWidget.innerHTML = `
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                            <strong style="color:var(--neon-green)">⚡ [AI Built]: ${itemName.toUpperCase()}</strong>
-                            <span style="font-size:0.7rem; color:var(--neon-pink);">ACTIVE</span>
+                    const newImageCard = document.createElement('div');
+                    newImageCard.className = 'ai-image-card';
+                    newImageCard.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <strong style="color:var(--neon-green)">🖼️ [AI Image]: ${imageName.toUpperCase()}</strong>
+                            <span style="font-size:0.7rem; color:var(--neon-pink);">SECURE</span>
                         </div>
-                        <div style="font-size:0.78rem; color:#fff;">Status: Fully Integrated & Operational. Secure node verified by AI Assistant.</div>
-                        <div style="margin-top:6px; background:#010408; padding:4px; border-radius:3px; font-size:0.72rem; color:var(--neon-cyan);">
-                            Telemetry: Live Data Flow Normal [100%]
-                        </div>
+                        <img src="${randomImgUrl}" alt="Cyber Image">
+                        <div style="font-size:0.7rem; color:#aaa; margin-top:4px;">Rendered by AI Assistant for Mawliid Sheikh</div>
                     `;
-                    widgetsContainer.appendChild(newWidget);
+                    widgetsContainer.appendChild(newImageCard);
 
-                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan ku guuleystay Commander! Element-ka <b style="color:#fff;">"${itemName}"</b> si toos ah ayaan ugu darsaday dashboard-kaaga. Ka eeg dhinaca midig ee panel-ka!`;
+                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan ku guuleystay Commander! Sawirka <b style="color:#fff;">"${imageName}"</b> si toos ah ayaan ugu darsaday dashboard-kaaga dhinaca midig!`;
                 } else {
-                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan maqlay fariintaada Commander Mawliid. Si aad dashboard-ka wax ugu darto, kaliya iigu dheh: <i style="color:#fff;">"iigu dar [magaca qalabka ama radar]"</i> oo shaashada ayaan ku soo darayaa!`;
+                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan maqlay fariintaada Commander Mawliid. Si aad sawir u geliso shaashada, kaliya iigu dheh: <i style="color:#fff;">"iigu dar image ee [magaca]"</i> ama <i style="color:#fff;">"iigu dar sawir"</i>!`;
                 }
 
                 msgs.appendChild(resp);
