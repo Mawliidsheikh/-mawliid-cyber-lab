@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | SOC COMMAND CENTER</title>
+    <title>MAWLIID SHEIKH | UNKNOWN PEOPLE SOC & SOLAR SYSTEM</title>
     <style>
         :root {
             --neon-green: #00ff41;
@@ -197,13 +197,14 @@
             gap: 15px;
         }
 
+        /* THREAT MAP & SOLAR SYSTEM CONTAINER */
         .threat-map-box {
             background: #020813;
             border: 1.5px solid var(--neon-cyan);
             border-radius: 8px;
             padding: 12px;
             position: relative;
-            height: 240px;
+            height: 260px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -214,11 +215,55 @@
         .map-grid-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0,243,255,0.06) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0,243,255,0.06) 1px, transparent 1px);
-            background-size: 25px 25px;
+            background-image: linear-gradient(rgba(0,243,255,0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0,243,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
             z-index: 1;
             pointer-events: none;
+        }
+
+        .solar-system-view {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 243, 255, 0.3);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sun {
+            width: 18px; height: 18px;
+            background: var(--neon-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--neon-orange);
+            position: relative;
+        }
+
+        .planet {
+            position: absolute;
+            width: 6px; height: 6px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: orbit 6s linear infinite;
+        }
+        .planet.p2 {
+            width: 8px; height: 8px;
+            background: var(--neon-green);
+            animation: orbitRev 10s linear infinite;
+        }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(42px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(42px) rotate(-360deg); }
+        }
+        @keyframes orbitRev {
+            0% { transform: rotate(0deg) translateX(58px) rotate(0deg); }
+            100% { transform: rotate(-360deg) translateX(58px) rotate(360deg); }
         }
 
         .map-content {
@@ -227,21 +272,22 @@
             flex-grow: 1;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .world-map-svg {
-            width: 100%;
-            max-height: 150px;
+            width: 75%;
+            max-height: 160px;
             opacity: 0.8;
             filter: drop-shadow(0 0 10px var(--neon-cyan));
         }
 
+        /* TERMINAL WINDOW */
         .terminal-box {
             background: rgba(2, 8, 15, 0.95);
             border: 1.5px solid var(--neon-green);
             border-radius: 8px;
-            height: 280px;
+            height: 270px;
             display: flex;
             flex-direction: column;
             box-shadow: var(--glow-green);
@@ -333,6 +379,7 @@
             border-top: 1px solid rgba(0, 243, 255, 0.2);
         }
 
+        /* UNKNOWN PEOPLE GROUP CHAT MODAL & BUTTON */
         .chat-float-btn {
             position: fixed !important;
             bottom: 25px !important;
@@ -368,8 +415,8 @@
         .chat-modal.open { display: flex; }
 
         .chat-box {
-            width: 100%; max-width: 440px;
-            height: 520px;
+            width: 100%; max-width: 480px;
+            height: 580px;
             background: #031020;
             border: 2px solid var(--neon-cyan);
             border-radius: 10px;
@@ -387,6 +434,34 @@
             align-items: center;
             border-bottom: 1px solid var(--neon-cyan);
         }
+
+        .group-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-list-bar {
+            background: rgba(0,0,0,0.5);
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            color: var(--neon-green);
+            border-bottom: 1px solid rgba(0,243,255,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-member-btn {
+            background: rgba(0, 243, 255, 0.2);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .add-member-btn:hover { background: var(--neon-cyan); color: #000; }
 
         .chat-messages {
             flex-grow: 1;
@@ -409,6 +484,13 @@
             background: rgba(0, 255, 65, 0.1);
             border-left-color: var(--neon-green);
             text-align: right;
+        }
+        .msg.admin-notice {
+            background: rgba(255, 153, 0, 0.1);
+            border-left-color: var(--neon-orange);
+            color: var(--neon-orange);
+            font-size: 0.8rem;
+            text-align: center;
         }
 
         .chat-input-area {
@@ -457,12 +539,12 @@
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH SOC COMMAND</h1>
-                <p>// ADVANCED CYBERSECURITY OPERATIONS CENTER</p>
+                <p>// ADVANCED CYBERSECURITY & ORBITAL MONITORING</p>
             </div>
         </div>
         <div class="soc-status-badges">
             <div class="soc-badge"><span class="pulse-dot"></span> SECURE GATEWAY: <strong>ACTIVE</strong></div>
-            <div class="soc-badge" style="border-color: var(--neon-green); color: var(--neon-green);">ENCRYPTION: <strong>AES-256</strong></div>
+            <div class="soc-badge" style="border-color: var(--neon-green); color: var(--neon-green);">ADMIN: <strong>MAWLIID SHEIKH</strong></div>
         </div>
     </header>
 
@@ -487,21 +569,30 @@
                     <div>• Core Status: <span style="color:var(--neon-green)">STABLE</span></div>
                     <div>• Active Sockets: <span style="color:var(--neon-cyan)">2,418</span></div>
                     <div>• Threat Level: <span style="color:var(--neon-green)">NOMINAL</span></div>
-                    <div>• Firewall Rules: <span style="color:var(--neon-cyan)">Enforced</span></div>
+                    <div>• Orbital Sync: <span style="color:var(--neon-cyan)">ONLINE</span></div>
                 </div>
             </div>
         </aside>
 
-        <!-- CENTER PANEL -->
+        <!-- CENTER PANEL: THREAT MAP + SOLAR SYSTEM + TERMINAL -->
         <div class="center-stack">
             <div class="threat-map-box">
                 <div class="map-grid-overlay"></div>
+                
+                <!-- Rotating Solar System in corner -->
+                <div class="solar-system-view">
+                    <div class="sun"></div>
+                    <div class="planet"></div>
+                    <div class="planet p2"></div>
+                </div>
+
                 <div style="display: flex; justify-content: space-between; align-items: center; z-index: 2; font-size: 0.85rem; font-weight: bold;">
-                    <span style="color: var(--neon-cyan);">[ GLOBAL THREAT MAP & LIVE NODES ]</span>
+                    <span style="color: var(--neon-cyan);">[ GLOBAL CONTINENTS & SOLAR ORBITS ]</span>
                     <span style="color: var(--neon-green);">● REAL-TIME</span>
                 </div>
                 <div class="map-content">
                     <svg class="world-map-svg" viewBox="0 0 1000 500" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <!-- Continents Outline Simulation -->
                         <path d="M150,120 Q180,100 220,130 T300,110 T380,140 T450,120" stroke="var(--neon-cyan)" />
                         <path d="M600,100 Q650,80 720,120 T850,110" stroke="var(--neon-cyan)" />
                         <path d="M120,250 Q200,220 280,280 T400,260" stroke="var(--neon-green)" />
@@ -514,7 +605,7 @@
                 </div>
                 <div style="z-index: 2; font-size: 0.72rem; color: #aaa; display: flex; justify-content: space-between;">
                     <span>Command Node: Mawliid Secure Lab</span>
-                    <span>Encrypted Link: Active</span>
+                    <span>Planetary Orbit Sync: 100%</span>
                 </div>
             </div>
 
@@ -525,7 +616,7 @@
                     <span id="clock" style="color: var(--neon-cyan);">00:00:00</span>
                 </div>
                 <div class="terminal-body" id="term-out">
-                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v19.0 ===</div>
+                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v20.0 ===</div>
                     <div>Nidaamku wuu wada shaqaynayaa. Qor amarka <span style="color:var(--neon-green);">help</span>.</div>
                     <br>
                 </div>
@@ -566,21 +657,32 @@
         &copy; 2026 <strong>Mawliid Sheikh Cyber Security Command Center</strong> | All Rights Reserved
     </footer>
 
-    <!-- TEAM CHAT BUTTON & MODAL -->
+    <!-- UNKNOWN PEOPLE GROUP CHAT BUTTON & MODAL -->
     <button class="chat-float-btn" onclick="toggleChat()">
         <span>💬</span>
-        <span>SOC CREW CHAT (<span id="msgCount">1</span>)</span>
+        <span>UNKNOWN PEOPLE (<span id="msgCount">1</span>)</span>
     </button>
 
     <div class="chat-modal" id="chatModal">
         <div class="chat-box">
             <div class="chat-header">
-                <div style="font-weight: bold; color: var(--neon-cyan);">🔒 SOC INCIDENT RESPONSE CHAT</div>
+                <div class="group-info">
+                    <div style="font-weight: bold; color: var(--neon-cyan);">👥 UNKNOWN PEOPLE</div>
+                    <div style="font-size: 0.72rem; color: #aaa;" id="memberCountText">Admin: Mawliid Sheikh | Members: 3</div>
+                </div>
                 <button onclick="toggleChat()" style="background:var(--neon-pink); color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold;">✖</button>
             </div>
-            <div class="chat-messages" id="chatMsgs">
-                <div class="msg"><strong style="color:var(--neon-green)">Commander (Mawliid):</strong> Ku soo dhawaada qolka SOC Incident Response. Halkaan waxaan uga wada hadlaynaa hawlgallada iyo xogta shabakadda.</div>
+            
+            <div class="member-list-bar">
+                <span id="activeMembersList">Xubnaha: Mawliid (Admin), Ghost, CyberX</span>
+                <button class="add-member-btn" onclick="addNewMember()">+ Ku dar Qof</button>
             </div>
+
+            <div class="chat-messages" id="chatMsgs">
+                <div class="msg admin-notice">[System]: Mawliid Sheikh ayaa furay group-ka "Unknown People" wuxuuna u yahay Admin.</div>
+                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid (Admin):</strong> Soo dhowaada kooxda, halkan waxaan ka wadaynaa hawlgallada.</div>
+            </div>
+
             <div class="chat-input-area">
                 <input type="text" id="chatInput" placeholder="Fariin qor..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
                 <button class="chat-send-btn" onclick="sendTeamMsg()">DIR</button>
@@ -589,6 +691,7 @@
     </div>
 
     <script>
+        // Matrix Background Animation
         const mCanvas = document.getElementById('matrix-bg');
         const mCtx = mCanvas.getContext('2d');
         function resizeM() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
@@ -608,6 +711,7 @@
             }
         }, 40);
 
+        // Clock & Terminal
         setInterval(() => { document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0]; }, 1000);
         const out = document.getElementById('term-out');
         const input = document.getElementById('cmd-input');
@@ -632,6 +736,7 @@
         }
         input.addEventListener('keypress', e => { if (e.key === 'Enter') { execCmd(input.value); } });
 
+        // Dynamic Chart & Log Stream
         setInterval(() => {
             const bars = document.querySelectorAll('.bar');
             bars.forEach(b => {
@@ -655,9 +760,29 @@
             if(logAnalysis.children.length > 7) logAnalysis.removeChild(logAnalysis.firstChild);
         }, 2500);
 
+        // UNKNOWN PEOPLE GROUP CHAT LOGIC (Admin: Mawliid)
+        let members = ["Mawliid (Admin)", "Ghost", "CyberX"];
         let unreadCount = 1;
+
         function toggleChat() {
             document.getElementById('chatModal').classList.toggle('open');
+        }
+
+        function addNewMember() {
+            const nameInput = prompt("Geli magaca qofka aad rabto inaad group-ka kusoo darto:");
+            if (nameInput && nameInput.trim() !== "") {
+                const cleanName = nameInput.trim();
+                members.push(cleanName);
+                document.getElementById('activeMembersList').textContent = "Xubnaha: " + members.join(", ");
+                document.getElementById('memberCountText').textContent = "Admin: Mawliid Sheikh | Members: " + members.length;
+                
+                const msgs = document.getElementById('chatMsgs');
+                const notice = document.createElement('div');
+                notice.className = 'msg admin-notice';
+                notice.textContent = `[Admin Action]: Mawliid Sheikh ayaa ku daray "${cleanName}" group-ka Unknown People.`;
+                msgs.appendChild(notice);
+                msgs.scrollTop = msgs.scrollHeight;
+            }
         }
 
         function sendTeamMsg() {
@@ -666,25 +791,30 @@
             if (!txt) return;
             const msgs = document.getElementById('chatMsgs');
             
+            // User Message (Admin Mawliid)
             const d = document.createElement('div');
             d.className = 'msg me';
-            d.innerHTML = `<strong style="color:var(--neon-green)">Mawliid:</strong> ${txt}`;
+            d.innerHTML = `<strong style="color:var(--neon-green)">Mawliid (Admin):</strong> ${txt}`;
             msgs.appendChild(d);
             msgs.scrollTop = msgs.scrollHeight;
             txtInp.value = '';
 
+            // Simulated response from random group member
             setTimeout(() => {
+                const activeMembersWithoutAdmin = members.filter(m => !m.includes("Admin"));
+                const randomMember = activeMembersWithoutAdmin[Math.floor(Math.random() * activeMembersWithoutAdmin.length)] || "Ghost";
+                
                 const responses = [
-                    "Waan helay fariintaada Commander, SOC-ku wuu dagan yahay! 🛡️",
-                    "Threat map-ka waxaa ka muuqda node cusub oo la xaqiijiyay.",
-                    "Log analysis-ka wuxuu muujinayaa in wax walba ay secure yihiin.",
-                    "Ready for next directive!"
+                    "Waan helay fariintaada Commander! 🛡️",
+                    "Unknown People node-ka waa la xaqiijiyay.",
+                    "Wax walba waa secure halkan, sug warbixin.",
+                    "Ready for the next operation!"
                 ];
                 const randomResp = responses[Math.floor(Math.random() * responses.length)];
                 
                 const resp = document.createElement('div');
                 resp.className = 'msg';
-                resp.innerHTML = `<strong style="color:var(--neon-cyan)">Analyst:</strong> ${randomResp}`;
+                resp.innerHTML = `<strong style="color:var(--neon-cyan)">${randomMember}:</strong> ${randomResp}`;
                 msgs.appendChild(resp);
                 msgs.scrollTop = msgs.scrollHeight;
                 
