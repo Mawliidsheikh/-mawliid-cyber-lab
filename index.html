@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | CYBER SECURITY LAB</title>
+    <title>MAWLIID SHEIKH | CYBER SECURITY COMMAND CENTER (SOC)</title>
     <style>
         :root {
             --neon-green: #00ff41;
             --neon-cyan: #00f3ff;
             --neon-pink: #ff0055;
-            --dark-bg: #010402;
-            --panel-bg: rgba(4, 14, 8, 0.95);
-            --glow-green: 0 0 20px rgba(0, 255, 65, 0.7);
-            --glow-cyan: 0 0 20px rgba(0, 243, 255, 0.7);
+            --neon-orange: #ff9900;
+            --dark-bg: #010408;
+            --panel-bg: rgba(4, 16, 32, 0.92);
+            --glow-cyan: 0 0 20px rgba(0, 243, 255, 0.4);
+            --glow-green: 0 0 20px rgba(0, 255, 65, 0.4);
         }
 
         * {
@@ -24,7 +25,7 @@
 
         body {
             background-color: var(--dark-bg);
-            color: var(--neon-green);
+            color: var(--neon-cyan);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,19 +37,19 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
-            opacity: 0.35;
+            opacity: 0.2;
         }
 
-        /* HEADER */
+        /* TOP HEADER SOC STYLE */
         header {
-            width: 96%;
-            max-width: 1420px;
-            margin: 18px auto 0;
-            padding: 16px 26px;
+            width: 98%;
+            max-width: 1600px;
+            margin: 12px auto 0;
+            padding: 12px 25px;
             background: var(--panel-bg);
-            border: 2px solid var(--neon-green);
-            box-shadow: var(--glow-green);
-            border-radius: 14px;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            border-radius: 8px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -59,170 +60,224 @@
         .brand-section {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 15px;
         }
 
         .logo-wrapper {
             position: relative;
-            width: 76px;
-            height: 76px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
         }
 
         .logo-ring {
             position: absolute;
             width: 100%; height: 100%;
             border-radius: 50%;
-            border: 3px dashed var(--neon-cyan);
-            border-top-color: var(--neon-green);
-            border-bottom-color: var(--neon-pink);
+            border: 2px dashed var(--neon-pink);
+            border-top-color: var(--neon-cyan);
             animation: spin 5s linear infinite;
-            box-shadow: var(--glow-cyan);
         }
 
         .logo-img {
-            width: 64px;
-            height: 64px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            object-position: top;
-            border: 2px solid var(--neon-green);
+            border: 2px solid var(--neon-cyan);
             z-index: 2;
         }
 
         .title-box h1 {
-            font-size: clamp(1.3rem, 3vw, 2.2rem);
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
             letter-spacing: 2px;
-            text-shadow: 0 0 12px var(--neon-green);
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-cyan);
         }
 
         .title-box p {
-            color: var(--neon-cyan);
-            font-size: 0.88rem;
-            margin-top: 4px;
+            color: var(--neon-green);
+            font-size: 0.78rem;
+            margin-top: 2px;
         }
 
-        .live-badge {
-            background: rgba(0, 255, 65, 0.15);
-            border: 1px solid var(--neon-green);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .soc-status-badges {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .soc-badge {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .pulse-dot {
-            width: 10px; height: 10px;
+            width: 8px; height: 8px;
             background: var(--neon-green);
             border-radius: 50%;
             animation: pulse 1s infinite;
         }
 
-        /* DASHBOARD GRID */
-        .dashboard {
-            width: 96%;
-            max-width: 1420px;
-            margin: 20px auto;
+        /* MAIN SOC DASHBOARD GRID */
+        .soc-container {
+            width: 98%;
+            max-width: 1600px;
+            margin: 15px auto;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 15px;
             flex-grow: 1;
         }
 
-        @media (min-width: 1024px) {
-            .dashboard {
-                grid-template-columns: 280px 1fr 320px;
+        @media (min-width: 1200px) {
+            .soc-container {
+                grid-template-columns: 320px 1fr 340px;
             }
         }
 
-        .panel {
+        .soc-panel {
             background: var(--panel-bg);
-            border: 1.5px solid var(--neon-green);
-            border-radius: 14px;
-            padding: 18px;
-            box-shadow: var(--glow-green);
+            border: 1.5px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: var(--glow-cyan);
             display: flex;
             flex-direction: column;
+            gap: 12px;
         }
 
-        .panel-title {
-            color: var(--neon-cyan);
-            font-size: 1.05rem;
-            border-bottom: 1px solid rgba(0, 243, 255, 0.4);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+        .panel-header {
+            color: var(--neon-green);
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            padding-bottom: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: bold;
         }
 
+        /* TOOLS BUTTONS */
         .tool-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        @media (min-width: 1024px) {
-            .tool-list { grid-template-columns: 1fr; }
-        }
-
-        .cyber-btn {
-            background: rgba(0, 255, 65, 0.05);
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
-            padding: 12px;
-            border-radius: 6px;
+        .soc-btn {
+            background: rgba(0, 243, 255, 0.05);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            padding: 10px 12px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
             text-align: left;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
 
-        .cyber-btn:hover {
-            background: var(--neon-green);
+        .soc-btn:hover {
+            background: var(--neon-cyan);
             color: #000;
-            box-shadow: 0 0 12px var(--neon-green);
-            transform: translateX(4px);
+            box-shadow: 0 0 12px var(--neon-cyan);
         }
 
-        /* TERMINAL WINDOW */
-        .terminal-window {
-            height: 520px;
-            padding: 0;
+        /* CENTER: MAP & TERMINAL SECTION */
+        .center-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* GLOBAL THREAT MAP SIMULATION BOX */
+        .threat-map-box {
+            background: #020813;
+            border: 1.5px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 12px;
+            position: relative;
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--glow-cyan);
             overflow: hidden;
         }
 
-        .terminal-bar {
-            background: #0b1c12;
-            padding: 12px 18px;
+        .map-grid-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0,243,255,0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0,243,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .map-content {
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .world-map-svg {
+            width: 100%;
+            max-height: 150px;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 8px var(--neon-cyan));
+        }
+
+        /* TERMINAL WINDOW */
+        .terminal-box {
+            background: rgba(2, 8, 15, 0.95);
+            border: 1.5px solid var(--neon-green);
+            border-radius: 8px;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--glow-green);
+            overflow: hidden;
+        }
+
+        .terminal-topbar {
+            background: #05160c;
+            padding: 8px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--neon-green);
+            font-size: 0.8rem;
         }
-
-        .dots { display: flex; gap: 6px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .r { background: #ff5f56; } .y { background: #ffbd2e; } .g { background: #27c93f; }
 
         .terminal-body {
-            padding: 18px;
+            padding: 12px;
             flex-grow: 1;
             overflow-y: auto;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--neon-green);
         }
 
-        .input-bar {
+        .terminal-input-bar {
             display: flex;
-            padding: 12px 18px;
-            background: #060f09;
+            padding: 8px 12px;
+            background: #020a05;
             border-top: 1px solid rgba(0, 255, 65, 0.3);
         }
 
@@ -231,85 +286,85 @@
             border: none;
             color: var(--neon-green);
             flex-grow: 1;
-            font-size: 1rem;
+            font-size: 0.9rem;
             outline: none;
-            margin-left: 8px;
+            margin-left: 6px;
         }
 
-        /* RADAR */
-        .radar-container {
-            width: 180px; height: 180px;
-            margin: 10px auto 20px;
-            border-radius: 50%;
-            border: 2px solid var(--neon-green);
-            position: relative;
-            background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,0,0,0.85) 70%);
-            overflow: hidden;
-            box-shadow: var(--glow-green);
-        }
-
-        .radar-sweep {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 50%; height: 50%;
-            background: linear-gradient(45deg, rgba(0, 255, 65, 0.7), transparent);
-            transform-origin: 0 0;
-            animation: spin 3s linear infinite;
-        }
-
-        .log-feed {
-            margin-top: auto;
-            background: rgba(0,0,0,0.6);
-            padding: 12px;
+        /* RIGHT PANEL: CHARTS & LOGS */
+        .chart-box {
+            background: #020813;
+            border: 1px solid rgba(0, 243, 255, 0.4);
             border-radius: 6px;
+            padding: 10px;
             font-size: 0.8rem;
-            border-left: 3px solid var(--neon-pink);
-            height: 130px;
-            overflow: hidden;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 90px;
+            padding-top: 10px;
+            border-bottom: 1px solid rgba(0,243,255,0.3);
+        }
+
+        .bar {
+            flex-grow: 1;
+            background: var(--neon-cyan);
+            border-radius: 2px 2px 0 0;
+            transition: height 0.5s;
+        }
+
+        .log-analysis {
+            background: rgba(0,0,0,0.6);
+            border-left: 3px solid var(--neon-orange);
+            padding: 8px;
+            font-size: 0.75rem;
+            height: 160px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
         footer {
             text-align: center;
-            padding: 16px;
-            font-size: 0.85rem;
-            color: rgba(0, 255, 65, 0.7);
+            padding: 12px;
+            font-size: 0.8rem;
+            color: rgba(0, 243, 255, 0.6);
             margin-top: auto;
-            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
         }
 
-        /* ================= HACKER GROUP CHAT FLOATING BUTTON ================= */
+        /* TEAM CHAT MODAL */
         .chat-float-btn {
             position: fixed !important;
             bottom: 25px !important;
             right: 25px !important;
-            background: #061a0e !important;
-            color: var(--neon-green) !important;
-            border: 2px solid var(--neon-green) !important;
-            padding: 14px 22px !important;
+            background: #021a2c !important;
+            color: var(--neon-cyan) !important;
+            border: 2px solid var(--neon-cyan) !important;
+            padding: 12px 20px !important;
             border-radius: 30px !important;
             font-weight: bold !important;
-            font-size: 0.95rem !important;
+            font-size: 0.9rem !important;
             cursor: pointer !important;
             z-index: 999999 !important;
-            box-shadow: var(--glow-green) !important;
+            box-shadow: var(--glow-cyan) !important;
             display: flex !important;
             align-items: center !important;
-            gap: 10px !important;
-            animation: pulse 2s infinite;
+            gap: 8px !important;
+            animation: pulse 1.8s infinite;
         }
+        .chat-float-btn:hover { background: var(--neon-cyan); color: #000; }
 
-        .chat-float-btn:hover {
-            background: var(--neon-green);
-            color: #000;
-        }
-
-        /* CHAT MODAL (WHATSAPP STYLE FOR TEAM) */
         .chat-modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(1, 4, 2, 0.9);
+            background: rgba(1, 6, 15, 0.88);
             z-index: 1000000;
             align-items: center;
             justify-content: center;
@@ -318,80 +373,87 @@
         .chat-modal.open { display: flex; }
 
         .chat-box {
-            width: 100%; max-width: 460px;
-            height: 560px;
-            background: #040e08;
-            border: 2px solid var(--neon-green);
-            border-radius: 12px;
-            box-shadow: var(--glow-green);
+            width: 100%; max-width: 440px;
+            height: 520px;
+            background: #031020;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 10px;
+            box-shadow: var(--glow-cyan);
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
         .chat-header {
-            background: #0b2214;
-            padding: 14px;
+            background: #071f38;
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--neon-green);
+            border-bottom: 1px solid var(--neon-cyan);
         }
 
         .chat-messages {
             flex-grow: 1;
-            padding: 15px;
+            padding: 12px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            font-size: 0.9rem;
+            gap: 8px;
+            font-size: 0.88rem;
         }
 
         .msg {
-            background: rgba(0, 255, 65, 0.1);
-            border-left: 3px solid var(--neon-green);
-            padding: 8px 12px;
+            background: rgba(0, 243, 255, 0.1);
+            border-left: 3px solid var(--neon-cyan);
+            padding: 6px 10px;
             border-radius: 4px;
+            color: #fff;
+        }
+        .msg.me {
+            background: rgba(0, 255, 65, 0.1);
+            border-left-color: var(--neon-green);
+            text-align: right;
         }
 
         .chat-input-area {
             display: flex;
             padding: 10px;
-            background: #020804;
-            border-top: 1px solid rgba(0, 255, 65, 0.3);
+            background: #010810;
+            border-top: 1px solid rgba(0, 243, 255, 0.3);
             gap: 8px;
         }
 
         .chat-input-area input {
             flex-grow: 1;
             background: #000;
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
-            padding: 8px 12px;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 8px 10px;
             border-radius: 4px;
             outline: none;
+            font-size: 0.9rem;
         }
 
         .chat-send-btn {
-            background: var(--neon-green);
+            background: var(--neon-cyan);
             color: #000;
             border: none;
-            padding: 0 16px;
+            padding: 0 14px;
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
         }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     </style>
 </head>
 <body>
 
     <canvas id="matrix-bg"></canvas>
 
-    <!-- HEADER -->
+    <!-- SOC TOP HEADER -->
     <header>
         <div class="brand-section">
             <div class="logo-wrapper">
@@ -399,77 +461,135 @@
                 <img src="logo.jpg" onerror="this.src='https://github.com/Mawliidsheikh.png'" alt="Mawliid Sheikh" class="logo-img">
             </div>
             <div class="title-box">
-                <h1>MAWLIID SHEIKH CYBER LAB</h1>
-                <p>// ADVANCED HACKING & SECURITY COMMAND CENTER</p>
+                <h1>MAWLIID SHEIKH SOC COMMAND</h1>
+                <p>// CYBERSECURITY OPERATIONS & THREAT INTELLIGENCE CENTER</p>
             </div>
         </div>
-        <div class="live-badge">
-            <span class="pulse-dot"></span>
-            <span>SYSTEM: <strong>SECURE</strong></span>
+        <div class="soc-status-badges">
+            <div class="soc-badge"><span class="pulse-dot"></span> THREAT LVL: <strong>LOW</strong></div>
+            <div class="soc-badge" style="border-color: var(--neon-orange); color: var(--neon-orange);">ALERTS: <strong>0 active</strong></div>
         </div>
     </header>
 
-    <!-- DASHBOARD -->
-    <main class="dashboard">
-        <aside class="panel">
-            <div class="panel-title"><span>[ EXPLOIT MODULES ]</span><span>⚡</span></div>
+    <!-- MAIN SOC DASHBOARD -->
+    <main class="soc-container">
+        
+        <!-- LEFT PANEL: NETWORK SECURITY ANALYTICS -->
+        <aside class="soc-panel">
+            <div class="panel-header"><span>[ NETWORK SECURITY ]</span><span>⚡</span></div>
             <div class="tool-list">
-                <button class="cyber-btn" onclick="execCmd('scan')">[01] Port Scan</button>
-                <button class="cyber-btn" onclick="execCmd('exploit')">[02] Inject Payload</button>
-                <button class="cyber-btn" onclick="execCmd('trace')">[03] Trace Target</button>
-                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Decrypt Hash</button>
-                <button class="cyber-btn" onclick="execCmd('root')">[05] Root Access</button>
-                <button class="cyber-btn" style="border-color: var(--neon-pink); color: var(--neon-pink);" onclick="execCmd('clear')">[XX] Clear Screen</button>
+                <button class="soc-btn" onclick="execCmd('scan')">[01] Deep Port Scan</button>
+                <button class="soc-btn" onclick="execCmd('exploit')">[02] Run Vulnerability Audit</button>
+                <button class="soc-btn" onclick="execCmd('trace')">[03] Trace Threat IP</button>
+                <button class="soc-btn" onclick="execCmd('decrypt')">[04] Decrypt Traffic Hash</button>
+                <button class="soc-btn" onclick="execCmd('root')">[05] Root Shell Access</button>
+                <button class="soc-btn" style="border-color: var(--neon-pink); color: var(--neon-pink);" onclick="execCmd('clear')">[XX] Reset Console</button>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <div style="font-size: 0.8rem; margin-bottom: 6px; color: var(--neon-green);">SYSTEM HEALTH & ALERTS</div>
+                <div style="font-size: 0.75rem; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 4px; border: 1px solid rgba(0,243,255,0.2); display: flex; flex-direction: column; gap: 4px;">
+                    <div>• Firewall: <span style="color:var(--neon-green)">ONLINE</span></div>
+                    <div>• IDS/IPS: <span style="color:var(--neon-green)">ACTIVE</span></div>
+                    <div>• Packet Loss: <span style="color:var(--neon-cyan)">0.00%</span></div>
+                    <div>• Encrypted Tunnels: <span style="color:var(--neon-green)">14 SECURE</span></div>
+                </div>
             </div>
         </aside>
 
-        <section class="panel terminal-window">
-            <div class="terminal-bar">
-                <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
-                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-lab:~#</span>
-                <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
+        <!-- CENTER PANEL: GLOBAL THREAT MAP & TERMINAL -->
+        <div class="center-stack">
+            <!-- GLOBAL THREAT MAP BOX -->
+            <div class="threat-map-box">
+                <div class="map-grid-overlay"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; z-index: 2; font-size: 0.85rem; font-weight: bold;">
+                    <span style="color: var(--neon-cyan);">[ GLOBAL THREAT MAP & ACTIVE NODES ]</span>
+                    <span style="color: var(--neon-green);">LIVE FEED</span>
+                </div>
+                <div class="map-content">
+                    <!-- Stylized World Map representation via SVG -->
+                    <svg class="world-map-svg" viewBox="0 0 1000 500" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M150,120 Q180,100 220,130 T300,110 T380,140 T450,120" stroke="var(--neon-cyan)" />
+                        <path d="M600,100 Q650,80 720,120 T850,110" stroke="var(--neon-cyan)" />
+                        <path d="M120,250 Q200,220 280,280 T400,260" stroke="var(--neon-green)" />
+                        <path d="M550,230 Q680,200 800,270" stroke="var(--neon-orange)" />
+                        <!-- Simulated Target Nodes / Markers -->
+                        <circle cx="210" cy="130" r="4" fill="var(--neon-pink)" />
+                        <circle cx="380" cy="140" r="4" fill="var(--neon-green)" />
+                        <circle cx="680" cy="150" r="4" fill="var(--neon-cyan)" />
+                        <circle cx="780" cy="220" r="4" fill="var(--neon-orange)" />
+                    </svg>
+                </div>
+                <div style="z-index: 2; font-size: 0.72rem; color: #aaa; display: flex; justify-content: space-between;">
+                    <span>Origin: East Africa Gateway</span>
+                    <span>Status: Protected by Mawliid SOC</span>
+                </div>
             </div>
-            <div class="terminal-body" id="term-out">
-                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER SECURITY LAB v12.0 ===</div>
-                <div>Nidaamka haking-ka iyo baaritaanka amniga wuu shaqaynayaa. Ku qor amarka <span style="color:var(--neon-cyan);">help</span> halkaan hoose.</div>
-                <br>
-            </div>
-            <div class="input-bar">
-                <span style="color: var(--neon-cyan); font-weight: bold;">root@mawliid:~$</span>
-                <input type="text" id="cmd-input" placeholder="Geli amarkaaga (help)..." autocomplete="off">
-            </div>
-        </section>
 
-        <aside class="panel">
-            <div class="panel-title"><span>[ LIVE RADAR ]</span><span>ACTIVE</span></div>
-            <div class="radar-container"><div class="radar-sweep"></div></div>
-            <div class="log-feed" id="live-logs">
-                <div>> Firewall status: Bypassed...</div>
-                <div>> Node connection secure...</div>
-                <div>> Monitoring active IPs...</div>
+            <!-- TERMINAL WINDOW -->
+            <div class="terminal-box">
+                <div class="terminal-topbar">
+                    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+                    <span style="color: var(--neon-green);">soc-terminal@mawliid-node:~#</span>
+                    <span id="clock" style="color: var(--neon-cyan);">00:00:00</span>
+                </div>
+                <div class="terminal-body" id="term-out">
+                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC COMMAND KERNEL v16.0 ===</div>
+                    <div>Nidaamka soc-ka wuu shaqaynayaa. Qor amarka <span style="color:var(--neon-green);">help</span> si aad u bilowdo.</div>
+                    <br>
+                </div>
+                <div class="terminal-input-bar">
+                    <span style="color: var(--neon-green); font-weight: bold;">soc@mawliid:~$</span>
+                    <input type="text" id="cmd-input" placeholder="Geli amarkaaga (help)..." autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: DATABASE TRAFFIC & LOG ANALYSIS -->
+        <aside class="soc-panel">
+            <div class="panel-header"><span>[ DATABASE TRAFFIC ]</span><span>LIVE</span></div>
+            <div class="chart-box">
+                <div style="font-size: 0.75rem; margin-bottom: 4px; color: var(--neon-cyan);">Inbound Packet Rate</div>
+                <div class="bar-chart" id="barChart">
+                    <div class="bar" style="height: 40%;"></div>
+                    <div class="bar" style="height: 65%;"></div>
+                    <div class="bar" style="height: 50%;"></div>
+                    <div class="bar" style="height: 85%;"></div>
+                    <div class="bar" style="height: 60%;"></div>
+                    <div class="bar" style="height: 90%;"></div>
+                    <div class="bar" style="height: 75%;"></div>
+                </div>
+            </div>
+
+            <div class="panel-header" style="margin-top: 5px;"><span>[ LOG ANALYSIS ]</span><span>STREAM</span></div>
+            <div class="log-analysis" id="logAnalysis">
+                <div>[INFO] Session established from 192.168.1.55</div>
+                <div>[OK] Database query executed in 12ms</div>
+                <div>[SEC] SSL handshake verified successfully</div>
+                <div>[WARN] High frequency request filtered</div>
             </div>
         </aside>
+
     </main>
 
     <footer>
-        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | Authorized Access Only
+        &copy; 2026 <strong>Mawliid Sheikh Cyber Security Command Center</strong> | All Rights Reserved
     </footer>
 
-    <!-- TEAM CHAT FLOATING BUTTON (WhatsApp Style Group) -->
+    <!-- TEAM CHAT BUTTON & MODAL -->
     <button class="chat-float-btn" onclick="toggleChat()">
         <span>💬</span>
-        <span>TEAM CHAT</span>
+        <span>SOC TEAM CHAT (<span id="msgCount">1</span>)</span>
     </button>
 
-    <!-- TEAM CHAT MODAL -->
     <div class="chat-modal" id="chatModal">
         <div class="chat-box">
             <div class="chat-header">
-                <div style="font-weight: bold; color: var(--neon-green);">🔒 HACKER CREW SECURE CHAT</div>
+                <div style="font-weight: bold; color: var(--neon-cyan);">🔒 SOC INCIDENT RESPONSE CHAT</div>
                 <button onclick="toggleChat()" style="background:var(--neon-pink); color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold;">✖</button>
             </div>
             <div class="chat-messages" id="chatMsgs">
-                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid Admin:</strong> Ku soo dhawaada qolka xiriirka kooxda. Halkaan waxaan uga wada hadlaynaa hawlgallada.</div>
+                <div class="msg"><strong style="color:var(--neon-green)">Commander (Mawliid):</strong> Ku soo dhawaada qolka SOC Incident Response. Halkaan waxaan uga socodsiin karnaa xiriirka kooxda.</div>
             </div>
             <div class="chat-input-area">
                 <input type="text" id="chatInput" placeholder="Fariin qor..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
@@ -485,12 +605,12 @@
         function resizeM() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeM);
         resizeM();
-        const chars = '01MAWLIIDSHEIKH_HACK_ROOT_CYBER#$*';
+        const chars = '01SOC_MAWLIIDSHEIKH_CYBER_MAP#$*';
         let drops = Array(Math.floor(mCanvas.width / 15)).fill(1);
         setInterval(() => {
-            mCtx.fillStyle = 'rgba(1, 4, 2, 0.08)';
+            mCtx.fillStyle = 'rgba(1, 6, 15, 0.08)';
             mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
-            mCtx.fillStyle = '#00ff41';
+            mCtx.fillStyle = '#00f3ff';
             mCtx.font = '14px monospace';
             for (let i = 0; i < drops.length; i++) {
                 mCtx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 15, drops[i] * 15);
@@ -511,28 +631,53 @@
         function execCmd(raw) {
             const c = (typeof raw === 'string' ? raw : input.value).trim().toLowerCase();
             if (!c) return;
-            print(`<span style="color:#00f3ff">root@mawliid:~$</span>${c}`);
+            print(`<span style="color:#00f3ff">soc@mawliid:~$</span> ${c}`);
             if (c === 'help') print('Amarrada la heli karo: scan, exploit, trace, decrypt, root, clear', '#00f3ff');
-            else if (c === 'scan') print('[+] Scanning target ports... [22: OPEN, 80: OPEN, 443: SECURE]', '#00f3ff');
-            else if (c === 'exploit') print('[+] Payload injected successfully! Target vulnerable.', '#00ff41');
-            else if (c === 'trace') print('[+] Tracing IP: 192.168.1.104 -> Location: East Africa Node [SECURE]', '#00f3ff');
-            else if (c === 'decrypt') print('[+] Hash Decrypted: $1$Mawliid$Secur3Hash2026', '#ffd700');
-            else if (c === 'root') print('[+] Root privileges acquired. Welcome Administrator.', '#ff0055');
+            else if (c === 'scan') print('[+] Deep Port Scan completed. All 65,535 ports analyzed. 2 ports open.', '#00ff41');
+            else if (c === 'exploit') print('[+] Vulnerability Audit: Zero critical flaws detected in perimeter.', '#00f3ff');
+            else if (c === 'trace') print('[+] Threat IP traced to secure gateway node. Location: East Africa.', '#00f3ff');
+            else if (c === 'decrypt') print('[+] Traffic Hash Decrypted: SHA256 verified [SECURE]', '#ff9900');
+            else if (c === 'root') print('[+] SOC Administrator privileges verified for Mawliid Sheikh.', '#ff0055');
             else if (c === 'clear') out.innerHTML = '';
-            else print(`Amarkaan lama aqoonsado: ${c}. Qor 'help' si aad u aragto amarrada.`, '#ff0055');
+            else print(`Amarkaan lama aqoonsado: ${c}. Qor 'help'.`, '#ff0055');
             if(typeof raw !== 'string') input.value = '';
         }
         input.addEventListener('keypress', e => { if (e.key === 'Enter') { execCmd(input.value); } });
 
-        // Team Chat Modal (WhatsApp style)
+        // Dynamic Chart & Log Stream Simulation
+        setInterval(() => {
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(b => {
+                const randomHeight = Math.floor(Math.random() * 75) + 20;
+                b.style.height = randomHeight + '%';
+            });
+        }, 2000);
+
+        const logAnalysis = document.getElementById('logAnalysis');
+        const sampleLogs = [
+            '[INFO] Threat intelligence feed updated',
+            '[OK] Integrity check passed on core modules',
+            '[SEC] Encrypted handshake with node 7',
+            '[WARN] Port 22 probe detected and logged',
+            '[INFO] Database backup completed successfully'
+        ];
+        setInterval(() => {
+            const logItem = document.createElement('div');
+            logItem.textContent = sampleLogs[Math.floor(Math.random() * sampleLogs.length)];
+            logAnalysis.appendChild(logItem);
+            if(logAnalysis.children.length > 6) logAnalysis.removeChild(logAnalysis.firstChild);
+        }, 3000);
+
+        // Team Chat Functionality
+        let unreadCount = 1;
         function toggleChat() {
             document.getElementById('chatModal').classList.toggle('open');
         }
+
         function sendTeamMsg() {
             const txtInp = document.getElementById('chatInput');
             const txt = txtInp.value.trim();
             if (!txt) return;
             const msgs = document.getElementById('chatMsgs');
-            const d = document.createElement('div');
-            d.className = 'msg';
-            d.innerHTML = `<strong style
+            
+            const d = document.
