@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | SOC COMMAND & AI IMAGE BUILDER</title>
+    <title>MAWLIID SHEIKH | SOC COMMAND & UNIVERSAL AI BUILDER</title>
     <style>
         :root {
             --neon-green: #00ff41;
@@ -368,37 +368,38 @@
             gap: 5px;
         }
 
-        /* AI DYNAMIC IMAGES CONTAINER */
-        #ai-widgets-container {
+        /* UNIVERSAL AI DYNAMIC CANVAS (MEEL KASTA OO BANNAAN OO SHAASHADA AH) */
+        #universal-canvas-area {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
+            grid-column: 1 / -1; /* Wuxuu ku fidsan karaa guud ahaan shaashada ama meel kasta */
         }
 
-        .ai-image-card {
-            background: rgba(0, 243, 255, 0.08);
-            border: 1.5px solid var(--neon-cyan);
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            box-shadow: 0 0 12px rgba(0,243,255,0.3);
-            animation: fadeIn 0.4s ease-in-out;
-            text-align: center;
+        .ai-injected-card {
+            background: rgba(3, 14, 28, 0.95);
+            border: 2px solid var(--neon-pink);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+            animation: fadeInCard 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .ai-image-card img {
+        .ai-injected-card img {
             width: 100%;
-            height: 140px;
+            height: 220px;
             object-fit: cover;
             border-radius: 6px;
-            border: 1px solid var(--neon-green);
-            margin-top: 6px;
+            border: 1.5px solid var(--neon-cyan);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes fadeInCard {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
@@ -410,7 +411,7 @@
             border-top: 1px solid rgba(0, 243, 255, 0.2);
         }
 
-        /* LARGE PROMINENT FLOATING BUTTON */
+        /* PROMINENT FLOATING BUTTON */
         .chat-float-btn {
             position: fixed !important;
             bottom: 30px !important;
@@ -584,7 +585,7 @@
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH SOC COMMAND</h1>
-                <p>// ADVANCED CYBERSECURITY & AI IMAGE BUILDER</p>
+                <p>// UNIVERSAL AI SCREEN BUILDER & ORBITAL MONITORING</p>
             </div>
         </div>
         <div class="soc-status-badges">
@@ -613,7 +614,7 @@
                 <div style="font-size: 0.75rem; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 4px; border: 1px solid rgba(0,243,255,0.2); display: flex; flex-direction: column; gap: 6px;">
                     <div>• Core Status: <span style="color:var(--neon-green)">STABLE</span></div>
                     <div>• Active Sockets: <span style="color:var(--neon-cyan)">2,418</span></div>
-                    <div>• AI Builder: <span style="color:var(--neon-pink)">ONLINE</span></div>
+                    <div>• AI Universal: <span style="color:var(--neon-pink)">ONLINE</span></div>
                     <div>• Orbital Sync: <span style="color:var(--neon-cyan)">ONLINE</span></div>
                 </div>
             </div>
@@ -659,7 +660,7 @@
                     <span id="clock" style="color: var(--neon-cyan);">00:00:00</span>
                 </div>
                 <div class="terminal-body" id="term-out">
-                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v24.0 ===</div>
+                    <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH SOC KERNEL v25.0 ===</div>
                     <div>Nidaamku wuu wada shaqaynayaa. Qor amarka <span style="color:var(--neon-green);">help</span>.</div>
                     <br>
                 </div>
@@ -670,7 +671,7 @@
             </div>
         </div>
 
-        <!-- RIGHT PANEL: AI DYNAMIC IMAGES -->
+        <!-- RIGHT PANEL -->
         <aside class="soc-panel">
             <div class="panel-header"><span>[ TRAFFIC ANALYTICS ]</span><span>LIVE</span></div>
             <div class="chart-box">
@@ -685,16 +686,7 @@
                 </div>
             </div>
 
-            <div class="panel-header" style="margin-top: 5px;"><span>[ AI DYNAMIC IMAGES ]</span><span>ACTIVE</span></div>
-            <!-- AI will inject real images here when requested -->
-            <div id="ai-widgets-container">
-                <div class="ai-image-card">
-                    <div style="color:var(--neon-green); font-weight:bold;">🖼️ AI Image Gallery Ready</div>
-                    <div style="font-size: 0.75rem; color:#aaa; margin-top:2px;">Kala hadal AI-ga group-ka oo u sheeg inuu sawir ku daro.</div>
-                </div>
-            </div>
-
-            <div class="panel-header" style="margin-top: 5px;"><span>[ LIVE LOG STREAM ]</span><span>ACTIVE</span></div>
+            <div class="panel-header" style="margin-top: 5px;"><span>[ SYSTEM LOGS ]</span><span>ACTIVE</span></div>
             <div class="log-analysis" id="logAnalysis">
                 <div>[INFO] Secure session verified from gateway</div>
                 <div>[OK] Firewall rules updated successfully</div>
@@ -702,6 +694,11 @@
                 <div>[INFO] Threat intelligence database synced</div>
             </div>
         </aside>
+
+        <!-- UNIVERSAL AI INJECTED CANVAS (MEEL KASTA OO BANNAAN OO SHAASHADA AH) -->
+        <div id="universal-canvas-area">
+            <!-- AI will inject custom large image/widget cards here across the screen -->
+        </div>
 
     </main>
 
@@ -719,7 +716,7 @@
         <div class="chat-box">
             <div class="chat-header">
                 <div class="group-info">
-                    <div style="font-weight: bold; color: var(--neon-cyan);">👥 UNKNOWN PEOPLE + AI IMAGE BUILDER</div>
+                    <div style="font-weight: bold; color: var(--neon-cyan);">👥 UNKNOWN PEOPLE + UNIVERSAL AI</div>
                     <div style="font-size: 0.72rem; color: #aaa;" id="memberCountText">Admin: Mawliid Sheikh | Members: AI Bot, Ghost, CyberX</div>
                 </div>
                 <button onclick="toggleChat()" style="background:var(--neon-pink); color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-weight:bold;">✖</button>
@@ -731,13 +728,13 @@
             </div>
 
             <div class="chat-messages" id="chatMsgs">
-                <div class="msg admin-notice">[System]: Mawliid Sheikh ayaa furay group-ka. Ku dheh tusaale: "iigu dar image ee hacker" ama "iigu dar sawir" si AI uu si toos ah sawir ugala soo dhex baxo internetka oo ugu darsado dashboard-ka!</div>
-                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid (Admin):</strong> AI, maanta sawir iigu dar shaashada.</div>
-                <div class="msg ai-msg"><strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Haa Commander Mawliid! Hal-ku-dheggayga waa inaan sawir dhab ah dashboard-kaaga ka soo dhex muujiyo. Qor amarkaaga!</div>
+                <div class="msg admin-notice">[System]: Mawliid Sheikh ayaa furay group-ka. Hadda waxaad AI ku dhihi kartaa "iigu dar sawir [magaca]" ama "iigu dar image meel kasta", wuxuuna si weyn ugu soo darayaa meelaha bannaanka ah ee shaashada!</div>
+                <div class="msg"><strong style="color:var(--neon-cyan)">Mawliid (Admin):</strong> AI, sawir cusub halkan noogu soo dar meel kasta oo bannaan.</div>
+                <div class="msg ai-msg"><strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Haa Commander! Diyaar ayaan u ahay inaan sawirro iyo qalab cusub ka dhex abuuro shaashadaada meel kasta. Hal-ku-dheggayga qor!</div>
             </div>
 
             <div class="chat-input-area">
-                <input type="text" id="chatInput" placeholder="Tiri tusaale: iigu dar image ee hacker..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
+                <input type="text" id="chatInput" placeholder="Tiri tusaale: iigu dar sawir hacker..." onkeypress="if(event.key==='Enter') sendTeamMsg()">
                 <button class="chat-send-btn" onclick="sendTeamMsg()">DIR</button>
             </div>
         </div>
@@ -779,8 +776,8 @@
             print(`<span style="color:#00f3ff">soc@mawliid:~$</span> ${c}`);
             if (c === 'help') print('Amarrada la heli karo: scan, exploit, trace, decrypt, root, clear', '#00f3ff');
             else if (c === 'scan') print('[+] Port scan finished. All firewall parameters secure.', '#00ff41');
-            else if (c === 'exploit') print('[+] Vulnerability audit passed: 0 critical vulnerabilities found.', '#00ff41');
-            else if (c === 'trace') print('[+] Threat IP traced to secure gateway node [SECURE].', '#00ff41');
+            else if (c === 'exploit') print('[+] Vulnerability audit passed: 0 critical vulnerabilities found.', '#00f3ff');
+            else if (c === 'trace') print('[+] Threat IP traced to secure gateway node [SECURE].', '#00f3ff');
             else if (c === 'decrypt') print('[+] Traffic hash decrypted successfully [SHA-256 verified].', '#ff9900');
             else if (c === 'root') print('[+] SOC Administrator privileges verified for Mawliid Sheikh.', '#ff0055');
             else if (c === 'clear') out.innerHTML = '';
@@ -813,7 +810,7 @@
             if(logAnalysis.children.length > 7) logAnalysis.removeChild(logAnalysis.firstChild);
         }, 2500);
 
-        // UNKNOWN PEOPLE GROUP CHAT + REAL AI IMAGE INJECTOR
+        // UNKNOWN PEOPLE GROUP CHAT + UNIVERSAL AI SCREEN BUILDER
         let members = ["Mawliid (Admin)", "AI Assistant", "Ghost", "CyberX"];
         let unreadCount = 1;
 
@@ -852,42 +849,46 @@
             msgs.scrollTop = msgs.scrollHeight;
             txtInp.value = '';
 
-            // AI Image Injection Action & Response
+            // Universal AI Image/Widget Screen Injection
             setTimeout(() => {
                 const resp = document.createElement('div');
                 resp.className = 'msg ai-msg';
 
                 let lowerTxt = txt.toLowerCase();
-                if (lowerTxt.includes('image') || lowerTxt.includes('sawir') || lowerTxt.includes('iigu dar') || lowerTxt.includes('ku dar')) {
-                    let imageName = txt.replace(/image|sawir|iigu dar|ku dar|ee/gi, '').trim();
-                    if (!imageName) imageName = "Cyber Security Operations";
+                if (lowerTxt.includes('image') || lowerTxt.includes('sawir') || lowerTxt.includes('iigu dar') || lowerTxt.includes('ku dar') || lowerTxt.includes('abuur')) {
+                    let titleName = txt.replace(/image|sawir|iigu dar|ku dar|abuur|ee/gi, '').trim();
+                    if (!titleName) titleName = "Cyber Intelligence Visual";
 
-                    // Select a cool high-tech cyber image URL from Unsplash
+                    // High-tech image collection
                     const cyberImages = [
-                        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&auto=format&fit=crop&q=60",
-                        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&auto=format&fit=crop&q=60",
-                        "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&auto=format&fit=crop&q=60",
-                        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60"
+                        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80",
+                        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&auto=format&fit=crop&q=80",
+                        "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80",
+                        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
+                        "https://images.unsplash.com/photo-1510519138161-5944d2531d5f?w=800&auto=format&fit=crop&q=80"
                     ];
                     const randomImgUrl = cyberImages[Math.floor(Math.random() * cyberImages.length)];
 
-                    // Inject real Image into dashboard
-                    const widgetsContainer = document.getElementById('ai-widgets-container');
-                    const newImageCard = document.createElement('div');
-                    newImageCard.className = 'ai-image-card';
-                    newImageCard.innerHTML = `
+                    // Inject large card directly into the universal canvas area across the screen
+                    const canvasArea = document.getElementById('universal-canvas-area');
+                    const newCard = document.createElement('div');
+                    newCard.className = 'ai-injected-card';
+                    newCard.innerHTML = `
                         <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <strong style="color:var(--neon-green)">🖼️ [AI Image]: ${imageName.toUpperCase()}</strong>
-                            <span style="font-size:0.7rem; color:var(--neon-pink);">SECURE</span>
+                            <strong style="color:var(--neon-green)">🌐 [UNIVERSAL AI MODULE]: ${titleName.toUpperCase()}</strong>
+                            <span style="font-size:0.75rem; color:var(--neon-pink); background:rgba(255,0,85,0.1); padding:2px 8px; border-radius:4px;">DEPLOYED</span>
                         </div>
-                        <img src="${randomImgUrl}" alt="Cyber Image">
-                        <div style="font-size:0.7rem; color:#aaa; margin-top:4px;">Rendered by AI Assistant for Mawliid Sheikh</div>
+                        <img src="${randomImgUrl}" alt="AI Injected Image">
+                        <div style="font-size:0.8rem; color:#aaa; display:flex; justify-content:space-between; align-items:center;">
+                            <span>Node Status: Secure & Synchronized</span>
+                            <button onclick="this.parentElement.parentElement.remove()" style="background:var(--neon-pink); color:#fff; border:none; padding:2px 8px; border-radius:3px; cursor:pointer; font-size:0.75rem;">Delete</button>
+                        </div>
                     `;
-                    widgetsContainer.appendChild(newImageCard);
+                    canvasArea.appendChild(newCard);
 
-                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan ku guuleystay Commander! Sawirka <b style="color:#fff;">"${imageName}"</b> si toos ah ayaan ugu darsaday dashboard-kaaga dhinaca midig!`;
+                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan ku guuleystay Commander! Sawirka iyo module-ka <b style="color:#fff;">"${titleName}"</b> si ballaaran ugu soo daray qaybta ugu weyn ee shaashadaada!`;
                 } else {
-                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan maqlay fariintaada Commander Mawliid. Si aad sawir u geliso shaashada, kaliya iigu dheh: <i style="color:#fff;">"iigu dar image ee [magaca]"</i> ama <i style="color:#fff;">"iigu dar sawir"</i>!`;
+                    resp.innerHTML = `<strong style="color:var(--neon-pink)">🤖 AI Assistant:</strong> Waan maqlay fariintaada Commander. Si aad sawir meel kasta uga dhex muujiso shaashada, kaliya iigu dheh: <i style="color:#fff;">"iigu dar sawir [magaca]"</i>!`;
                 }
 
                 msgs.appendChild(resp);
