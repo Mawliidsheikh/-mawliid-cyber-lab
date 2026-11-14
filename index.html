@@ -3,54 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MAWLIID SHEIKH | KONAMI eFOOTBALL PRO</title>
+    <title>MAWLIID SHEIKH | CYBER LAB & eFOOTBALL PRO</title>
     <style>
         :root {
+            --neon-green: #00ff41;
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff0055;
             --ef-yellow: #ffd700;
             --ef-blue: #0055ff;
-            --ef-pink: #ff0055;
+            --dark-bg: #010402;
+            --panel-bg: rgba(4, 14, 8, 0.95);
+            --glow-green: 0 0 20px rgba(0, 255, 65, 0.7);
+            --glow-cyan: 0 0 20px rgba(0, 243, 255, 0.7);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background: #020610; color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
 
-        .konami-float-btn {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #matrix-bg {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #0044ff, #ff0055, #ffd700);
-            color: #fff;
-            border: 3px solid #fff;
-            padding: 18px 32px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 999999;
-            box-shadow: 0 0 50px rgba(0, 243, 255, 0.9);
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            opacity: 0.3;
+        }
+
+        /* HEADER */
+        header {
+            width: 96%;
+            max-width: 1420px;
+            margin: 18px auto 0;
+            padding: 16px 26px;
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-green);
+            box-shadow: var(--glow-green);
+            border-radius: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .brand-section {
             display: flex;
             align-items: center;
-            gap: 12px;
-            animation: pulseBtn 1.5s infinite;
+            gap: 18px;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-ring {
+            position: absolute;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 3px dashed var(--neon-cyan);
+            border-top-color: var(--neon-green);
+            border-bottom-color: var(--neon-pink);
+            animation: spin 5s linear infinite;
+            box-shadow: var(--glow-cyan);
+        }
+
+        .logo-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 2px solid var(--neon-green);
+            z-index: 2;
+        }
+
+        .title-box h1 {
+            font-size: clamp(1.3rem, 3vw, 2.2rem);
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px var(--neon-green);
+        }
+
+        .title-box p {
+            color: var(--neon-cyan);
+            font-size: 0.88rem;
+            margin-top: 4px;
+        }
+
+        .live-badge {
+            background: rgba(0, 255, 65, 0.15);
+            border: 1px solid var(--neon-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse-dot {
+            width: 10px; height: 10px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        /* DASHBOARD GRID */
+        .dashboard {
+            width: 96%;
+            max-width: 1420px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            flex-grow: 1;
+        }
+
+        @media (min-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 280px 1fr 320px;
+            }
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1.5px solid var(--neon-green);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: var(--glow-green);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-title {
+            color: var(--neon-cyan);
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.4);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tool-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 1024px) {
+            .tool-list { grid-template-columns: 1fr; }
+        }
+
+        .cyber-btn {
+            background: rgba(0, 255, 65, 0.05);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .cyber-btn:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 12px var(--neon-green);
+        }
+
+        /* TERMINAL WINDOW */
+        .terminal-window {
+            height: 520px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .terminal-bar {
+            background: #0b1c12;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--neon-green);
+        }
+
+        .dots { display: flex; gap: 6px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .r { background: #ff5f56; } .y { background: #ffbd2e; } .g { background: #27c93f; }
+
+        .terminal-body {
+            padding: 18px;
+            flex-grow: 1;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .input-bar {
+            display: flex;
+            padding: 12px 18px;
+            background: #060f09;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        #cmd-input {
+            background: transparent;
+            border: none;
+            color: var(--neon-green);
+            flex-grow: 1;
+            font-size: 1rem;
+            outline: none;
+            margin-left: 8px;
+        }
+
+        /* RADAR */
+        .radar-container {
+            width: 180px; height: 180px;
+            margin: 10px auto 20px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-green);
+            position: relative;
+            background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,0,0,0.85) 70%);
+            overflow: hidden;
+            box-shadow: var(--glow-green);
+        }
+
+        .radar-sweep {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 50%; height: 50%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.7), transparent);
+            transform-origin: 0 0;
+            animation: spin 3s linear infinite;
+        }
+
+        .log-feed {
+            margin-top: auto;
+            background: rgba(0,0,0,0.6);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            border-left: 3px solid var(--neon-pink);
+            height: 130px;
+            overflow: hidden;
+        }
+
+        footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 0.85rem;
+            color: rgba(0, 255, 65, 0.7);
+            margin-top: auto;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        /* ================= KONAMI eFOOTBALL FLOATING BUTTON ================= */
+        .konami-float-btn {
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            background: linear-gradient(135deg, #0044ff, #ff0055, #ffd700) !important;
+            color: #fff !important;
+            border: 3px solid #fff !important;
+            padding: 16px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 900 !important;
+            font-size: 1.1rem !important;
+            cursor: pointer !important;
+            z-index: 2147483647 !important;
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.9) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            animation: konamiPulse 1.8s infinite !important;
+            font-family: 'Segoe UI', Tahoma, sans-serif !important;
             text-transform: uppercase;
         }
-        .konami-float-btn:hover { transform: scale(1.1); }
 
+        .konami-float-btn:hover { transform: scale(1.12); }
+
+        /* ================= FULLSCREEN eFOOTBALL MODAL ================= */
         .game-modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             background: rgba(2, 6, 15, 0.98);
-            z-index: 1000000;
+            z-index: 2147483646;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 5px;
+            font-family: 'Segoe UI', sans-serif;
         }
         .game-modal.open { display: flex; }
 
         .modal-box {
-            width: 100%; max-width: 1200px;
+            width: 100%; max-width: 1250px;
             height: 100vh; max-height: 98vh;
             background: #050e1d;
             border: 3px solid var(--ef-yellow);
@@ -76,7 +346,7 @@
             border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.85rem;
         }
         .close-modal-btn {
-            background: var(--ef-pink);
+            background: var(--neon-pink);
             color: #fff; border: none; padding: 8px 16px;
             border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.9rem;
         }
@@ -146,21 +416,88 @@
         .btn-pass { width: 65px; height: 65px; background: radial-gradient(circle, #0088ff, #0044aa); font-size: 0.85rem; }
         .btn-shoot { width: 80px; height: 80px; background: radial-gradient(circle, #ff0055, #990022); font-size: 0.95rem; }
 
-        @keyframes pulseBtn {
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes konamiPulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0, 243, 255, 0.8); }
-            50% { transform: scale(1.06); box-shadow: 0 0 60px rgba(255, 0, 85, 1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 0, 85, 1); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Badhanka Konami eFootball oo si toos ah u furaya FullScreen -->
-    <button class="konami-float-btn" onclick="openGameModal()">
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand-section">
+            <div class="logo-wrapper">
+                <div class="logo-ring"></div>
+                <img src="logo.jpg" onerror="this.src='https://github.com/Mawliidsheikh.png'" alt="Mawliid Sheikh" class="logo-img">
+            </div>
+            <div class="title-box">
+                <h1>MAWLIID SHEIKH CYBER LAB</h1>
+                <p>// CYBERSECURITY COMMAND CENTER & eFOOTBALL PRO</p>
+            </div>
+        </div>
+        <div class="live-badge">
+            <span class="pulse-dot"></span>
+            <span>SYSTEM: <strong>ONLINE</strong></span>
+        </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <main class="dashboard">
+        <aside class="panel">
+            <div class="panel-title"><span>[ CYBER MODULES ]</span><span>⚡</span></div>
+            <div class="tool-list">
+                <button class="cyber-btn" onclick="execCmd('scan')">[01] Port Scan</button>
+                <button class="cyber-btn" onclick="execCmd('hack')">[02] Exploit Server</button>
+                <button class="cyber-btn" onclick="execCmd('trace')">[03] Trace IP</button>
+                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Decrypt Key</button>
+                <button class="cyber-btn" onclick="execCmd('about')">[05] About Owner</button>
+                <button class="cyber-btn" style="border-color: var(--neon-pink); color: var(--neon-pink);" onclick="execCmd('clear')">[XX] Clear Screen</button>
+            </div>
+        </aside>
+
+        <section class="panel terminal-window">
+            <div class="terminal-bar">
+                <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-lab:~#</span>
+                <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
+            </div>
+            <div class="terminal-body" id="term-out">
+                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v11.0 ===</div>
+                <div>Badhanka KONAMI eFOOTBALL PVP wuxuu ku suganyahay geeska hoose. Guji si aad u gasho FullScreen Arena!</div>
+                <br>
+            </div>
+            <div class="input-bar">
+                <span style="color: var(--neon-cyan); font-weight: bold;">root@mawliid:~$</span>
+                <input type="text" id="cmd-input" placeholder="Geli amarkaaga (help)..." autocomplete="off">
+            </div>
+        </section>
+
+        <aside class="panel">
+            <div class="panel-title"><span>[ LIVE RADAR ]</span><span>ACTIVE</span></div>
+            <div class="radar-container"><div class="radar-sweep"></div></div>
+            <div class="log-feed" id="live-logs">
+                <div>> Firewall operational...</div>
+                <div>> Konami eFootball Engine Ready...</div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | All Rights Reserved
+    </footer>
+
+    <!-- KONAMI FLOATING BUTTON -->
+    <button class="konami-float-btn" id="openGameBtn">
         <span>⚽</span>
         <span>KONAMI eFOOTBALL PVP</span>
     </button>
 
-    <!-- Daaqadda Ciyaarta (FullScreen Modal) -->
+    <!-- FULLSCREEN MODAL -->
     <div class="game-modal" id="gameModal">
         <div class="modal-box">
             <div class="modal-top">
@@ -170,7 +507,7 @@
                 <div style="background: #000; padding: 6px 16px; border-radius: 6px; border: 1px solid var(--ef-yellow); font-weight: bold;">
                     <span style="color: #0055ff;">HOME</span> <span id="s-home" style="color: var(--ef-yellow);">0</span> - <span id="s-away" style="color: var(--ef-yellow);">0</span> <span style="color: #ff0055;">AWAY</span>
                 </div>
-                <button class="close-modal-btn" onclick="closeGameModal()">✖ XIDH</button>
+                <button class="close-modal-btn" id="closeGameBtn">✖ XIDH</button>
             </div>
 
             <div class="arena-layout">
@@ -179,236 +516,4 @@
                 </div>
 
                 <div class="online-sidebar">
-                    <div style="color: var(--ef-yellow); font-weight: bold; margin-bottom: 6px; font-size: 0.9rem;">⭐ COACHES & BOOSTERS</div>
-                    <div style="display: flex; gap: 10px; margin-bottom: 10px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; align-items: center;">
-                        <img src="logo.jpg" onerror="this.src='https://github.com/Mawliidsheikh.png'" style="width:45px; height:45px; border-radius:50%; border:2px solid var(--ef-yellow); object-fit:cover;">
-                        <div>
-                            <div style="font-size: 0.8rem; font-weight: bold; color: var(--ef-yellow);">Mawliid Sheikh (Manager)</div>
-                            <div style="font-size: 0.72rem; color: #00ff41;">Boost: +2 Speed & Long Shot</div>
-                        </div>
-                    </div>
-                    <div class="chat-messages" id="chat-box">
-                        <div style="color: var(--ef-yellow);">[Konami Engine]: Ciyaartoydu waxay leeyihiin lugo iyo gacmo caadi ah. Isticmaal Pass & Shoot si aad u dhaliso gool!</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="controls-strip">
-                <div class="dpad-group">
-                    <div></div>
-                    <button class="d-btn" onmousedown="keys['ArrowUp']=true" onmouseup="keys['ArrowUp']=false" ontouchstart="keys['ArrowUp']=true" ontouchend="keys['ArrowUp']=false">▲</button>
-                    <div></div>
-                    <button class="d-btn" onmousedown="keys['ArrowLeft']=true" onmouseup="keys['ArrowLeft']=false" ontouchstart="keys['ArrowLeft']=true" ontouchend="keys['ArrowLeft']=false">◀</button>
-                    <button class="d-btn" onmousedown="keys['ArrowDown']=true" onmouseup="keys['ArrowDown']=false" ontouchstart="keys['ArrowDown']=true" ontouchend="keys['ArrowDown']=false">▼</button>
-                    <button class="d-btn" onmousedown="keys['ArrowRight']=true" onmouseup="keys['ArrowRight']=false" ontouchstart="keys['ArrowRight']=true" ontouchend="keys['ArrowRight']=false">▶</button>
-                </div>
-
-                <div style="font-size: 0.78rem; color: #aaa; text-align: center;">
-                    <strong>PC:</strong> Fallaaraha + [SPACE] Laad<br><strong>Mobile:</strong> Isticmaal badhammada taabashada
-                </div>
-
-                <div class="action-group">
-                    <button class="konami-action-btn btn-pass" onclick="playerPass()">PASS</button>
-                    <button class="konami-action-btn btn-shoot" onclick="playerShoot()">SHOOT</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let isGameOpen = false;
-        const modal = document.getElementById('gameModal');
-
-        function openGameModal() {
-            isGameOpen = true;
-            modal.classList.add('open');
-        }
-        function closeGameModal() {
-            isGameOpen = false;
-            modal.classList.remove('open');
-        }
-
-        // Konami Match Engine (Players with Limbs: Arms, Legs, Head)
-        const canvas = document.getElementById('konamiPitch');
-        const ctx = canvas.getContext('2d');
-        const W = 960, H = 480;
-        const GOAL_T = 160, GOAL_B = 320;
-
-        let sHome = 0, sAway = 0;
-        const keys = {};
-        const ball = { x: W / 2, y: H / 2, r: 9, vx: 0, vy: 0, friction: 0.98 };
-
-        // Home Team Squad (Real Player anatomy: head, body, arms, legs)
-        const homeSquad = [
-            { x: 50, y: H / 2, speed: 4.2, color: '#0055ff', num: '1', role: 'GK' },
-            { x: 280, y: 150, speed: 4.8, color: '#0055ff', num: '8', role: 'MID' },
-            { x: 340, y: 330, speed: 4.8, color: '#0055ff', num: '10', role: 'FW' }
-        ];
-
-        // Away Team Squad (AI / Opponent)
-        const awaySquad = [
-            { x: W - 50, y: H / 2, speed: 4.2, color: '#ff0055', num: '1', role: 'GK' },
-            { x: W - 280, y: 150, speed: 4.6, color: '#ff0055', num: '7', role: 'MID' },
-            { x: W - 340, y: 330, speed: 4.6, color: '#ff0055', num: '9', role: 'FW' }
-        ];
-
-        window.addEventListener('keydown', e => {
-            if (isGameOpen && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
-            keys[e.key] = true;
-            if (isGameOpen && e.key === ' ') playerShoot();
-        });
-        window.addEventListener('keyup', e => { keys[e.key] = false; });
-
-        function getActivePlayer() {
-            return Math.hypot(ball.x - homeSquad[1].x, ball.y - homeSquad[1].y) < Math.hypot(ball.x - homeSquad[2].x, ball.y - homeSquad[2].y) ? homeSquad[1] : homeSquad[2];
-        }
-
-        function playerShoot() {
-            const active = getActivePlayer();
-            const angle = Math.atan2(H / 2 - ball.y, W - 12 - ball.x);
-            ball.vx = Math.cos(angle) * 16;
-            ball.vy = Math.sin(angle) * 16;
-        }
-
-        function playerPass() {
-            const active = getActivePlayer();
-            const target = active === homeSquad[1] ? homeSquad[2] : homeSquad[1];
-            const angle = Math.atan2(target.y - ball.y, target.x - ball.x);
-            ball.vx = Math.cos(angle) * 12;
-            ball.vy = Math.sin(angle) * 12;
-        }
-
-        function resetBall() {
-            ball.x = W / 2; ball.y = H / 2; ball.vx = 0; ball.vy = 0;
-            homeSquad[1].x = 280; homeSquad[1].y = 150;
-            homeSquad[2].x = 340; homeSquad[2].y = 330;
-            awaySquad[1].x = W - 280; awaySquad[1].y = 150;
-            awaySquad[2].x = W - 340; awaySquad[2].y = 330;
-        }
-
-        function updateGame() {
-            if (!isGameOpen) return;
-
-            const active = getActivePlayer();
-            const spd = active.speed;
-            if (keys['ArrowUp']) active.y -= spd;
-            if (keys['ArrowDown']) active.y += spd;
-            if (keys['ArrowLeft']) active.x -= spd;
-            if (keys['ArrowRight']) active.x += spd;
-
-            active.x = Math.max(25, Math.min(W - 25, active.x));
-            active.y = Math.max(25, Math.min(H - 25, active.y));
-
-            // AI movement for other players
-            homeSquad.forEach((p, idx) => {
-                if (p === active) return;
-                if (idx === 0) p.y += (Math.max(GOAL_T + 15, Math.min(GOAL_B - 15, ball.y)) - p.y) * 0.08;
-                else { p.x += ((ball.x - 70) - p.x) * 0.04; p.y += (ball.y - p.y) * 0.04; }
-            });
-
-            awaySquad.forEach((p, idx) => {
-                if (idx === 0) p.y += (Math.max(GOAL_T + 15, Math.min(GOAL_B - 15, ball.y)) - p.y) * 0.08;
-                else { p.x += (ball.x - p.x) * 0.04; p.y += (ball.y - p.y) * 0.04; }
-            });
-
-            ball.x += ball.vx;
-            ball.y += ball.vy;
-            ball.vx *= ball.friction;
-            ball.vy *= ball.friction;
-
-            // Goals
-            if (ball.x + ball.r >= W - 15 && ball.y > GOAL_T && ball.y < GOAL_B) {
-                sHome++;
-                document.getElementById('s-home').textContent = sHome;
-                resetBall();
-            } else if (ball.x - ball.r <= 15 && ball.y > GOAL_T && ball.y < GOAL_B) {
-                sAway++;
-                document.getElementById('s-away').textContent = sAway;
-                resetBall();
-            }
-
-            if (ball.y - ball.r < 15) { ball.y = 15 + ball.r; ball.vy *= -0.8; }
-            if (ball.y + ball.r > H - 15) { ball.y = H - 15 - ball.r; ball.vy *= -0.8; }
-            if (ball.x - ball.r < 15) { ball.x = 15 + ball.r; ball.vx *= -0.8; }
-            if (ball.x + ball.r > W - 15) { ball.x = W - 15 - ball.r; ball.vx *= -0.8; }
-
-            // Collision with players
-            [...homeSquad, ...awaySquad].forEach(p => {
-                if (Math.hypot(ball.x - p.x, ball.y - p.y) < 22) {
-                    const a = Math.atan2(ball.y - p.y, ball.x - p.x);
-                    ball.vx = Math.cos(a) * 7;
-                    ball.vy = Math.sin(a) * 7;
-                }
-            });
-        }
-
-        // Draw Player with Anatomy (Head, Body, Arms, Legs)
-        function drawPlayer(p, isSelected) {
-            ctx.save();
-            ctx.translate(p.x, p.y);
-
-            // Selection ring
-            if (isSelected) {
-                ctx.beginPath(); ctx.arc(0, 0, 24, 0, Math.PI * 2);
-                ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 3; ctx.stroke();
-            }
-
-            // Legs
-            ctx.strokeStyle = '#fff'; ctx.lineWidth = 4; ctx.lineCap = 'round';
-            ctx.beginPath(); ctx.moveTo(-6, 10); ctx.lineTo(-10, 20); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(6, 10); ctx.lineTo(10, 20); ctx.stroke();
-
-            // Arms
-            ctx.beginPath(); ctx.moveTo(-10, -2); ctx.lineTo(-18, 6); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(10, -2); ctx.lineTo(18, 6); ctx.stroke();
-
-            // Body / Kit
-            ctx.beginPath(); ctx.arc(0, 2, 12, 0, Math.PI * 2);
-            ctx.fillStyle = p.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
-
-            // Head
-            ctx.beginPath(); ctx.arc(0, -14, 8, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffccaa'; ctx.fill(); ctx.strokeStyle = '#333'; ctx.lineWidth = 1; ctx.stroke();
-
-            // Number
-            ctx.fillStyle = '#fff'; ctx.font = 'bold 10px Arial'; ctx.textAlign = 'center';
-            ctx.fillText(p.num, 0, 6);
-
-            ctx.restore();
-        }
-
-        function drawGame() {
-            // Pitch background with grass stripes
-            for (let i = 0; i < 12; i++) {
-                ctx.fillStyle = i % 2 === 0 ? '#0b521f' : '#0e5e24';
-                ctx.fillRect(i * (W / 12), 0, W / 12, H);
-            }
-
-            // Pitch Lines & Center Circle
-            ctx.strokeStyle = '#fff'; ctx.lineWidth = 3;
-            ctx.strokeRect(15, 15, W - 30, H - 30);
-            ctx.beginPath(); ctx.moveTo(W / 2, 15); ctx.lineTo(W / 2, H - 15); ctx.stroke();
-            ctx.beginPath(); ctx.arc(W / 2, H / 2, 65, 0, Math.PI * 2); ctx.stroke();
-
-            // Goals
-            ctx.fillStyle = 'rgba(0, 85, 255, 0.35);'; ctx.fillRect(0, GOAL_T, 15, GOAL_B - GOAL_T);
-            ctx.fillStyle = 'rgba(255, 0, 85, 0.35);'; ctx.fillRect(W - 15, GOAL_T, 15, GOAL_B - GOAL_T);
-
-            // Draw Squads with Limbs
-            homeSquad.forEach(p => drawPlayer(p, p === getActivePlayer()));
-            awaySquad.forEach(p => drawPlayer(p, false));
-
-            // Ball
-            ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
-            ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#000'; ctx.lineWidth = 2; ctx.stroke();
-        }
-
-        function loop() {
-            updateGame();
-            if (isGameOpen) drawGame();
-            requestAnimationFrame(loop);
-        }
-        loop();
-    </script>
-</body>
-</html>
+                    <div style="color: var(--ef-yellow); font-weight: bold; margin-bottom: 6px; font-size: 0.9rem;">⭐ COACH
