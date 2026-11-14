@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MAWLIID SHEIKH | CYBER COMMAND & eFOOTBALL PRO</title>
+    <title>MAWLIID SHEIKH | CYBER LAB & eFOOTBALL PRO</title>
     <style>
         :root {
             --neon-green: #00ff41;
@@ -34,22 +34,11 @@
             position: relative;
         }
 
-        /* CRT Scanline & Matrix Effect */
         #matrix-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
             opacity: 0.28;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
-            background-size: 100% 4px;
-            z-index: 999;
-            pointer-events: none;
         }
 
         /* HEADER */
@@ -67,7 +56,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 15px;
-            animation: slideDown 0.8s ease-out;
         }
 
         .brand-section {
@@ -163,11 +151,6 @@
             box-shadow: var(--glow-green);
             display: flex;
             flex-direction: column;
-            transition: border-color 0.3s;
-        }
-
-        .panel:hover {
-            border-color: var(--neon-cyan);
         }
 
         .panel-title {
@@ -207,7 +190,6 @@
             background: var(--neon-green);
             color: #000;
             box-shadow: 0 0 12px var(--neon-green);
-            transform: translateX(4px);
         }
 
         /* TERMINAL WINDOW */
@@ -255,7 +237,7 @@
             margin-left: 8px;
         }
 
-        /* RADAR & STATS */
+        /* RADAR */
         .radar-container {
             width: 180px; height: 180px;
             margin: 10px auto 20px;
@@ -293,47 +275,43 @@
             font-size: 0.85rem;
             color: rgba(0, 255, 65, 0.7);
             margin-top: auto;
-            margin-bottom: 70px;
             border-top: 1px solid rgba(0, 255, 65, 0.2);
         }
 
-        /* ================= KONAMI eFOOTBALL FLOATING BUTTON ================= */
+        /* ================= 100% INDEPENDENT FLOATING eFOOTBALL BUTTON ================= */
         .floating-efootball-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: linear-gradient(135deg, #0055ff, #ff0055);
-            color: #fff;
-            border: 3px solid var(--ef-yellow);
-            padding: 16px 28px;
-            border-radius: 50px;
-            font-weight: 900;
-            font-size: 1.05rem;
-            cursor: pointer;
-            z-index: 99999;
-            box-shadow: 0 0 35px rgba(0, 85, 255, 0.9);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            animation: bounceFloat 2s infinite;
-            font-family: 'Segoe UI', sans-serif;
-            pointer-events: auto;
+            position: fixed !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            background: linear-gradient(135deg, #ff0055, #ffd700) !important;
+            color: #000 !important;
+            border: 3px solid #fff !important;
+            padding: 16px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 900 !important;
+            font-size: 1.05rem !important;
+            cursor: pointer !important;
+            z-index: 2147483647 !important; /* Always on top */
+            box-shadow: 0 0 40px rgba(255, 0, 85, 0.9) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            animation: bounceFloat 2s infinite !important;
+            font-family: 'Segoe UI', sans-serif !important;
         }
 
         .floating-efootball-btn:hover {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #ff0055, #ffd700);
-            color: #000;
+            transform: scale(1.12);
         }
 
-        /* ================= POPUP eFOOTBALL MODAL (KONAMI STYLE) ================= */
+        /* ================= POPUP eFOOTBALL MODAL ================= */
         .game-modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             background: rgba(2, 6, 12, 0.97);
-            z-index: 99999999;
+            z-index: 2147483646;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -484,7 +462,6 @@
             outline: none;
         }
 
-        /* Konami Mobile & PC Controls Strip */
         .controls-strip {
             display: flex;
             justify-content: space-between;
@@ -538,7 +515,6 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounceFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
@@ -558,75 +534,4 @@
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH CYBER LAB</h1>
-                <p>// CYBERSECURITY COMMAND CENTER & ARCADE v8.0</p>
-            </div>
-        </div>
-        <div class="live-badge">
-            <span class="pulse-dot"></span>
-            <span>SYSTEM: <strong>ONLINE</strong></span>
-        </div>
-    </header>
-
-    <!-- DASHBOARD -->
-    <main class="dashboard">
-        <aside class="panel">
-            <div class="panel-title"><span>[ CYBER MODULES ]</span><span>⚡</span></div>
-            <div class="tool-list">
-                <button class="cyber-btn" onclick="execCmd('scan')">[01] Port Scan</button>
-                <button class="cyber-btn" onclick="execCmd('hack')">[02] Exploit Server</button>
-                <button class="cyber-btn" onclick="execCmd('trace')">[03] Trace IP</button>
-                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Decrypt Key</button>
-                <button class="cyber-btn" onclick="execCmd('about')">[05] About Owner</button>
-                <button class="cyber-btn" style="border-color: var(--neon-pink); color: var(--neon-pink);" onclick="execCmd('clear')">[XX] Clear Screen</button>
-            </div>
-        </aside>
-
-        <section class="panel terminal-window">
-            <div class="terminal-bar">
-                <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
-                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-lab:~#</span>
-                <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
-            </div>
-            <div class="terminal-body" id="term-out">
-                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v8.0 ===</div>
-                <div>Nidaamku wuu wada shaqaynayaa. Guji badhanka **KONAMI eFOOTBALL PVP** ee geeska hoose si aad u ciyaarto!</div>
-                <br>
-            </div>
-            <div class="input-bar">
-                <span style="color: var(--neon-cyan); font-weight: bold;">root@mawliid:~$</span>
-                <input type="text" id="cmd-input" placeholder="Geli amarkaaga (help)..." autocomplete="off">
-            </div>
-        </section>
-
-        <aside class="panel">
-            <div class="panel-title"><span>[ LIVE RADAR ]</span><span>ACTIVE</span></div>
-            <div class="radar-container"><div class="radar-sweep"></div></div>
-            <div class="log-feed" id="live-logs">
-                <div>> Firewall operational...</div>
-                <div>> Konami eFootball Engine Ready...</div>
-            </div>
-        </aside>
-    </main>
-
-    <footer>
-        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | All Rights Reserved
-    </footer>
-
-    <!-- ================= KONAMI eFOOTBALL FLOATING BUTTON ================= -->
-    <button class="floating-efootball-btn" onclick="openGameModal()">
-        <span>⚽</span>
-        <span>KONAMI eFOOTBALL PVP</span>
-    </button>
-
-    <!-- ================= POPUP eFOOTBALL MODAL ================= -->
-    <div class="game-modal" id="gameModal">
-        <div class="modal-box">
-            <div class="modal-top">
-                <div style="color: var(--ef-yellow); font-weight: 900; font-size: 1rem;">
-                    ⚽ KONAMI eFOOTBALL MATCH ROOM
-                </div>
-
-                <div class="room-controls">
-                    <span style="font-size: 0.8rem; color: #ccc;">ROOM:</span>
-                    <input type="text" id="room-code" class="room-input" value="MAWLIID-PVP">
-                    <button class="room-btn" onclick="copyRoomLink()">📋 INVITE</button>
+                <p>// CYBERSECURITY COMMAND CENTER
