@@ -3,68 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MAWLIID eFOOTBALL 2026 | ONLINE PVP</title>
+    <title>MAWLIID SHEIKH | CYBER LAB & eFOOTBALL</title>
     <style>
         :root {
-            --ef-dark: #020710;
-            --ef-blue: #0055ff;
-            --ef-red: #ff0055;
+            --neon-green: #00ff41;
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff0055;
             --ef-yellow: #ffd700;
-            --ef-cyan: #00f3ff;
+            --ef-blue: #0066ff;
+            --dark-bg: #030504;
+            --panel-bg: rgba(8, 18, 12, 0.9);
+            --glow-green: 0 0 15px rgba(0, 255, 65, 0.5);
+            --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.5);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            user-select: none;
-            -webkit-user-select: none;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         body {
-            background-color: var(--ef-dark);
-            color: #fff;
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
         }
 
-        /* Konami eFootball Broadcast Header */
+        #matrix-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            opacity: 0.25;
+        }
+
+        /* MAIN WEBSITE HEADER */
         header {
-            width: 100%;
-            background: linear-gradient(90deg, #040e22 0%, #0a1b38 50%, #22040f 100%);
-            border-bottom: 2px solid var(--ef-yellow);
-            padding: 10px 18px;
+            width: 96%;
+            max-width: 1400px;
+            margin: 15px auto 0;
+            padding: 15px 25px;
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-green);
+            box-shadow: var(--glow-green);
+            border-radius: 10px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            gap: 15px;
         }
 
-        .brand {
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-ring {
+            position: absolute;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 3px dashed var(--neon-cyan);
+            border-top-color: var(--neon-green);
+            border-bottom-color: var(--neon-pink);
+            animation: spin 6s linear infinite;
+            box-shadow: var(--glow-cyan);
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 2px solid var(--neon-green);
+            z-index: 2;
+        }
+
+        .title-box h1 {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .title-box p {
+            color: var(--neon-cyan);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .status-pill {
+            background: rgba(0, 255, 65, 0.12);
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse-dot {
+            width: 10px; height: 10px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse 1.2s infinite;
+        }
+
+        /* Dashboard Grid */
+        .dashboard {
+            width: 96%;
+            max-width: 1400px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            flex-grow: 1;
+        }
+
+        @media (min-width: 992px) {
+            .dashboard {
+                grid-template-columns: 270px 1fr 310px;
+            }
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: var(--glow-green);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-title {
+            color: var(--neon-cyan);
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.4);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tool-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 992px) {
+            .tool-list { grid-template-columns: 1fr; }
+        }
+
+        .cyber-btn {
+            background: rgba(0, 255, 65, 0.05);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .cyber-btn:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 12px var(--neon-green);
+        }
+
+        /* Terminal */
+        .terminal-window {
+            height: 490px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .terminal-bar {
+            background: #0b1c12;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--neon-green);
+        }
+
+        .dots { display: flex; gap: 6px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .r { background: #ff5f56; } .y { background: #ffbd2e; } .g { background: #27c93f; }
+
+        .terminal-body {
+            padding: 16px;
+            flex-grow: 1;
+            overflow-y: auto;
+            font-size: 0.94rem;
+            line-height: 1.6;
+        }
+
+        .input-bar {
+            display: flex;
+            padding: 12px 16px;
+            background: #060f09;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        #cmd-input {
+            background: transparent;
+            border: none;
+            color: var(--neon-green);
+            flex-grow: 1;
+            font-size: 1rem;
+            outline: none;
+            margin-left: 8px;
+        }
+
+        /* Radar */
+        .radar-container {
+            width: 170px; height: 170px;
+            margin: 10px auto 20px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-green);
+            position: relative;
+            background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,0,0,0.8) 70%);
+            overflow: hidden;
+        }
+
+        .radar-sweep {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 50%; height: 50%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.7), transparent);
+            transform-origin: 0 0;
+            animation: spin 3s linear infinite;
+        }
+
+        .log-feed {
+            margin-top: auto;
+            background: rgba(0,0,0,0.6);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            border-left: 3px solid var(--neon-pink);
+            height: 120px;
+            overflow: hidden;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.85rem;
+            color: rgba(0, 255, 65, 0.7);
+            margin-top: auto;
+            margin-bottom: 60px;
+        }
+
+        /* ================= KONAMI eFOOTBALL FLOATING BUTTON ================= */
+        .floating-efootball-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #0055ff, #ff0055);
+            color: #fff;
+            border: 3px solid var(--ef-yellow);
+            padding: 16px 28px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.05rem;
+            cursor: pointer;
+            z-index: 999999;
+            box-shadow: 0 0 35px rgba(0, 85, 255, 0.9);
             display: flex;
             align-items: center;
             gap: 12px;
+            animation: bounceFloat 2s infinite;
+            font-family: 'Segoe UI', sans-serif;
+            pointer-events: auto;
         }
 
-        .logo-box {
-            width: 48px; height: 48px;
-            border-radius: 50%;
+        .floating-efootball-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #ff0055, #ffd700);
+            color: #000;
+        }
+
+        /* ================= POPUP eFOOTBALL MODAL (KONAMI STYLE) ================= */
+        .game-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(2, 6, 12, 0.97);
+            z-index: 99999999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .game-modal.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 1050px;
+            background: #040d1a;
             border: 2px solid var(--ef-yellow);
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 0 12px var(--ef-yellow);
+            box-shadow: 0 0 50px rgba(0, 102, 255, 0.9);
+            display: flex;
+            flex-direction: column;
         }
-        .logo-box img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 
-        .title h1 { font-size: 1.1rem; color: var(--ef-yellow); font-weight: 900; letter-spacing: 1px; }
-        .title p { font-size: 0.75rem; color: var(--ef-cyan); }
+        .modal-top {
+            background: linear-gradient(90deg, #002266, #071326, #660022);
+            padding: 12px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--ef-yellow);
+        }
 
-        /* Room & Match Controls */
-        .match-controls {
+        .room-controls {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -73,345 +354,100 @@
 
         .room-input {
             background: #000;
-            border: 1px solid var(--ef-cyan);
+            border: 1px solid var(--neon-cyan);
             color: #fff;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
             font-size: 0.85rem;
             width: 120px;
             text-align: center;
-            font-weight: bold;
         }
 
-        .btn-konami {
-            background: var(--ef-yellow);
+        .room-btn {
+            background: var(--neon-cyan);
             color: #000;
             border: none;
-            padding: 7px 14px;
-            border-radius: 6px;
-            font-weight: 900;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 0.82rem;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-        .btn-konami:hover { background: #fff; }
-
-        /* Scoreboard */
-        .scoreboard {
-            background: rgba(0,0,0,0.9);
-            border: 2px solid var(--ef-cyan);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
-        }
-        .team-h { background: var(--ef-blue); padding: 5px 12px; font-weight: 900; font-size: 0.85rem; }
-        .score-box { padding: 5px 14px; font-size: 1.2rem; font-weight: 900; color: var(--ef-yellow); background: #000; }
-        .team-a { background: var(--ef-red); padding: 5px 12px; font-weight: 900; font-size: 0.85rem; }
-
-        /* Main Stadium Arena */
-        .stadium-container {
-            position: relative;
-            flex-grow: 1;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle, #0b3d16 0%, #021206 100%);
-            padding: 10px;
-        }
-
-        .pitch-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 950px;
-            background: #093815;
-            border: 3px solid #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-            overflow: hidden;
-        }
-
-        #eFootballCanvas {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 500px;
-        }
-
-        /* Konami Goal Banner */
-        #goalBanner {
-            position: absolute;
-            top: 45%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: linear-gradient(135deg, rgba(0, 85, 255, 0.95), rgba(0,0,0,0.95));
-            border: 4px solid var(--ef-yellow);
-            color: var(--ef-yellow);
-            padding: 15px 40px;
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 900;
-            border-radius: 14px;
-            text-shadow: 0 0 15px var(--ef-yellow);
-            box-shadow: 0 0 30px rgba(255,215,0,0.8);
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-            z-index: 50;
-            text-align: center;
-        }
-        #goalBanner.show { transform: translate(-50%, -50%) scale(1); }
-
-        /* Mobile & PC Touch Controllers (Konami Layout) */
-        .controller-hud {
-            width: 100%;
-            max-width: 950px;
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 10px;
-        }
-
-        .dpad-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 48px);
-            grid-template-rows: repeat(2, 44px);
-            gap: 5px;
-        }
-
-        .d-btn {
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--ef-cyan);
-            color: #fff;
-            font-size: 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-        .d-btn:active { background: var(--ef-cyan); color: #000; }
-
-        .action-group {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .act-btn {
-            border-radius: 50%;
-            border: 3px solid #fff;
-            color: #fff;
-            font-weight: 900;
-            cursor: pointer;
-            touch-action: manipulation;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-        }
-        .act-btn:active { transform: scale(0.92); }
-
-        .btn-pass { width: 62px; height: 62px; background: radial-gradient(circle, #0088ff, #0044aa); font-size: 0.78rem; }
-        .btn-shoot { width: 76px; height: 76px; background: radial-gradient(circle, #ff0055, #990022); font-size: 0.88rem; }
-
-        /* Chat & Room Info Bar */
-        .room-info-bar {
-            width: 100%;
-            max-width: 950px;
-            margin-top: 8px;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(0,243,255,0.3);
-            border-radius: 8px;
-            padding: 8px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             font-size: 0.8rem;
         }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            font-size: 0.78rem;
-            color: rgba(0, 255, 65, 0.6);
-            margin-top: auto;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Konami eFootball Broadcast Header -->
-    <header>
-        <div class="brand">
-            <div class="logo-box">
-                <img src="logo.jpg" onerror="this.src='https://github.com/Mawliidsheikh.png'" alt="Mawliid">
-            </div>
-            <div class="title">
-                <h1>MAWLIID eFOOTBALL PRO</h1>
-                <p>ONLINE ROOM MATCH</p>
-            </div>
-        </div>
-
-        <div class="match-controls">
-            <span style="font-size: 0.78rem; color: #aaa;">ROOM ID:</span>
-            <input type="text" id="roomCode" class="room-input" value="MAWLIID-PVP">
-            <button class="btn-konami" onclick="copyInviteLink()">📋 INVITE LINK</button>
-            <button class="btn-konami" style="background: var(--ef-cyan);" onclick="toggleTeamSide()">SIDE: <span id="sideLabel">HOME (BLUE)</span></button>
-        </div>
-
-        <div class="scoreboard">
-            <div class="team-h">MAWLIID FC</div>
-            <div class="score-box"><span id="scoreH">0</span> - <span id="scoreA">0</span></div>
-            <div class="team-a">OPPONENT</div>
-        </div>
-    </header>
-
-    <!-- Stadium Arena -->
-    <div class="stadium-container">
-        <div class="pitch-wrapper">
-            <canvas id="eFootballCanvas" width="900" height="480"></canvas>
-            <div id="goalBanner">GOOOAAALLL! ⚽🔥</div>
-        </div>
-
-        <!-- Room Info Bar -->
-        <div class="room-info-bar">
-            <span id="roomStatus" style="color: var(--ef-yellow);">🟢 Qolku wuu diyaar yahay. Dir link-ga si saaxiibkaagu u soo galo!</span>
-            <span style="color: var(--ef-cyan);">PC: Fallaaraha + [SPACE] | Mobile: Badhammada hoose</span>
-        </div>
-
-        <!-- Konami Touch HUD Controllers -->
-        <div class="controller-hud">
-            <div class="dpad-grid">
-                <div></div>
-                <button class="d-btn" onmousedown="setKey('ArrowUp',true)" onmouseup="setKey('ArrowUp',false)" ontouchstart="setKey('ArrowUp',true)" ontouchend="setKey('ArrowUp',false)">▲</button>
-                <div></div>
-                <button class="d-btn" onmousedown="setKey('ArrowLeft',true)" onmouseup="setKey('ArrowLeft',false)" ontouchstart="setKey('ArrowLeft',true)" ontouchend="setKey('ArrowLeft',false)">◀</button>
-                <button class="d-btn" onmousedown="setKey('ArrowDown',true)" onmouseup="setKey('ArrowDown',false)" ontouchstart="setKey('ArrowDown',true)" ontouchend="setKey('ArrowDown',false)">▼</button>
-                <button class="d-btn" onmousedown="setKey('ArrowRight',true)" onmouseup="setKey('ArrowRight',false)" ontouchstart="setKey('ArrowRight',true)" ontouchend="setKey('ArrowRight',false)">▶</button>
-            </div>
-
-            <div class="action-group">
-                <button class="act-btn btn-pass" onclick="playerPass()">PASS</button>
-                <button class="act-btn btn-shoot" onclick="playerShoot()">SHOOT</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        &copy; 2026 Mawliid Sheikh Cyber Lab | eFootball Online Multiplayer Engine
-    </footer>
-
-    <script>
-        const canvas = document.getElementById('eFootballCanvas');
-        const ctx = canvas.getContext('2d');
-        const W = 900, H = 480;
-        const GOAL_T = 170, GOAL_B = 310;
-
-        let scoreH = 0, scoreA = 0;
-        let isHomeTeam = true; // true = Blue (Home), false = Red (Away)
-        let isPaused = false;
-        const keys = {};
-
-        // Ball & Pitch objects
-        const ball = { x: W / 2, y: H / 2, r: 9, vx: 0, vy: 0, friction: 0.975 };
-
-        // Home Team (Blue - Mawliid FC)
-        const homePlayers = [
-            { x: 150, y: H / 2, r: 17, speed: 4.5, color: '#0055ff', num: '1' }, // GK
-            { x: 300, y: 160, r: 18, speed: 4.8, color: '#0055ff', num: '7' }, // MID
-            { x: 350, y: 320, r: 18, speed: 4.8, color: '#0055ff', num: '10' }  // ST
-        ];
-
-        // Away Team (Red - Opponent / AI)
-        const awayPlayers = [
-            { x: W - 150, y: H / 2, r: 17, speed: 4.5, color: '#ff0055', num: '1' }, // GK
-            { x: W - 300, y: 160, r: 18, speed: 4.6, color: '#ff0055', num: '8' }, // MID
-            { x: W - 350, y: 320, r: 18, speed: 4.6, color: '#ff0055', num: '9' }  // ST
-        ];
-
-        function setKey(k, val) { keys[k] = val; }
-
-        window.addEventListener('keydown', e => {
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
-            keys[e.key] = true;
-            if (e.key === ' ') playerShoot();
-        });
-        window.addEventListener('keyup', e => { keys[e.key] = false; });
-
-        // Room Link Sharing
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('room')) {
-            document.getElementById('roomCode').value = urlParams.get('room');
-            isHomeTeam = false; // Join as Away team (Red)
-            document.getElementById('sideLabel').textContent = 'AWAY (RED)';
-            document.getElementById('roomStatus').textContent = '🟢 Waxaad ku biirtay qolka saaxiibkaa adigoo ah Away Team!';
+        .close-modal-btn {
+            background: var(--neon-pink);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
-        function copyInviteLink() {
-            const code = document.getElementById('roomCode').value || 'MAWLIID-PVP';
-            const link = `${window.location.origin}${window.location.pathname}?room=${code}`;
-            navigator.clipboard.writeText(link);
-            alert(`Link-ga qolka (${code}) waa la koobiyeeyay! U dir saaxiibkaa WhatsApp ama Telegram si uu kuu soo galo.`);
+        .arena-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            padding: 12px;
         }
 
-        function toggleTeamSide() {
-            isHomeTeam = !isHomeTeam;
-            document.getElementById('sideLabel').textContent = isHomeTeam ? 'HOME (BLUE)' : 'AWAY (RED)';
+        @media (min-width: 900px) {
+            .arena-layout {
+                grid-template-columns: 2.3fr 1fr;
+            }
         }
 
-        function getActivePlayer() {
-            const squad = isHomeTeam ? homePlayers : awayPlayers;
-            // Return closest outfield player to ball
-            return squad[1].x < squad[2].x ? squad[2] : squad[1];
+        .pitch-container {
+            position: relative;
+            background: #083d18;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
         }
 
-        function playerShoot() {
-            const active = getActiveParameterPlayer();
-            const targetX = isHomeTeam ? W - 15 : 15;
-            const targetY = H / 2;
-            const angle = Math.atan2(targetY - ball.y, targetX - ball.x);
-            ball.vx = Math.cos(angle) * 15;
-            ball.vy = Math.sin(angle) * 15;
+        #konamiPitch {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-width: 720px;
         }
 
-        function playerPass() {
-            const active = getActiveParameterPlayer();
-            const squad = isHomeTeam ? homePlayers : awayPlayers;
-            const target = active === squad[1] ? squad[2] : squad[1];
-            const angle = Math.atan2(target.y - ball.y, target.x - ball.x);
-            ball.vx = Math.cos(angle) * 11;
-            ball.vy = Math.sin(angle) * 11;
+        .online-sidebar {
+            background: #071528;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 260px;
         }
 
-        function getActiveParameterPlayer() {
-            const squad = isHomeTeam ? homePlayers : awayPlayers;
-            return Math.hypot(ball.x - squad[1].x, ball.y - squad[1].y) < Math.hypot(ball.x - squad[2].x, ball.y - squad[2].y) ? squad[1] : squad[2];
+        .online-players-list {
+            background: rgba(0,0,0,0.5);
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            margin-bottom: 8px;
         }
 
-        function showGoalBanner(text) {
-            const b = document.getElementById('goalBanner');
-            b.textContent = text;
-            b.classList.add('show');
-            setTimeout(() => b.classList.remove('show'), 2000);
+        .chat-messages {
+            flex-grow: 1;
+            background: rgba(0,0,0,0.6);
+            border-radius: 6px;
+            padding: 8px;
+            overflow-y: auto;
+            max-height: 120px;
+            font-size: 0.82rem;
+            margin-bottom: 8px;
+            color: #e0f7fa;
         }
 
-        function resetPositions() {
-            ball.x = W / 2; ball.y = H / 2; ball.vx = 0; ball.vy = 0;
-            homePlayers[0].x = 150; homePlayers[0].y = H / 2;
-            homePlayers[1].x = 300; homePlayers[1].y = 160;
-            homePlayers[2].x = 350; homePlayers[2].y = 320;
-
-            awayPlayers[0].x = W - 150; awayPlayers[0].y = H / 2;
-            awayPlayers[1].x = W - 300; awayPlayers[1].y = 160;
-            awayPlayers[2].x = W - 350; awayPlayers[2].y = 320;
-            isPaused = false;
-        }
-
-        function handleGoal(team) {
-            if (isPaused) return;
-            isPaused = true;
-            if (team ===
-
+        .chat-input-box {
+            display: flex;
 
 
        
