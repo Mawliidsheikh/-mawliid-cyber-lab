@@ -1,16 +1,20 @@
-<!DOCTYPE html>
+
+
+       <!DOCTYPE html>
 <html lang="so">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mawliid Sheikh Cyber Lab | Neon Hacker Simulator</title>
+    <title>MAWLIID SHEIKH | CYBER COMMAND CENTER</title>
     <style>
         :root {
             --neon-green: #00ff41;
             --neon-cyan: #00f3ff;
-            --dark-bg: #050505;
-            --panel-bg: rgba(10, 20, 15, 0.85);
-            --border-glow: 0 0 10px rgba(0, 255, 65, 0.5);
+            --neon-pink: #ff0055;
+            --dark-bg: #030504;
+            --panel-bg: rgba(8, 18, 12, 0.88);
+            --glow-green: 0 0 15px rgba(0, 255, 65, 0.6);
+            --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.5);
         }
 
         * {
@@ -26,126 +30,255 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Matrix Canvas Background */
+        /* Matrix Rain Background */
         #matrix-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.25;
+            z-index: -2;
+            opacity: 0.3;
         }
 
-        /* Header */
+        /* CRT Scanline Effect */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        /* Top Navigation / Header with Animated Logo */
         header {
-            width: 100%;
-            max-width: 1000px;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--neon-green);
-            box-shadow: var(--border-glow);
+            width: 96%;
+            max-width: 1400px;
+            margin: 15px auto 0;
+            padding: 15px 25px;
             background: var(--panel-bg);
-            margin-top: 15px;
-            border-radius: 8px;
+            border: 1px solid var(--neon-green);
+            box-shadow: var(--glow-green);
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            animation: slideDown 0.8s ease-out;
         }
 
-        header h1 {
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
-            text-shadow: 0 0 8px var(--neon-green);
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        /* Animated Logo Container */
+        .logo-wrapper {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px dashed var(--neon-cyan);
+            border-top-color: var(--neon-green);
+            border-bottom-color: var(--neon-pink);
+            animation: spin 6s linear infinite;
+            box-shadow: var(--glow-cyan);
+        }
+
+        .logo-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--neon-green);
+            z-index: 2;
+        }
+
+        .title-box h1 {
+            font-size: clamp(1.3rem, 3vw, 2.1rem);
             letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--neon-green);
+            animation: glitchText 3s infinite;
         }
 
-        header p {
+        .title-box p {
             color: var(--neon-cyan);
-            font-size: 0.9rem;
-            margin-top: 5px;
+            font-size: 0.85rem;
+            margin-top: 4px;
         }
 
-        /* Main Container */
-        .container {
-            width: 95%;
-            max-width: 1000px;
+        .live-badge {
+            background: rgba(0, 255, 65, 0.15);
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: pulse 1.2s infinite;
+        }
+
+        /* Wide Main Dashboard Grid */
+        .dashboard {
+            width: 96%;
+            max-width: 1400px;
             margin: 20px auto;
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
+            flex-grow: 1;
         }
 
-        @media (min-width: 768px) {
-            .container {
-                grid-template-columns: 2fr 1fr;
+        @media (min-width: 992px) {
+            .dashboard {
+                grid-template-columns: 280px 1fr 320px;
             }
         }
 
-        /* Terminal Window */
-        .terminal {
+        .panel {
             background: var(--panel-bg);
             border: 1px solid var(--neon-green);
-            border-radius: 8px;
-            box-shadow: var(--border-glow);
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: var(--glow-green);
             display: flex;
             flex-direction: column;
-            height: 450px;
+            transition: transform 0.3s ease;
+        }
+
+        .panel:hover {
+            border-color: var(--neon-cyan);
+        }
+
+        .panel-title {
+            color: var(--neon-cyan);
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.4);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Left Panel: Quick Attack Tools */
+        .tool-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 992px) {
+            .tool-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cyber-btn {
+            background: rgba(0, 255, 65, 0.05);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: left;
+            transition: all 0.25s;
+            position: relative;
             overflow: hidden;
         }
 
-        .terminal-header {
-            background: #0d1a12;
-            padding: 10px 15px;
+        .cyber-btn:hover, .cyber-btn:active {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-green);
+            transform: translateX(4px);
+        }
+
+        .cyber-btn.danger {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .cyber-btn.danger:hover {
+            background: var(--neon-pink);
+            color: #fff;
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        /* Center Panel: Giant Terminal */
+        .terminal-window {
+            height: 520px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .terminal-bar {
+            background: #0b1c12;
+            padding: 12px 18px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--neon-green);
         }
 
-        .dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
+        .dots { display: flex; gap: 7px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .r { background: #ff5f56; }
+        .y { background: #ffbd2e; }
+        .g { background: #27c93f; }
 
         .terminal-body {
-            padding: 15px;
+            padding: 18px;
             flex-grow: 1;
             overflow-y: auto;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        .output-line {
-            margin-bottom: 8px;
-            word-wrap: break-word;
-        }
+        .line { margin-bottom: 8px; word-wrap: break-word; }
+        .cyan { color: var(--neon-cyan); }
+        .warn { color: #ffcc00; }
+        .err { color: var(--neon-pink); }
 
-        .cmd-text { color: var(--neon-cyan); }
-        .warn-text { color: #ffcc00; }
-        .error-text { color: #ff3333; }
-
-        .input-area {
+        .input-bar {
             display: flex;
-            padding: 10px 15px;
-            background: #08120c;
+            padding: 12px 18px;
+            background: #060f09;
             border-top: 1px solid rgba(0, 255, 65, 0.3);
         }
 
         .prompt {
             color: var(--neon-cyan);
-            margin-right: 8px;
             font-weight: bold;
+            margin-right: 10px;
         }
 
         #cmd-input {
@@ -157,69 +290,101 @@
             outline: none;
         }
 
-        /* Side Control Panel */
-        .side-panel {
-            background: var(--panel-bg);
-            border: 1px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        /* Right Panel: Radar & Live Telemetry */
+        .radar-container {
+            width: 180px;
+            height: 180px;
+            margin: 10px auto 20px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-green);
+            position: relative;
+            background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,0,0,0.8) 70%);
+            box-shadow: var(--glow-green);
+            overflow: hidden;
+        }
+
+        .radar-sweep {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 50%; height: 50%;
+            background: linear-gradient(45deg, rgba(0, 255, 65, 0.7), transparent);
+            transform-origin: 0 0;
+            animation: spin 3s linear infinite;
+        }
+
+        .radar-blip {
+            position: absolute;
+            width: 8px; height: 8px;
+            background: var(--neon-pink);
+            border-radius: 50%;
+            top: 30%; left: 65%;
+            box-shadow: 0 0 8px var(--neon-pink);
+            animation: pulse 1.5s infinite;
+        }
+
+        .stat-bar {
+            margin-bottom: 14px;
+        }
+
+        .stat-label {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .side-panel h2 {
-            color: var(--neon-cyan);
-            font-size: 1.1rem;
-            border-bottom: 1px solid var(--neon-cyan);
-            padding-bottom: 8px;
-        }
-
-        .btn-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .btn-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .cyber-btn {
-            background: transparent;
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
-            padding: 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s;
-            text-align: left;
-        }
-
-        .cyber-btn:hover, .cyber-btn:active {
-            background: var(--neon-green);
-            color: var(--dark-bg);
-            box-shadow: 0 0 12px var(--neon-green);
-        }
-
-        .status-box {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px;
-            border-radius: 5px;
+            justify-content: space-between;
             font-size: 0.85rem;
-            border-left: 3px solid var(--neon-cyan);
+            margin-bottom: 5px;
+        }
+
+        .progress-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--neon-cyan);
+            width: 65%;
+            transition: width 0.5s ease;
+            box-shadow: var(--glow-cyan);
+        }
+
+        .log-feed {
+            margin-top: auto;
+            background: rgba(0,0,0,0.6);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            border-left: 3px solid var(--neon-pink);
+            height: 110px;
+            overflow: hidden;
         }
 
         footer {
-            margin-top: auto;
-            padding: 15px;
             text-align: center;
-            font-size: 0.8rem;
+            padding: 15px;
+            font-size: 0.85rem;
             color: rgba(0, 255, 65, 0.7);
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            margin-top: 15px;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glitchText {
+            0%, 95%, 100% { text-shadow: 0 0 10px var(--neon-green); transform: skew(0deg); }
+            96% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-cyan); transform: skew(-5deg); }
+            98% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-cyan); transform: skew(5deg); }
         }
     </style>
 </head>
@@ -227,145 +392,224 @@
 
     <canvas id="matrix-bg"></canvas>
 
+    <!-- Header with Animated Logo -->
     <header>
-        <h1>MAWLIID SHEIKH CYBER LAB</h1>
-        <p>[ NEON HACKER SIMULATOR v2.6 // SYSTEM ONLINE ]</p>
+        <div class="brand-section">
+            <div class="logo-wrapper">
+                <div class="logo-ring"></div>
+                <!-- HALKAN KU BEDDEL LINK-GA SAWIRKAAGA HADDII AAD RABTO -->
+                <img src="https://github.com/Mawliidsheikh.png" alt="Mawliid Sheikh Logo" class="logo-img">
+            </div>
+            <div class="title-box">
+                <h1>MAWLIID SHEIKH CYBER LAB</h1>
+                <p>// GLOBAL CYBER COMMAND & HACKER SIMULATOR v4.0</p>
+            </div>
+        </div>
+
+        <div class="live-badge">
+            <span class="pulse-dot"></span>
+            <span>ENCRYPTED CONNECTION: <strong>ACTIVE</strong></span>
+        </div>
     </header>
 
-    <main class="container">
-        <!-- Terminal Section -->
-        <section class="terminal">
-            <div class="terminal-header">
-                <div class="dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                </div>
-                <span style="font-size: 0.8rem; color: #888;">root@mawliid-lab:~</span>
+    <!-- Main 3-Column Wide Dashboard -->
+    <main class="dashboard">
+        
+        <!-- Left Column: Hacker Modules -->
+        <aside class="panel">
+            <div class="panel-title">
+                <span>[ CYBER MODULES ]</span>
+                <span>⚡</span>
             </div>
-            
-            <div class="terminal-body" id="terminal-output">
-                <div class="output-line">Ku soo dhawaaw <strong>Mawliid Sheikh Cyber Lab</strong>!</div>
-                <div class="output-line cmd-text">Qor 'help' ama guji badhammada dhinaca yaalla si aad u bilowdo.</div>
-                <div class="output-line">--------------------------------------------------</div>
+            <div class="tool-list">
+                <button class="cyber-btn" onclick="execCmd('scan')">[01] Deep Port Scan</button>
+                <button class="cyber-btn" onclick="execCmd('hack')">[02] Exploit Mainframe</button>
+                <button class="cyber-btn" onclick="execCmd('trace')">[03] Satellite IP Trace</button>
+                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Quantum Decrypt</button>
+                <button class="cyber-btn" onclick="execCmd('ddos')">[05] Stress Test Net</button>
+                <button class="cyber-btn" onclick="execCmd('about')">[06] System Info</button>
+                <button class="cyber-btn danger" onclick="execCmd('clear')">[XX] Wipe Terminal</button>
+            </div>
+        </aside>
+
+        <!-- Center Column: Main Interactive Terminal -->
+        <section class="panel terminal-window">
+            <div class="terminal-bar">
+                <div class="dots">
+                    <span class="dot r"></span>
+                    <span class="dot y"></span>
+                    <span class="dot g"></span>
+                </div>
+                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-cyber-lab:~#</span>
+                <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
             </div>
 
-            <div class="input-area">
-                <span class="prompt">root@lab:~$</span>
-                <input type="text" id="cmd-input" placeholder="Qor amar (tusaale: scan)..." autocomplete="off">
+            <div class="terminal-body" id="term-out">
+                <div class="line">==========================================================</div>
+                <div class="line cyan">   KU SOO DHAWAAW MAWLIID SHEIKH CYBER COMMAND CENTER</div>
+                <div class="line">==========================================================</div>
+                <div class="line">Nidaamku wuu diyaar yahay. Guji badhammada bidix ama qor <span class="warn">'help'</span>.</div>
+                <br>
+            </div>
+
+            <div class="input-bar">
+                <span class="prompt">root@mawliid:~$</span>
+                <input type="text" id="cmd-input" placeholder="Geli amarka hacker-ka..." autocomplete="off">
             </div>
         </section>
 
-        <!-- Controls Section (Great for Mobile & Desktop) -->
-        <aside class="side-panel">
-            <h2>QALABKA DEGDEGA AH</h2>
-            <div class="btn-grid">
-                <button class="cyber-btn" onclick="runCommand('scan')">[1] Network Scan</button>
-                <button class="cyber-btn" onclick="runCommand('hack')">[2] Simulate Hack</button>
-                <button class="cyber-btn" onclick="runCommand('decrypt')">[3] Decrypt Data</button>
-                <button class="cyber-btn" onclick="runCommand('about')">[4] About Lab</button>
-                <button class="cyber-btn" onclick="runCommand('clear')" style="border-color: #ff5f56; color: #ff5f56;">[X] Clear Screen</button>
+        <!-- Right Column: Live Radar & Telemetry -->
+        <aside class="panel">
+            <div class="panel-title">
+                <span>[ LIVE RADAR ]</span>
+                <span class="cyan">SCANNING</span>
             </div>
 
-            <div class="status-box">
-                <div><strong>IP Status:</strong> <span style="color: var(--neon-cyan);">192.168.1.104 (Hidden)</span></div>
-                <div style="margin-top:5px;"><strong>Firewall:</strong> <span style="color: #00ff41;">ACTIVE (99.9%)</span></div>
-                <div style="margin-top:5px;"><strong>Device:</strong> <span id="device-type">Detecting...</span></div>
+            <div class="radar-container">
+                <div class="radar-sweep"></div>
+                <div class="radar-blip"></div>
+            </div>
+
+            <div class="stat-bar">
+                <div class="stat-label"><span>CPU OVERCLOCK</span><span id="cpu-val">72%</span></div>
+                <div class="progress-bg"><div class="progress-fill" id="cpu-bar" style="width: 72%;"></div></div>
+            </div>
+
+            <div class="stat-bar">
+                <div class="stat-label"><span>NEURAL FIREWALL</span><span id="ram-val">94%</span></div>
+                <div class="progress-bg"><div class="progress-fill" id="ram-bar" style="width: 94%; background: var(--neon-green);"></div></div>
+            </div>
+
+            <div class="log-feed" id="live-logs">
+                <div>> Initializing proxy chains...</div>
+                <div>> Masking MAC address... OK</div>
             </div>
         </aside>
+
     </main>
 
     <footer>
-        &copy; 2026 Mawliid Sheikh Cyber Lab. Waxaa loo dhisay waxbarasho iyo tijaabo.
+        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | All Systems Operational | Designed for Cybersecurity Training
     </footer>
 
     <script>
-        // 1. Matrix Rain Effect
+        // 1. Matrix Rain Animation
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
+        function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', resize);
+        resize();
 
-        const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
-        const fontSize = 14;
-        let columns = canvas.width / fontSize;
-        let drops = Array(Math.floor(columns)).fill(1);
+        const letters = '01MAWLIIDSHEIKHCYBERLAB@#$%&*987654321';
+        const fontSize = 15;
+        let drops = Array(Math.floor(canvas.width / fontSize)).fill(1);
 
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+            ctx.fillStyle = 'rgba(3, 5, 4, 0.06)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#00ff41';
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < drops.length; i++) {
-                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(drawMatrix, 40);
+        setInterval(drawMatrix, 35);
 
-        // 2. Detect Device Type
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        document.getElementById('device-type').textContent = isMobile ? 'Mobile Terminal' : 'Desktop Workstation';
+        // 2. Live Clock & Dynamic System Stats
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').textContent = now.toTimeString().split(' ')[0];
 
-        // 3. Terminal Logic
-        const output = document.getElementById('terminal-output');
+            const cpu = Math.floor(Math.random() * 35) + 55;
+            document.getElementById('cpu-val').textContent = cpu + '%';
+            document.getElementById('cpu-bar').style.width = cpu + '%';
+        }, 1500);
+
+        // Live Security Logs Feed
+        const logMessages = [
+            "> Packet intercepted on port 443",
+            "> Tor circuit rebuilt successfully",
+            "> SSH tunnel encrypted [AES-256]",
+            "> Ping sweep blocked from unknown IP",
+            "> Mawliid_Core_v4 running smoothly"
+        ];
+        setInterval(() => {
+            const feed = document.getElementById('live-logs');
+            const msg = logMessages[Math.floor(Math.random() * logMessages.length)];
+            const div = document.createElement('div');
+            div.textContent = msg;
+            feed.appendChild(div);
+            if (feed.children.length > 5) feed.removeChild(feed.firstChild);
+        }, 2500);
+
+        // 3. Interactive Terminal Logic
+        const out = document.getElementById('term-out');
         const input = document.getElementById('cmd-input');
 
-        function appendLine(text, className = '') {
+        function print(msg, cls = '') {
             const div = document.createElement('div');
-            div.className = 'output-line ' + className;
-            div.innerHTML = text;
-            output.appendChild(div);
-            output.scrollTop = output.scrollHeight;
+            div.className = 'line ' + cls;
+            div.innerHTML = msg;
+            out.appendChild(div);
+            out.scrollTop = out.scrollHeight;
         }
 
-        function runCommand(cmd) {
-            const cleanCmd = cmd.trim().toLowerCase();
-            if (!cleanCmd) return;
+        function execCmd(raw) {
+            const cmd = raw.trim().toLowerCase();
+            if (!cmd) return;
+            print(`<span class="prompt">root@mawliid:~$</span> ${cmd}`);
 
-            appendLine(`<span class="prompt">root@lab:~$</span> ${cleanCmd}`);
-
-            switch (cleanCmd) {
+            switch (cmd) {
                 case 'help':
-                    appendLine('Amarrada la heli karo: <span class="cmd-text">scan, hack, decrypt, about, clear</span>');
+                    print('Amarrada: <span class="cyan">scan, hack, trace, decrypt, ddos, about, clear</span>');
                     break;
                 case 'scan':
-                    appendLine('Baadhitaanka shabakadda ayaa socda...', 'warn-text');
-                    setTimeout(() => {
-                        appendLine('[+] Port 80 (HTTP) - OPEN');
-                        appendLine('[+] Port 443 (HTTPS) - SECURE');
-                        appendLine('[+] 3 Aaladood ayaa laga helay shabakadda maxalliga ah.', 'cmd-text');
-                    }, 800);
+                    print('Baadhitaan qoto dheer ayaa ka socda shabakadda...', 'warn');
+                    setTimeout(() => print('[+] 10.0.0.1 - Gateway (Vulnerable)'), 600);
+                    setTimeout(() => print('[+] 10.0.0.45 - Database Server [Port 3306 OPEN]', 'cyan'), 1200);
                     break;
                 case 'hack':
-                    appendLine('Isku dayga jebinta sirta (Simulation)...', 'warn-text');
-                    setTimeout(() => appendLine('>> Bypassing Firewall... [45%]'), 600);
-                    setTimeout(() => appendLine('>> Accessing Mainframe... [89%]'), 1200);
-                    setTimeout(() => appendLine('[GUUL] Nidaamka tijaabada waa la furay!', 'cmd-text'), 1800);
+                    print('Bilowga weerarka tijaabada (Mainframe Exploit)...', 'warn');
+                    setTimeout(() => print('>> Injecting SQL Payload... [30%]'), 500);
+                    setTimeout(() => print('>> Escalating Root Privileges... [78%]'), 1100);
+                    setTimeout(() => print('[GUUL] Waxaad si buuxda ula wareegtay Root Access!', 'cyan'), 1800);
+                    break;
+                case 'trace':
+                    print('Raadinta IP-ga dayax-gacmeedka...', 'warn');
+                    setTimeout(() => print('>> Location Locked: Horn of Africa Node // Ping: 14ms', 'cyan'), 900);
                     break;
                 case 'decrypt':
-                    const hash = Math.random().toString(36).substring(2, 15).toUpperCase();
-                    appendLine(`Furaha la furfuray: <span class="cmd-text">KEY-${hash}-2026</span>`);
+                    const code = Math.random().toString(36).substring(2, 14).toUpperCase();
+                    print(`Sirta waa la furay: <span class="cyan">MS-LAB-${code}-99</span>`);
+                    break;
+                case 'ddos':
+                    print('Dirista xog badan (Simulated Traffic)...', 'err');
+                    setTimeout(() => print('>> 150,000 Requests/sec la diray. Server-ku wuu cuslaaday!', 'warn'), 1000);
                     break;
                 case 'about':
-                    appendLine('<strong>Mawliid Sheikh Cyber Lab</strong> waa goob lagu barto laguna tijaabiyo xirfadaha amniga internet-ka (Cybersecurity).', 'cmd-text');
+                    print('<strong>Mawliid Sheikh Cyber Lab</strong> - Madal casri ah oo loogu talagalay barashada amniga internet-ka iyo tijaabinta nidaamyada.', 'cyan');
                     break;
                 case 'clear':
-                    output.innerHTML = '';
+                    out.innerHTML = '';
                     break;
                 default:
-                    appendLine(`Cilad: Amarka '${cleanCmd}' lama yaqaan. Qor 'help'.`, 'error-text');
+                    print(`Cilad: Amarka '${cmd}' lama yaqaan. Qor 'help'.`, 'err');
             }
         }
 
-        input.addEventListener('keypress', function (e)
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                execCmd(input.value);
+                input.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
