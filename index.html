@@ -1,19 +1,22 @@
 
 
+
 <!DOCTYPE html>
 <html lang="so">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | CYBER COMMAND & ARCADE</title>
+    <title>MAWLIID SHEIKH | CYBER eFOOTBALL & COMMAND LAB</title>
     <style>
         :root {
             --neon-green: #00ff41;
             --neon-cyan: #00f3ff;
             --neon-pink: #ff0055;
+            --efootball-blue: #0066ff;
+            --efootball-yellow: #ffd700;
             --dark-bg: #030504;
-            --panel-bg: rgba(8, 18, 12, 0.9);
-            --glow-green: 0 0 15px rgba(0, 255, 65, 0.6);
+            --panel-bg: rgba(8, 18, 12, 0.92);
+            --glow-green: 0 0 15px rgba(0, 255, 65, 0.5);
             --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.5);
         }
 
@@ -31,22 +34,21 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-            position: relative;
         }
 
         #matrix-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
-            opacity: 0.25;
+            opacity: 0.2;
         }
 
         /* Header with Your Photo Logo */
         header {
             width: 96%;
-            max-width: 1400px;
-            margin: 15px auto 0;
-            padding: 15px 25px;
+            max-width: 1440px;
+            margin: 12px auto 0;
+            padding: 12px 22px;
             background: var(--panel-bg);
             border: 1px solid var(--neon-green);
             box-shadow: var(--glow-green);
@@ -55,19 +57,19 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
+            gap: 12px;
         }
 
         .brand-section {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 15px;
         }
 
         .logo-wrapper {
             position: relative;
-            width: 76px;
-            height: 76px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -80,15 +82,15 @@
             width: 100%; height: 100%;
             border-radius: 50%;
             border: 3px dashed var(--neon-cyan);
-            border-top-color: var(--neon-green);
+            border-top-color: var(--efootball-yellow);
             border-bottom-color: var(--neon-pink);
             animation: spin 6s linear infinite;
             box-shadow: var(--glow-cyan);
         }
 
         .logo-img {
-            width: 64px;
-            height: 64px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
             object-position: top;
@@ -97,548 +99,430 @@
         }
 
         .title-box h1 {
-            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-size: clamp(1.2rem, 2.8vw, 1.9rem);
             letter-spacing: 2px;
             text-shadow: 0 0 10px var(--neon-green);
-            animation: glitchText 3s infinite;
         }
 
         .title-box p {
-            color: var(--neon-cyan);
+            color: var(--efootball-yellow);
             font-size: 0.85rem;
-            margin-top: 4px;
+            font-weight: bold;
         }
 
-        .live-badge {
-            background: rgba(0, 255, 65, 0.15);
-            border: 1px solid var(--neon-green);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .pulse-dot {
-            width: 10px; height: 10px;
-            background: var(--neon-green);
-            border-radius: 50%;
-            animation: pulse 1.2s infinite;
-        }
-
-        /* Dashboard Grid */
-        .dashboard {
+        /* Main Layout: Giant eFootball Arena + Cyber Terminal */
+        .main-grid {
             width: 96%;
-            max-width: 1400px;
-            margin: 20px auto;
+            max-width: 1440px;
+            margin: 15px auto;
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
-            flex-grow: 1;
         }
 
-        @media (min-width: 1024px) {
-            .dashboard {
-                grid-template-columns: 260px 1fr 340px;
+        @media (min-width: 1100px) {
+            .main-grid {
+                grid-template-columns: 1.6fr 1fr;
             }
         }
 
         .panel {
             background: var(--panel-bg);
-            border: 1px solid var(--neon-green);
-            border-radius: 10px;
+            border: 1px solid var(--neon-cyan);
+            border-radius: 12px;
             padding: 16px;
-            box-shadow: var(--glow-green);
+            box-shadow: var(--glow-cyan);
             display: flex;
             flex-direction: column;
         }
 
-        .panel-title {
-            color: var(--neon-cyan);
-            font-size: 1.05rem;
-            border-bottom: 1px solid rgba(0, 243, 255, 0.4);
-            padding-bottom: 8px;
+        /* eFOOTBALL STADIUM SECTION */
+        .stadium-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, #001a4d, #0b1c12, #4d0019);
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--efootball-yellow);
             margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .team-badge {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-        }
-
-        /* Left Tools */
-        .tool-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        @media (min-width: 1024px) {
-            .tool-list { grid-template-columns: 1fr; }
-        }
-
-        .cyber-btn {
-            background: rgba(0, 255, 65, 0.05);
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
-            padding: 11px;
-            border-radius: 6px;
-            cursor: pointer;
+            gap: 10px;
             font-weight: bold;
-            text-align: left;
-            transition: all 0.2s;
+            font-size: 1rem;
         }
 
-        .cyber-btn:hover, .cyber-btn:active {
-            background: var(--neon-green);
-            color: var(--dark-bg);
-            box-shadow: 0 0 12px var(--neon-green);
+        .score-pill {
+            background: #000;
+            color: var(--efootball-yellow);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: 1px solid var(--efootball-yellow);
+            letter-spacing: 2px;
         }
 
-        .cyber-btn.danger {
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
+        .match-timer {
+            color: var(--neon-green);
+            font-weight: bold;
+            font-size: 1rem;
         }
 
-        .cyber-btn.danger:hover {
-            background: var(--neon-pink);
-            color: #fff;
-        }
-
-        /* Center Terminal */
-        .terminal-window {
-            height: 480px;
-            padding: 0;
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background: #062b12;
+            border-radius: 8px;
+            border: 3px solid #fff;
             overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
         }
 
-        .terminal-bar {
-            background: #0b1c12;
-            padding: 10px 15px;
+        #pitch {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+        }
+
+        /* Overlay message (GOAL! / KICK OFF) */
+        #goal-banner {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(0, 0, 0, 0.85);
+            color: var(--efootball-yellow);
+            border: 3px solid var(--efootball-yellow);
+            padding: 15px 40px;
+            font-size: clamp(1.5rem, 4vw, 2.8rem);
+            font-weight: bold;
+            border-radius: 12px;
+            text-shadow: 0 0 15px var(--efootball-yellow);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #goal-banner.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* eFootball Controller Bar (Mobile & Desktop) */
+        .controls-bar {
+            margin-top: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--neon-green);
+            flex-wrap: wrap;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
         }
 
-        .dots { display: flex; gap: 6px; }
-        .dot { width: 11px; height: 11px; border-radius: 50%; }
-        .r { background: #ff5f56; } .y { background: #ffbd2e; } .g { background: #27c93f; }
+        .dpad {
+            display: grid;
+            grid-template-columns: repeat(3, 46px);
+            grid-template-rows: repeat(2, 42px);
+            gap: 5px;
+        }
+
+        .ctrl-btn {
+            background: rgba(0, 102, 255, 0.25);
+            border: 1px solid var(--neon-cyan);
+            color: #fff;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .ctrl-btn:active {
+            background: var(--neon-cyan);
+            color: #000;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .shoot-btn {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff0055, #990033);
+            border: 2px solid #fff;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.7);
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .shoot-btn:active {
+            transform: scale(0.92);
+        }
+
+        .sprint-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00cc44, #006622);
+            border: 2px solid #fff;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .kickoff-btn {
+            background: var(--efootball-yellow);
+            color: #000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Hacker Terminal Side Panel */
+        .terminal-panel {
+            border-color: var(--neon-green);
+            box-shadow: var(--glow-green);
+            height: 100%;
+            min-height: 450px;
+        }
+
+        .panel-title {
+            color: var(--neon-green);
+            border-bottom: 1px solid rgba(0, 255, 65, 0.4);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .quick-cmds {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .mini-btn {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .mini-btn:hover {
+            background: var(--neon-green);
+            color: #000;
+        }
 
         .terminal-body {
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px;
+            border-radius: 6px;
             flex-grow: 1;
             overflow-y: auto;
-            font-size: 0.92rem;
+            font-size: 0.88rem;
             line-height: 1.5;
+            max-height: 330px;
         }
-
-        .line { margin-bottom: 7px; word-wrap: break-word; }
-        .cyan { color: var(--neon-cyan); }
-        .warn { color: #ffcc00; }
-        .err { color: var(--neon-pink); }
 
         .input-bar {
             display: flex;
-            padding: 10px 15px;
+            margin-top: 10px;
             background: #060f09;
-            border-top: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 255, 65, 0.4);
         }
-
-        .prompt { color: var(--neon-cyan); font-weight: bold; margin-right: 8px; }
 
         #cmd-input {
             background: transparent;
             border: none;
             color: var(--neon-green);
             flex-grow: 1;
-            font-size: 1rem;
             outline: none;
-        }
-
-        /* Right Panel: MINI CYBER GAME */
-        .game-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .score-board {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            background: rgba(0,0,0,0.6);
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: 1px solid rgba(0, 243, 255, 0.3);
-        }
-
-        #snake-canvas {
-            background: #020804;
-            border: 2px solid var(--neon-cyan);
-            box-shadow: var(--glow-cyan);
-            border-radius: 6px;
-            max-width: 100%;
-        }
-
-        /* Mobile D-Pad Controls */
-        .d-pad {
-            display: grid;
-            grid-template-columns: repeat(3, 50px);
-            grid-template-rows: repeat(2, 45px);
-            gap: 6px;
-            margin-top: 12px;
-            justify-content: center;
-        }
-
-        .pad-btn {
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            user-select: none;
-        }
-
-        .pad-btn:active {
-            background: var(--neon-cyan);
-            color: #000;
-        }
-
-        .start-game-btn {
-            margin-top: 12px;
-            width: 100%;
-            padding: 10px;
-            background: var(--neon-green);
-            color: #000;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: var(--glow-green);
-        }
-
-        .start-game-btn:hover {
-            background: var(--neon-cyan);
+            margin-left: 8px;
         }
 
         footer {
             text-align: center;
-            padding: 15px;
+            padding: 12px;
             font-size: 0.85rem;
             color: rgba(0, 255, 65, 0.7);
-            border-top: 1px solid rgba(0, 255, 65, 0.2);
-            margin-top: 10px;
+            margin-top: auto;
         }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        @keyframes glitchText {
-            0%, 95%, 100% { text-shadow: 0 0 10px var(--neon-green); transform: skew(0deg); }
-            96% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-cyan); transform: skew(-4deg); }
-            98% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-cyan); transform: skew(4deg); }
-        }
     </style>
 </head>
 <body>
 
     <canvas id="matrix-bg"></canvas>
 
-    <!-- Header with Your Photo Logo -->
+    <!-- Header -->
     <header>
         <div class="brand-section">
             <div class="logo-wrapper">
                 <div class="logo-ring"></div>
-                <!-- Sawirkaaga logo.jpg ayuu halkan ka soo qaadanayaa -->
                 <img src="logo.jpg" onerror="this.src='https://github.com/Mawliidsheikh.png'" alt="Mawliid Sheikh" class="logo-img">
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH CYBER LAB</h1>
-                <p>// CYBER COMMAND CENTER & HACKER ARCADE v5.0</p>
+                <p>⚡ CYBER eFOOTBALL PRO 2026 & HACKER TERMINAL</p>
             </div>
         </div>
-
-        <div class="live-badge">
-            <span class="pulse-dot"></span>
-            <span>ADMIN: <strong>MAWLIID SHEIKH</strong></span>
-        </div>
+        <button class="kickoff-btn" onclick="resetMatch()">⚽ KICK OFF / CIYAAR CUSUB</button>
     </header>
 
-    <!-- Main Dashboard -->
-    <main class="dashboard">
-        
-        <!-- Left Panel: Hacker Commands -->
-        <aside class="panel">
-            <div class="panel-title">
-                <span>[ CYBER TOOLS ]</span>
-                <span>⚡</span>
-            </div>
-            <div class="tool-list">
-                <button class="cyber-btn" onclick="execCmd('scan')">[01] Port Scan</button>
-                <button class="cyber-btn" onclick="execCmd('hack')">[02] Exploit Server</button>
-                <button class="cyber-btn" onclick="execCmd('trace')">[03] Trace IP</button>
-                <button class="cyber-btn" onclick="execCmd('decrypt')">[04] Decrypt Key</button>
-                <button class="cyber-btn" onclick="execCmd('about')">[05] About Owner</button>
-                <button class="cyber-btn danger" onclick="execCmd('clear')">[XX] Clear Screen</button>
-            </div>
-        </aside>
+    <!-- Main Content -->
+    <main class="main-grid">
 
-        <!-- Center Panel: Interactive Terminal -->
-        <section class="panel terminal-window">
-            <div class="terminal-bar">
-                <div class="dots">
-                    <span class="dot r"></span>
-                    <span class="dot y"></span>
-                    <span class="dot g"></span>
+        <!-- GIANT eFOOTBALL ARENA -->
+        <section class="panel">
+            <div class="stadium-header">
+                <div class="team-badge" style="color: #4da6ff;">
+                    <span>🔵 MAWLIID FC</span>
                 </div>
-                <span style="font-size: 0.85rem; color: var(--neon-cyan);">root@mawliid-lab:~#</span>
-                <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
+                <div class="score-pill">
+                    <span id="p-score">0</span> - <span id="ai-score">0</span>
+                </div>
+                <div class="team-badge" style="color: #ff4d6d;">
+                    <span>CYBER AI 🔴</span>
+                </div>
+                <div class="match-timer">⏱ <span id="match-time">00</span>'</div>
+            </div>
+
+            <div class="canvas-wrapper">
+                <canvas id="pitch" width="800" height="460"></canvas>
+                <div id="goal-banner">GOOOAAALLL! ⚽🔥</div>
+            </div>
+
+            <!-- Mobile & PC Controls -->
+            <div class="controls-bar">
+                <div class="dpad">
+                    <div></div>
+                    <button class="ctrl-btn" onmousedown="setKey('ArrowUp', true)" onmouseup="setKey('ArrowUp', false)" ontouchstart="setKey('ArrowUp', true)" ontouchend="setKey('ArrowUp', false)">▲</button>
+                    <div></div>
+                    <button class="ctrl-btn" onmousedown="setKey('ArrowLeft', true)" onmouseup="setKey('ArrowLeft', false)" ontouchstart="setKey('ArrowLeft', true)" ontouchend="setKey('ArrowLeft', false)">◀</button>
+                    <button class="ctrl-btn" onmousedown="setKey('ArrowDown', true)" onmouseup="setKey('ArrowDown', false)" ontouchstart="setKey('ArrowDown', true)" ontouchend="setKey('ArrowDown', false)">▼</button>
+                    <button class="ctrl-btn" onmousedown="setKey('ArrowRight', true)" onmouseup="setKey('ArrowRight', false)" ontouchstart="setKey('ArrowRight', true)" ontouchend="setKey('ArrowRight', false)">▶</button>
+                </div>
+
+                <div style="font-size: 0.8rem; color: #aaa; text-align: center;">
+                    <strong>PC:</strong> Fallaaraha + [SPACE] Laad<br>
+                    <strong>Mobile:</strong> Isticmaal badhammada
+                </div>
+
+                <div class="action-btns">
+                    <button class="sprint-btn" onmousedown="setKey('Shift', true)" onmouseup="setKey('Shift', false)" ontouchstart="setKey('Shift', true)" ontouchend="setKey('Shift', false)">OROD<br>(SPRINT)</button>
+                    <button class="shoot-btn" onclick="shootBall()">LAAD<br>(SHOOT)</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CYBER HACKER TERMINAL -->
+        <aside class="panel terminal-panel">
+            <div class="panel-title">
+                <span>[ HACKER TERMINAL ]</span>
+                <span>root@mawliid</span>
+            </div>
+
+            <div class="quick-cmds">
+                <button class="mini-btn" onclick="execCmd('scan')">Scan Net</button>
+                <button class="mini-btn" onclick="execCmd('hack')">Hack Server</button>
+                <button class="mini-btn" onclick="execCmd('decrypt')">Decrypt</button>
+                <button class="mini-btn" onclick="execCmd('clear')">Clear</button>
             </div>
 
             <div class="terminal-body" id="term-out">
-                <div class="line cyan">=== MAWLIID SHEIKH CYBER SYSTEM v5.0 ===</div>
-                <div class="line">Ku soo dhawaaw xarunta amniga iyo madadaalada!</div>
-                <div class="line">Qor <span class="warn">'help'</span> ama ciyaar game-ka dhanka midig yaalla.</div>
+                <div style="color: var(--neon-cyan);">=== MAWLIID CYBER SYSTEM ONLINE ===</div>
+                <div>Ku soo dhawaaw garoonka <strong>Cyber eFootball</strong>!</div>
+                <div>Laad kubbadda oo goolal ka dhali Cyber AI.</div>
                 <br>
             </div>
 
             <div class="input-bar">
-                <span class="prompt">root@mawliid:~$</span>
-                <input type="text" id="cmd-input" placeholder="Qor amar (tusaale: hack)..." autocomplete="off">
+                <span style="color: var(--neon-cyan); font-weight: bold;">~$</span>
+                <input type="text" id="cmd-input" placeholder="Qor amar (help)..." autocomplete="off">
             </div>
-        </section>
-
-        <!-- Right Panel: CYBER SNAKE GAME -->
-        <aside class="panel game-box">
-            <div class="panel-title" style="width: 100%;">
-                <span>[ CYBER SNAKE GAME ]</span>
-                <span>🎮</span>
-            </div>
-
-            <div class="score-board">
-                <span>DATA: <strong id="score" class="cyan">0</strong></span>
-                <span>BEST: <strong id="high-score" style="color: var(--neon-pink);">0</strong></span>
-            </div>
-
-            <canvas id="snake-canvas" width="280" height="240"></canvas>
-
-            <!-- Touch Controls for Mobile & Mouse -->
-            <div class="d-pad">
-                <div></div>
-                <button class="pad-btn" onclick="changeDir('UP')">▲</button>
-                <div></div>
-                <button class="pad-btn" onclick="changeDir('LEFT')">◀</button>
-                <button class="pad-btn" onclick="changeDir('DOWN')">▼</button>
-                <button class="pad-btn" onclick="changeDir('RIGHT')">▶</button>
-            </div>
-
-            <button class="start-game-btn" onclick="startGame()">▶ BILOW / CUSBOONAYSII GAME-KA</button>
         </aside>
 
     </main>
 
     <footer>
-        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | Designed & Developed by Mawliid Sheikh
+        &copy; 2026 <strong>Mawliid Sheikh Cyber Lab</strong> | Cyber eFootball Pro Edition
     </footer>
 
     <script>
         // 1. Matrix Background
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize);
-        resize();
-
-        const letters = '01MAWLIIDSHEIKH@#$%&*987654321';
-        const fontSize = 14;
-        let drops = Array(Math.floor(canvas.width / fontSize)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(3, 5, 4, 0.06)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00ff41';
-            ctx.font = fontSize + 'px monospace';
+        const mCanvas = document.getElementById('matrix-bg');
+        const mCtx = mCanvas.getContext('2d');
+        function resizeM() { mCanvas.width = window.innerWidth; mCanvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeM);
+        resizeM();
+        const chars = '01MAWLIIDEFOOTBALL2026@#$%';
+        let drops = Array(Math.floor(mCanvas.width / 15)).fill(1);
+        setInterval(() => {
+            mCtx.fillStyle = 'rgba(3, 5, 4, 0.08)';
+            mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+            mCtx.fillStyle = '#00ff41';
+            mCtx.font = '14px monospace';
             for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                mCtx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 15, drops[i] * 15);
+                if (drops[i] * 15 > mCanvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
-        }
-        setInterval(drawMatrix, 35);
+        }, 40);
 
-        // 2. Clock
-        setInterval(() => {
-            document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0];
-        }, 1000);
-
-        // 3. Terminal Logic
+        // 2. Terminal Logic
         const out = document.getElementById('term-out');
         const input = document.getElementById('cmd-input');
-
-        function print(msg, cls = '') {
-            const div = document.createElement('div');
-            div.className = 'line ' + cls;
-            div.innerHTML = msg;
-            out.appendChild(div);
+        function print(msg, color = '#00ff41') {
+            const d = document.createElement('div');
+            d.style.color = color;
+            d.style.marginBottom = '6px';
+            d.innerHTML = msg;
+            out.appendChild(d);
             out.scrollTop = out.scrollHeight;
         }
-
         function execCmd(raw) {
-            const cmd = raw.trim().toLowerCase();
-            if (!cmd) return;
-            print(`<span class="prompt">root@mawliid:~$</span> ${cmd}`);
-
-            switch (cmd) {
-                case 'help':
-                    print('Amarrada: <span class="cyan">scan, hack, trace, decrypt, about, clear</span>');
-                    break;
-                case 'scan':
-                    print('Baadhitaanka shabakadda ayaa socda...', 'warn');
-                    setTimeout(() => print('[+] Port 80 & 443: ACTIVE // Firewall Secure', 'cyan'), 700);
-                    break;
-                case 'hack':
-                    print('Jebinta sirta tijaabada...', 'warn');
-                    setTimeout(() => print('>> Accessing Mainframe... [100%] GUUL!', 'cyan'), 1000);
-                    break;
-                case 'trace':
-                    print('Raadinta IP-ga: <span class="cyan">102.68.14.99 (East Africa Node)</span>');
-                    break;
-                case 'decrypt':
-                    const code = Math.random().toString(36).substring(2, 12).toUpperCase();
-                    print(`Furaha la furay: <span class="cyan">MS-${code}-2026</span>`);
-                    break;
-                case 'about':
-                    print('<strong>Mawliid Sheikh</strong> - Aasaasaha Mawliid Cyber Lab.', 'cyan');
-                    break;
-                case 'clear':
-                    out.innerHTML = '';
-                    break;
-                default:
-                    print(`Cilad: Amarka '${cmd}' lama yaqaan.`, 'err');
-            }
+            const c = raw.trim().toLowerCase();
+            if (!c) return;
+            print(`<span style="color:#00f3ff">root@mawliid:~$</span> ${c}`);
+            if (c === 'help') print('Amarrada: scan, hack, decrypt, clear', '#00f3ff');
+            else if (c === 'scan') print('[+] Stadium Wi-Fi & Servers: SECURE (100%)', '#ffd700');
+            else if (c === 'hack') print('[GUUL] Waxaad jabsatay xogta kooxda kasoo horjeedda!', '#00f3ff');
+            else if (c === 'decrypt') print('Key: EFOOTBALL-MAWLIID-2026-PRO', '#ffd700');
+            else if (c === 'clear') out.innerHTML = '';
+            else print('Amarkaas lama yaqaan. Qor help.', '#ff0055');
         }
-
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') { execCmd(input.value); input.value = ''; }
-        });
-
-        // 4. CYBER SNAKE GAME LOGIC
-        const gCanvas = document.getElementById('snake-canvas');
-        const gCtx = gCanvas.getContext('2d');
-        const box = 14;
-        let snake = [];
-        let food = {};
-        let dir = 'RIGHT';
-        let score = 0;
-        let highScore = localStorage.getItem('cyberSnakeBest') || 0;
-        document.getElementById('high-score').textContent = highScore;
-        let gameLoop = null;
-
-        function spawnFood() {
-            food = {
-                x: Math.floor(Math.random() * (gCanvas.width / box)) * box,
-                y: Math.floor(Math.random() * (gCanvas.height / box)) * box
-            };
-        }
-
-        function changeDir(newDir) {
-            if (newDir === 'LEFT' && dir !== 'RIGHT') dir = 'LEFT';
-            if (newDir === 'UP' && dir !== 'DOWN') dir = 'UP';
-            if (newDir === 'RIGHT' && dir !== 'LEFT') dir = 'RIGHT';
-            if (newDir === 'DOWN' && dir !== 'UP') dir = 'DOWN';
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                e.preventDefault();
-                if (e.key === 'ArrowLeft') changeDir('LEFT');
-                if (e.key === 'ArrowUp') changeDir('UP');
-                if (e.key === 'ArrowRight') changeDir('RIGHT');
-                if (e.key === 'ArrowDown') changeDir('DOWN');
-            }
-        });
-
-        function startGame() {
-            snake = [{ x: 5 * box, y: 5 * box }];
-            dir = 'RIGHT';
-            score = 0;
-            document.getElementById('score').textContent = score;
-            spawnFood();
-            if (gameLoop) clearInterval(gameLoop);
-            gameLoop = setInterval(drawGame, 130);
-        }
-
-        function drawGame() {
-            gCtx.fillStyle = '#020804';
-            gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
-
-            // Draw Food (Neon Pink Data Packet)
-            gCtx.fillStyle = '#ff0055';
-            gCtx.shadowBlur = 10;
-            gCtx.shadowColor = '#ff0055';
-            gCtx.fillRect(food.x, food.y, box - 2, box - 2);
-
-            // Draw Snake (Neon Green)
-            gCtx.shadowColor = '#00ff41';
-            for (let i = 0; i < snake.length; i++) {
-                gCtx.fillStyle = i === 0 ? '#00f3ff' : '#00ff41';
-                gCtx.fillRect(snake[i].x, snake[i].y, box - 2, box - 2);
-            }
-            gCtx.shadowBlur = 0;
-
-            let headX = snake[0].x;
-            let headY = snake[0].y;
-
-            if (dir === 'LEFT') headX -= box;
-            if (dir === 'UP') headY -= box;
-            if (dir === 'RIGHT') headX += box;
-            if (dir === 'DOWN') headY += box;
-
-            // Wrap around walls for smoother play
-            if (headX < 0) headX = gCanvas.width - box;
-            if (headX >= gCanvas.width) headX = 0;
-            if (headY < 0) headY = gCanvas.height - box;
-            if (headY >= gCanvas.height) headY = 0;
-
-            // Check self collision
-            for (let i = 0; i < snake.length; i++) {
-                if (headX === snake[i].x && headY === snake[i].y) {
-                    clearInterval(gameLoop);
-                    gCtx.fillStyle = '#ff0055';
-                    gCtx.font = 'bold 18px Courier New';
-                    gCtx.fillText('SYSTEM CRASH! GAME OVER', 15, gCanvas.height / 2);
-                    return;
-                }
-            }
-
-            // Eat Food
-            if (headX === food.x && headY === food.y) {
-                score += 10;
-                document.getElementById('score').textContent = score;
-                if (score > highScore) {
-                    highScore = score;
-                    localStorage.setItem('cyberSnakeBest', highScore);
-                    document.getElementById('high-score').textContent = highScore;
-                }
-                spawnFood();
-            } else {
-                snake.pop();
-            }
-
-            snake.unshift({ x: headX, y: headY });
-        }
-
-        // Draw initial screen
-        gCtx.fillStyle = '#00f3ff';
-        gCtx.font = '14px Courier New';
-        gCtx.fillText('Guji "BILOW GAME-KA"', 55, 120);
-    </script>
-</body>
-</html>
+        input.addEventListener('keypress', e => {
