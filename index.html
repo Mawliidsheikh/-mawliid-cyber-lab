@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MAWLIID SHEIKH | CYBER LAB & eFOOTBALL</title>
+    <title>MAWLIID SHEIKH | CYBER COMMAND & eFOOTBALL PRO</title>
     <style>
         :root {
             --neon-green: #00ff41;
             --neon-cyan: #00f3ff;
             --neon-pink: #ff0055;
             --ef-yellow: #ffd700;
-            --ef-blue: #0066ff;
-            --dark-bg: #030504;
-            --panel-bg: rgba(8, 18, 12, 0.9);
-            --glow-green: 0 0 15px rgba(0, 255, 65, 0.5);
-            --glow-cyan: 0 0 15px rgba(0, 243, 255, 0.5);
+            --ef-blue: #0055ff;
+            --dark-bg: #020503;
+            --panel-bg: rgba(6, 16, 10, 0.92);
+            --glow-green: 0 0 18px rgba(0, 255, 65, 0.6);
+            --glow-cyan: 0 0 18px rgba(0, 243, 255, 0.6);
         }
 
         * {
@@ -31,42 +31,55 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            position: relative;
         }
 
+        /* CRT Scanline & Matrix Effect */
         #matrix-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
-            opacity: 0.25;
+            opacity: 0.28;
         }
 
-        /* MAIN WEBSITE HEADER */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
+        }
+
+        /* HEADER */
         header {
             width: 96%;
-            max-width: 1400px;
-            margin: 15px auto 0;
-            padding: 15px 25px;
+            max-width: 1420px;
+            margin: 18px auto 0;
+            padding: 16px 26px;
             background: var(--panel-bg);
             border: 1px solid var(--neon-green);
             box-shadow: var(--glow-green);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             gap: 15px;
+            animation: slideDown 0.8s ease-out;
         }
 
         .brand-section {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
         }
 
         .logo-wrapper {
             position: relative;
-            width: 72px;
-            height: 72px;
+            width: 74px;
+            height: 74px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -86,8 +99,8 @@
         }
 
         .logo-img {
-            width: 60px;
-            height: 60px;
+            width: 62px;
+            height: 62px;
             border-radius: 50%;
             object-fit: cover;
             object-position: top;
@@ -96,21 +109,21 @@
         }
 
         .title-box h1 {
-            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-size: clamp(1.3rem, 3vw, 2.2rem);
             letter-spacing: 2px;
             text-shadow: 0 0 10px var(--neon-green);
         }
 
         .title-box p {
             color: var(--neon-cyan);
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             margin-top: 4px;
         }
 
-        .status-pill {
-            background: rgba(0, 255, 65, 0.12);
+        .live-badge {
+            background: rgba(0, 255, 65, 0.15);
             border: 1px solid var(--neon-green);
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.85rem;
             display: flex;
@@ -125,10 +138,10 @@
             animation: pulse 1.2s infinite;
         }
 
-        /* Dashboard Grid */
+        /* DASHBOARD GRID */
         .dashboard {
             width: 96%;
-            max-width: 1400px;
+            max-width: 1420px;
             margin: 20px auto;
             display: grid;
             grid-template-columns: 1fr;
@@ -136,20 +149,25 @@
             flex-grow: 1;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1024px) {
             .dashboard {
-                grid-template-columns: 270px 1fr 310px;
+                grid-template-columns: 280px 1fr 320px;
             }
         }
 
         .panel {
             background: var(--panel-bg);
             border: 1px solid var(--neon-green);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 18px;
             box-shadow: var(--glow-green);
             display: flex;
             flex-direction: column;
+            transition: border-color 0.3s;
+        }
+
+        .panel:hover {
+            border-color: var(--neon-cyan);
         }
 
         .panel-title {
@@ -160,6 +178,7 @@
             margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
         .tool-list {
@@ -168,7 +187,7 @@
             gap: 10px;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1024px) {
             .tool-list { grid-template-columns: 1fr; }
         }
 
@@ -188,20 +207,22 @@
             background: var(--neon-green);
             color: #000;
             box-shadow: 0 0 12px var(--neon-green);
+            transform: translateX(4px);
         }
 
-        /* Terminal */
+        /* TERMINAL WINDOW */
         .terminal-window {
-            height: 490px;
+            height: 520px;
             padding: 0;
             overflow: hidden;
         }
 
         .terminal-bar {
             background: #0b1c12;
-            padding: 12px 16px;
+            padding: 12px 18px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid var(--neon-green);
         }
 
@@ -210,16 +231,16 @@
         .r { background: #ff5f56; } .y { background: #ffbd2e; } .g { background: #27c93f; }
 
         .terminal-body {
-            padding: 16px;
+            padding: 18px;
             flex-grow: 1;
             overflow-y: auto;
-            font-size: 0.94rem;
+            font-size: 0.95rem;
             line-height: 1.6;
         }
 
         .input-bar {
             display: flex;
-            padding: 12px 16px;
+            padding: 12px 18px;
             background: #060f09;
             border-top: 1px solid rgba(0, 255, 65, 0.3);
         }
@@ -234,15 +255,16 @@
             margin-left: 8px;
         }
 
-        /* Radar */
+        /* RADAR & STATS */
         .radar-container {
-            width: 170px; height: 170px;
+            width: 180px; height: 180px;
             margin: 10px auto 20px;
             border-radius: 50%;
             border: 2px solid var(--neon-green);
             position: relative;
-            background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,0,0,0.8) 70%);
+            background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,0,0,0.85) 70%);
             overflow: hidden;
+            box-shadow: var(--glow-green);
         }
 
         .radar-sweep {
@@ -257,21 +279,22 @@
         .log-feed {
             margin-top: auto;
             background: rgba(0,0,0,0.6);
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
             font-size: 0.8rem;
             border-left: 3px solid var(--neon-pink);
-            height: 120px;
+            height: 130px;
             overflow: hidden;
         }
 
         footer {
             text-align: center;
-            padding: 15px;
+            padding: 16px;
             font-size: 0.85rem;
             color: rgba(0, 255, 65, 0.7);
             margin-top: auto;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
         }
 
         /* ================= KONAMI eFOOTBALL FLOATING BUTTON ================= */
@@ -287,7 +310,7 @@
             font-weight: 900;
             font-size: 1.05rem;
             cursor: pointer;
-            z-index: 999999;
+            z-index: 99999;
             box-shadow: 0 0 35px rgba(0, 85, 255, 0.9);
             display: flex;
             align-items: center;
@@ -324,7 +347,7 @@
 
         .modal-box {
             width: 100%;
-            max-width: 1050px;
+            max-width: 1080px;
             background: #040d1a;
             border: 2px solid var(--ef-yellow);
             border-radius: 14px;
@@ -412,7 +435,7 @@
             width: 100%;
             height: auto;
             display: block;
-            max-width: 720px;
+            max-width: 740px;
         }
 
         .online-sidebar {
@@ -475,16 +498,16 @@
 
         .dpad-group {
             display: grid;
-            grid-template-columns: repeat(3, 42px);
-            grid-template-rows: repeat(2, 38px);
+            grid-template-columns: repeat(3, 44px);
+            grid-template-rows: repeat(2, 40px);
             gap: 4px;
         }
 
         .d-btn {
-            background: rgba(0, 102, 255, 0.3);
+            background: rgba(0, 102, 255, 0.35);
             border: 1px solid var(--neon-cyan);
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             border-radius: 6px;
             cursor: pointer;
             touch-action: manipulation;
@@ -493,7 +516,7 @@
 
         .action-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
 
@@ -510,11 +533,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.8);
         }
         .konami-action-btn:active { transform: scale(0.9); }
-        .btn-pass { width: 56px; height: 56px; background: radial-gradient(circle, #0088ff, #0044aa); font-size: 0.75rem; }
-        .btn-shoot { width: 68px; height: 68px; background: radial-gradient(circle, #ff0055, #990022); font-size: 0.85rem; }
+        .btn-pass { width: 60px; height: 60px; background: radial-gradient(circle, #0088ff, #0044aa); font-size: 0.78rem; }
+        .btn-shoot { width: 72px; height: 72px; background: radial-gradient(circle, #ff0055, #990022); font-size: 0.88rem; }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounceFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
@@ -534,10 +558,10 @@
             </div>
             <div class="title-box">
                 <h1>MAWLIID SHEIKH CYBER LAB</h1>
-                <p>// CYBERSECURITY COMMAND CENTER</p>
+                <p>// CYBERSECURITY COMMAND CENTER & ARCADE v8.0</p>
             </div>
         </div>
-        <div class="status-pill">
+        <div class="live-badge">
             <span class="pulse-dot"></span>
             <span>SYSTEM: <strong>ONLINE</strong></span>
         </div>
@@ -564,8 +588,8 @@
                 <span id="clock" style="font-size: 0.85rem;">00:00:00</span>
             </div>
             <div class="terminal-body" id="term-out">
-                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v7.0 ===</div>
-                <div>Guji badhanka Konami eFootball ee geeska hoose si aad u furto ciyaarta!</div>
+                <div style="color: var(--neon-cyan);">=== MAWLIID SHEIKH CYBER LAB v8.0 ===</div>
+                <div>Nidaamku wuu wada shaqaynayaa. Guji badhanka **KONAMI eFOOTBALL PVP** ee geeska hoose si aad u ciyaarto!</div>
                 <br>
             </div>
             <div class="input-bar">
@@ -579,7 +603,7 @@
             <div class="radar-container"><div class="radar-sweep"></div></div>
             <div class="log-feed" id="live-logs">
                 <div>> Firewall operational...</div>
-                <div>> eFootball Match Engine Ready...</div>
+                <div>> Konami eFootball Engine Ready...</div>
             </div>
         </aside>
     </main>
@@ -618,7 +642,7 @@
 
             <div class="arena-layout">
                 <div class="pitch-container">
-                    <canvas id="konamiPitch" width="720" height="360"></canvas>
+                    <canvas id="konamiPitch" width="740" height="370"></canvas>
                 </div>
 
                 <div class="online-sidebar">
@@ -641,6 +665,7 @@
                 </div>
             </div>
 
+            <!-- Konami Touch Controls (Mobile & PC) -->
             <div class="controls-strip">
                 <div class="dpad-group">
                     <div></div>
@@ -652,7 +677,7 @@
                 </div>
 
                 <div style="font-size: 0.72rem; color: #aaa; text-align: center;">
-                    <strong>PC:</strong> Fallaaraha + [SPACE] Laad<br><strong>Mobile:</strong> Isticmaal badhammada hoose
+                    <strong>PC:</strong> Fallaaraha + [SPACE] Laad<br><strong>Mobile:</strong> Isticmaal badhammada
                 </div>
 
                 <div class="action-group">
@@ -673,7 +698,7 @@
         const chars = '01MAWLIIDSHEIKH2026@#$%';
         let drops = Array(Math.floor(mCanvas.width / 15)).fill(1);
         setInterval(() => {
-            mCtx.fillStyle = 'rgba(3, 5, 4, 0.08)';
+            mCtx.fillStyle = 'rgba(2, 5, 3, 0.08)';
             mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
             mCtx.fillStyle = '#00ff41';
             mCtx.font = '14px monospace';
@@ -684,7 +709,7 @@
             }
         }, 40);
 
-        // Terminal Clock & Cmds
+        // Terminal Clock & Commands
         setInterval(() => { document.getElementById('clock').textContent = new Date().toTimeString().split(' ')[0]; }, 1000);
         const out = document.getElementById('term-out');
         const input = document.getElementById('cmd-input');
@@ -697,14 +722,14 @@
             const c = raw.trim().toLowerCase();
             if (!c) return;
             print(`<span style="color:#00f3ff">root@mawliid:~$</span> ${c}`);
-            if (c === 'help') print('Amarrada: scan, hack, trace, decrypt, clear', '#00f3ff');
-            else if (c === 'scan') print('[+] Ports 80, 443: SECURE', '#00f3ff');
+            if (c === 'help') print('Amarrada la heli karo: scan, hack, trace, decrypt, clear', '#00f3ff');
+            else if (c === 'scan') print('[+] Network Ports 80, 443: SECURE', '#00f3ff');
             else if (c === 'hack') print('[GUUL] Mainframe Simulation active!', '#00f3ff');
             else if (c === 'trace') print('Node: East Africa // Ping: 12ms', '#00f3ff');
-            else if (c === 'decrypt') print('Key: MS-CYBER-2026', '#00f3ff');
-            else if (c === 'about') print('Mawliid Sheikh Cyber Lab - Security Training Hub.', '#00f3ff');
+            else if (c === 'decrypt') print('Key: MS-CYBER-2026-PRO', '#00f3ff');
+            else if (c === 'about') print('Mawliid Sheikh Cyber Lab - Security Training & Simulation Hub.', '#00f3ff');
             else if (c === 'clear') out.innerHTML = '';
-            else print('Amarkaas lama yaqaan.', '#ff0055');
+            else print(`Cilad: Amarka '${c}' lama yaqaan.`, '#ff0055');
         }
         input.addEventListener('keypress', e => { if (e.key === 'Enter') { execCmd(input.value); input.value = ''; } });
 
@@ -762,29 +787,27 @@
             }, 1000);
         }
 
-        // Konami eFootball Engine (Konami Style Players: 3 vs 3 with Passing/Shooting)
+        // Konami eFootball Match Engine
         const canvas = document.getElementById('konamiPitch');
         const ctx = canvas.getContext('2d');
-        const W = 720, H = 360;
-        const GOAL_T = 120, GOAL_B = 240;
+        const W = 740, H = 370;
+        const GOAL_T = 125, GOAL_B = 245;
 
         let sHome = 0, sAway = 0;
         const keys = {};
 
         const ball = { x: W / 2, y: H / 2, r: 8, vx: 0, vy: 0, friction: 0.975 };
 
-        // Home Team (Blue)
         const homeSquad = [
-            { x: 50, y: H / 2, r: 15, speed: 4.0, color: '#0055ff', num: '1' },
-            { x: 220, y: 110, r: 16, speed: 4.6, color: '#0055ff', num: '8' },
-            { x: 260, y: 250, r: 16, speed: 4.6, color: '#0055ff', num: '10' }
+            { x: 45, y: H / 2, r: 15, speed: 4.0, color: '#0055ff', num: '1' },
+            { x: 230, y: 110, r: 16, speed: 4.6, color: '#0055ff', num: '8' },
+            { x: 270, y: 260, r: 16, speed: 4.6, color: '#0055ff', num: '10' }
         ];
 
-        // Away Team (Red)
         const awaySquad = [
-            { x: W - 50, y: H / 2, r: 15, speed: 4.0, color: '#ff0055', num: '1' },
-            { x: W - 220, y: 110, r: 16, speed: 4.5, color: '#ff0055', num: '7' },
-            { x: W - 260, y: 250, r: 16, speed: 4.5, color: '#ff0055', num: '9' }
+            { x: W - 45, y: H / 2, r: 15, speed: 4.0, color: '#ff0055', num: '1' },
+            { x: W - 230, y: 110, r: 16, speed: 4.5, color: '#ff0055', num: '7' },
+            { x: W - 270, y: 260, r: 16, speed: 4.5, color: '#ff0055', num: '9' }
         ];
 
         window.addEventListener('keydown', e => {
@@ -819,16 +842,15 @@
 
         function resetBall() {
             ball.x = W / 2; ball.y = H / 2; ball.vx = 0; ball.vy = 0;
-            homeSquad[1].x = 220; homeSquad[1].y = 110;
-            homeSquad[2].x = 260; homeSquad[2].y = 250;
-            awaySquad[1].x = W - 220; awaySquad[1].y = 110;
-            awaySquad[2].x = W - 260; awaySquad[2].y = 250;
+            homeSquad[1].x = 230; homeSquad[1].y = 110;
+            homeSquad[2].x = 270; homeSquad[2].y = 260;
+            awaySquad[1].x = W - 230; awaySquad[1].y = 110;
+            awaySquad[2].x = W - 270; awaySquad[2].y = 260;
         }
 
         function updateGame() {
             if (!isGameOpen) return;
 
-            // Controlled player movement
             const active = getActivePlayer();
             const spd = active.speed;
             if (keys['ArrowUp']) active.y -= spd;
@@ -839,7 +861,6 @@
             active.x = Math.max(20, Math.min(W - 20, active.x));
             active.y = Math.max(20, Math.min(H - 20, active.y));
 
-            // AI movement for non-active players
             homeSquad.forEach((p, idx) => {
                 if (p === active) return;
                 if (idx === 0) p.y += (Math.max(GOAL_T + 12, Math.min(GOAL_B - 12, ball.y)) - p.y) * 0.08;
@@ -851,13 +872,11 @@
                 else { p.x += (ball.x - p.x) * 0.035; p.y += (ball.y - p.y) * 0.035; }
             });
 
-            // Ball physics
             ball.x += ball.vx;
             ball.y += ball.vy;
             ball.vx *= ball.friction;
             ball.vy *= ball.friction;
 
-            // Goals
             if (ball.x + ball.r >= W - 12 && ball.y > GOAL_T && ball.y < GOAL_B) {
                 sHome++;
                 document.getElementById('s-home').textContent = sHome;
@@ -870,13 +889,11 @@
                 resetBall();
             }
 
-            // Walls
             if (ball.y - ball.r < 12) { ball.y = 12 + ball.r; ball.vy *= -0.8; }
             if (ball.y + ball.r > H - 12) { ball.y = H - 12 - ball.r; ball.vy *= -0.8; }
             if (ball.x - ball.r < 12) { ball.x = 12 + ball.r; ball.vx *= -0.8; }
             if (ball.x + ball.r > W - 12) { ball.x = W - 12 - ball.r; ball.vx *= -0.8; }
 
-            // Collisions
             [...homeSquad, ...awaySquad].forEach(p => {
                 const dx = ball.x - p.x;
                 const dy = ball.y - p.y;
@@ -889,7 +906,6 @@
         }
 
         function drawGame() {
-            // Grass
             for (let i = 0; i < 10; i++) {
                 ctx.fillStyle = i % 2 === 0 ? '#0b4f1e' : '#0e5e24';
                 ctx.fillRect(i * (W / 10), 0, W / 10, H);
@@ -902,7 +918,6 @@
             ctx.fillStyle = 'rgba(0, 85, 255, 0.4)'; ctx.fillRect(0, GOAL_T, 12, GOAL_B - GOAL_T);
             ctx.fillStyle = 'rgba(255, 0, 85, 0.4)'; ctx.fillRect(W - 12, GOAL_T, 12, GOAL_B - GOAL_T);
 
-            // Draw Squads
             homeSquad.forEach(p => {
                 const isC = isHomeTeam && p === getActivePlayer();
                 if (isC) {
@@ -927,7 +942,6 @@
                 ctx.fillText(p.num, p.x, p.y + 4);
             });
 
-            // Ball
             ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
             ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#000'; ctx.stroke();
         }
