@@ -1,102 +1,371 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="so">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Neon Cyber Lab — Simulator</title>
-<style>
-:root{--g:#00ff18;--bg:#020602;--dim:#087b10;--panel:rgba(0,0,0,.88)}
-*{box-sizing:border-box}body{margin:0;background:#000;color:var(--g);font:16px "Courier New",monospace;overflow:hidden}
-.topbar{height:58px;background:linear-gradient(90deg,#00ff18,#aaff00,#00ff18);color:#001800;font-weight:bold;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 0 24px #00ff18a0;position:relative;overflow:hidden}
-.topbar:after{content:"";position:absolute;top:0;left:-35%;width:24%;height:100%;background:linear-gradient(90deg,transparent,#fff9,transparent);transform:skewX(-25deg);animation:shine 4s linear infinite}
-.brand{font-size:clamp(16px,2.2vw,25px);letter-spacing:2px;text-shadow:0 0 10px #fff;animation:brandpulse 2s ease-in-out infinite alternate}
-.brandmark{display:inline-block;margin-right:8px;animation:spinmark 6s linear infinite}
-.brand small{font-size:11px;letter-spacing:3px}
-.topstatus{font-size:12px;letter-spacing:1px}
-.topstatus i{display:inline-block;width:9px;height:9px;border-radius:50%;background:#003c00;margin-right:7px;box-shadow:0 0 9px #003c00;animation:blink 1s infinite}
-@keyframes shine{0%{left:-35%}100%{left:130%}}
-@keyframes brandpulse{from{text-shadow:0 0 4px #fff}to{text-shadow:0 0 14px #fff,0 0 24px #00ff18}}
-@keyframes spinmark{to{transform:rotate(360deg)}}
-@keyframes blink{50%{opacity:.25}}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 70% 25%,#063008 0,transparent 48%),repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,255,0,.025) 4px);z-index:-1}
-header{height:46px;background:var(--g);color:#000;font-weight:bold;padding:12px 18px;display:flex;justify-content:space-between}
-#desktop{height:calc(100vh - 90px);position:relative;padding:12px}
-.icons{position:absolute;right:22px;top:18px;display:grid;grid-template-columns:repeat(2,110px);gap:20px;text-align:center}
-.appicon{cursor:pointer;padding:8px;border:1px solid transparent}.appicon:hover{border-color:var(--g);background:#002900}
-.glyph{font-size:34px;font-weight:bold;display:block}.appicon small{display:block;line-height:1.3}
-.window{position:absolute;background:var(--panel);border:2px solid var(--g);box-shadow:0 0 15px #00ff1840;min-width:280px}
-.titlebar{background:var(--g);color:#000;padding:8px 12px;font-weight:bold;display:flex;justify-content:space-between;cursor:move}
-.controls button{background:transparent;border:0;color:#000;font-size:18px;font-weight:bold;cursor:pointer;margin-left:10px}
-.content{padding:14px;max-height:55vh;overflow:auto}
-button,.btn{background:var(--g);color:#000;border:0;padding:7px 13px;font:bold 14px "Courier New";cursor:pointer;margin:4px 4px 4px 0}
-button:hover{background:#aaffaa}.field{background:#000;color:var(--g);border:1px solid var(--g);padding:7px;font:14px monospace;width:100%;margin:5px 0}
-.muted{color:#36a83c}.bar{height:12px;border:1px solid var(--g);margin:10px 0}.fill{height:100%;width:0;background:var(--g);transition:width .25s}
-#taskbar{height:32px;background:var(--g);color:#000;display:flex;align-items:center;gap:8px;padding:3px 10px;font-weight:bold}
-.task{background:#000;color:var(--g);border:1px solid #000;padding:4px 9px;cursor:pointer}
-#clock{margin-left:auto}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45;margin:0}
-#network{width:100%;height:180px;border:1px solid var(--g);background:#000}
-@media(max-width:650px){.icons{position:relative;right:auto;top:auto;grid-template-columns:repeat(3,1fr);gap:2px}.window{left:3%!important;top:230px!important;width:94%!important}.content{max-height:42vh}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mawliid Sheikh Cyber Lab | Neon Hacker Simulator</title>
+    <style>
+        :root {
+            --neon-green: #00ff41;
+            --neon-cyan: #00f3ff;
+            --dark-bg: #050505;
+            --panel-bg: rgba(10, 20, 15, 0.85);
+            --border-glow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Matrix Canvas Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.25;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--neon-green);
+            box-shadow: var(--border-glow);
+            background: var(--panel-bg);
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+        header h1 {
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            text-shadow: 0 0 8px var(--neon-green);
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: var(--neon-cyan);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Main Container */
+        .container {
+            width: 95%;
+            max-width: 1000px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Terminal Window */
+        .terminal {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-green);
+            border-radius: 8px;
+            box-shadow: var(--border-glow);
+            display: flex;
+            flex-direction: column;
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #0d1a12;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--neon-green);
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .output-line {
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+
+        .cmd-text { color: var(--neon-cyan); }
+        .warn-text { color: #ffcc00; }
+        .error-text { color: #ff3333; }
+
+        .input-area {
+            display: flex;
+            padding: 10px 15px;
+            background: #08120c;
+            border-top: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .prompt {
+            color: var(--neon-cyan);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        #cmd-input {
+            background: transparent;
+            border: none;
+            color: var(--neon-green);
+            flex-grow: 1;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* Side Control Panel */
+        .side-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .side-panel h2 {
+            color: var(--neon-cyan);
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--neon-cyan);
+            padding-bottom: 8px;
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .btn-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cyber-btn {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .cyber-btn:hover, .cyber-btn:active {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 12px var(--neon-green);
+        }
+
+        .status-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--neon-cyan);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(0, 255, 65, 0.7);
+        }
+    </style>
 </head>
 <body>
-<header class="topbar">
-  <span class="brand"><span class="brandmark">◆</span> MAWLIID SHEIKH <small> // CYBER LAB</small></span>
-  <span class="topstatus"><i></i> SYSTEM ONLINE <b>•</b> LOCAL DEMO</span>
-</header>
-<div id="desktop">
- <div class="icons">
-  <div class="appicon" onclick="openWin('miner')"><span class="glyph">₿</span><small>Bitcoin Miner<br>Simulator</small></div>
-  <div class="appicon" onclick="openWin('network')"><span class="glyph">⌘</span><small>Network<br>Visualizer</small></div>
-  <div class="appicon" onclick="openWin('password')"><span class="glyph">🔐</span><small>Password<br>Strength Lab</small></div>
-  <div class="appicon" onclick="openWin('console')"><span class="glyph">>_</span><small>Program<br>Console</small></div>
-  <div class="appicon" onclick="openWin('about')"><span class="glyph">◈</span><small>System<br>Info</small></div>
- </div>
- <section class="window" id="mainwin" style="left:2%;top:4%;width:54%">
-  <div class="titlebar" onmousedown="drag(event,'mainwin')"><span>Network Tracking — Visualizer</span><span class="controls"><button onclick="minWin('mainwin')">_</button><button onclick="closeWin('mainwin')">×</button></span></div>
-  <div class="content"><canvas id="network" width="700" height="180"></canvas><p class="muted">Animated network visualization — fictional nodes only.</p><button onclick="animateNetwork()">Refresh Network</button></div>
- </section>
- <section class="window" id="console" style="left:4%;top:48%;width:45%;display:none">
-  <div class="titlebar" onmousedown="drag(event,'console')"><span>Program Console</span><span class="controls"><button onclick="minWin('console')">_</button><button onclick="closeWin('console')">×</button></span></div>
-  <div class="content"><pre id="log">NEON CYBER LAB v1.0
-Initializing local simulator...
-Ready. Type help and press Enter.</pre><input id="cmd" class="field" placeholder="Type help, scan, status, clear..." onkeydown="if(event.key==='Enter')runCmd()"><button onclick="runCmd()">Run Command</button></div>
- </section>
- <section class="window" id="password" style="left:24%;top:12%;width:38%;display:none">
-  <div class="titlebar" onmousedown="drag(event,'password')"><span>Password Strength Lab</span><span class="controls"><button onclick="minWin('password')">_</button><button onclick="closeWin('password')">×</button></span></div>
-  <div class="content"><p>Check the strength of a sample password locally.</p><input class="field" id="pw" type="text" placeholder="Enter a sample password"><button onclick="checkPassword()">Check Strength</button><p id="pwresult" class="muted">No password checked.</p><p class="muted">This checks strength only; it does not guess or crack passwords.</p></div>
- </section>
- <section class="window" id="miner" style="left:34%;top:18%;width:35%;display:none">
-  <div class="titlebar" onmousedown="drag(event,'miner')"><span>Bitcoin Miner Simulator</span><span class="controls"><button onclick="minWin('miner')">_</button><button onclick="closeWin('miner')">×</button></span></div>
-  <div class="content"><p>SIMULATED HASH RATE: <b id="hash">0.00</b> GH/s</p><div class="bar"><div class="fill" id="minefill"></div></div><p id="minestatus">Miner idle.</p><button onclick="startMine()">Start Simulation</button><button onclick="stopMine()">Stop</button><p class="muted">No real mining, wallet access, or network activity.</p></div>
- </section>
- <section class="window" id="about" style="left:40%;top:25%;width:30%;display:none">
-  <div class="titlebar" onmousedown="drag(event,'about')"><span>System Information</span><span class="controls"><button onclick="closeWin('about')">×</button></span></div>
-  <div class="content"><pre>OS: NEON CYBER LAB
-Mode: SAFE SIMULATION
-Network: OFFLINE
-External access: DISABLED
-Modules: 5 loaded
-Status: OPERATIONAL</pre></div>
- </section>
-</div>
-<div id="taskbar"><span>◆ MAWLIID SHEIKH</span><button class="task" onclick="openWin('console')">>_ Console</button><button class="task" onclick="openWin('password')">Password Lab</button><span id="clock"></span></div>
-<script>
-const $=id=>document.getElementById(id);
-function openWin(id){$(id).style.display='block';}
-function closeWin(id){$(id).style.display='none';}
-function minWin(id){$(id).style.display='none';}
-function runCmd(){let v=$('cmd').value.trim().toLowerCase(),l=$('log');if(!v)return;
-let msg={help:'Commands: help, scan, status, clear, about',scan:'Starting fictional visual scan...\\n[OK] 12 demo nodes visualized. No devices contacted.',status:'All local demo modules operational. External network: disabled.',about:'NEON CYBER LAB — safe educational interface.'}[v];
-if(v==='clear')l.textContent='';else l.textContent+='\\n> '+v+'\\n'+(msg||'Unknown command. Type help.');
-$('cmd').value='';l.scrollTop=l.scrollHeight;}
-function checkPassword(){let p=$('pw').value,s=0;if(p.length>=8)s++;if(/[A-Z]/.test(p))s++;if(/[a-z]/.test(p))s++;if(/[0-9]/.test(p))s++;if(/[^A-Za-z0-9]/.test(p))s++;let names=['Very weak','Weak','Fair','Good','Strong','Very strong'];$('pwresult').textContent=p?('Strength: '+names[s]+' ('+s+'/5)'):'Please enter a sample password.';}
-let mining=null,progress=0;
-function startMine(){if(mining)return;$('minestatus').textContent='Simulation running...';mining=setInterval(()=>{progress=Math.min(100,progress+2);$('minefill').style.width=progress+'%';$('hash').textContent=(Math.random()*2+1).toFixed(2);if(progress>=100){stopMine();$('minestatus').textContent='Simulation complete.'}},250);}
-function stopMine(){if(mining)clearInterval(mining);mining=null;$('minestatus').textContent='Simulation paused.';}
-function animateNetwork(){drawNetwork();}
-function drawNetwork(){let c=$('network'),x=c.getContext('2d'),w=c.width,h=c.height,pts=Array.from({length:22},()=>[Math.random()*w,Math.random()*h]);x.clearRect(0,0,w,h);x.strokeStyle='#075d0d';x.fillStyle='#00ff18';for(let i=0;i<pts.length;i++){for(let j=i+1;j<pts.length;j++){let dx=pts[i][0]-pts[j][0],dy=pts[i][1]-pts[j][1];if(dx*dx+dy*dy<4200){x.beginPath();x.moveTo(...pts[i]);x.lineTo(...pts[j]);x.stroke()}}x.beginPath();x.arc(...pts[i],3,0,Math.PI*2);x.fill()}}
-drawNetwork();setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString()},1000);
-function drag(e,id){if(e.target.tagName==='BUTTON')return;let el=$(id),sx=e.clientX,sy=e.clientY,r=el.getBoundingClientRect(),move=ev=>{el.style.left=(r.left+ev.clientX-sx)+'px';el.style.top=(r.top+ev.clientY-sy)+'px'},up=()=>{document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up)};document.addEventListener('mousemove',move);document.addEventListener('mouseup',up)}
-</script>
-</body></html>
+
+    <canvas id="matrix-bg"></canvas>
+
+    <header>
+        <h1>MAWLIID SHEIKH CYBER LAB</h1>
+        <p>[ NEON HACKER SIMULATOR v2.6 // SYSTEM ONLINE ]</p>
+    </header>
+
+    <main class="container">
+        <!-- Terminal Section -->
+        <section class="terminal">
+            <div class="terminal-header">
+                <div class="dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <span style="font-size: 0.8rem; color: #888;">root@mawliid-lab:~</span>
+            </div>
+            
+            <div class="terminal-body" id="terminal-output">
+                <div class="output-line">Ku soo dhawaaw <strong>Mawliid Sheikh Cyber Lab</strong>!</div>
+                <div class="output-line cmd-text">Qor 'help' ama guji badhammada dhinaca yaalla si aad u bilowdo.</div>
+                <div class="output-line">--------------------------------------------------</div>
+            </div>
+
+            <div class="input-area">
+                <span class="prompt">root@lab:~$</span>
+                <input type="text" id="cmd-input" placeholder="Qor amar (tusaale: scan)..." autocomplete="off">
+            </div>
+        </section>
+
+        <!-- Controls Section (Great for Mobile & Desktop) -->
+        <aside class="side-panel">
+            <h2>QALABKA DEGDEGA AH</h2>
+            <div class="btn-grid">
+                <button class="cyber-btn" onclick="runCommand('scan')">[1] Network Scan</button>
+                <button class="cyber-btn" onclick="runCommand('hack')">[2] Simulate Hack</button>
+                <button class="cyber-btn" onclick="runCommand('decrypt')">[3] Decrypt Data</button>
+                <button class="cyber-btn" onclick="runCommand('about')">[4] About Lab</button>
+                <button class="cyber-btn" onclick="runCommand('clear')" style="border-color: #ff5f56; color: #ff5f56;">[X] Clear Screen</button>
+            </div>
+
+            <div class="status-box">
+                <div><strong>IP Status:</strong> <span style="color: var(--neon-cyan);">192.168.1.104 (Hidden)</span></div>
+                <div style="margin-top:5px;"><strong>Firewall:</strong> <span style="color: #00ff41;">ACTIVE (99.9%)</span></div>
+                <div style="margin-top:5px;"><strong>Device:</strong> <span id="device-type">Detecting...</span></div>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        &copy; 2026 Mawliid Sheikh Cyber Lab. Waxaa loo dhisay waxbarasho iyo tijaabo.
+    </footer>
+
+    <script>
+        // 1. Matrix Rain Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
+        const fontSize = 14;
+        let columns = canvas.width / fontSize;
+        let drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 40);
+
+        // 2. Detect Device Type
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        document.getElementById('device-type').textContent = isMobile ? 'Mobile Terminal' : 'Desktop Workstation';
+
+        // 3. Terminal Logic
+        const output = document.getElementById('terminal-output');
+        const input = document.getElementById('cmd-input');
+
+        function appendLine(text, className = '') {
+            const div = document.createElement('div');
+            div.className = 'output-line ' + className;
+            div.innerHTML = text;
+            output.appendChild(div);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function runCommand(cmd) {
+            const cleanCmd = cmd.trim().toLowerCase();
+            if (!cleanCmd) return;
+
+            appendLine(`<span class="prompt">root@lab:~$</span> ${cleanCmd}`);
+
+            switch (cleanCmd) {
+                case 'help':
+                    appendLine('Amarrada la heli karo: <span class="cmd-text">scan, hack, decrypt, about, clear</span>');
+                    break;
+                case 'scan':
+                    appendLine('Baadhitaanka shabakadda ayaa socda...', 'warn-text');
+                    setTimeout(() => {
+                        appendLine('[+] Port 80 (HTTP) - OPEN');
+                        appendLine('[+] Port 443 (HTTPS) - SECURE');
+                        appendLine('[+] 3 Aaladood ayaa laga helay shabakadda maxalliga ah.', 'cmd-text');
+                    }, 800);
+                    break;
+                case 'hack':
+                    appendLine('Isku dayga jebinta sirta (Simulation)...', 'warn-text');
+                    setTimeout(() => appendLine('>> Bypassing Firewall... [45%]'), 600);
+                    setTimeout(() => appendLine('>> Accessing Mainframe... [89%]'), 1200);
+                    setTimeout(() => appendLine('[GUUL] Nidaamka tijaabada waa la furay!', 'cmd-text'), 1800);
+                    break;
+                case 'decrypt':
+                    const hash = Math.random().toString(36).substring(2, 15).toUpperCase();
+                    appendLine(`Furaha la furfuray: <span class="cmd-text">KEY-${hash}-2026</span>`);
+                    break;
+                case 'about':
+                    appendLine('<strong>Mawliid Sheikh Cyber Lab</strong> waa goob lagu barto laguna tijaabiyo xirfadaha amniga internet-ka (Cybersecurity).', 'cmd-text');
+                    break;
+                case 'clear':
+                    output.innerHTML = '';
+                    break;
+                default:
+                    appendLine(`Cilad: Amarka '${cleanCmd}' lama yaqaan. Qor 'help'.`, 'error-text');
+            }
+        }
+
+        input.addEventListener('keypress', function (e)
