@@ -1,345 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="so">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVEMBER 2026 // SCHEDULE</title>
+    <title>eFootball 3D | PC Edition</title>
     <style>
         :root {
-            --neon-green: #00ff41;
-            --neon-cyan: #00f3ff;
-            --neon-pink: #ff0055;
-            --dark-bg: #02060d;
-            --card-bg: rgba(6, 18, 34, 0.92);
+            --ef-blue: #06113c;
+            --ef-dark: #02071d;
+            --ef-yellow: #ffe600;
+            --ef-pink: #ff0066;
+            --ef-cyan: #00e5ff;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
         }
 
         body {
-            background-color: var(--dark-bg);
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.12), transparent 60%),
-                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 30px 30px, 30px 30px;
-            color: var(--neon-cyan);
-            min-height: 100vh;
-            padding: 30px 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .header-bar {
-            width: 100%;
-            max-width: 1100px;
-            background: var(--card-bg);
-            border: 1.5px solid var(--neon-cyan);
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.25);
-            border-radius: 12px;
-            padding: 20px 30px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .header-bar h1 {
+            background: radial-gradient(circle at top right, #102a83, var(--ef-dark) 75%);
             color: #fff;
-            font-size: 1.6rem;
-            letter-spacing: 3px;
-            text-shadow: 0 0 12px var(--neon-cyan);
-        }
-
-        .stats-pill {
+            height: 100vh;
+            overflow: hidden;
             display: flex;
-            gap: 15px;
-            font-size: 0.95rem;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: rgba(2, 7, 29, 0.85);
+            border-bottom: 2px solid var(--ef-yellow);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 1px;
+            color: var(--ef-yellow);
+            text-shadow: 0 0 15px rgba(255, 230, 0, 0.5);
+        }
+
+        .logo span {
+            color: #fff;
+        }
+
+        .currency-bar {
+            display: flex;
+            gap: 20px;
             font-weight: bold;
+            font-size: 0.95rem;
         }
 
-        .stat-done {
-            color: var(--neon-green);
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid var(--neon-green);
-            padding: 6px 14px;
-            border-radius: 6px;
+        .currency-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .stat-fail {
-            color: var(--neon-pink);
-            background: rgba(255, 0, 85, 0.1);
-            border: 1px solid var(--neon-pink);
-            padding: 6px 14px;
-            border-radius: 6px;
+        .gp-color { color: var(--ef-cyan); }
+        .coin-color { color: var(--ef-yellow); }
+
+        /* Main Menu Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+            padding: 15px 40px;
+            background: rgba(0, 0, 0, 0.4);
         }
 
-        .grid-container {
-            width: 100%;
-            max-width: 1100px;
+        .tab {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding-bottom: 5px;
+            color: #aaa;
+            transition: 0.2s;
+        }
+
+        .tab.active, .tab:hover {
+            color: var(--ef-yellow);
+            border-bottom: 3px solid var(--ef-yellow);
+        }
+
+        /* Main Content Area */
+        .main-container {
+            flex: 1;
+            padding: 30px 40px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 18px;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
         }
 
-        .day-card {
-            background: var(--card-bg);
-            border: 1.5px solid rgba(0, 243, 255, 0.35);
-            border-radius: 10px;
-            padding: 18px;
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 15px;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: all 0.25s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .day-card:hover:not(.locked) {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-            transform: translateY(-3px);
+        .menu-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ef-yellow);
+            box-shadow: 0 10px 25px rgba(255, 230, 0, 0.25);
         }
 
-        .day-card.locked-done {
-            border-color: var(--neon-green);
-            background: rgba(0, 255, 65, 0.06);
-            box-shadow: 0 0 18px rgba(0, 255, 65, 0.25);
+        .menu-card.highlight {
+            background: linear-gradient(135deg, #d90452, #5c0029);
+            border-color: var(--ef-pink);
         }
 
-        .day-card.locked-fail {
-            border-color: var(--neon-pink);
-            background: rgba(255, 0, 85, 0.06);
-            box-shadow: 0 0 18px rgba(255, 0, 85, 0.25);
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
-        .card-top {
+        .card-desc {
+            font-size: 0.9rem;
+            color: #ddd;
+            margin-top: 8px;
+        }
+
+        .card-badge {
+            align-self: flex-start;
+            background: var(--ef-yellow);
+            color: #000;
+            font-weight: bold;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Right Side Panel (Friend Match / Quick Info) */
+        .side-panel {
+            background: rgba(2, 7, 29, 0.8);
+            border: 1.5px solid var(--ef-cyan);
+            border-radius: 12px;
+            padding: 25px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .side-panel h2 {
+            color: var(--ef-cyan);
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
             padding-bottom: 10px;
         }
 
-        .date-num {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .day-name {
-            font-size: 0.85rem;
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .task-input {
+        .room-input {
             width: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 243, 255, 0.25);
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--ef-cyan);
             color: #fff;
-            padding: 10px;
             border-radius: 6px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: border 0.2s;
+            font-size: 1rem;
         }
 
-        .task-input:focus {
-            border-color: var(--neon-cyan);
-        }
-
-        .task-input:disabled {
-            background: transparent;
-            border-color: transparent;
-            color: #e0e0e0;
-            font-weight: bold;
-            padding-left: 0;
-            cursor: not-allowed;
-        }
-
-        .action-row {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-mark {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            border: 1px solid;
-            background: transparent;
-            transition: all 0.2s;
-        }
-
-        .btn-check {
-            border-color: var(--neon-green);
-            color: var(--neon-green);
-        }
-
-        .btn-check:hover {
-            background: var(--neon-green);
+        .btn-action {
+            padding: 12px;
+            background: var(--ef-yellow);
             color: #000;
-            box-shadow: 0 0 15px var(--neon-green);
-        }
-
-        .btn-cross {
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
-        }
-
-        .btn-cross:hover {
-            background: var(--neon-pink);
-            color: #fff;
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
-
-        .locked-badge {
-            width: 100%;
-            text-align: center;
-            padding: 8px;
+            font-weight: 900;
+            border: none;
             border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            letter-spacing: 1.5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 1rem;
+            transition: 0.2s;
         }
 
-        .badge-done {
-            background: rgba(0, 255, 65, 0.15);
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
+        .btn-action:hover {
+            background: #fff;
+            box-shadow: 0 0 15px #fff;
         }
 
-        .badge-fail {
-            background: rgba(255, 0, 85, 0.15);
-            color: var(--neon-pink);
-            border: 1px solid var(--neon-pink);
+        .btn-secondary {
+            background: transparent;
+            color: var(--ef-cyan);
+            border: 1.5px solid var(--ef-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ef-cyan);
+            color: #000;
+        }
+
+        /* Status Modal */
+        #status-msg {
+            margin-top: auto;
+            padding: 12px;
+            background: rgba(0, 229, 255, 0.15);
+            border-left: 4px solid var(--ef-cyan);
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="header-bar">
-        <h1>NOVEMBER 2026 // SCHEDULE</h1>
-        <div class="stats-pill">
-            <div class="stat-done">✓ DONE: <span id="done-count">0</span></div>
-            <div class="stat-fail">✗ MISSED: <span id="fail-count">0</span></div>
+    <div class="top-bar">
+        <div class="logo">e<span>Football</span> 3D</div>
+        <div class="currency-bar">
+            <div class="currency-item gp-color">GP: 1,250,000</div>
+            <div class="currency-item coin-color">eFootball Coins: 500</div>
+            <div class="currency-item">USER: MAWLIID_SOC</div>
         </div>
     </div>
 
-    <div class="grid-container" id="calendar-grid"></div>
+    <div class="nav-tabs">
+        <div class="tab active" onclick="selectTab(this, 'Match')">Match</div>
+        <div class="tab" onclick="selectTab(this, 'Game Plan')">Game Plan</div>
+        <div class="tab" onclick="selectTab(this, 'My Team')">My Team</div>
+        <div class="tab" onclick="selectTab(this, 'Contract')">Contract</div>
+        <div class="tab" onclick="selectTab(this, 'Extras')">Settings</div>
+    </div>
 
-    <script>
-        const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-        const startDay = 15; // Nov 15, 2026
-        const endDay = 30;   // Nov 30, 2026
-        const storageKey = "mawliid_nov_2026_locked_schedule_v2";
+    <div class="main-container">
+        <div class="cards-grid">
+            <div class="menu-card highlight" onclick="triggerAction('Starting 3D Exhibition Match...')">
+                <span class="card-badge">LIVE 3D</span>
+                <div>
+                    <div class="card-title">Authentic Match</div>
+                    <div class="card-desc">Ku ciyaar kooxaha waaweyn (Real Madrid, Barcelona, Man City) garoon 3D ah.</div>
+                </div>
+            </div>
 
-        let savedData = JSON.parse(localStorage.getItem(storageKey)) || {};
+            <div class="menu-card" onclick="triggerAction('Opening Friend Match Lobby...')">
+                <span class="card-badge">1v1 / Co-op</span>
+                <div>
+                    <div class="card-title">Friend Match</div>
+                    <div class="card-desc">Samee qol (Create Room) ama ku biir saaxiibkaa (1v1, 2v2, 3v3).</div>
+                </div>
+            </div>
 
-        const grid = document.getElementById("calendar-grid");
+            <div class="menu-card" onclick="triggerAction('Loading Game Plan: 4-3-3 Formation (Messi, Ronaldo, Mbappé)...')">
+                <span class="card-badge">TACTICS</span>
+                <div>
+                    <div class="card-title">Game Plan</div>
+                    <div class="card-desc">Deji shaxda (4-3-3, 4-2-3-1), kabtanka, iyo ciyaartoyda safka hore.</div>
+                </div>
+            </div>
 
-        function updateCounters() {
-            let done = 0;
-            let fail = 0;
-            Object.values(savedData).forEach(item => {
-                if (item.status === "done") done++;
-                if (item.status === "fail") fail++;
-            });
-            document.getElementById("done-count").textContent = done;
-            document.getElementById("fail-count").textContent = fail;
-        }
+            <div class="menu-card" onclick="triggerAction('Entering Penalty Shootout & Training Mode...')">
+                <span class="card-badge">PRACTICE</span>
+                <div>
+                    <div class="card-title">Training & Penalties</div>
+                    <div class="card-desc">Tababar Free Kick, Penalty Shootout, iyo xakamaynta kubadda.</div>
+                </div>
+            </div>
+        </div>
 
-        function lockDay(dayNum, status) {
-            const inputEl = document.getElementById(`task-${dayNum}`);
-            const taskText = inputEl ? inputEl.value.trim() : "";
-
-            savedData[dayNum] = {
-                task: taskText || "NO TASK",
-                status: status
-            };
-
-            localStorage.setItem(storageKey, JSON.stringify(savedData));
-            renderGrid();
-        }
-
-        function saveTaskDraft(dayNum, val) {
-            if (!savedData[dayNum]) {
-                savedData[dayNum] = { task: val, status: "open" };
-            } else if (savedData[dayNum].status === "open") {
-                savedData[dayNum].task = val;
-            }
-            localStorage.setItem(storageKey, JSON.stringify(savedData));
-        }
-
-        function renderGrid() {
-            grid.innerHTML = "";
-
-            for (let d = startDay; d <= endDay; d++) {
-                const dateObj = new Date(2026, 10, d); // Month 10 = November
-                const dayName = daysOfWeek[dateObj.getDay()];
-                const record = savedData[d] || { task: "", status: "open" };
-                const isLocked = record.status === "done" || record.status === "fail";
-
-                const card = document.createElement("div");
-                card.className = "day-card";
-                if (record.status === "done") card.classList.add("locked", "locked-done");
-                if (record.status === "fail") card.classList.add("locked", "locked-fail");
-
-                let bottomHTML = "";
-                if (!isLocked) {
-                    bottomHTML = `
-                        <div class="action-row">
-                            <button class="btn-mark btn-check" onclick="lockDay(${d}, 'done')">✓</button>
-                            <button class="btn-mark btn-cross" onclick="lockDay(${d}, 'fail')">✗</button>
-                        </div>
-                    `;
-                } else if (record.status === "done") {
-                    bottomHTML = `<div class="locked-badge badge-done">✓ LOCKED</div>`;
-                } else {
-                    bottomHTML = `<div class="locked-badge badge-fail">✗ LOCKED</div>`;
-                }
-
-                card.innerHTML = `
-                    <div class="card-top">
-                        <span class="date-num">NOV ${d}</span>
-                        <span class="day-name">${dayName}</span>
-                    </div>
-                    <input 
-                        type="text" 
-                        id="task-${d}" 
-                        class="task-input" 
-                        placeholder="Task..." 
-                        value="${record.task.replace(/"/g, '&quot;')}"
-                        oninput="saveTaskDraft(${d}, this.value)"
-                        ${isLocked ? "disabled" : ""}
-                    >
-                    ${bottomHTML}
-                `;
-
-                grid.appendChild(card);
-            }
-
-            updateCounters();
-        }
-
-        renderGrid();
-    </script>
-</body>
-</html>
+        <div class="side-panel">
+            <h2>FRIEND MATCH ROOM</h2>
+            <p style="font-size: 0.85rem; color: #ccc;">Geli lambarka qolka si aad ula ciyaarto saaxiibkaa ama samee qol cusub:</p>
+            <input type="text" id="room-code" class="room-input" placeholder="Room Number (Tusaale: 0482-9910)">
+            <button class="btn-action" onclick="createRoom()">Create Match Room</button>
