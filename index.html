@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eFootball 3D | PC Edition</title>
+    <title>eFootball 3D | Divisions & Match Hub</title>
     <style>
         :root {
             --ef-blue: #06113c;
@@ -11,6 +11,7 @@
             --ef-yellow: #ffe600;
             --ef-pink: #ff0066;
             --ef-cyan: #00e5ff;
+            --ef-green: #00ff66;
         }
 
         * {
@@ -22,7 +23,7 @@
         }
 
         body {
-            background: radial-gradient(circle at top right, #102a83, var(--ef-dark) 75%);
+            background: radial-gradient(circle at top right, #0a194f, var(--ef-dark) 80%);
             color: #fff;
             height: 100vh;
             overflow: hidden;
@@ -36,7 +37,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: rgba(2, 7, 29, 0.85);
+            background: rgba(2, 7, 29, 0.95);
             border-bottom: 2px solid var(--ef-yellow);
         }
 
@@ -44,14 +45,11 @@
             font-size: 1.8rem;
             font-weight: 900;
             font-style: italic;
-            letter-spacing: 1px;
             color: var(--ef-yellow);
             text-shadow: 0 0 15px rgba(255, 230, 0, 0.5);
         }
 
-        .logo span {
-            color: #fff;
-        }
+        .logo span { color: #fff; }
 
         .currency-bar {
             display: flex;
@@ -75,7 +73,7 @@
             display: flex;
             gap: 30px;
             padding: 15px 40px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .tab {
@@ -100,16 +98,21 @@
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 25px;
+            overflow-y: auto;
         }
 
-        .cards-grid {
-            display: grid;
+        .section-view {
+            display: none;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
+        .section-view.active {
+            display: grid;
+        }
+
         .menu-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
             border: 1.5px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             padding: 25px;
@@ -118,8 +121,6 @@
             justify-content: space-between;
             cursor: pointer;
             transition: all 0.25s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .menu-card:hover {
@@ -129,8 +130,8 @@
         }
 
         .menu-card.highlight {
-            background: linear-gradient(135deg, #d90452, #5c0029);
-            border-color: var(--ef-pink);
+            background: linear-gradient(135deg, #12226c, #06113c);
+            border-color: var(--ef-cyan);
         }
 
         .card-title {
@@ -141,7 +142,7 @@
 
         .card-desc {
             font-size: 0.9rem;
-            color: #ddd;
+            color: #ccc;
             margin-top: 8px;
         }
 
@@ -156,9 +157,9 @@
             text-transform: uppercase;
         }
 
-        /* Right Side Panel (Friend Match / Quick Info) */
+        /* Right Side Panel / Divisions Hub */
         .side-panel {
-            background: rgba(2, 7, 29, 0.8);
+            background: rgba(2, 7, 29, 0.9);
             border: 1.5px solid var(--ef-cyan);
             border-radius: 12px;
             padding: 25px;
@@ -174,14 +175,18 @@
             padding-bottom: 10px;
         }
 
-        .room-input {
-            width: 100%;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.1);
+        .division-box {
+            background: rgba(0, 229, 255, 0.08);
             border: 1px solid var(--ef-cyan);
-            color: #fff;
-            border-radius: 6px;
-            font-size: 1rem;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .division-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--ef-yellow);
         }
 
         .btn-action {
@@ -202,18 +207,16 @@
             box-shadow: 0 0 15px #fff;
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--ef-cyan);
-            border: 1.5px solid var(--ef-cyan);
-        }
-
-        .btn-secondary:hover {
-            background: var(--ef-cyan);
+        .btn-match {
+            background: var(--ef-green);
             color: #000;
         }
 
-        /* Status Modal */
+        .btn-match:hover {
+            background: #fff;
+            box-shadow: 0 0 15px var(--ef-green);
+        }
+
         #status-msg {
             margin-top: auto;
             padding: 12px;
@@ -226,59 +229,163 @@
 <body>
 
     <div class="top-bar">
-        <div class="logo">e<span>Football</span> 3D</div>
+        <div class="logo">e<span>Football</span> League</div>
         <div class="currency-bar">
-            <div class="currency-item gp-color">GP: 1,250,000</div>
-            <div class="currency-item coin-color">eFootball Coins: 500</div>
+            <div class="currency-item gp-color">GP: 2,450,000</div>
+            <div class="currency-item coin-color">Coins: 1,200</div>
             <div class="currency-item">USER: MAWLIID_SOC</div>
         </div>
     </div>
 
     <div class="nav-tabs">
-        <div class="tab active" onclick="selectTab(this, 'Match')">Match</div>
-        <div class="tab" onclick="selectTab(this, 'Game Plan')">Game Plan</div>
-        <div class="tab" onclick="selectTab(this, 'My Team')">My Team</div>
-        <div class="tab" onclick="selectTab(this, 'Contract')">Contract</div>
-        <div class="tab" onclick="selectTab(this, 'Extras')">Settings</div>
+        <div class="tab active" onclick="switchTab('match', this)">Match</div>
+        <div class="tab" onclick="switchTab('dreamteam', this)">Dream Team</div>
+        <div class="tab" onclick="switchTab('gameplan', this)">Game Plan</div>
+        <div class="tab" onclick="switchTab('contract', this)">Contract</div>
     </div>
 
     <div class="main-container">
-        <div class="cards-grid">
-            <div class="menu-card highlight" onclick="triggerAction('Starting 3D Exhibition Match...')">
-                <span class="card-badge">LIVE 3D</span>
+        
+        <!-- MATCH HUB -->
+        <div id="match-view" class="section-view active">
+            <div class="menu-card highlight" onclick="startDivisionMatch()">
+                <span class="card-badge">RANKED</span>
                 <div>
-                    <div class="card-title">Authentic Match</div>
-                    <div class="card-desc">Ku ciyaar kooxaha waaweyn (Real Madrid, Barcelona, Man City) garoon 3D ah.</div>
+                    <div class="card-title">eFootball Division</div>
+                    <div class="card-desc">Ciyaar online ama offline ah si aad uga soo baxdo Division 10 ilaa Division 1.</div>
                 </div>
             </div>
 
             <div class="menu-card" onclick="triggerAction('Opening Friend Match Lobby...')">
-                <span class="card-badge">1v1 / Co-op</span>
+                <span class="card-badge">1v1 / CO-OP</span>
                 <div>
                     <div class="card-title">Friend Match</div>
-                    <div class="card-desc">Samee qol (Create Room) ama ku biir saaxiibkaa (1v1, 2v2, 3v3).</div>
+                    <div class="card-desc">Samee qol gaar ah ama ku biir Room Code si aad saaxiibkaa ula ciyaarto.</div>
                 </div>
             </div>
 
-            <div class="menu-card" onclick="triggerAction('Loading Game Plan: 4-3-3 Formation (Messi, Ronaldo, Mbappé)...')">
-                <span class="card-badge">TACTICS</span>
+            <div class="menu-card" onclick="triggerAction('Starting Trial Match: Real Madrid vs Barcelona...')">
+                <span class="card-badge">OFFLINE</span>
                 <div>
-                    <div class="card-title">Game Plan</div>
-                    <div class="card-desc">Deji shaxda (4-3-3, 4-2-3-1), kabtanka, iyo ciyaartoyda safka hore.</div>
+                    <div class="card-title">Trial Match</div>
+                    <div class="card-desc">Ku ciyaar kooxaha Authentic Teams adigoo wata Messi ama Mbappé.</div>
                 </div>
             </div>
 
-            <div class="menu-card" onclick="triggerAction('Entering Penalty Shootout & Training Mode...')">
+            <div class="menu-card" onclick="triggerAction('Starting Penalty Shootout Challenge...')">
                 <span class="card-badge">PRACTICE</span>
                 <div>
-                    <div class="card-title">Training & Penalties</div>
-                    <div class="card-desc">Tababar Free Kick, Penalty Shootout, iyo xakamaynta kubadda.</div>
+                    <div class="card-title">Penalty Shootout</div>
+                    <div class="card-desc">Tababar xabbadaha ganaaxa iyo goolhayaha.</div>
                 </div>
             </div>
         </div>
 
+        <!-- DREAM TEAM HUB -->
+        <div id="dreamteam-view" class="section-view">
+            <div class="menu-card" onclick="triggerAction('Opening My Squad & Player Cards...')">
+                <span class="card-badge">SQUAD</span>
+                <div>
+                    <div class="card-title">My Squad</div>
+                    <div class="card-desc">Maamul ciyaartoydaada gaarka ah (Messi, Ronaldo, Mbappé) iyo shaxdaada.</div>
+                </div>
+            </div>
+            <div class="menu-card" onclick="triggerAction('Entering Player Training & Level Training...')">
+                <span class="card-badge">UPGRADE</span>
+                <div>
+                    <div class="card-title">Player Training</div>
+                    <div class="card-desc">Kordhi heerka ciyaartoydaada oo bar xirfado cusub.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME PLAN HUB -->
+        <div id="gameplan-view" class="section-view">
+            <div class="menu-card" onclick="triggerAction('Loading 4-3-3 Tactics & Manager Instructions...')">
+                <span class="card-badge">TACTICS</span>
+                <div>
+                    <div class="card-title">Formation (4-3-3)</div>
+                    <div class="card-desc">Beddel qaab ciyaareedka, Possession Game, ama Quick Counter.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTRACT HUB -->
+        <div id="contract-view" class="section-view">
+            <div class="menu-card" onclick="triggerAction('Opening Special Player List & Packs...')">
+                <span class="card-badge">SIGNINGS</span>
+                <div>
+                    <div class="card-title">Special Player List</div>
+                    <div class="card-desc">Saxiix ciyaartoy cusub oo Epic iyo Highlight ah.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: DIVISION & MATCH LAUNCHER -->
         <div class="side-panel">
-            <h2>FRIEND MATCH ROOM</h2>
-            <p style="font-size: 0.85rem; color: #ccc;">Geli lambarka qolka si aad ula ciyaarto saaxiibkaa ama samee qol cusub:</p>
-            <input type="text" id="room-code" class="room-input" placeholder="Room Number (Tusaale: 0482-9910)">
-            <button class="btn-action" onclick="createRoom()">Create Match Room</button>
+            <h2>EFOOTBALL LEAGUE</h2>
+            <div class="division-box">
+                <div class="division-title" id="div-name">DIVISION 10</div>
+                <p style="font-size: 0.85rem; color: #ccc; margin-top: 5px;">Hadafka: Ka gudub heerkan adigoo guulo hela!</p>
+            </div>
+            <p style="font-size: 0.85rem; color: #aaa;">Dhibcahaaga: <strong id="div-points" style="color: var(--ef-yellow);">0 / 10 Pts</strong></p>
+            
+            <button class="btn-action btn-match" onclick="startDivisionMatch()">PLAY DIVISION MATCH</button>
+            <button class="btn-action" onclick="resetDivision()">Reset League</button>
+
+            <div id="status-msg">
+                <strong>STATUS:</strong> Diyaar u ah ciyaarta Divisions-ka!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDivision = 10;
+        let currentPoints = 0;
+
+        function switchTab(tabName, el) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section-view').forEach(v => v.classList.remove('active'));
+
+            el.classList.add('active');
+            document.getElementById(tabName + '-view').classList.add('active');
+            triggerAction("Waxaad furtay qaybta: " + tabName.toUpperCase());
+        }
+
+        function triggerAction(msg) {
+            document.getElementById('status-msg').innerHTML = "<strong>SYSTEM:</strong> " + msg;
+        }
+
+        function startDivisionMatch() {
+            triggerAction("Match-kii waa uu bilaabmay! Raadinaya qof aad la ciyaarto (Searching opponent)...");
+            setTimeout(() => {
+                const win = Math.random() > 0.3; // 70% chance to win
+                if (win) {
+                    currentPoints += 3;
+                    triggerAction("GUSUL! Waa adkaatay ciyaartii! (+3 Pts)");
+                } else {
+                    currentPoints = Math.max(0, currentPoints - 1);
+                    triggerAction("KHASARAD! Waa lagaa adkaadstay ciyaartii. (-1 Pt)");
+                }
+
+                if (currentPoints >= 10 && currentDivision > 1) {
+                    currentDivision--;
+                    currentPoints = 0;
+                    alert("HAMBALYO! Waxaad u gudubtay Division " + currentDivision + "!");
+                }
+
+                document.getElementById('div-name').textContent = "DIVISION " + currentDivision;
+                document.getElementById('div-points').textContent = currentPoints + " / 10 Pts";
+            }, 1500);
+        }
+
+        function resetDivision() {
+            currentDivision = 10;
+            currentPoints = 0;
+            document.getElementById('div-name').textContent = "DIVISION 10";
+            document.getElementById('div-points').textContent = "0 / 10 Pts";
+            triggerAction("Horyaalka waa la billaabay dib (Reset). Waxaad ku jirtaa Division 10.");
+        }
+    </script>
+</body>
+</html>
