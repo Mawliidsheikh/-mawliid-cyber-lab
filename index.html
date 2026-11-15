@@ -3,389 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eFootball 3D | Divisions & Match Hub</title>
+    <title>eFootball 3D | Real Simulation Match</title>
     <style>
-        :root {
-            --ef-blue: #06113c;
-            --ef-dark: #02071d;
-            --ef-yellow: #ffe600;
-            --ef-pink: #ff0066;
-            --ef-cyan: #00e5ff;
-            --ef-green: #00ff66;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            user-select: none;
-        }
-
         body {
-            background: radial-gradient(circle at top right, #0a194f, var(--ef-dark) 80%);
+            margin: 0;
+            background: #000;
             color: #fff;
-            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-        }
-
-        /* Top Navigation Bar */
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
-            background: rgba(2, 7, 29, 0.95);
-            border-bottom: 2px solid var(--ef-yellow);
+            justify-content: center;
+            height: 100vh;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            font-style: italic;
-            color: var(--ef-yellow);
-            text-shadow: 0 0 15px rgba(255, 230, 0, 0.5);
+        #game-container {
+            position: relative;
+            border: 3px solid #00f3ff;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+            border-radius: 8px;
         }
 
-        .logo span { color: #fff; }
-
-        .currency-bar {
-            display: flex;
-            gap: 20px;
-            font-weight: bold;
-            font-size: 0.95rem;
+        canvas {
+            display: block;
+            background: linear-gradient(180deg, #06240d 0%, #031507 100%);
         }
 
-        .currency-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 6px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .gp-color { color: var(--ef-cyan); }
-        .coin-color { color: var(--ef-yellow); }
-
-        /* Main Menu Tabs */
-        .nav-tabs {
+        .hud {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             gap: 30px;
-            padding: 15px 40px;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .tab {
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            padding-bottom: 5px;
-            color: #aaa;
-            transition: 0.2s;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 8px 25px;
+            border-radius: 20px;
+            border: 1.5px solid #ffe600;
+            letter-spacing: 2px;
         }
 
-        .tab.active, .tab:hover {
-            color: var(--ef-yellow);
-            border-bottom: 3px solid var(--ef-yellow);
-        }
-
-        /* Main Content Area */
-        .main-container {
-            flex: 1;
-            padding: 30px 40px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-            overflow-y: auto;
-        }
-
-        .section-view {
-            display: none;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .section-view.active {
-            display: grid;
-        }
-
-        .menu-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--ef-yellow);
-            box-shadow: 0 10px 25px rgba(255, 230, 0, 0.25);
-        }
-
-        .menu-card.highlight {
-            background: linear-gradient(135deg, #12226c, #06113c);
-            border-color: var(--ef-cyan);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .card-desc {
-            font-size: 0.9rem;
-            color: #ccc;
-            margin-top: 8px;
-        }
-
-        .card-badge {
-            align-self: flex-start;
-            background: var(--ef-yellow);
-            color: #000;
-            font-weight: bold;
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        /* Right Side Panel / Divisions Hub */
-        .side-panel {
-            background: rgba(2, 7, 29, 0.9);
-            border: 1.5px solid var(--ef-cyan);
-            border-radius: 12px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .side-panel h2 {
-            color: var(--ef-cyan);
-            font-size: 1.3rem;
-            border-bottom: 1px solid rgba(0, 229, 255, 0.3);
-            padding-bottom: 10px;
-        }
-
-        .division-box {
-            background: rgba(0, 229, 255, 0.08);
-            border: 1px solid var(--ef-cyan);
-            padding: 15px;
-            border-radius: 8px;
+        .controls-hint {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #00e5ff;
             text-align: center;
-        }
-
-        .division-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--ef-yellow);
-        }
-
-        .btn-action {
-            padding: 12px;
-            background: var(--ef-yellow);
-            color: #000;
-            font-weight: 900;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 1rem;
-            transition: 0.2s;
-        }
-
-        .btn-action:hover {
-            background: #fff;
-            box-shadow: 0 0 15px #fff;
-        }
-
-        .btn-match {
-            background: var(--ef-green);
-            color: #000;
-        }
-
-        .btn-match:hover {
-            background: #fff;
-            box-shadow: 0 0 15px var(--ef-green);
-        }
-
-        #status-msg {
-            margin-top: auto;
-            padding: 12px;
-            background: rgba(0, 229, 255, 0.15);
-            border-left: 4px solid var(--ef-cyan);
-            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="logo">e<span>Football</span> League</div>
-        <div class="currency-bar">
-            <div class="currency-item gp-color">GP: 2,450,000</div>
-            <div class="currency-item coin-color">Coins: 1,200</div>
-            <div class="currency-item">USER: MAWLIID_SOC</div>
+    <div id="game-container">
+        <div class="hud">
+            <span style="color: #00ff66;">MESSI (TEAM A): <span id="score-a">0</span></span>
+            <span>VS</span>
+            <span style="color: #ff0055;">RONALDO (TEAM B): <span id="score-b">0</span></span>
         </div>
+        <canvas id="field" width="900" height="500"></canvas>
     </div>
 
-    <div class="nav-tabs">
-        <div class="tab active" onclick="switchTab('match', this)">Match</div>
-        <div class="tab" onclick="switchTab('dreamteam', this)">Dream Team</div>
-        <div class="tab" onclick="switchTab('gameplan', this)">Game Plan</div>
-        <div class="tab" onclick="switchTab('contract', this)">Contract</div>
-    </div>
-
-    <div class="main-container">
-        
-        <!-- MATCH HUB -->
-        <div id="match-view" class="section-view active">
-            <div class="menu-card highlight" onclick="startDivisionMatch()">
-                <span class="card-badge">RANKED</span>
-                <div>
-                    <div class="card-title">eFootball Division</div>
-                    <div class="card-desc">Ciyaar online ama offline ah si aad uga soo baxdo Division 10 ilaa Division 1.</div>
-                </div>
-            </div>
-
-            <div class="menu-card" onclick="triggerAction('Opening Friend Match Lobby...')">
-                <span class="card-badge">1v1 / CO-OP</span>
-                <div>
-                    <div class="card-title">Friend Match</div>
-                    <div class="card-desc">Samee qol gaar ah ama ku biir Room Code si aad saaxiibkaa ula ciyaarto.</div>
-                </div>
-            </div>
-
-            <div class="menu-card" onclick="triggerAction('Starting Trial Match: Real Madrid vs Barcelona...')">
-                <span class="card-badge">OFFLINE</span>
-                <div>
-                    <div class="card-title">Trial Match</div>
-                    <div class="card-desc">Ku ciyaar kooxaha Authentic Teams adigoo wata Messi ama Mbappé.</div>
-                </div>
-            </div>
-
-            <div class="menu-card" onclick="triggerAction('Starting Penalty Shootout Challenge...')">
-                <span class="card-badge">PRACTICE</span>
-                <div>
-                    <div class="card-title">Penalty Shootout</div>
-                    <div class="card-desc">Tababar xabbadaha ganaaxa iyo goolhayaha.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DREAM TEAM HUB -->
-        <div id="dreamteam-view" class="section-view">
-            <div class="menu-card" onclick="triggerAction('Opening My Squad & Player Cards...')">
-                <span class="card-badge">SQUAD</span>
-                <div>
-                    <div class="card-title">My Squad</div>
-                    <div class="card-desc">Maamul ciyaartoydaada gaarka ah (Messi, Ronaldo, Mbappé) iyo shaxdaada.</div>
-                </div>
-            </div>
-            <div class="menu-card" onclick="triggerAction('Entering Player Training & Level Training...')">
-                <span class="card-badge">UPGRADE</span>
-                <div>
-                    <div class="card-title">Player Training</div>
-                    <div class="card-desc">Kordhi heerka ciyaartoydaada oo bar xirfado cusub.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- GAME PLAN HUB -->
-        <div id="gameplan-view" class="section-view">
-            <div class="menu-card" onclick="triggerAction('Loading 4-3-3 Tactics & Manager Instructions...')">
-                <span class="card-badge">TACTICS</span>
-                <div>
-                    <div class="card-title">Formation (4-3-3)</div>
-                    <div class="card-desc">Beddel qaab ciyaareedka, Possession Game, ama Quick Counter.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CONTRACT HUB -->
-        <div id="contract-view" class="section-view">
-            <div class="menu-card" onclick="triggerAction('Opening Special Player List & Packs...')">
-                <span class="card-badge">SIGNINGS</span>
-                <div>
-                    <div class="card-title">Special Player List</div>
-                    <div class="card-desc">Saxiix ciyaartoy cusub oo Epic iyo Highlight ah.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- RIGHT PANEL: DIVISION & MATCH LAUNCHER -->
-        <div class="side-panel">
-            <h2>EFOOTBALL LEAGUE</h2>
-            <div class="division-box">
-                <div class="division-title" id="div-name">DIVISION 10</div>
-                <p style="font-size: 0.85rem; color: #ccc; margin-top: 5px;">Hadafka: Ka gudub heerkan adigoo guulo hela!</p>
-            </div>
-            <p style="font-size: 0.85rem; color: #aaa;">Dhibcahaaga: <strong id="div-points" style="color: var(--ef-yellow);">0 / 10 Pts</strong></p>
-            
-            <button class="btn-action btn-match" onclick="startDivisionMatch()">PLAY DIVISION MATCH</button>
-            <button class="btn-action" onclick="resetDivision()">Reset League</button>
-
-            <div id="status-msg">
-                <strong>STATUS:</strong> Diyaar u ah ciyaarta Divisions-ka!
-            </div>
-        </div>
+    <div class="controls-hint">
+        <strong>CONTROLS:</strong> Isticmaal Furayaasha **W, A, S, D** si aad u dhaqaajiso Messi | Riix **SPACEBAR** si aad u tuurto/shooteyso kubadda!
     </div>
 
     <script>
-        let currentDivision = 10;
-        let currentPoints = 0;
+        const canvas = document.getElementById("field");
+        const ctx = canvas.getContext("2d");
 
-        function switchTab(tabName, el) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.section-view').forEach(v => v.classList.remove('active'));
+        // Game Objects
+        let ball = { x: 450, y: 250, vx: 0, vy: 0, radius: 10, speed: 0.98 };
+        let playerA = { x: 200, y: 250, radius: 18, speed: 4, color: "#00ff66", name: "Messi" };
+        let playerB = { x: 700, y: 250, radius: 18, speed: 3, color: "#ff0055", name: "Ronaldo" };
 
-            el.classList.add('active');
-            document.getElementById(tabName + '-view').classList.add('active');
-            triggerAction("Waxaad furtay qaybta: " + tabName.toUpperCase());
-        }
+        let scoreA = 0;
+        let scoreB = 0;
 
-        function triggerAction(msg) {
-            document.getElementById('status-msg').innerHTML = "<strong>SYSTEM:</strong> " + msg;
-        }
+        let keys = {};
 
-        function startDivisionMatch() {
-            triggerAction("Match-kii waa uu bilaabmay! Raadinaya qof aad la ciyaarto (Searching opponent)...");
-            setTimeout(() => {
-                const win = Math.random() > 0.3; // 70% chance to win
-                if (win) {
-                    currentPoints += 3;
-                    triggerAction("GUSUL! Waa adkaatay ciyaartii! (+3 Pts)");
+        window.addEventListener("keydown", (e) => {
+            keys[e.code] = true;
+            if (e.code === "Space") {
+                // Shoot ball towards opponent goal
+                let dx = ball.x - playerA.x;
+                let dy = ball.y - playerA.y;
+                let dist = Math.hypot(dx, dy);
+                if (dist < 40) {
+                    ball.vx = (dx / dist) * 12;
+                    ball.vy = (dy / dist) * 12;
+                }
+            }
+        });
+
+        window.addEventListener("keyup", (e) => {
+            keys[e.code] = false;
+        });
+
+        function update() {
+            // Player A Movement (WASD)
+            if (keys["KeyW"] && playerA.y > 30) playerA.y -= playerA.speed;
+            if (keys["KeyS"] && playerA.y < canvas.height - 30) playerA.y += playerA.speed;
+            if (keys["KeyA"] && playerA.x > 30) playerA.x -= playerA.speed;
+            if (keys["KeyD"] && playerA.x < canvas.width / 2) playerA.x += playerA.speed;
+
+            // Simple AI for Player B (Ronaldo tracks the ball)
+            if (playerB.y < ball.y) playerB.y += 2;
+            if (playerB.y > ball.y) playerB.y -= 2;
+            if (playerB.x < ball.x) playerB.x += 1.5;
+            if (playerB.x > ball.x) playerB.x -= 1.5;
+
+            // Ball Physics
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            ball.vx *= ball.speed;
+            ball.vy *= ball.speed;
+
+            // Boundaries (Walls)
+            if (ball.y < 15 || ball.y > canvas.height - 15) ball.vy *= -1;
+
+            // Collision with Player A
+            let distA = Math.hypot(ball.x - playerA.x, ball.y - playerA.y);
+            if (distA < playerA.radius + ball.radius) {
+                ball.vx = (ball.x - playerA.x) * 0.4 + playerA.speed;
+                ball.vy = (ball.y - playerA.y) * 0.4;
+            }
+
+            // Collision with Player B
+            let distB = Math.hypot(ball.x - playerB.x, ball.y - playerB.y);
+            if (distB < playerB.radius + ball.radius) {
+                ball.vx = (ball.x - playerB.x) * 0.4;
+                ball.vy = (ball.y - playerB.y) * 0.4;
+            }
+
+            // Goal Detection
+            if (ball.x <= 15) {
+                if (ball.y > 180 && ball.y < 320) {
+                    scoreB++;
+                    document.getElementById("score-b").textContent = scoreB;
+                    resetBall();
                 } else {
-                    currentPoints = Math.max(0, currentPoints - 1);
-                    triggerAction("KHASARAD! Waa lagaa adkaadstay ciyaartii. (-1 Pt)");
+                    ball.vx *= -1;
+                    ball.x = 20;
                 }
-
-                if (currentPoints >= 10 && currentDivision > 1) {
-                    currentDivision--;
-                    currentPoints = 0;
-                    alert("HAMBALYO! Waxaad u gudubtay Division " + currentDivision + "!");
+            }
+            if (ball.x >= canvas.width - 15) {
+                if (ball.y > 180 && ball.y < 320) {
+                    scoreA++;
+                    document.getElementById("score-a").textContent = scoreA;
+                    resetBall();
+                } else {
+                    ball.vx *= -1;
+                    ball.x = canvas.width - 20;
                 }
-
-                document.getElementById('div-name').textContent = "DIVISION " + currentDivision;
-                document.getElementById('div-points').textContent = currentPoints + " / 10 Pts";
-            }, 1500);
+            }
         }
 
-        function resetDivision() {
-            currentDivision = 10;
-            currentPoints = 0;
-            document.getElementById('div-name').textContent = "DIVISION 10";
-            document.getElementById('div-points').textContent = "0 / 10 Pts";
-            triggerAction("Horyaalka waa la billaabay dib (Reset). Waxaad ku jirtaa Division 10.");
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.vx = 0;
+            ball.vy = 0;
         }
+
+        function drawField() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Grass lines
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+            ctx.lineWidth = 3;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+            // Center line
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 20);
+            ctx.lineTo(canvas.width / 2, canvas.height - 20);
+            ctx.stroke();
+
+            // Center circle
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, 60, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Goals
+            ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+            ctx.fillRect(0, 180, 15, 140);
+            ctx.fillRect(canvas.width - 15, 180, 15, 140);
+
+            // Draw Ball
+            ctx.fillStyle = "#fff";
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw Player A (Messi - Green)
+            ctx.fillStyle = playerA.color;
+            ctx.beginPath();
+            ctx.arc(playerA.x, playerA.y, playerA.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#fff";
+            ctx.font = "12px Courier New";
+            ctx.fillText(playerA.name, playerA.x - 20, playerA.y - 22);
+
+            // Draw Player B (Ronaldo - Pink)
+            ctx.fillStyle = playerB.color;
+            ctx.beginPath();
+            ctx.arc(playerB.x, playerB.y, playerB.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#fff";
+            ctx.fillText(playerB.name, playerB.x - 20, playerB.y - 22);
+        }
+
+        function loop() {
+            update();
+            drawField();
+            requestAnimationFrame(loop);
+        }
+
+        loop();
     </script>
 </body>
 </html>
