@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="so">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAWLIID SHEIKH | NOVEMBER 2026 SOC SCHEDULE</title>
+    <title>NOVEMBER 2026 | TACTICAL SCHEDULE</title>
     <style>
         :root {
             --neon-green: #00ff41;
             --neon-cyan: #00f3ff;
             --neon-pink: #ff0055;
-            --neon-orange: #ff9900;
-            --dark-bg: #010408;
-            --panel-bg: rgba(3, 14, 28, 0.95);
-            --glow-cyan: 0 0 20px rgba(0, 243, 255, 0.4);
+            --dark-bg: #02060d;
+            --card-bg: rgba(6, 18, 34, 0.92);
         }
 
         * {
@@ -24,264 +22,104 @@
 
         body {
             background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.12), transparent 60%),
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
             color: var(--neon-cyan);
             min-height: 100vh;
-            padding: 20px;
+            padding: 30px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        header {
+        .header-bar {
             width: 100%;
-            max-width: 1200px;
-            background: var(--panel-bg);
-            border: 2px solid var(--neon-cyan);
-            box-shadow: var(--glow-cyan);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        header h1 {
-            color: #fff;
-            font-size: 1.8rem;
-            text-shadow: 0 0 10px var(--neon-cyan);
-            letter-spacing: 2px;
-        }
-
-        header p {
-            color: var(--neon-green);
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        .schedule-container {
-            width: 100%;
-            max-width: 1200px;
-            background: var(--panel-bg);
+            max-width: 1100px;
+            background: var(--card-bg);
             border: 1.5px solid var(--neon-cyan);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: var(--glow-cyan);
-        }
-
-        .table-title {
-            color: var(--neon-green);
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
-            padding-bottom: 8px;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.25);
+            border-radius: 12px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th, td {
-            border: 1px solid rgba(0, 243, 255, 0.25);
-            padding: 12px;
-            font-size: 0.9rem;
-        }
-
-        th {
-            background: rgba(0, 243, 255, 0.1);
+        .header-bar h1 {
             color: #fff;
-            text-shadow: 0 0 5px var(--neon-cyan);
+            font-size: 1.6rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 12px var(--neon-cyan);
         }
 
-        tr:nth-child(even) {
-            background: rgba(0, 243, 255, 0.02);
-        }
-
-        tr:hover {
-            background: rgba(0, 243, 255, 0.06);
-        }
-
-        .status-select {
-            background: #020813;
-            color: var(--neon-cyan);
-            border: 1px solid var(--neon-cyan);
-            padding: 6px 10px;
-            border-radius: 4px;
+        .stats-pill {
+            display: flex;
+            gap: 15px;
+            font-size: 0.95rem;
             font-weight: bold;
-            outline: none;
-            cursor: pointer;
         }
 
-        .status-select.done {
-            border-color: var(--neon-green);
+        .stat-done {
             color: var(--neon-green);
             background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--neon-green);
+            padding: 6px 14px;
+            border-radius: 6px;
         }
 
-        .status-select.failed {
-            border-color: var(--neon-pink);
+        .stat-fail {
             color: var(--neon-pink);
             background: rgba(255, 0, 85, 0.1);
+            border: 1px solid var(--neon-pink);
+            padding: 6px 14px;
+            border-radius: 6px;
         }
 
-        .status-select.pending {
-            border-color: var(--neon-orange);
-            color: var(--neon-orange);
-            background: rgba(255, 153, 0, 0.1);
-        }
-
-        .note-input {
+        .grid-container {
             width: 100%;
-            background: transparent;
-            border: 1px solid rgba(0,243,255,0.3);
-            color: #fff;
-            padding: 6px;
-            border-radius: 4px;
-            outline: none;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 18px;
         }
 
-        .note-input:focus {
+        .day-card {
+            background: var(--card-bg);
+            border: 1.5px solid rgba(0, 243, 255, 0.35);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-card:hover:not(.locked) {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .day-card.locked-done {
             border-color: var(--neon-green);
+            background: rgba(0, 255, 65, 0.06);
+            box-shadow: 0 0 18px rgba(0, 255, 65, 0.25);
         }
 
-        footer {
-            margin-top: 25px;
-            font-size: 0.8rem;
-            color: rgba(0, 243, 255, 0.6);
-            text-align: center;
+        .day-card.locked-fail {
+            border-color: var(--neon-pink);
+            background: rgba(255, 0, 85, 0.06);
+            box-shadow: 0 0 18px rgba(255, 0, 85, 0.25);
         }
-    </style>
-</head>
-<body>
 
-    <header>
-        <h1>MAWLIID SHEIKH - NOVEMBER 2026 SCHEDULE</h1>
-        <p>// OPERATIONAL TASK TRACKER & STATUS CONTROL</p>
-    </header>
-
-    <div class="schedule-container">
-        <div class="table-title">
-            <span>[ BISHAN NOVEMBER 2026 - JADWALKA SHAQAHA ]</span>
-            <span>Haddaan la qaban waa (❌) ama (✓)</span>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 80px;">Taariikhda</th>
-                    <th>Maalinta</th>
-                    <th>Hawsha / Mashruuca Qorshaysan</th>
-                    <th style="width: 180px;">Xaaladda (Status)</th>
-                    <th>Faahfaahin / Qoraal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Nov 15</strong></td>
-                    <td>Axad</td>
-                    <td>Dhisidda SOC Dashboard & Universal AI Image Injection</td>
-                    <td>
-                        <select class="status-select done" onchange="updateStatus(this)">
-                            <option value="done">✓ La qabtay (Done)</option>
-                            <option value="failed">❌ Qabsoomi waa</option>
-                            <option value="pending" selected>⏳ Wali socota</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="note-input" value="Chrome Extension folder setup"></td>
-                </tr>
-                <tr>
-                    <td><strong>Nov 16</strong></td>
-                    <td>Isniin</td>
-                    <td>Tijaabinta Group Chat-ka "Unknown People" & AI Commands</td>
-                    <td>
-                        <select class="status-select pending" onchange="updateStatus(this)">
-                            <option value="done">✓ La qabtay (Done)</option>
-                            <option value="failed">❌ Qabsoomi waa</option>
-                            <option value="pending" selected>⏳ Wali socota</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="note-input" placeholder="Qor qoraal..."></td>
-                </tr>
-                <tr>
-                    <td><strong>Nov 17</strong></td>
-                    <td>Talaado</td>
-                    <td>Hagaajinta Solar System Orbit animations & Threat Map</td>
-                    <td>
-                        <select class="status-select pending" onchange="updateStatus(this)">
-                            <option value="done">✓ La qabtay (Done)</option>
-                            <option value="failed">❌ Qabsoomi waa</option>
-                            <option value="pending" selected>⏳ Wali socota</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="note-input" placeholder="Qor qoraal..."></td>
-                </tr>
-                <tr>
-                    <td><strong>Nov 18</strong></td>
-                    <td>Arbaco</td>
-                    <td>Audit ama Hubinta Security Modules & Terminal Logs</td>
-                    <td>
-                        <select class="status-select pending" onchange="updateStatus(this)">
-                            <option value="done">✓ La qabtay (Done)</option>
-                            <option value="failed">❌ Qabsoomi waa</option>
-                            <option value="pending" selected>⏳ Wali socota</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="note-input" placeholder="Qor qoraal..."></td>
-                </tr>
-                <tr>
-                    <td><strong>Nov 19</strong></td>
-                    <td>Khamiis</td>
-                    <td>Universal AI Canvas module test oo buuxa</td>
-                    <td>
-                        <select class="status-select pending" onchange="updateStatus(this)">
-                            <option value="done">✓ La qabtay (Done)</option>
-                            <option value="failed">❌ Qabsoomi waa</option>
-                            <option value="pending" selected>⏳ Wali socota</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="note-input" placeholder="Qor qoraal..."></td>
-                </tr>
-                <tr>
-                    <td><strong>Nov 20</strong></td>
-                    <td>Jimco</td>
-                    <td>Nasasho & Dib-u-eegis code-ka guud</td>
-                    <td>
-                        <select class="status-select pending" onchange="updateStatus(this)">
-                            <option value="done">✓ La qabtay (Done)</option>
-                            <option value="failed">❌ Qabsoomi waa</option>
-                            <option value="pending" selected>⏳ Wali socota</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="note-input" placeholder="Qor qoraal..."></td>
-                </tr>
-                <tr>
-                    <td><strong>Nov 21</strong></td>
-                    <td>Sabti</td>
-                    <td>Cusboonaysiinta Chrome Extension Package & Icons</td>
-                    <td>
-                        <select class="status-select pending" onchange="updateStatus(this)">
-                            <option value="done">✓ La qabtay (Done)</option>
-                            <option value="failed">❌ Qabsoomi waa</option>
-                            <option value="pending" selected>⏳ Wali socota</option>
-                        </select>
-                    </td>
-                    <td><input type="text" class="note-input" placeholder="Qor qoraal..."></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <footer>
-        &copy; 2026 Mawliid Sheikh SOC Command Center | Schedule & Task Tracker
-    </footer>
-
-    <script>
-        function updateStatus(selectElem) {
-            selectElem.className = "status-select " + selectElem.value;
-        }
-    </script>
-</body>
-</html>
+        .card-top {
+            display: flex
