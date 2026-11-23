@@ -1132,22 +1132,3 @@
                     const studentId = 'MA-' + (1001 + state.students.length);
                     state.students.push({
                         id: studentId,
-                        name: name,
-                        grade: grade,
-                        phone: phone,
-                        guardian: guardian
-                    });
-                    showToast('Student registered: ' + name);
-                }
-                document.getElementById('reg-edit-index').value = '';
-                document.getElementById('reg-form-heading').textContent = 'Register New Student';
-                document.getElementById('reg-name').value = '';
-                document.getElementById('reg-grade').value = '';
-                document.getElementById('reg-phone').value = '';
-                document.getElementById('reg-guardian').value = '';
-                renderAll();
-            });
-
-            document.getElementById('reg-clear-btn').addEventListener('click', function() {
-                document.getElementById('reg-edit-index').value = '';
-                document.getElementById('reg
