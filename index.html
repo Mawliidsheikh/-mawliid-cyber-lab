@@ -15,7 +15,6 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --accent: #2563eb;
         }
 
         body.dark-mode {
@@ -49,10 +48,8 @@
             color: var(--text-main);
             display: flex;
             min-height: 100vh;
-            transition: background 0.25s, color 0.25s;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 225px;
             background: var(--sidebar-bg);
@@ -135,7 +132,6 @@
             font-size: 0.86rem;
             cursor: pointer;
             text-align: left;
-            transition: background 0.15s, color 0.15s;
         }
 
         .nav-btn-left {
@@ -175,21 +171,18 @@
             background: rgba(255,255,255,0.06);
         }
 
-        /* Main Area */
         .main-wrapper {
             margin-left: 225px;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-width: 0;
-            transition: margin-left 0.25s;
         }
 
         .main-wrapper.expanded {
             margin-left: 0;
         }
 
-        /* Topbar */
         .topbar {
             background: var(--topbar-bg);
             border-bottom: 1px solid var(--border-color);
@@ -224,10 +217,6 @@
             gap: 5px;
         }
 
-        .icon-btn:hover {
-            filter: brightness(0.96);
-        }
-
         .school-title {
             font-weight: 700;
             font-size: 0.85rem;
@@ -247,4 +236,418 @@
             border-radius: 6px;
             border: 1px solid var(--border-color);
             background: var(--card-bg);
-            color
+            color: var(--text-main);
+            font-size: 0.8rem;
+        }
+
+        .btn-set {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-set:hover {
+            background: #1d4ed8;
+        }
+
+        .content {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .welcome-banner {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 22px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .welcome-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: #2563eb;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .welcome-banner h1 {
+            font-size: 1.65rem;
+            margin-bottom: 6px;
+        }
+
+        .welcome-banner p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .date-pill {
+            background: var(--body-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .section-heading {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .section-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px 14px 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .kpi-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            color: #ffffff;
+        }
+
+        .kpi-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .kpi-value {
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+
+        .kpi-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .kpi-link {
+            width: 100%;
+            border: none;
+            border-top: 1px solid var(--border-color);
+            background: transparent;
+            padding-top: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .view-page {
+            display: none;
+        }
+
+        .view-page.active {
+            display: block;
+        }
+
+        .card-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 0.88rem;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .ctrl-input {
+            padding: 8px 12px;
+            border-radius: 7px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.86rem;
+        }
+
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 20px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 820px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            .main-wrapper {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="school-logo-box">
+            <div class="school-badge">
+                <span>MAWLIID</span>
+                <span style="font-size:0.58rem; color:#2563eb;">ACADEMY</span>
+            </div>
+        </div>
+
+        <div class="profile-box">
+            <img id="student-avatar" class="profile-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23475569'/%3E%3Ctext x='50' y='58' font-size='40' text-anchor='middle' fill='%23fff'%3EM%3C/text%3E%3C/svg%3E" alt="Mawliid">
+            <div>
+                <div class="profile-name" id="sidebar-student-name">Mawliid</div>
+                <div style="font-size:0.72rem; color:#94a3b8;">Student Portal</div>
+            </div>
+        </div>
+
+        <ul class="nav-list">
+            <li><button type="button" class="nav-btn active" onclick="openPage('dashboard', this)"><span class="nav-btn-left">📊 Dashboard</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('student-data', this)"><span class="nav-btn-left">👤 Student Data</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('fees', this)"><span class="nav-btn-left">💳 Fees Collection</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('calendar', this)"><span class="nav-btn-left">📅 My Calendar</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('subjects', this)"><span class="nav-btn-left">📚 My Subjects</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('timetable', this)"><span class="nav-btn-left">🗓️ My Timetable</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('exam-timetable', this)"><span class="nav-btn-left">📝 My Exam Timetable</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('exam-result', this)"><span class="nav-btn-left">📈 My Exam Result</span></button></li>
+            <li>
+                <button type="button" class="nav-btn" onclick="toggleSubmenu('exam-sub')">
+                    <span class="nav-btn-left">💻 Online Examination</span>
+                    <span>‹</span>
+                </button>
+                <ul class="sub-menu" id="exam-sub">
+                    <li><button type="button" class="sub-btn" onclick="openPage('online-exam')">• Active Quizzes</button></li>
+                    <li><button type="button" class="sub-btn" onclick="openPage('exam-result')">• Past Scores</button></li>
+                </ul>
+            </li>
+            <li><button type="button" class="nav-btn" onclick="openPage('attendance', this)"><span class="nav-btn-left">✅ My Attendance</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('notices', this)"><span class="nav-btn-left">📢 My Notice Board</span></button></li>
+            <li><button type="button" class="nav-btn" onclick="openPage('homework', this)"><span class="nav-btn-left">📋 My Homework</span></button></li>
+        </ul>
+    </aside>
+
+    <div class="main-wrapper" id="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button type="button" class="icon-btn" onclick="toggleSidebar()" title="Menu">☰</button>
+                <button type="button" class="icon-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+                <button type="button" class="icon-btn" onclick="cycleSidebarColor()">🎨 Sidebar Color ▾</button>
+                <span class="school-title">MAWLIID KG, PRIMARY AND SECONDARY SCHOOL</span>
+            </div>
+
+            <div class="topbar-right">
+                <select id="academic-year" class="year-select">
+                    <option value="2019 EC (2026)" selected>2019 EC (2026)</option>
+                    <option value="2018 EC (2025)">2018 EC (2025)</option>
+                    <option value="2020 EC (2027)">2020 EC (2027)</option>
+                </select>
+                <button type="button" class="btn-set" onclick="applyAcademicYear()">Set</button>
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="welcome-banner">
+                <div>
+                    <div class="welcome-tag">STUDENT DASHBOARD</div>
+                    <h1 id="greeting-heading">Good Afternoon, Mawliid!</h1>
+                    <p>Keep up with your subjects, homework, attendance, and school notices.</p>
+                </div>
+                <div class="date-pill">📅 Monday, 23 November 2026</div>
+            </div>
+
+            <div class="section-heading">My learning</div>
+            <div class="section-sub">Important numbers at a glance</div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:#2563eb;">👛</div>
+                    <div class="kpi-label" style="color:#2563eb;">FEES PAID</div>
+                    <div class="kpi-value" id="kpi-fees">Birr 0.00</div>
+                    <div class="kpi-desc">Total payments recorded</div>
+                    <button type="button" class="kpi-link" style="color:#2563eb;" onclick="openPage('fees')">More info ⊕</button>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:#f59e0b;">📖</div>
+                    <div class="kpi-label" style="color:#f59e0b;">SUBJECTS</div>
+                    <div class="kpi-value" id="kpi-subjects">9</div>
+                    <div class="kpi-desc">My current subjects</div>
+                    <button type="button" class="kpi-link" style="color:#f59e0b;" onclick="openPage('subjects')">More info ⊕</button>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:#10b981;">📣</div>
+                    <div class="kpi-label" style="color:#10b981;">NOTICES</div>
+                    <div class="kpi-value" id="kpi-notices">0</div>
+                    <div class="kpi-desc">School announcements</div>
+                    <button type="button" class="kpi-link" style="color:#10b981;" onclick="openPage('notices')">More info ⊕</button>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:#f43f5e;">📌</div>
+                    <div class="kpi-label" style="color:#f43f5e;">HOMEWORK</div>
+                    <div class="kpi-value" id="kpi-homework">0</div>
+                    <div class="kpi-desc">Homework assigned</div>
+                    <button type="button" class="kpi-link" style="color:#f43f5e;" onclick="openPage('homework')">More info ⊕</button>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:#14b8a6;">✔</div>
+                    <div class="kpi-label" style="color:#14b8a6;">SUBMITTED</div>
+                    <div class="kpi-value" id="kpi-submitted">15</div>
+                    <div class="kpi-desc">Homework completed</div>
+                    <button type="button" class="kpi-link" style="color:#14b8a6;" onclick="openPage('homework')">More info ⊕</button>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:#8b5cf6;">🗓</div>
+                    <div class="kpi-label" style="color:#8b5cf6;">ATTENDANCE</div>
+                    <div class="kpi-value" id="kpi-attendance">42</div>
+                    <div class="kpi-desc">Attendance records</div>
+                    <button type="button" class="kpi-link" style="color:#8b5cf6;" onclick="openPage('attendance')">More info ⊕</button>
+                </div>
+            </div>
+
+            <section id="page-dashboard" class="view-page active">
+                <div class="card-panel">
+                    <h3>Quick Overview (<span id="active-year-label">2019 EC (2026)</span>)</h3>
+                    <p style="color:var(--text-muted); font-size:0.86rem; margin-top:6px;">
+                        Select any option in the sidebar or click "More info" on any card to view or update details.
+                    </p>
+                </div>
+            </section>
+
+            <section id="page-student-data" class="view-page">
+                <div class="card-panel">
+                    <h3>Student Profile &amp; Photo</h3>
+                    <div class="form-row">
+                        <input type="text" id="edit-student-name" class="ctrl-input" value="Mawliid" placeholder="Student Name">
+                        <input type="file" id="avatar-upload" accept="image/*" class="ctrl-input" onchange="updateAvatar(event)">
+                        <button type="button" class="btn-set" onclick="saveStudentProfile()">Save Profile</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-fees" class="view-page">
+                <div class="card-panel">
+                    <h3>Fees Collection</h3>
+                    <div class="form-row">
+                        <input type="number" id="fee-amount" class="ctrl-input" placeholder="Amount (Birr)">
+                        <input type="text" id="fee-note" class="ctrl-input" placeholder="Term / Note">
+                        <button type="button" class="btn-set" onclick="addFeeRecord()">Record Payment</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr><th>Date</th><th>Note</th><th>Amount</th></tr>
+                        </thead>
+                        <tbody id="fees-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="page-subjects" class="view-page">
+                <div class="card-panel">
+                    <h3>My Subjects (<span id="subjects-count-title">9</span>)</h3>
+                    <div class="form-row">
+                        <input type="text" id="new-subject-name" class="ctrl-input" placeholder="Add subject (e.g. ICT)">
+                        <button type="button" class="btn-set" onclick="addSubject()">Add Subject</button>
+                    </div>
+                    <ul id="subjects-list" style="margin-top:14px; padding-left:20px; line-height:1.8;"></ul>
+                </div>
+            </section>
+
+            <section id="page-homework" class="view-page">
+                <div class="card-panel">
+                    <h3>My Homework</h3>
+                    <div class="form-row">
+                        <input type="text" id="hw-title" class="ctrl-input" placeholder="Homework assignment...">
+                        <button type="button" class="btn-set" onclick="addHomework()">Add Homework</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr><th>Assignment</th><th>Status</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="hw-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="page-notices" class="view-page">
+                <div class="card-panel">
+                    <h3>My Notice Board</h3>
+                    <div class="form-row">
+                        <input type="text" id="notice-text" class="ctrl-input" placeholder="New school announcement...">
+                        <button type="button" class="btn-set" onclick="addNotice()">Post Notice</button>
+                    </div>
+                    <ul id="notices-list" style="margin-top:14px; padding-left:20px; line-height:1.8;"></ul>
+                </div>
+            </section>
+
+            <section id="page-attendance" class="view-page">
+                <div class="card-panel">
+                    <h3>My Attendance</h3>
+                    <p style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">
+                        Total recorded days: <strong id="att-days-count">42</strong>
+                    </
