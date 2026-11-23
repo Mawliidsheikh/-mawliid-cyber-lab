@@ -260,6 +260,22 @@
             flex: 1;
         }
 
+        .status-banner {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: none;
+        }
+
+        .status-banner.visible {
+            display: block;
+        }
+
         .welcome-banner {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -464,36 +480,36 @@
         </div>
 
         <ul class="nav-list">
-            <li><button type="button" class="nav-btn active" onclick="openPage('dashboard', this)"><span class="nav-btn-left">📊 Dashboard</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('student-data', this)"><span class="nav-btn-left">👤 Student Data</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('fees', this)"><span class="nav-btn-left">💳 Fees Collection</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('calendar', this)"><span class="nav-btn-left">📅 My Calendar</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('subjects', this)"><span class="nav-btn-left">📚 My Subjects</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('timetable', this)"><span class="nav-btn-left">🗓️ My Timetable</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('exam-timetable', this)"><span class="nav-btn-left">📝 My Exam Timetable</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('exam-result', this)"><span class="nav-btn-left">📈 My Exam Result</span></button></li>
+            <li><button type="button" class="nav-btn active" data-page="dashboard"><span class="nav-btn-left">📊 Dashboard</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="student-data"><span class="nav-btn-left">👤 Student Data</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="fees"><span class="nav-btn-left">💳 Fees Collection</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="calendar"><span class="nav-btn-left">📅 My Calendar</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="subjects"><span class="nav-btn-left">📚 My Subjects</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="timetable"><span class="nav-btn-left">🗓️ My Timetable</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="exam-timetable"><span class="nav-btn-left">📝 My Exam Timetable</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="exam-result"><span class="nav-btn-left">📈 My Exam Result</span></button></li>
             <li>
-                <button type="button" class="nav-btn" onclick="toggleSubmenu('exam-sub')">
+                <button type="button" class="nav-btn" id="btn-online-exam-toggle">
                     <span class="nav-btn-left">💻 Online Examination</span>
                     <span>‹</span>
                 </button>
                 <ul class="sub-menu" id="exam-sub">
-                    <li><button type="button" class="sub-btn" onclick="openPage('online-exam')">• Active Quizzes</button></li>
-                    <li><button type="button" class="sub-btn" onclick="openPage('exam-result')">• Past Scores</button></li>
+                    <li><button type="button" class="sub-btn" data-page="online-exam">• Active Quizzes</button></li>
+                    <li><button type="button" class="sub-btn" data-page="exam-result">• Past Scores</button></li>
                 </ul>
             </li>
-            <li><button type="button" class="nav-btn" onclick="openPage('attendance', this)"><span class="nav-btn-left">✅ My Attendance</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('notices', this)"><span class="nav-btn-left">📢 My Notice Board</span></button></li>
-            <li><button type="button" class="nav-btn" onclick="openPage('homework', this)"><span class="nav-btn-left">📋 My Homework</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="attendance"><span class="nav-btn-left">✅ My Attendance</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="notices"><span class="nav-btn-left">📢 My Notice Board</span></button></li>
+            <li><button type="button" class="nav-btn" data-page="homework"><span class="nav-btn-left">📋 My Homework</span></button></li>
         </ul>
     </aside>
 
     <div class="main-wrapper" id="main-wrapper">
         <header class="topbar">
             <div class="topbar-left">
-                <button type="button" class="icon-btn" onclick="toggleSidebar()" title="Menu">☰</button>
-                <button type="button" class="icon-btn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-                <button type="button" class="icon-btn" onclick="cycleSidebarColor()">🎨 Sidebar Color ▾</button>
+                <button type="button" class="icon-btn" id="btn-toggle-sidebar" title="Menu">☰</button>
+                <button type="button" class="icon-btn" id="btn-dark-mode">🌙 Dark Mode</button>
+                <button type="button" class="icon-btn" id="btn-sidebar-color">🎨 Sidebar Color ▾</button>
                 <span class="school-title">MAWLIID KG, PRIMARY AND SECONDARY SCHOOL</span>
             </div>
 
@@ -503,11 +519,13 @@
                     <option value="2018 EC (2025)">2018 EC (2025)</option>
                     <option value="2020 EC (2027)">2020 EC (2027)</option>
                 </select>
-                <button type="button" class="btn-set" onclick="applyAcademicYear()">Set</button>
+                <button type="button" class="btn-set" id="btn-set-year">Set</button>
             </div>
         </header>
 
         <main class="content">
+            <div class="status-banner" id="action-status"></div>
+
             <div class="welcome-banner">
                 <div>
                     <div class="welcome-tag">STUDENT DASHBOARD</div>
@@ -526,7 +544,7 @@
                     <div class="kpi-label" style="color:#2563eb;">FEES PAID</div>
                     <div class="kpi-value" id="kpi-fees">Birr 0.00</div>
                     <div class="kpi-desc">Total payments recorded</div>
-                    <button type="button" class="kpi-link" style="color:#2563eb;" onclick="openPage('fees')">More info ⊕</button>
+                    <button type="button" class="kpi-link" style="color:#2563eb;" data-page="fees">More info ⊕</button>
                 </div>
 
                 <div class="kpi-card">
@@ -534,7 +552,7 @@
                     <div class="kpi-label" style="color:#f59e0b;">SUBJECTS</div>
                     <div class="kpi-value" id="kpi-subjects">9</div>
                     <div class="kpi-desc">My current subjects</div>
-                    <button type="button" class="kpi-link" style="color:#f59e0b;" onclick="openPage('subjects')">More info ⊕</button>
+                    <button type="button" class="kpi-link" style="color:#f59e0b;" data-page="subjects">More info ⊕</button>
                 </div>
 
                 <div class="kpi-card">
@@ -542,7 +560,7 @@
                     <div class="kpi-label" style="color:#10b981;">NOTICES</div>
                     <div class="kpi-value" id="kpi-notices">0</div>
                     <div class="kpi-desc">School announcements</div>
-                    <button type="button" class="kpi-link" style="color:#10b981;" onclick="openPage('notices')">More info ⊕</button>
+                    <button type="button" class="kpi-link" style="color:#10b981;" data-page="notices">More info ⊕</button>
                 </div>
 
                 <div class="kpi-card">
@@ -550,7 +568,7 @@
                     <div class="kpi-label" style="color:#f43f5e;">HOMEWORK</div>
                     <div class="kpi-value" id="kpi-homework">0</div>
                     <div class="kpi-desc">Homework assigned</div>
-                    <button type="button" class="kpi-link" style="color:#f43f5e;" onclick="openPage('homework')">More info ⊕</button>
+                    <button type="button" class="kpi-link" style="color:#f43f5e;" data-page="homework">More info ⊕</button>
                 </div>
 
                 <div class="kpi-card">
@@ -558,7 +576,7 @@
                     <div class="kpi-label" style="color:#14b8a6;">SUBMITTED</div>
                     <div class="kpi-value" id="kpi-submitted">15</div>
                     <div class="kpi-desc">Homework completed</div>
-                    <button type="button" class="kpi-link" style="color:#14b8a6;" onclick="openPage('homework')">More info ⊕</button>
+                    <button type="button" class="kpi-link" style="color:#14b8a6;" data-page="homework">More info ⊕</button>
                 </div>
 
                 <div class="kpi-card">
@@ -566,7 +584,7 @@
                     <div class="kpi-label" style="color:#8b5cf6;">ATTENDANCE</div>
                     <div class="kpi-value" id="kpi-attendance">42</div>
                     <div class="kpi-desc">Attendance records</div>
-                    <button type="button" class="kpi-link" style="color:#8b5cf6;" onclick="openPage('attendance')">More info ⊕</button>
+                    <button type="button" class="kpi-link" style="color:#8b5cf6;" data-page="attendance">More info ⊕</button>
                 </div>
             </div>
 
@@ -574,7 +592,7 @@
                 <div class="card-panel">
                     <h3>Quick Overview (<span id="active-year-label">2019 EC (2026)</span>)</h3>
                     <p style="color:var(--text-muted); font-size:0.86rem; margin-top:6px;">
-                        Select any option in the sidebar or click "More info" on any card to view or update details.
+                        Tap any menu item on the left or "More info" on any card to view or update details.
                     </p>
                 </div>
             </section>
@@ -584,8 +602,8 @@
                     <h3>Student Profile &amp; Photo</h3>
                     <div class="form-row">
                         <input type="text" id="edit-student-name" class="ctrl-input" value="Mawliid" placeholder="Student Name">
-                        <input type="file" id="avatar-upload" accept="image/*" class="ctrl-input" onchange="updateAvatar(event)">
-                        <button type="button" class="btn-set" onclick="saveStudentProfile()">Save Profile</button>
+                        <input type="file" id="avatar-upload" accept="image/*" class="ctrl-input">
+                        <button type="button" class="btn-set" id="btn-save-profile">Save Profile</button>
                     </div>
                 </div>
             </section>
@@ -596,7 +614,7 @@
                     <div class="form-row">
                         <input type="number" id="fee-amount" class="ctrl-input" placeholder="Amount (Birr)">
                         <input type="text" id="fee-note" class="ctrl-input" placeholder="Term / Note">
-                        <button type="button" class="btn-set" onclick="addFeeRecord()">Record Payment</button>
+                        <button type="button" class="btn-set" id="btn-add-fee">Record Payment</button>
                     </div>
                     <table>
                         <thead>
@@ -612,7 +630,7 @@
                     <h3>My Subjects (<span id="subjects-count-title">9</span>)</h3>
                     <div class="form-row">
                         <input type="text" id="new-subject-name" class="ctrl-input" placeholder="Add subject (e.g. ICT)">
-                        <button type="button" class="btn-set" onclick="addSubject()">Add Subject</button>
+                        <button type="button" class="btn-set" id="btn-add-subject">Add Subject</button>
                     </div>
                     <ul id="subjects-list" style="margin-top:14px; padding-left:20px; line-height:1.8;"></ul>
                 </div>
@@ -623,7 +641,7 @@
                     <h3>My Homework</h3>
                     <div class="form-row">
                         <input type="text" id="hw-title" class="ctrl-input" placeholder="Homework assignment...">
-                        <button type="button" class="btn-set" onclick="addHomework()">Add Homework</button>
+                        <button type="button" class="btn-set" id="btn-add-hw">Add Homework</button>
                     </div>
                     <table>
                         <thead>
@@ -639,7 +657,7 @@
                     <h3>My Notice Board</h3>
                     <div class="form-row">
                         <input type="text" id="notice-text" class="ctrl-input" placeholder="New school announcement...">
-                        <button type="button" class="btn-set" onclick="addNotice()">Post Notice</button>
+                        <button type="button" class="btn-set" id="btn-add-notice">Post Notice</button>
                     </div>
                     <ul id="notices-list" style="margin-top:14px; padding-left:20px; line-height:1.8;"></ul>
                 </div>
@@ -650,4 +668,242 @@
                     <h3>My Attendance</h3>
                     <p style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">
                         Total recorded days: <strong id="att-days-count">42</strong>
-                    </
+                    </p>
+                    <div class="form-row">
+                        <button type="button" class="btn-set" id="btn-log-attendance">+ Mark Present Today</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-calendar" class="view-page"><div class="card-panel"><h3>My Calendar</h3><p style="margin-top:8px; color:var(--text-muted);">Academic Year: <span id="cal-year">2019 EC (2026)</span></p></div></section>
+            <section id="page-timetable" class="view-page"><div class="card-panel"><h3>My Timetable</h3><p style="margin-top:8px; color:var(--text-muted);">Classes run Monday - Friday (8:00 AM - 2:30 PM).</p></div></section>
+            <section id="page-exam-timetable" class="view-page"><div class="card-panel"><h3>My Exam Timetable</h3><p style="margin-top:8px; color:var(--text-muted);">Exam schedule for <span id="exam-tt-year">2019 EC (2026)</span>.</p></div></section>
+            <section id="page-exam-result" class="view-page"><div class="card-panel"><h3>My Exam Result</h3><p style="margin-top:8px; color:var(--text-muted);">Term results and grade report.</p></div></section>
+            <section id="page-online-exam" class="view-page"><div class="card-panel"><h3>Online Examination</h3><p style="margin-top:8px; color:var(--text-muted);">No active online exam right now.</p></div></section>
+        </main>
+
+        <footer class="footer">
+            Copyright &copy; 2026 Mawliid Academy All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const state = {
+                studentName: 'Mawliid',
+                feesPaid: 0,
+                feeHistory: [],
+                subjects: ['Mathematics', 'English', 'Physics', 'Chemistry', 'Biology', 'History', 'Geography', 'Civics', 'ICT'],
+                notices: [],
+                homework: [],
+                submittedCount: 15,
+                attendanceCount: 42
+            };
+
+            const sidebarThemes = ['', 'sidebar-blue', 'sidebar-teal'];
+            let themeIndex = 0;
+            let statusTimer = null;
+
+            function showBanner(msg) {
+                const el = document.getElementById('action-status');
+                if (!el) return;
+                el.textContent = msg;
+                el.classList.add('visible');
+                clearTimeout(statusTimer);
+                statusTimer = setTimeout(function() {
+                    el.classList.remove('visible');
+                }, 2200);
+            }
+
+            function openPage(pageKey, triggerEl) {
+                if (!pageKey) return;
+                document.querySelectorAll('.view-page').forEach(function(p) {
+                    p.classList.remove('active');
+                });
+                const target = document.getElementById('page-' + pageKey);
+                if (target) {
+                    target.classList.add('active');
+                }
+                if (triggerEl && triggerEl.classList.contains('nav-btn')) {
+                    document.querySelectorAll('.nav-btn').forEach(function(b) {
+                        b.classList.remove('active');
+                    });
+                    triggerEl.classList.add('active');
+                }
+                if (window.innerWidth <= 820) {
+                    document.getElementById('sidebar').classList.remove('mobile-open');
+                }
+                showBanner('Opened: ' + pageKey);
+            }
+
+            document.querySelectorAll('[data-page]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    openPage(this.getAttribute('data-page'), this);
+                });
+            });
+
+            document.getElementById('btn-toggle-sidebar').addEventListener('click', function() {
+                const sb = document.getElementById('sidebar');
+                const mw = document.getElementById('main-wrapper');
+                if (window.innerWidth <= 820) {
+                    sb.classList.toggle('mobile-open');
+                } else {
+                    sb.classList.toggle('collapsed');
+                    mw.classList.toggle('expanded');
+                }
+                showBanner('Sidebar toggled');
+            });
+
+            document.getElementById('btn-dark-mode').addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                showBanner(document.body.classList.contains('dark-mode') ? 'Dark Mode ON' : 'Dark Mode OFF');
+            });
+
+            document.getElementById('btn-sidebar-color').addEventListener('click', function() {
+                if (themeIndex > 0) {
+                    document.body.classList.remove(sidebarThemes[themeIndex]);
+                }
+                themeIndex = (themeIndex + 1) % sidebarThemes.length;
+                if (themeIndex > 0) {
+                    document.body.classList.add(sidebarThemes[themeIndex]);
+                }
+                showBanner('Sidebar color changed');
+            });
+
+            document.getElementById('btn-online-exam-toggle').addEventListener('click', function() {
+                document.getElementById('exam-sub').classList.toggle('open');
+            });
+
+            document.getElementById('btn-set-year').addEventListener('click', function() {
+                const yr = document.getElementById('academic-year').value;
+                document.getElementById('active-year-label').textContent = yr;
+                document.getElementById('cal-year').textContent = yr;
+                document.getElementById('exam-tt-year').textContent = yr;
+                showBanner('Academic year set to ' + yr);
+            });
+
+            document.getElementById('avatar-upload').addEventListener('change', function(e) {
+                const file = e.target.files && e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    document.getElementById('student-avatar').src = ev.target.result;
+                    showBanner('Profile photo updated');
+                };
+                reader.readAsDataURL(file);
+            });
+
+            document.getElementById('btn-save-profile').addEventListener('click', function() {
+                const val = document.getElementById('edit-student-name').value.trim() || 'Mawliid';
+                state.studentName = val;
+                document.getElementById('sidebar-student-name').textContent = val;
+                document.getElementById('greeting-heading').textContent = 'Good Afternoon, ' + val + '!';
+                showBanner('Profile saved: ' + val);
+            });
+
+            document.getElementById('btn-add-fee').addEventListener('click', function() {
+                const amt = parseFloat(document.getElementById('fee-amount').value);
+                const note = document.getElementById('fee-note').value.trim() || 'School Fee';
+                if (isNaN(amt) || amt <= 0) {
+                    showBanner('Enter a valid amount greater than 0');
+                    return;
+                }
+                state.feesPaid += amt;
+                state.feeHistory.push({ date: new Date().toLocaleDateString(), note: note, amt: amt });
+                document.getElementById('fee-amount').value = '';
+                document.getElementById('fee-note').value = '';
+                renderAll();
+                showBanner('Payment recorded: Birr ' + amt.toFixed(2));
+            });
+
+            document.getElementById('btn-add-subject').addEventListener('click', function() {
+                const input = document.getElementById('new-subject-name');
+                const name = input.value.trim();
+                if (!name) return;
+                state.subjects.push(name);
+                input.value = '';
+                renderAll();
+                showBanner('Subject added: ' + name);
+            });
+
+            document.getElementById('btn-add-hw').addEventListener('click', function() {
+                const input = document.getElementById('hw-title');
+                const title = input.value.trim();
+                if (!title) return;
+                state.homework.push({ title: title, done: false });
+                input.value = '';
+                renderAll();
+                showBanner('Homework added');
+            });
+
+            document.getElementById('btn-add-notice').addEventListener('click', function() {
+                const input = document.getElementById('notice-text');
+                const txt = input.value.trim();
+                if (!txt) return;
+                state.notices.unshift(txt);
+                input.value = '';
+                renderAll();
+                showBanner('Notice posted');
+            });
+
+            document.getElementById('btn-log-attendance').addEventListener('click', function() {
+                state.attendanceCount += 1;
+                renderAll();
+                showBanner('Attendance marked present');
+            });
+
+            function renderAll() {
+                document.getElementById('kpi-fees').textContent = 'Birr ' + state.feesPaid.toFixed(2);
+                document.getElementById('kpi-subjects').textContent = state.subjects.length;
+                document.getElementById('subjects-count-title').textContent = state.subjects.length;
+                document.getElementById('kpi-notices').textContent = state.notices.length;
+                const pendingHw = state.homework.filter(function(h) { return !h.done; }).length;
+                document.getElementById('kpi-homework').textContent = pendingHw;
+                document.getElementById('kpi-submitted').textContent = state.submittedCount;
+                document.getElementById('kpi-attendance').textContent = state.attendanceCount;
+                document.getElementById('att-days-count').textContent = state.attendanceCount;
+
+                document.getElementById('subjects-list').innerHTML = state.subjects.map(function(s) {
+                    return '<li>' + s + '</li>';
+                }).join('');
+
+                document.getElementById('notices-list').innerHTML = state.notices.length
+                    ? state.notices.map(function(n) { return '<li>' + n + '</li>'; }).join('')
+                    : '<li style="color:var(--text-muted)">No notices posted yet.</li>';
+
+                document.getElementById('fees-tbody').innerHTML = state.feeHistory.length
+                    ? state.feeHistory.map(function(f) {
+                        return '<tr><td>' + f.date + '</td><td>' + f.note + '</td><td>Birr ' + f.amt.toFixed(2) + '</td></tr>';
+                    }).join('')
+                    : '<tr><td colspan="3" style="color:var(--text-muted)">No payment records yet.</td></tr>';
+
+                const hwTbody = document.getElementById('hw-tbody');
+                if (!state.homework.length) {
+                    hwTbody.innerHTML = '<tr><td colspan="3" style="color:var(--text-muted)">No homework assigned yet.</td></tr>';
+                } else {
+                    hwTbody.innerHTML = state.homework.map(function(h, i) {
+                        const actionHtml = h.done
+                            ? '-'
+                            : '<button type="button" class="btn-set hw-submit-btn" data-hw-index="' + i + '">Submit</button>';
+                        return '<tr><td>' + h.title + '</td><td>' + (h.done ? 'Submitted' : 'Pending') + '</td><td>' + actionHtml + '</td></tr>';
+                    }).join('');
+
+                    hwTbody.querySelectorAll('.hw-submit-btn').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            const idx = parseInt(this.getAttribute('data-hw-index'), 10);
+                            if (state.homework[idx] && !state.homework[idx].done) {
+                                state.homework[idx].done = true;
+                                state.submittedCount += 1;
+                                renderAll();
+                                showBanner('Homework submitted');
+                            }
+                        });
+                    });
+                }
+            }
+
+            renderAll();
+        });
+    </script>
+</body>
+</html>
