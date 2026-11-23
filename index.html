@@ -89,6 +89,10 @@
         }
 
         .nav-item {
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: transparent;
             padding: 12px 16px;
             border-radius: 10px;
             cursor: pointer;
@@ -96,6 +100,7 @@
             align-items: center;
             gap: 12px;
             color: #cbd5e1;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: 0.2s;
         }
@@ -287,9 +292,11 @@
             border-radius: 6px;
             border: 1px solid var(--border);
             background: #fff;
+            color: var(--text-dark);
             cursor: pointer;
             font-size: 0.82rem;
             margin-right: 4px;
+            transition: 0.15s;
         }
 
         .btn-sm:hover { background: #f1f5f9; }
@@ -386,6 +393,28 @@
             font-weight: bold;
         }
 
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #0f172a;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: 0.25s;
+            z-index: 300;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         @media print {
             body * { visibility: hidden; }
             #printable-id, #printable-id * { visibility: visible; }
@@ -412,15 +441,15 @@
         </div>
 
         <ul class="nav-menu">
-            <li class="nav-item active" onclick="switchView('dashboard', this)">📊 Guudmar (Dashboard)</li>
-            <li class="nav-item" onclick="switchView('register', this)">➕ Diiwaangeli Arday</li>
-            <li class="nav-item" onclick="switchView('students', this)">🎓 Liiska Ardayda</li>
-            <li class="nav-item" onclick="switchView('attendance', this)">✅ Xaadirinta Maanta</li>
+            <li><button type="button" class="nav-item active" data-view="dashboard" onclick="switchView('dashboard')">📊 Guudmar (Dashboard)</button></li>
+            <li><button type="button" class="nav-item" data-view="register" onclick="openNewRegistration()">➕ Diiwaangeli Arday</button></li>
+            <li><button type="button" class="nav-item" data-view="students" onclick="switchView('students')">🎓 Liiska Ardayda</button></li>
+            <li><button type="button" class="nav-item" data-view="attendance" onclick="switchView('attendance')">✅ Xaadirinta Maanta</button></li>
         </ul>
 
         <div class="sidebar-footer">
-            <button class="btn-side" onclick="exportCSV()">📥 Soo Deji Excel (CSV)</button>
-            <button class="btn-side" onclick="exportJSON()">💾 Kaydi Backup (JSON)</button>
+            <button type="button" class="btn-side" onclick="exportCSV()">📥 Soo Deji Excel (CSV)</button>
+            <button type="button" class="btn-side" onclick="exportJSON()">💾 Kaydi Backup (JSON)</button>
             <label class="btn-side" style="text-align:center; cursor:pointer;">
                 📂 Soo Celi Backup
                 <input type="file" accept=".json" onchange="importJSON(event)" style="display:none;">
@@ -430,8 +459,8 @@
 
     <main class="main-content">
         <div class="top-header">
-            <h1 id="page-title">Guudmarka Nidaamka</h1>
-            <button class="btn-primary" onclick="openNewRegistration()">+ Arday Cusub</button>
+            <h1 id="page-title">Guudmarka & Liiska Ardayda</h1>
+            <button type="button" class="btn-primary" onclick="openNewRegistration()">+ Arday Cusub</button>
         </div>
 
         <div class="stats-grid">
@@ -554,4 +583,115 @@
             </div>
         </section>
 
-        <section id="view
+        <section id="view-attendance" class="view-section">
+            <div class="panel">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                    <h2>Xaadirinta Maanta (<span id="today-date"></span>)</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ardayga</th>
+                                <th>ID</th>
+                                <th>Koorsada</th>
+                                <th>Xaaladda Maanta</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendance-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="id-modal" onclick="if(event.target===this) closeModal()">
+        <div class="id-card-box" id="printable-id">
+            <div class="id-header">
+                <h3 style="letter-spacing:1px;">MAWLIID ACADEMY</h3>
+                <p style="font-size:0.78rem; opacity:0.85;">KAARKA AQOONSIGA ARDAYGA</p>
+            </div>
+            <img id="modal-photo" class="id-photo" src="" alt="Photo">
+            <div class="id-body">
+                <h2 id="modal-name" style="margin-bottom:4px;"></h2>
+                <p id="modal-course" style="color:var(--primary); font-weight:600; margin-bottom:14px;"></p>
+                <div style="text-align:left; font-size:0.88rem; display:grid; gap:6px; border-top:1px solid var(--border); padding-top:12px;">
+                    <div><strong>ID:</strong> <span id="modal-id"></span></div>
+                    <div><strong>Telefoon:</strong> <span id="modal-phone"></span></div>
+                    <div><strong>Lacagta:</strong> <span id="modal-fee"></span></div>
+                </div>
+                <div class="barcode" id="modal-barcode"></div>
+                <div class="no-print" style="margin-top:18px; display:flex; gap:10px; justify-content:center;">
+                    <button type="button" class="btn-primary" onclick="window.print()">🖨️ Daabac (Print)</button>
+                    <button type="button" class="btn-sm" onclick="closeModal()">Xidh</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast-box"></div>
+
+    <script>
+        const STORAGE_KEY = 'mawliid_academy_sms_v1';
+        const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23cbd5e1'/%3E%3Ctext x='50' y='55' font-size='35' text-anchor='middle' fill='%23475569'%3E👤%3C/text%3E%3C/svg%3E";
+
+        let memoryStore = [];
+        function readStorage() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : memoryStore;
+            } catch (e) {
+                return memoryStore;
+            }
+        }
+
+        function writeStorage(data) {
+            memoryStore = data;
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {
+                // Haddii localStorage xidhmo ama buuxsamo, xogta ku hay xusuusta hadda
+            }
+        }
+
+        let students = readStorage();
+        let currentPhotoBase64 = DEFAULT_AVATAR;
+        const todayStr = new Date().toISOString().split('T')[0];
+
+        document.getElementById('today-date').textContent = todayStr;
+
+        function showToast(msg) {
+            const box = document.getElementById('toast-box');
+            box.textContent = msg;
+            box.classList.add('show');
+            clearTimeout(box._timer);
+            box._timer = setTimeout(() => box.classList.remove('show'), 2500);
+        }
+
+        function setActiveNav(viewName) {
+            const normalized = viewName === 'students' ? 'dashboard' : viewName;
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.view === viewName || (viewName === 'dashboard' && btn.dataset.view === 'dashboard'));
+            });
+        }
+
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+            const target = (viewName === 'students') ? 'dashboard' : viewName;
+            document.getElementById('view-' + target).classList.add('active');
+
+            setActiveNav(viewName);
+
+            const titles = {
+                dashboard: 'Guudmarka & Liiska Ardayda',
+                students: 'Liiska Ardayda',
+                register: 'Diiwaangelinta Ardayda',
+                attendance: 'Xaadirinta Maanta'
+            };
+            document.getElementById('page-title').textContent = titles[viewName] || 'Maamulka Ardayda';
+            renderAll();
+        }
+
+        function openNewRegistration() {
+            document.getElementById('student-form').reset();
+            document.getElement
