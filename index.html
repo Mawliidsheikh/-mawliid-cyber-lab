@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mawliid Academy - School &amp; AI Portal</title>
+    <title>ALBUSHRA KG, PRIMARY AND SECONDARY SCHOOL</title>
     <style>
         :root {
-            --sidebar-bg: #111827;
+            --sidebar-bg: #1e293b;
             --sidebar-text: #cbd5e1;
             --sidebar-active: #2563eb;
             --topbar-bg: #ffffff;
@@ -18,12 +18,12 @@
         }
 
         body.dark-mode {
-            --topbar-bg: #111827;
-            --body-bg: #090d16;
-            --card-bg: #161f30;
+            --topbar-bg: #0f172a;
+            --body-bg: #060b14;
+            --card-bg: #131c2e;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: #263248;
+            --border-color: #24324a;
         }
 
         body.sidebar-emerald {
@@ -47,12 +47,17 @@
             background: var(--body-bg);
             color: var(--text-main);
             min-height: 100vh;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .app-shell {
             display: flex;
-            transition: background 0.25s, color 0.25s;
+            min-height: 100vh;
+            width: 100%;
         }
 
         .sidebar {
-            width: 245px;
+            width: 235px;
             background: var(--sidebar-bg);
             color: var(--sidebar-text);
             position: fixed;
@@ -60,9 +65,8 @@
             left: 0;
             bottom: 0;
             overflow-y: auto;
-            transition: transform 0.25s, background 0.25s;
             z-index: 120;
-            padding-bottom: 24px;
+            transition: transform 0.22s, background 0.22s;
         }
 
         .sidebar.collapsed {
@@ -70,28 +74,50 @@
         }
 
         .sidebar-header {
-            padding: 18px 16px;
+            padding: 20px 14px;
+            text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .sidebar-title {
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 1rem;
+        .school-crest {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            border: 3px solid #f59e0b;
+            background: #ffffff;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.05rem;
         }
 
-        .sidebar-sub {
-            color: #94a3b8;
-            font-size: 0.75rem;
-            margin-top: 2px;
+        .user-avatar {
+            width: 62px;
+            height: 62px;
+            margin: 6px auto 8px;
+            border-radius: 50%;
+            border: 3px solid #3b82f6;
+            background: #2563eb;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.35rem;
+        }
+
+        .user-name {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1rem;
         }
 
         .nav-list {
             list-style: none;
-            padding: 10px 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            padding: 8px 0;
         }
 
         .nav-btn {
@@ -99,29 +125,28 @@
             border: none;
             background: transparent;
             color: var(--sidebar-text);
-            padding: 10px 14px;
-            border-radius: 8px;
+            padding: 10px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 0.86rem;
-            font-weight: 500;
+            font-size: 0.85rem;
             cursor: pointer;
             text-align: left;
         }
 
         .nav-btn:hover, .nav-btn.active {
-            background: var(--sidebar-active);
+            background: rgba(37, 99, 235, 0.22);
             color: #ffffff;
+            border-left: 3px solid #3b82f6;
         }
 
         .main-area {
-            margin-left: 245px;
+            margin-left: 235px;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-width: 0;
-            transition: margin-left 0.25s;
+            transition: margin-left 0.22s;
         }
 
         .main-area.expanded {
@@ -131,7 +156,7 @@
         .topbar {
             background: var(--topbar-bg);
             border-bottom: 1px solid var(--border-color);
-            padding: 10px 20px;
+            padding: 9px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -149,131 +174,80 @@
             flex-wrap: wrap;
         }
 
-        .tool-btn {
+        .pill-btn {
             border: 1px solid var(--border-color);
-            background: var(--card-bg);
+            background: var(--body-bg);
             color: var(--text-main);
             padding: 6px 11px;
             border-radius: 7px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
         }
 
-        .pill-count {
-            background: #dbeafe;
-            color: #1e40af;
-            padding: 5px 11px;
-            border-radius: 999px;
-            font-size: 0.76rem;
-            font-weight: 700;
+        .pill-btn.active-mode {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
         }
 
-        .btn-primary-sm {
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .mini-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #1e3a8a;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .btn-primary {
             background: #2563eb;
             color: #ffffff;
             border: none;
             padding: 7px 14px;
             border-radius: 7px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
         }
 
-        .btn-danger-sm {
+        .btn-success {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            padding: 6px 11px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-danger {
             background: #dc2626;
             color: #ffffff;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 10px;
             border-radius: 6px;
             font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
         }
 
-        .content-body {
-            padding: 22px;
+        .content-wrap {
+            padding: 20px;
             flex: 1;
-        }
-
-        .toast-bar {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #86efac;
-            padding: 9px 14px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-bottom: 14px;
-            display: none;
-        }
-
-        .toast-bar.show {
-            display: block;
-        }
-
-        .greeting-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 22px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .greeting-card h1 {
-            font-size: 1.7rem;
-            margin: 4px 0;
-        }
-
-        .clock-box {
-            background: var(--body-bg);
-            border: 1px solid var(--border-color);
-            padding: 10px 16px;
-            border-radius: 9px;
-            font-size: 0.84rem;
-            font-weight: 700;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-            gap: 14px;
-            margin-bottom: 22px;
-        }
-
-        .stat-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px 14px 10px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .stat-num {
-            font-size: 1.35rem;
-            font-weight: 800;
-        }
-
-        .stat-action {
-            width: 100%;
-            border: none;
-            border-top: 1px solid var(--border-color);
-            background: transparent;
-            padding-top: 8px;
-            margin-top: 4px;
-            font-size: 0.76rem;
-            font-weight: 700;
-            color: #2563eb;
-            cursor: pointer;
         }
 
         .page-view {
@@ -284,67 +258,107 @@
             display: block;
         }
 
-        .panel-card {
+        .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 20px;
             margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
         }
 
-        .input-row {
+        .card-header {
             display: flex;
-            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
-            margin-top: 12px;
+            gap: 10px;
+            margin-bottom: 14px;
         }
 
-        .field-ctrl {
-            padding: 9px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-main);
-            font-size: 0.88rem;
+        .card-header h1, .card-header h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 16px;
-            font-size: 0.88rem;
+            font-size: 0.86rem;
         }
 
         th, td {
             padding: 10px 12px;
-            border-bottom: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
             text-align: left;
         }
 
         th {
-            color: var(--text-muted);
-            font-size: 0.76rem;
-            text-transform: uppercase;
-        }
-
-        .ai-log {
-            margin-top: 14px;
-            padding: 14px;
-            border-radius: 9px;
-            border: 1px solid var(--border-color);
             background: var(--body-bg);
-            max-height: 280px;
-            overflow-y: auto;
-            font-size: 0.86rem;
-            line-height: 1.65;
+            font-weight: 700;
         }
 
-        .footer-bar {
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 9px 11px;
+            border: 1px solid var(--border-color);
+            border-radius: 7px;
             background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            padding: 12px 22px;
+            color: var(--text-main);
+            font-size: 0.86rem;
+        }
+
+        /* FLOATING OVERLAY WINDOW THAT DOES NOT HIDE OR BLOCK ANYTHING */
+        .floating-dock {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            width: 350px;
+            max-width: calc(100vw - 36px);
+            background: var(--card-bg);
+            border: 2px solid #2563eb;
+            border-radius: 12px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+            z-index: 400;
+            display: none;
+            overflow: hidden;
+        }
+
+        .floating-dock.open {
+            display: block;
+        }
+
+        .dock-head {
+            background: #2563eb;
+            color: #ffffff;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .dock-close {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 3px 8px;
+            cursor: pointer;
             font-size: 0.78rem;
-            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .dock-body {
+            padding: 14px;
         }
 
         @media (max-width: 820px) {
@@ -352,772 +366,33 @@
             .sidebar.mobile-open { transform: translateX(0); }
             .main-area { margin-left: 0; }
         }
+
+        @media print {
+            .sidebar, .topbar, .floating-dock, .no-print { display: none !important; }
+            .main-area { margin-left: 0 !important; }
+        }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-title">Mawliid Academy</div>
-            <div class="sidebar-sub">Direct School &amp; AI Portal</div>
-        </div>
-
-        <ul class="nav-list">
-            <li><button type="button" class="nav-btn active" data-target="dashboard">Dashboard</button></li>
-            <li><button type="button" class="nav-btn" data-target="ai-assistant">AI Assistant</button></li>
-            <li><button type="button" class="nav-btn" data-target="register-student">Register Student</button></li>
-            <li><button type="button" class="nav-btn" data-target="student-data">Registered Students</button></li>
-            <li><button type="button" class="nav-btn" data-target="timetable">School Schedule (1A-2C)</button></li>
-            <li><button type="button" class="nav-btn" data-target="exam-result">Exam Results</button></li>
-            <li><button type="button" class="nav-btn" data-target="online-exam">Online Examination</button></li>
-            <li><button type="button" class="nav-btn" data-target="fees">Fees Collection</button></li>
-            <li><button type="button" class="nav-btn" data-target="subjects">My Subjects</button></li>
-            <li><button type="button" class="nav-btn" data-target="notices">Notice Board</button></li>
-            <li><button type="button" class="nav-btn" data-target="homework">Homework</button></li>
-            <li><button type="button" class="nav-btn" data-target="attendance">Attendance</button></li>
-        </ul>
-    </aside>
-
-    <div class="main-area" id="main-area">
-        <header class="topbar">
-            <div class="topbar-left">
-                <button type="button" class="tool-btn" id="btn-menu">&#9776; Menu</button>
-                <button type="button" class="tool-btn" id="btn-fullscreen">Full Screen</button>
-                <button type="button" class="tool-btn" id="btn-dark">Dark Mode</button>
-                <button type="button" class="tool-btn" id="btn-theme">Sidebar Color</button>
-                <button type="button" class="btn-primary-sm" data-target="ai-assistant">Ask AI</button>
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="school-crest">AB</div>
+                <div class="user-avatar" id="side-avatar">M</div>
+                <div class="user-name" id="side-name">Mawliid</div>
             </div>
 
-            <div class="topbar-right">
-                <span class="pill-count" id="topbar-count-badge">In System: 1 Admin + 0 Students</span>
-                <select id="year-select" class="field-ctrl" style="padding:6px 10px; font-size:0.8rem;">
-                    <option value="2019 EC (2026)" selected>2019 EC (2026)</option>
-                    <option value="2018 EC (2025)">2018 EC (2025)</option>
-                    <option value="2020 EC (2027)">2020 EC (2027)</option>
-                </select>
-                <button type="button" class="btn-primary-sm" id="btn-set-year">Set</button>
-            </div>
-        </header>
-
-        <main class="content-body">
-            <div class="toast-bar" id="toast-bar"></div>
-
-            <div class="greeting-card">
-                <div>
-                    <div style="font-size:0.72rem; font-weight:700; color:#2563eb; letter-spacing:1px;">MAWLIID ACADEMY DIRECT PORTAL</div>
-                    <h1 id="dynamic-greeting">Good Evening, Mawliid!</h1>
-                    <p id="dynamic-subtitle" style="color:var(--text-muted); font-size:0.86rem;">Synchronizing live time...</p>
-                </div>
-                <div class="clock-box" id="live-clock-box">Monday, 23 November 2026</div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div style="font-size:0.72rem; font-weight:700; color:#7c3aed;">AI ASSISTANT</div>
-                    <div class="stat-num">AI</div>
-                    <button type="button" class="stat-action" data-target="ai-assistant">Open AI Helper</button>
-                </div>
-                <div class="stat-box">
-                    <div style="font-size:0.72rem; font-weight:700; color:#2563eb;">REGISTERED STUDENTS</div>
-                    <div class="stat-num" id="stat-students">0</div>
-                    <button type="button" class="stat-action" data-target="register-student">+ Register Student</button>
-                </div>
-                <div class="stat-box">
-                    <div style="font-size:0.72rem; font-weight:700; color:#0284c7;">FEES PAID</div>
-                    <div class="stat-num" id="stat-fees">Birr 0.00</div>
-                    <button type="button" class="stat-action" data-target="fees">Open Fees</button>
-                </div>
-                <div class="stat-box">
-                    <div style="font-size:0.72rem; font-weight:700; color:#d97706;">SUBJECTS</div>
-                    <div class="stat-num" id="stat-subjects">8</div>
-                    <button type="button" class="stat-action" data-target="subjects">View Subjects</button>
-                </div>
-                <div class="stat-box">
-                    <div style="font-size:0.72rem; font-weight:700; color:#059669;">NOTICES</div>
-                    <div class="stat-num" id="stat-notices">0</div>
-                    <button type="button" class="stat-action" data-target="notices">Open Notices</button>
-                </div>
-                <div class="stat-box">
-                    <div style="font-size:0.72rem; font-weight:700; color:#e11d48;">SCHEDULE</div>
-                    <div class="stat-num">6 Classes</div>
-                    <button type="button" class="stat-action" data-target="timetable">Open Schedule</button>
-                </div>
-            </div>
-
-            <!-- DASHBOARD -->
-            <section id="view-dashboard" class="page-view active">
-                <div class="panel-card">
-                    <h3>Quick AI Command &amp; Live Summary (<span id="current-year-display">2019 EC (2026)</span>)</h3>
-                    <p style="color:var(--text-muted); font-size:0.88rem; margin-top:6px;">
-                        Registered Students: <strong id="sum-students">0</strong> &bull;
-                        Total People in System: <strong id="sum-total-people">1</strong> &bull;
-                        Exam Results: <strong id="sum-results">0</strong>
-                    </p>
-                    <div class="input-row">
-                        <input type="text" id="dash-ai-input" class="field-ctrl" style="flex:1; min-width:220px;" placeholder="Ask AI or command: add student Axmed / add subject ICT / open schedule...">
-                        <button type="button" class="btn-primary-sm" id="dash-ai-btn">Run AI Command</button>
-                    </div>
-                    <p id="dash-ai-reply" style="margin-top:10px; font-size:0.86rem; color:#2563eb; font-weight:600;"></p>
-                </div>
-            </section>
-
-            <!-- AI ASSISTANT -->
-            <section id="view-ai-assistant" class="page-view">
-                <div class="panel-card">
-                    <h3>AI Assistant (Ask Anything &amp; Add to System)</h3>
-                    <p style="color:var(--text-muted); font-size:0.85rem; margin-top:4px;">
-                        Commands: <strong>add student [Name]</strong>, <strong>add subject [Name]</strong>, <strong>add notice [Text]</strong>, <strong>add fee [Amount]</strong>, <strong>students count</strong>, <strong>open schedule</strong>, <strong>full screen</strong>, <strong>dark mode</strong>.
-                    </p>
-                    <div class="input-row">
-                        <input type="text" id="ai-prompt-input" class="field-ctrl" style="flex:1; min-width:220px;" placeholder="Type a question or command...">
-                        <button type="button" class="btn-primary-sm" id="ai-send-btn">Send</button>
-                    </div>
-                    <div class="ai-log" id="ai-chat-log">
-                        <div><strong>AI:</strong> Ready! Ask me about your school system or tell me what to add.</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- REGISTER STUDENT -->
-            <section id="view-register-student" class="page-view">
-                <div class="panel-card">
-                    <h3 id="reg-form-heading">Register New Student</h3>
-                    <input type="hidden" id="reg-edit-index" value="">
-                    <div class="input-row">
-                        <input type="text" id="reg-name" class="field-ctrl" placeholder="Student Full Name *">
-                        <input type="text" id="reg-grade" class="field-ctrl" placeholder="Class / Grade (e.g. 1A or Grade 9)">
-                        <input type="text" id="reg-phone" class="field-ctrl" placeholder="Phone Number">
-                        <input type="text" id="reg-guardian" class="field-ctrl" placeholder="Parent / Guardian">
-                        <button type="button" class="btn-primary-sm" id="reg-save-btn">Save Student</button>
-                        <button type="button" class="tool-btn" id="reg-clear-btn">Clear</button>
-                    </div>
-                    <p style="color:var(--text-muted); font-size:0.82rem; margin-top:10px;">
-                        Total Registered Students: <strong id="reg-total-label">0</strong>
-                    </p>
-                </div>
-            </section>
-
-            <!-- REGISTERED STUDENTS -->
-            <section id="view-student-data" class="page-view">
-                <div class="panel-card">
-                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                        <h3>Registered Students (<span id="list-student-count">0</span>)</h3>
-                        <button type="button" class="btn-primary-sm" data-target="register-student">+ Register Student</button>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr><th>ID</th><th>Full Name</th><th>Class</th><th>Phone</th><th>Guardian</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="students-list-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- SCHOOL SCHEDULE -->
-            <section id="view-timetable" class="page-view">
-                <div class="panel-card">
-                    <h3>School Weekly Schedule (Classes 1A, 1B, 1C, 2A, 2B, 2C)</h3>
-                    <p style="color:var(--text-muted); font-size:0.84rem; margin-top:4px;">
-                        5-Day Weekly Timetable &bull; 8 Subjects (Somali, English, Arabic, Tarbiyo, Maths, Science, Moral, Amharic)
-                    </p>
-                    <table>
-                        <thead>
-                            <tr><th>Period</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Period 1</td><td>Maths (1A)</td><td>English (1B)</td><td>Somali (1C)</td><td>Science (2A)</td><td>Arabic (2B)</td></tr>
-                            <tr><td>Period 2</td><td>English (1A)</td><td>Maths (1B)</td><td>Tarbiyo (1C)</td><td>Amharic (2A)</td><td>Moral (2B)</td></tr>
-                            <tr><td>Period 3</td><td>Science (1A)</td><td>Somali (1B)</td><td>Maths (1C)</td><td>English (2A)</td><td>Maths (2C)</td></tr>
-                            <tr><td>Period 4</td><td>Arabic (1A)</td><td>Moral (1B)</td><td>Science (1C)</td><td>Tarbiyo (2A)</td><td>English (2C)</td></tr>
-                            <tr><td>Period 5</td><td>Tarbiyo (1A)</td><td>Amharic (1B)</td><td>English (1C)</td><td>Maths (2A)</td><td>Somali (2C)</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- EXAM RESULTS -->
-            <section id="view-exam-result" class="page-view">
-                <div class="panel-card">
-                    <h3>Exam Results &amp; Score Entry</h3>
-                    <div class="input-row">
-                        <input type="text" id="res-student" class="field-ctrl" placeholder="Student Name">
-                        <input type="text" id="res-subject" class="field-ctrl" placeholder="Subject">
-                        <input type="number" id="res-score" class="field-ctrl" placeholder="Score (0-100)">
-                        <button type="button" class="btn-primary-sm" id="res-save-btn">Add Result</button>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr><th>Student</th><th>Subject</th><th>Score</th><th>Grade</th></tr>
-                        </thead>
-                        <tbody id="results-list-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- ONLINE EXAM -->
-            <section id="view-online-exam" class="page-view">
-                <div class="panel-card">
-                    <h3>Online Examination</h3>
-                    <p style="color:var(--text-muted); font-size:0.88rem; margin-top:8px;">
-                        Question 1: Which planet is known as the Red Planet?
-                    </p>
-                    <div class="input-row">
-                        <select id="exam-choice" class="field-ctrl">
-                            <option value="">-- Select Answer --</option>
-                            <option value="Mars">Mars</option>
-                            <option value="Jupiter">Jupiter</option>
-                            <option value="Saturn">Saturn</option>
-                        </select>
-                        <button type="button" class="btn-primary-sm" id="exam-submit-btn">Submit Exam</button>
-                    </div>
-                    <p id="exam-result-msg" style="margin-top:10px; font-weight:700; font-size:0.88rem;"></p>
-                </div>
-            </section>
-
-            <!-- FEES -->
-            <section id="view-fees" class="page-view">
-                <div class="panel-card">
-                    <h3>Fees Collection</h3>
-                    <div class="input-row">
-                        <input type="number" id="fee-amt" class="field-ctrl" placeholder="Amount (Birr)">
-                        <input type="text" id="fee-desc" class="field-ctrl" placeholder="Student / Description">
-                        <button type="button" class="btn-primary-sm" id="fee-add-btn">Record Payment</button>
-                    </div>
-                    <table>
-                        <thead><tr><th>Description</th><th>Amount</th></tr></thead>
-                        <tbody id="fees-list-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- SUBJECTS -->
-            <section id="view-subjects" class="page-view">
-                <div class="panel-card">
-                    <h3>School Subjects</h3>
-                    <div class="input-row">
-                        <input type="text" id="sub-input" class="field-ctrl" placeholder="Add Subject">
-                        <button type="button" class="btn-primary-sm" id="sub-add-btn">Add</button>
-                    </div>
-                    <ul id="subjects-ul" style="margin-top:14px; padding-left:20px; line-height:1.8;"></ul>
-                </div>
-            </section>
-
-            <!-- HOMEWORK -->
-            <section id="view-homework" class="page-view">
-                <div class="panel-card">
-                    <h3>Homework</h3>
-                    <div class="input-row">
-                        <input type="text" id="hw-input" class="field-ctrl" placeholder="Homework Assignment">
-                        <button type="button" class="btn-primary-sm" id="hw-add-btn">Add</button>
-                    </div>
-                    <table>
-                        <thead><tr><th>Assignment</th><th>Status</th><th>Action</th></tr></thead>
-                        <tbody id="hw-list-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- NOTICES -->
-            <section id="view-notices" class="page-view">
-                <div class="panel-card">
-                    <h3>Notice Board</h3>
-                    <div class="input-row">
-                        <input type="text" id="notice-input" class="field-ctrl" placeholder="School Notice">
-                        <button type="button" class="btn-primary-sm" id="notice-add-btn">Post</button>
-                    </div>
-                    <ul id="notices-ul" style="margin-top:14px; padding-left:20px; line-height:1.8;"></ul>
-                </div>
-            </section>
-
-            <!-- ATTENDANCE -->
-            <section id="view-attendance" class="page-view">
-                <div class="panel-card">
-                    <h3>Attendance</h3>
-                    <p style="margin-top:8px; color:var(--text-muted);">Recorded Attendance Days: <strong id="att-count-val">42</strong></p>
-                    <div class="input-row">
-                        <button type="button" class="btn-primary-sm" id="att-mark-btn">+ Mark Present Today</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer-bar">Copyright &copy; 2026 Mawliid Academy All rights reserved.</footer>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const STORAGE_KEY = 'mawliid_portal_v3';
-            const defaultState = {
-                user: 'Mawliid',
-                students: [],
-                results: [],
-                fees: [],
-                feesTotal: 0,
-                subjects: ['Somali', 'English', 'Arabic', 'Tarbiyo', 'Maths', 'Science', 'Moral', 'Amharic'],
-                homework: [],
-                notices: [],
-                attendanceCount: 42
-            };
-
-            let state = Object.assign({}, defaultState);
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) state = Object.assign({}, defaultState, JSON.parse(saved));
-            } catch (e) {}
-
-            function saveState() {
-                try {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-                } catch (e) {}
-            }
-
-            const sidebarThemes = ['', 'sidebar-emerald', 'sidebar-indigo'];
-            let themePointer = 0;
-            let toastTimer = null;
-
-            function showToast(msg) {
-                const bar = document.getElementById('toast-bar');
-                if (!bar) return;
-                bar.textContent = msg;
-                bar.classList.add('show');
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(function() { bar.classList.remove('show'); }, 2200);
-            }
-
-            function computeGreeting(hour) {
-                if (hour >= 5 && hour < 12) return 'Good Morning';
-                if (hour >= 12 && hour < 17) return 'Good Afternoon';
-                return 'Good Evening';
-            }
-
-            function refreshClock() {
-                const now = new Date();
-                const greetWord = computeGreeting(now.getHours());
-                const dateStr = now.toLocaleDateString('en-US', {
-                    weekday: 'long',
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                });
-                const timeStr = now.toLocaleTimeString('en-US', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
-                });
-
-                document.getElementById('dynamic-greeting').textContent = greetWord + ', ' + state.user + '!';
-                document.getElementById('live-clock-box').textContent = dateStr + ' • ' + timeStr;
-                document.getElementById('dynamic-subtitle').textContent = greetWord + ' — Current time is ' + timeStr + '.';
-            }
-
-            refreshClock();
-            setInterval(refreshClock, 1000);
-
-            function toggleFullScreenMode() {
-                if (!document.fullscreenElement) {
-                    if (document.documentElement.requestFullscreen) {
-                        document.documentElement.requestFullscreen().catch(function() {});
-                    }
-                    showToast('Full Screen enabled');
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen().catch(function() {});
-                    }
-                    showToast('Exited Full Screen');
-                }
-            }
-
-            function navigateTo(targetKey, navBtnEl) {
-                if (!targetKey) return;
-                document.querySelectorAll('.page-view').forEach(function(v) { v.classList.remove('active'); });
-                const view = document.getElementById('view-' + targetKey);
-                if (view) view.classList.add('active');
-
-                if (navBtnEl && navBtnEl.classList.contains('nav-btn')) {
-                    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
-                    navBtnEl.classList.add('active');
-                }
-                if (window.innerWidth <= 820) {
-                    document.getElementById('sidebar').classList.remove('mobile-open');
-                }
-                showToast('Opened: ' + targetKey);
-            }
-
-            function registerStudentRecord(name, grade, phone, guardian) {
-                const cleanName = (name || '').trim();
-                if (!cleanName) return false;
-                state.students.push({
-                    id: 'MA-' + (1001 + state.students.length),
-                    name: cleanName,
-                    grade: (grade || '').trim() || 'Grade 9',
-                    phone: (phone || '').trim() || '-',
-                    guardian: (guardian || '').trim() || '-'
-                });
-                saveState();
-                renderAll();
-                return true;
-            }
-
-            function processAICommand(rawInput) {
-                const raw = (rawInput || '').trim();
-                if (!raw) return '';
-                const low = raw.toLowerCase();
-
-                if (low.startsWith('add student ')) {
-                    const studentName = raw.slice(12).trim();
-                    if (registerStudentRecord(studentName, 'Grade 9', '-', '-')) {
-                        return 'Added student "' + studentName + '" to the system. Total students: ' + state.students.length + '.';
-                    }
-                    return 'Please write a student name after "add student".';
-                }
-                if (low.startsWith('add subject ')) {
-                    const subName = raw.slice(12).trim();
-                    if (subName) {
-                        state.subjects.push(subName);
-                        saveState();
-                        renderAll();
-                        return 'Added subject "' + subName + '".';
-                    }
-                }
-                if (low.startsWith('add notice ')) {
-                    const noticeTxt = raw.slice(11).trim();
-                    if (noticeTxt) {
-                        state.notices.unshift(noticeTxt);
-                        saveState();
-                        renderAll();
-                        return 'Posted notice: "' + noticeTxt + '".';
-                    }
-                }
-                if (low.startsWith('add fee ')) {
-                    const amt = parseFloat(raw.slice(8).trim());
-                    if (!isNaN(amt) && amt > 0) {
-                        state.feesTotal += amt;
-                        state.fees.push({ desc: 'AI Recorded Fee', amt: amt });
-                        saveState();
-                        renderAll();
-                        return 'Recorded fee payment of Birr ' + amt.toFixed(2) + '.';
-                    }
-                }
-                if (low.includes('full')) {
-                    toggleFullScreenMode();
-                    return 'Toggled Full Screen mode.';
-                }
-                if (low.includes('dark')) {
-                    document.body.classList.toggle('dark-mode');
-                    return 'Toggled Dark Mode.';
-                }
-                if (low.includes('schedule') || low.includes('timetable') || low.includes('jadwal')) {
-                    navigateTo('timetable');
-                    return 'Opened School Weekly Schedule (1A-2C).';
-                }
-                if (low.includes('exam') || low.includes('result') || low.includes('imtixaan')) {
-                    navigateTo('exam-result');
-                    return 'Opened Exam Results. Recorded results: ' + state.results.length + '.';
-                }
-                if (low.includes('student') || low.includes('count') || low.includes('inta') || low.includes('arday')) {
-                    navigateTo('student-data');
-                    return 'Registered students: ' + state.students.length + ' | Total people in system: ' + (1 + state.students.length) + '.';
-                }
-                return 'System status: ' + state.students.length + ' students registered, ' + state.subjects.length + ' subjects, ' + state.notices.length + ' notices, Fees paid: Birr ' + state.feesTotal.toFixed(2) + '.';
-            }
-
-            document.querySelectorAll('[data-target]').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    navigateTo(this.getAttribute('data-target'), this);
-                });
-            });
-
-            document.getElementById('btn-menu').addEventListener('click', function() {
-                const sb = document.getElementById('sidebar');
-                const ma = document.getElementById('main-area');
-                if (window.innerWidth <= 820) sb.classList.toggle('mobile-open');
-                else {
-                    sb.classList.toggle('collapsed');
-                    ma.classList.toggle('expanded');
-                }
-            });
-
-            document.getElementById('btn-fullscreen').addEventListener('click', toggleFullScreenMode);
-            document.getElementById('btn-dark').addEventListener('click', function() {
-                document.body.classList.toggle('dark-mode');
-                showToast(document.body.classList.contains('dark-mode') ? 'Dark Mode enabled' : 'Light Mode enabled');
-            });
-
-            document.getElementById('btn-theme').addEventListener('click', function() {
-                if (themePointer > 0) document.body.classList.remove(sidebarThemes[themePointer]);
-                themePointer = (themePointer + 1) % sidebarThemes.length;
-                if (themePointer > 0) document.body.classList.add(sidebarThemes[themePointer]);
-                showToast('Sidebar theme updated');
-            });
-
-            document.getElementById('btn-set-year').addEventListener('click', function() {
-                const yr = document.getElementById('year-select').value;
-                document.getElementById('current-year-display').textContent = yr;
-                showToast('Academic Year set: ' + yr);
-            });
-
-            document.getElementById('reg-save-btn').addEventListener('click', function() {
-                const name = document.getElementById('reg-name').value.trim();
-                const grade = document.getElementById('reg-grade').value.trim();
-                const phone = document.getElementById('reg-phone').value.trim();
-                const guardian = document.getElementById('reg-guardian').value.trim();
-                if (!name) {
-                    showToast('Please enter student full name');
-                    return;
-                }
-                const editVal = document.getElementById('reg-edit-index').value;
-                if (editVal !== '') {
-                    const idx = parseInt(editVal, 10);
-                    if (state.students[idx]) {
-                        state.students[idx] = {
-                            id: state.students[idx].id,
-                            name: name,
-                            grade: grade || 'Grade 9',
-                            phone: phone || '-',
-                            guardian: guardian || '-'
-                        };
-                        showToast('Student updated');
-                    }
-                } else {
-                    registerStudentRecord(name, grade, phone, guardian);
-                    showToast('Student registered: ' + name);
-                }
-                document.getElementById('reg-edit-index').value = '';
-                document.getElementById('reg-form-heading').textContent = 'Register New Student';
-                document.getElementById('reg-name').value = '';
-                document.getElementById('reg-grade').value = '';
-                document.getElementById('reg-phone').value = '';
-                document.getElementById('reg-guardian').value = '';
-                saveState();
-                renderAll();
-            });
-
-            document.getElementById('reg-clear-btn').addEventListener('click', function() {
-                document.getElementById('reg-edit-index').value = '';
-                document.getElementById('reg-form-heading').textContent = 'Register New Student';
-                document.getElementById('reg-name').value = '';
-                document.getElementById('reg-grade').value = '';
-                document.getElementById('reg-phone').value = '';
-                document.getElementById('reg-guardian').value = '';
-            });
-
-            document.getElementById('res-save-btn').addEventListener('click', function() {
-                const student = document.getElementById('res-student').value.trim() || state.user;
-                const subject = document.getElementById('res-subject').value.trim();
-                const score = parseFloat(document.getElementById('res-score').value);
-                if (!subject || isNaN(score)) {
-                    showToast('Enter subject and valid score');
-                    return;
-                }
-                const grade = score >= 85 ? 'A' : (score >= 70 ? 'B' : (score >= 50 ? 'C' : 'F'));
-                state.results.push({ student: student, subject: subject, score: score, grade: grade });
-                document.getElementById('res-subject').value = '';
-                document.getElementById('res-score').value = '';
-                saveState();
-                renderAll();
-                showToast('Result saved');
-            });
-
-            document.getElementById('exam-submit-btn').addEventListener('click', function() {
-                const ans = document.getElementById('exam-choice').value;
-                const msgEl = document.getElementById('exam-result-msg');
-                if (!ans) {
-                    msgEl.textContent = 'Please select an answer.';
-                    return;
-                }
-                if (ans === 'Mars') {
-                    msgEl.textContent = 'Correct! Score: 100% (Grade A)';
-                    state.results.push({ student: state.user, subject: 'Online Exam', score: 100, grade: 'A' });
-                } else {
-                    msgEl.textContent = 'Submitted. Correct answer is Mars.';
-                }
-                saveState();
-                renderAll();
-                showToast('Online exam submitted');
-            });
-
-            document.getElementById('fee-add-btn').addEventListener('click', function() {
-                const amt = parseFloat(document.getElementById('fee-amt').value);
-                const desc = document.getElementById('fee-desc').value.trim() || 'School Fee';
-                if (isNaN(amt) || amt <= 0) {
-                    showToast('Enter a valid amount');
-                    return;
-                }
-                state.feesTotal += amt;
-                state.fees.push({ desc: desc, amt: amt });
-                document.getElementById('fee-amt').value = '';
-                document.getElementById('fee-desc').value = '';
-                saveState();
-                renderAll();
-                showToast('Payment recorded');
-            });
-
-            document.getElementById('sub-add-btn').addEventListener('click', function() {
-                const inp = document.getElementById('sub-input');
-                const val = inp.value.trim();
-                if (!val) return;
-                state.subjects.push(val);
-                inp.value = '';
-                saveState();
-                renderAll();
-                showToast('Subject added');
-            });
-
-            document.getElementById('hw-add-btn').addEventListener('click', function() {
-                const inp = document.getElementById('hw-input');
-                const val = inp.value.trim();
-                if (!val) return;
-                state.homework.push({ title: val, done: false });
-                inp.value = '';
-                saveState();
-                renderAll();
-                showToast('Homework added');
-            });
-
-            document.getElementById('notice-add-btn').addEventListener('click', function() {
-                const inp = document.getElementById('notice-input');
-                const val = inp.value.trim();
-                if (!val) return;
-                state.notices.unshift(val);
-                inp.value = '';
-                saveState();
-                renderAll();
-                showToast('Notice posted');
-            });
-
-            document.getElementById('att-mark-btn').addEventListener('click', function() {
-                state.attendanceCount += 1;
-                saveState();
-                renderAll();
-                showToast('Attendance marked present');
-            });
-
-            document.getElementById('dash-ai-btn').addEventListener('click', function() {
-                const inp = document.getElementById('dash-ai-input');
-                const reply = processAICommand(inp.value);
-                if (reply) {
-                    document.getElementById('dash-ai-reply').textContent = 'AI: ' + reply;
-                    inp.value = '';
-                }
-            });
-
-            document.getElementById('ai-send-btn').addEventListener('click', function() {
-                const inp = document.getElementById('ai-prompt-input');
-                const raw = inp.value.trim();
-                if (!raw) return;
-                const reply = processAICommand(raw);
-                const log = document.getElementById('ai-chat-log');
-                log.innerHTML += '<div style="margin-top:8px;"><strong>You:</strong> ' + raw + '</div><div><strong>AI:</strong> ' + reply + '</div>';
-                log.scrollTop = log.scrollHeight;
-                inp.value = '';
-            });
-
-            function renderAll() {
-                const stdTotal = state.students.length;
-                const systemTotal = 1 + stdTotal;
-
-                document.getElementById('stat-students').textContent = stdTotal;
-                document.getElementById('reg-total-label').textContent = stdTotal;
-                document.getElementById('list-student-count').textContent = stdTotal;
-                document.getElementById('sum-students').textContent = stdTotal;
-                document.getElementById('sum-total-people').textContent = systemTotal;
-                document.getElementById('sum-results').textContent = state.results.length;
-                document.getElementById('topbar-count-badge').textContent =
-                    'In System: ' + systemTotal + ' (1 Admin + ' + stdTotal + ' Students)';
-
-                document.getElementById('stat-fees').textContent = 'Birr ' + state.feesTotal.toFixed(2);
-                document.getElementById('stat-subjects').textContent = state.subjects.length;
-                document.getElementById('stat-notices').textContent = state.notices.length;
-                document.getElementById('att-count-val').textContent = state.attendanceCount;
-
-                const stdTbody = document.getElementById('students-list-tbody');
-                if (!stdTotal) {
-                    stdTbody.innerHTML = '<tr><td colspan="6" style="color:var(--text-muted)">No students registered yet.</td></tr>';
-                } else {
-                    stdTbody.innerHTML = state.students.map(function(s, i) {
-                        return '<tr>' +
-                            '<td>' + s.id + '</td>' +
-                            '<td>' + s.name + '</td>' +
-                            '<td>' + s.grade + '</td>' +
-                            '<td>' + s.phone + '</td>' +
-                            '<td>' + s.guardian + '</td>' +
-                            '<td>' +
-                                '<button type="button" class="tool-btn edit-student-row" data-idx="' + i + '">Edit</button> ' +
-                                '<button type="button" class="btn-danger-sm del-student-row" data-idx="' + i + '">Delete</button>' +
-                            '</td>' +
-                        '</tr>';
-                    }).join('');
-
-                    stdTbody.querySelectorAll('.edit-student-row').forEach(function(b) {
-                        b.addEventListener('click', function() {
-                            const idx = parseInt(this.getAttribute('data-idx'), 10);
-                            const st = state.students[idx];
-                            if (!st) return;
-                            document.getElementById('reg-edit-index').value = idx;
-                            document.getElementById('reg-form-heading').textContent = 'Edit Student: ' + st.name;
-                            document.getElementById('reg-name').value = st.name;
-                            document.getElementById('reg-grade').value = st.grade;
-                            document.getElementById('reg-phone').value = st.phone;
-                            document.getElementById('reg-guardian').value = st.guardian;
-                            navigateTo('register-student');
-                        });
-                    });
-
-                    stdTbody.querySelectorAll('.del-student-row').forEach(function(b) {
-                        b.addEventListener('click', function() {
-                            const idx = parseInt(this.getAttribute('data-idx'), 10);
-                            state.students.splice(idx, 1);
-                            saveState();
-                            renderAll();
-                            showToast('Student deleted');
-                        });
-                    });
-                }
-
-                document.getElementById('results-list-tbody').innerHTML = state.results.length
-                    ? state.results.map(function(r) {
-                        return '<tr><td>' + r.student + '</td><td>' + r.subject + '</td><td>' + r.score + '</td><td>' + r.grade + '</td></tr>';
-                    }).join('')
-                    : '<tr><td colspan="4" style="color:var(--text-muted)">No exam results entered yet.</td></tr>';
-
-                document.getElementById('fees-list-tbody').innerHTML = state.fees.length
-                    ? state.fees.map(function(f) {
-                        return '<tr><td>' + f.desc + '</td><td>Birr ' + f.amt.toFixed(2) + '</td></tr>';
-                    }).join('')
-                    : '<tr><td colspan="2" style="color:var(--text-muted)">No payments recorded yet.</td></tr>';
-
-                document.getElementById('subjects-ul').innerHTML = state.subjects.map(function(sub) {
-                    return '<li>' + sub + '</li>';
-                }).join('');
-
-                const hwTbody = document.getElementById('hw-list-tbody');
-                if (!state.homework.length) {
-                    hwTbody.innerHTML = '<tr><td colspan="3" style="color:var(--text-muted)">No homework items yet.</td></tr>';
-                } else {
-                    hwTbody.innerHTML = state.homework.map(function(h, i) {
-                        const act = h.done ? 'Completed' : '<button type="button" class="btn-primary-sm hw-complete-btn" data-idx="' + i + '">Submit</button>';
-                        return '<tr><td>' + h.title + '</td><td>' + (h.done ? 'Submitted' : 'Pending') + '</td><td>' + act + '</td></tr>';
-                    }).join('');
-                    hwTbody.querySelectorAll('.hw-complete-btn').forEach(function(b) {
-                        b.addEventListener('click', function() {
-                            const idx = parseInt(this.getAttribute('data-idx'), 10);
-                            if (state.homework[idx]) {
-                                state.homework[idx].done = true;
-                                saveState();
-                                renderAll();
-                                showToast('Homework submitted');
-                            }
-                        });
-                    });
-                }
-
-                document.getElementById('notices-ul').innerHTML = state.notices.length
-                    ? state.notices.map(function(n) { return '<li>' + n + '</li>'; }).join('')
-                    : '<li style="color:var(--text-muted)">No notices posted yet.</li>';
-            }
-
-            renderAll();
-        });
-    </script>
-</body>
-</html>
+            <ul class="nav-list">
+                <li><button type="button" class="nav-btn" data-view="dashboard">Dashboard</button></li>
+                <li><button type="button" class="nav-btn" data-view="coworkers">Co-Workers Network</button></li>
+                <li><button type="button" class="nav-btn active" data-view="exam-result">My Exam Result</button></li>
+                <li><button type="button" class="nav-btn" data-view="student-data">Student Data</button></li>
+                <li><button type="button" class="nav-btn" data-view="fees">Fees Collection</button></li>
+                <li><button type="button" class="nav-btn" data-view="calendar">My Calendar</button></li>
+                <li><button type="button" class="nav-btn" data-view="subjects">My Subjects</button></li>
+                <li><button type="button" class="nav-btn" data-view="timetable">My Timetable</button></li>
+                <li><button type="button" class="nav-btn" data-view="exam-timetable">My Exam Timetable</button></li>
+                <li><button type="button" class="nav-btn" data-view="online-exam">Online Examination</button></li>
+                <li><button type="button" class="nav-btn" data-view="attendance">My Attendance</button></li>
+                <li><button type="button" class="nav-btn" data-view="notices">My Notice Board</button></li>
