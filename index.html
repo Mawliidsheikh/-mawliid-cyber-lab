@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mawliid Contacts &amp; WhatsApp System</title>
+    <title>Mawliid Contacts &amp; WhatsApp</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,93 +16,23 @@
             background: #f1f5f9;
             color: #0f172a;
             min-height: 100vh;
+            padding: 20px 14px;
         }
 
-        /* OUTSIDE LOGIN SCREEN */
-        #login-screen {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: #0f172a;
-        }
-
-        #login-screen.hidden {
-            display: none;
-        }
-
-        .login-box {
-            background: #ffffff;
-            color: #0f172a;
-            width: 100%;
-            max-width: 390px;
-            border-radius: 12px;
-            padding: 26px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
-        }
-
-        .login-box h1 {
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-        }
-
-        .login-box p {
-            color: #64748b;
-            font-size: 0.85rem;
-            margin-bottom: 16px;
-        }
-
-        .field {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: #0f172a;
-            background: #ffffff;
-        }
-
-        .login-field {
-            margin-bottom: 12px;
-        }
-
-        .btn-primary {
-            background: #2563eb;
-            color: #ffffff;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background: #1d4ed8;
-        }
-
-        /* INSIDE SYSTEM */
-        #system-screen {
-            display: none;
-            padding: 24px 16px;
-        }
-
-        #system-screen.active {
-            display: block;
-        }
-
-        .container {
-            max-width: 920px;
+        .wrap {
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .top-card {
+        .card {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
             border-radius: 12px;
-            padding: 16px 20px;
+            padding: 20px;
             margin-bottom: 16px;
+        }
+
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -110,73 +40,78 @@
             gap: 10px;
         }
 
-        .btn-logout {
-            background: #e2e8f0;
-            color: #0f172a;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.84rem;
-            cursor: pointer;
+        .title {
+            font-size: 1.3rem;
+            font-weight: 800;
         }
 
-        .card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
+        .sub {
+            font-size: 0.85rem;
+            color: #475569;
+            margin-top: 4px;
         }
 
-        .card h2 {
-            font-size: 1.05rem;
-            margin-bottom: 12px;
-        }
-
-        .grid-3 {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 10px;
+            margin-top: 12px;
         }
 
-        .btn-wa {
+        .inp {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #94a3b8;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            color: #0f172a;
+            background: #ffffff;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .btn-blue {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-green {
             background: #16a34a;
             color: #ffffff;
-            border: none;
             padding: 7px 12px;
-            border-radius: 7px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            cursor: pointer;
+            font-size: 0.82rem;
         }
 
-        .btn-wa:hover {
-            background: #15803d;
-        }
-
-        .btn-del {
+        .btn-red {
             background: #dc2626;
             color: #ffffff;
-            border: none;
             padding: 7px 10px;
-            border-radius: 7px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
+            font-size: 0.82rem;
         }
 
-        .status {
+        .btn-gray {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .msg-status {
             margin-top: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.86rem;
+            font-weight: 700;
             min-height: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 12px;
             font-size: 0.88rem;
         }
 
@@ -188,7 +123,7 @@
 
         th {
             background: #f8fafc;
-            color: #475569;
+            color: #334155;
             font-size: 0.78rem;
             text-transform: uppercase;
         }
@@ -198,50 +133,53 @@
             color: #64748b;
             padding: 18px;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <div class="wrap">
+        <!-- LOGIN PANEL (OPTIONAL - WAA LAGA BAXI KARA AMA WAA LAGU SOO GALI KARAA) -->
+        <div class="card" id="login-card">
+            <div class="title">Gelitaanka Nidaamka (Login)</div>
+            <div class="sub">Gali magacaaga (ama si toos ah u guji "Gal Hadda").</div>
+            <div class="grid">
+                <input type="text" id="user-name-inp" class="inp" placeholder="Magacaaga (tusaale: Mawliid)" value="Mawliid">
+                <input type="password" id="user-pass-inp" class="inp" placeholder="Password (ikhtiyaari)">
+                <button type="button" class="btn btn-blue" id="btn-enter">Gal Hadda</button>
+            </div>
+        </div>
 
-    <!-- 1. DIBADDA LAGA SOO GALO -->
-    <div id="login-screen">
-        <form class="login-box" id="login-form">
-            <h1>Gelitaanka Nidaamka</h1>
-            <p>Gali magacaaga iyo sirta (password) si aad gudaha u gasho.</p>
-            <input type="text" id="login-username" class="field login-field" placeholder="Magaca (tusaale: Mawliid)" required>
-            <input type="password" id="login-password" class="field login-field" placeholder="Password" required>
-            <button type="submit" class="btn-primary" style="width:100%;">Gal Gudaha</button>
-        </form>
-    </div>
-
-    <!-- 2. GUDAHA NIDAAMKA -->
-    <div id="system-screen">
-        <div class="container">
-            <div class="top-card">
+        <!-- MAIN SYSTEM -->
+        <div id="main-system">
+            <div class="card top-bar">
                 <div>
-                    <strong id="welcome-user">Ku soo dhawoow, Mawliid</strong>
-                    <div style="font-size:0.82rem; color:#64748b;">Shabakadda Diiwaangelinta &amp; Diridda WhatsApp</div>
+                    <div class="title" id="active-user-title">Nidaamka Diiwaangelinta &amp; WhatsApp — Mawliid</div>
+                    <div class="sub">Diiwaangeli qofka iyo number-kiisa, kadibna si toos ah WhatsApp ugu dir.</div>
                 </div>
-                <button type="button" class="btn-logout" id="btn-logout">Ka Bax (Logout)</button>
+                <button type="button" class="btn btn-gray" id="btn-toggle-login">Login / Lock</button>
             </div>
 
             <div class="card">
-                <h2>Diiwaangeli Qof &amp; Number-kiisa WhatsApp</h2>
-                <div class="grid-3">
-                    <input type="text" id="p-name" class="field" placeholder="Magaca qofka *">
-                    <input type="tel" id="p-phone" class="field" placeholder="Number-ka (tusaale: +251912345678) *">
-                    <input type="text" id="p-note" class="field" placeholder="Faallo / Xil">
-                    <button type="button" class="btn-primary" id="btn-add-person">Ku Dar Liiska</button>
+                <div class="title" style="font-size:1.05rem;">1. Diiwaangeli Qof &amp; Number-kiisa WhatsApp</div>
+                <div class="grid">
+                    <input type="text" id="c-name" class="inp" placeholder="Magaca qofka *">
+                    <input type="tel" id="c-phone" class="inp" placeholder="Number-ka (+2519... ama 252...)*">
+                    <input type="text" id="c-note" class="inp" placeholder="Faallo / Xil">
+                    <button type="button" class="btn btn-blue" id="btn-add">+ Kaydi</button>
                 </div>
-                <div class="status" id="status-box"></div>
+                <div class="msg-status" id="status-line"></div>
             </div>
 
             <div class="card">
-                <h2>Farriinta Loo Dirayo WhatsApp</h2>
-                <input type="text" id="wa-text" class="field" value="Asc, waan ku salaamay." placeholder="Qor fariinta aad WhatsApp ugu dirayso...">
+                <div class="title" style="font-size:1.05rem;">2. Qor Farriinta Loo Dirayo WhatsApp</div>
+                <input type="text" id="wa-msg" class="inp" style="margin-top:10px;" value="Asc, waa Mawliid." placeholder="Qor fariinta aad WhatsApp ugu dirayso...">
             </div>
 
             <div class="card">
-                <h2>Dadka Diiwaangashan (<span id="p-count">0</span>)</h2>
+                <div class="title" style="font-size:1.05rem;">3. Dadka Diiwaangashan (<span id="c-count">0</span>)</div>
                 <table>
                     <thead>
                         <tr>
@@ -251,7 +189,7 @@
                             <th>Ficil</th>
                         </tr>
                     </thead>
-                    <tbody id="p-tbody">
+                    <tbody id="c-tbody">
                         <tr><td colspan="4" class="empty">Weli cidna lama diiwaangelin.</td></tr>
                     </tbody>
                 </table>
@@ -260,47 +198,47 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const KEY = 'mawliid_simple_whatsapp_contacts_v1';
-            let contacts = [];
+        (function() {
+            const STORAGE_KEY = 'mawliid_wa_direct_v2';
+            let list = [];
             try {
-                const raw = localStorage.getItem(KEY);
-                if (raw) contacts = JSON.parse(raw) || [];
-            } catch (e) {
-                contacts = [];
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) list = JSON.parse(saved) || [];
+            } catch (err) {
+                list = [];
             }
 
-            function persist() {
+            function saveList() {
                 try {
-                    localStorage.setItem(KEY, JSON.stringify(contacts));
-                } catch (e) {}
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                } catch (err) {}
             }
 
-            function setStatus(msg, isErr) {
-                const box = document.getElementById('status-box');
-                box.style.color = isErr ? '#dc2626' : '#15803d';
-                box.textContent = msg;
+            function showStatus(text, error) {
+                const el = document.getElementById('status-line');
+                el.style.color = error ? '#dc2626' : '#15803d';
+                el.textContent = text;
             }
 
-            function normalizePhone(rawPhone) {
-                let digits = (rawPhone || '').replace(/[^0-9]/g, '');
-                if (digits.startsWith('00')) digits = digits.slice(2);
-                if (digits.length === 9 && (digits.startsWith('9') || digits.startsWith('7'))) {
-                    digits = '251' + digits;
+            function cleanPhone(raw) {
+                let d = String(raw || '').replace(/[^0-9]/g, '');
+                if (d.startsWith('00')) d = d.slice(2);
+                if (d.length === 9 && (d.startsWith('9') || d.startsWith('7'))) {
+                    d = '251' + d;
                 }
-                return digits;
+                return d;
             }
 
-            function openWhatsAppFor(contact) {
-                const digits = normalizePhone(contact.phone);
+            function sendWA(item) {
+                const digits = cleanPhone(item.phone);
                 if (!digits) {
-                    setStatus('Number-ka sax maaha. Fadlan geli number leh furaha waddanka (tusaale +251...).', true);
+                    showStatus('Number-ka sax maaha. Geli number telefoon oo sax ah.', true);
                     return;
                 }
-                const message = document.getElementById('wa-text').value.trim() || 'Asc.';
-                const waUrl = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(message);
-                setStatus('Waxaa loo dirayaa WhatsApp: ' + contact.name + ' (+' + digits + ')', false);
-                window.open(waUrl, '_blank', 'noopener,noreferrer');
+                const msg = document.getElementById('wa-msg').value.trim() || 'Asc.';
+                const url = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(msg);
+                showStatus('Waxaa loo furay WhatsApp: ' + item.name + ' (+' + digits + ')', false);
+                window.open(url, '_blank', 'noopener,noreferrer');
             }
 
             function esc(str) {
@@ -312,15 +250,95 @@
             }
 
             function render() {
-                document.getElementById('p-count').textContent = contacts.length;
-                const tbody = document.getElementById('p-tbody');
-                if (!contacts.length) {
+                document.getElementById('c-count').textContent = list.length;
+                const tbody = document.getElementById('c-tbody');
+                if (!list.length) {
                     tbody.innerHTML = '<tr><td colspan="4" class="empty">Weli cidna lama diiwaangelin.</td></tr>';
                     return;
                 }
 
-                tbody.innerHTML = contacts.map(function(c, i) {
+                tbody.innerHTML = list.map(function(item, i) {
                     return '<tr>' +
-                        '<td><strong>' + esc(c.name) + '</strong></td>' +
-                        '<td>' + esc(c.phone) + '</td>' +
-                        '<td>' + esc(c.note || '-') + '</td>' +
+                        '<td><strong>' + esc(item.name) + '</strong></td>' +
+                        '<td>' + esc(item.phone) + '</td>' +
+                        '<td>' + esc(item.note || '-') + '</td>' +
+                        '<td>' +
+                            '<button type="button" class="btn btn-green send-wa" data-i="' + i + '">Dir WhatsApp</button> ' +
+                            '<button type="button" class="btn btn-red del-wa" data-i="' + i + '">Tirtir</button>' +
+                        '</td>' +
+                    '</tr>';
+                }).join('');
+
+                tbody.querySelectorAll('.send-wa').forEach(function(btn) {
+                    btn.onclick = function() {
+                        const idx = parseInt(this.getAttribute('data-i'), 10);
+                        if (list[idx]) sendWA(list[idx]);
+                    };
+                });
+
+                tbody.querySelectorAll('.del-wa').forEach(function(btn) {
+                    btn.onclick = function() {
+                        const idx = parseInt(this.getAttribute('data-i'), 10);
+                        list.splice(idx, 1);
+                        saveList();
+                        render();
+                        showStatus('Waa la tirtiray.', false);
+                    };
+                });
+            }
+
+            document.getElementById('btn-enter').onclick = function() {
+                const uname = document.getElementById('user-name-inp').value.trim() || 'Mawliid';
+                document.getElementById('active-user-title').textContent = 'Nidaamka Diiwaangelinta & WhatsApp — ' + uname;
+                document.getElementById('login-card').classList.add('hidden');
+                document.getElementById('main-system').classList.remove('hidden');
+            };
+
+            document.getElementById('btn-toggle-login').onclick = function() {
+                const loginCard = document.getElementById('login-card');
+                const mainSys = document.getElementById('main-system');
+                const isHidden = loginCard.classList.contains('hidden');
+                if (isHidden) {
+                    loginCard.classList.remove('hidden');
+                    mainSys.classList.add('hidden');
+                } else {
+                    loginCard.classList.add('hidden');
+                    mainSys.classList.remove('hidden');
+                }
+            };
+
+            document.getElementById('btn-add').onclick = function() {
+                const nameEl = document.getElementById('c-name');
+                const phoneEl = document.getElementById('c-phone');
+                const noteEl = document.getElementById('c-note');
+
+                const name = nameEl.value.trim();
+                const phone = phoneEl.value.trim();
+                const note = noteEl.value.trim();
+
+                if (!name) {
+                    showStatus('Fadlan qor magaca qofka.', true);
+                    nameEl.focus();
+                    return;
+                }
+                if (!cleanPhone(phone)) {
+                    showStatus('Fadlan qor number telefoon oo sax ah.', true);
+                    phoneEl.focus();
+                    return;
+                }
+
+                list.push({ name: name, phone: phone, note: note });
+                saveList();
+                render();
+
+                nameEl.value = '';
+                phoneEl.value = '';
+                noteEl.value = '';
+                showStatus('Waa la kaydiyey ' + name + '. Guji "Dir WhatsApp".', false);
+            };
+
+            render();
+        })();
+    </script>
+</body>
+</html>
