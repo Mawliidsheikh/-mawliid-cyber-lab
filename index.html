@@ -3,341 +3,702 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mawliid Contacts &amp; WhatsApp</title>
+    <title>Mawliid Cloud — Contacts &amp; WhatsApp System</title>
     <style>
+        :root {
+            --bg-app: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-sidebar: #0f172a;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border-subtle: #e2e8f0;
+            --brand-primary: #2563eb;
+            --brand-hover: #1d4ed8;
+            --success: #16a34a;
+            --success-hover: #15803d;
+            --danger: #dc2626;
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background: #f1f5f9;
-            color: #0f172a;
+            background: var(--bg-app);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding: 20px 14px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .wrap {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-
-        .top-bar {
+        /* AUTHENTICATION SCREEN */
+        #auth-screen {
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(circle at top right, #1e3a8a 0%, #0f172a 55%, #020617 100%);
         }
 
-        .title {
-            font-size: 1.3rem;
-            font-weight: 800;
+        #auth-screen.hidden {
+            display: none;
         }
 
-        .sub {
-            font-size: 0.85rem;
-            color: #475569;
-            margin-top: 4px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .inp {
+        .auth-card {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #94a3b8;
-            border-radius: 8px;
-            font-size: 0.92rem;
-            color: #0f172a;
-            background: #ffffff;
+            max-width: 420px;
+            background: var(--bg-surface);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .auth-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--brand-primary);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .auth-card h1 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .auth-card p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px 13px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 9px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            background: var(--bg-surface);
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
         .btn {
             border: none;
-            border-radius: 8px;
+            border-radius: 9px;
             padding: 10px 16px;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background 0.15s, transform 0.1s;
+        }
+
+        .btn:active {
+            transform: scale(0.99);
+        }
+
+        .btn-primary {
+            background: var(--brand-primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: var(--brand-hover);
+        }
+
+        .btn-whatsapp {
+            background: var(--success);
+            color: #ffffff;
+            padding: 7px 12px;
+            font-size: 0.8rem;
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--success-hover);
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: var(--danger);
+            padding: 7px 11px;
+            font-size: 0.8rem;
+        }
+
+        .btn-delete:hover {
+            background: #fecaca;
+        }
+
+        .btn-ghost {
+            background: #f1f5f9;
+            color: var(--text-primary);
+            padding: 8px 13px;
+            font-size: 0.82rem;
+        }
+
+        .btn-ghost:hover {
+            background: #e2e8f0;
+        }
+
+        /* WORKSPACE SHELL */
+        #workspace-screen {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        #workspace-screen.active {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 248px;
+            background: var(--bg-sidebar);
+            color: #cbd5e1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 14px;
+            z-index: 100;
+        }
+
+        .sidebar-top-title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-sub {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+
+        .sidebar-nav {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-link {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            color: #cbd5e1;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 9px;
+            font-size: 0.86rem;
+            font-weight: 500;
             cursor: pointer;
         }
 
-        .btn-blue {
-            background: #2563eb;
+        .nav-link.active, .nav-link:hover {
+            background: rgba(255, 255, 255, 0.09);
             color: #ffffff;
         }
 
-        .btn-green {
-            background: #16a34a;
-            color: #ffffff;
-            padding: 7px 12px;
-            font-size: 0.82rem;
+        .sidebar-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 14px;
+            font-size: 0.8rem;
         }
 
-        .btn-red {
-            background: #dc2626;
-            color: #ffffff;
-            padding: 7px 10px;
-            font-size: 0.82rem;
+        .main-shell {
+            margin-left: 248px;
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
         }
 
-        .btn-gray {
-            background: #e2e8f0;
-            color: #0f172a;
+        .topbar {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
 
-        .msg-status {
-            margin-top: 10px;
-            font-size: 0.86rem;
+        .topbar-title {
+            font-size: 1rem;
             font-weight: 700;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .main-content {
+            padding: 24px;
+            max-width: 1120px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-label {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .metric-value {
+            font-size: 1.55rem;
+            font-weight: 800;
+            margin-top: 6px;
+        }
+
+        .surface-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .surface-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .grid-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+            align-items: end;
+        }
+
+        .feedback-line {
+            margin-top: 10px;
+            font-size: 0.84rem;
+            font-weight: 600;
             min-height: 20px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 8px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 12px;
             font-size: 0.88rem;
         }
 
         th, td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border-subtle);
             text-align: left;
         }
 
         th {
-            background: #f8fafc;
-            color: #334155;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
+            color: var(--text-secondary);
+            background: #f8fafc;
         }
 
-        .empty {
+        .empty-state {
             text-align: center;
-            color: #64748b;
-            padding: 18px;
+            color: var(--text-secondary);
+            padding: 24px;
         }
 
-        .hidden {
-            display: none;
+        @media (max-width: 820px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+            }
+            #workspace-screen.active {
+                flex-direction: column;
+            }
+            .main-shell {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="wrap">
-        <!-- LOGIN PANEL (OPTIONAL - WAA LAGA BAXI KARA AMA WAA LAGU SOO GALI KARAA) -->
-        <div class="card" id="login-card">
-            <div class="title">Gelitaanka Nidaamka (Login)</div>
-            <div class="sub">Gali magacaaga (ama si toos ah u guji "Gal Hadda").</div>
-            <div class="grid">
-                <input type="text" id="user-name-inp" class="inp" placeholder="Magacaaga (tusaale: Mawliid)" value="Mawliid">
-                <input type="password" id="user-pass-inp" class="inp" placeholder="Password (ikhtiyaari)">
-                <button type="button" class="btn btn-blue" id="btn-enter">Gal Hadda</button>
-            </div>
-        </div>
 
-        <!-- MAIN SYSTEM -->
-        <div id="main-system">
-            <div class="card top-bar">
+    <!-- 1. OUTSIDE LOGIN SCREEN -->
+    <div id="auth-screen">
+        <form class="auth-card" id="auth-form">
+            <div class="auth-brand">
+                <div class="brand-mark">M</div>
                 <div>
-                    <div class="title" id="active-user-title">Nidaamka Diiwaangelinta &amp; WhatsApp — Mawliid</div>
-                    <div class="sub">Diiwaangeli qofka iyo number-kiisa, kadibna si toos ah WhatsApp ugu dir.</div>
+                    <div style="font-weight:800; font-size:0.95rem;">Mawliid Cloud</div>
+                    <div style="font-size:0.75rem; color:#64748b;">Contacts &amp; WhatsApp Workspace</div>
                 </div>
-                <button type="button" class="btn btn-gray" id="btn-toggle-login">Login / Lock</button>
+            </div>
+            <h1>Sign in to your account</h1>
+            <p>Enter your username and password to access the directory and send WhatsApp messages.</p>
+
+            <div class="form-group">
+                <label class="form-label" for="auth-user">Username</label>
+                <input type="text" id="auth-user" class="input" placeholder="e.g. Mawliid" required>
             </div>
 
-            <div class="card">
-                <div class="title" style="font-size:1.05rem;">1. Diiwaangeli Qof &amp; Number-kiisa WhatsApp</div>
-                <div class="grid">
-                    <input type="text" id="c-name" class="inp" placeholder="Magaca qofka *">
-                    <input type="tel" id="c-phone" class="inp" placeholder="Number-ka (+2519... ama 252...)*">
-                    <input type="text" id="c-note" class="inp" placeholder="Faallo / Xil">
-                    <button type="button" class="btn btn-blue" id="btn-add">+ Kaydi</button>
+            <div class="form-group">
+                <label class="form-label" for="auth-pass">Password</label>
+                <input type="password" id="auth-pass" class="input" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; margin-top:6px;">Continue to System</button>
+        </form>
+    </div>
+
+    <!-- 2. INSIDE SYSTEM WORKSPACE -->
+    <div id="workspace-screen">
+        <aside class="sidebar">
+            <div>
+                <div style="display:flex; align-items:center; gap:10px; padding:0 6px;">
+                    <div class="brand-mark">M</div>
+                    <div>
+                        <div class="sidebar-top-title">Mawliid Cloud</div>
+                        <div class="sidebar-sub">WhatsApp Directory</div>
+                    </div>
                 </div>
-                <div class="msg-status" id="status-line"></div>
+
+                <nav class="sidebar-nav">
+                    <button type="button" class="nav-link active" id="nav-directory">Contacts Directory</button>
+                    <button type="button" class="nav-link" id="nav-template">Message Template</button>
+                </nav>
             </div>
 
-            <div class="card">
-                <div class="title" style="font-size:1.05rem;">2. Qor Farriinta Loo Dirayo WhatsApp</div>
-                <input type="text" id="wa-msg" class="inp" style="margin-top:10px;" value="Asc, waa Mawliid." placeholder="Qor fariinta aad WhatsApp ugu dirayso...">
+            <div class="sidebar-footer">
+                <div style="color:#ffffff; font-weight:600;" id="sidebar-operator">Mawliid</div>
+                <div style="color:#94a3b8; font-size:0.74rem; margin-top:2px;">Active Session</div>
             </div>
+        </aside>
 
-            <div class="card">
-                <div class="title" style="font-size:1.05rem;">3. Dadka Diiwaangashan (<span id="c-count">0</span>)</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Magaca</th>
-                            <th>Number-ka</th>
-                            <th>Faallo</th>
-                            <th>Ficil</th>
-                        </tr>
-                    </thead>
-                    <tbody id="c-tbody">
-                        <tr><td colspan="4" class="empty">Weli cidna lama diiwaangelin.</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="main-shell">
+            <header class="topbar">
+                <div class="topbar-title" id="topbar-heading">Contacts &amp; WhatsApp Dispatch</div>
+                <div class="topbar-actions">
+                    <input type="search" id="search-box" class="input" style="width:210px; padding:7px 11px; font-size:0.84rem;" placeholder="Search name or number...">
+                    <button type="button" class="btn btn-ghost" id="btn-sign-out">Sign Out</button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <div class="metric-label">Total Registered People</div>
+                        <div class="metric-value" id="metric-total">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">WhatsApp Ready</div>
+                        <div class="metric-value" id="metric-ready">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Workspace Operator</div>
+                        <div class="metric-value" style="font-size:1.2rem; margin-top:10px;" id="metric-user">Mawliid</div>
+                    </div>
+                </div>
+
+                <!-- ADD CONTACT -->
+                <section class="surface-card" id="card-add-contact">
+                    <div class="surface-title">Register Person &amp; Phone Number</div>
+                    <div class="grid-form">
+                        <div>
+                            <label class="form-label" for="contact-name">Full Name</label>
+                            <input type="text" id="contact-name" class="input" placeholder="e.g. Axmed Cali">
+                        </div>
+                        <div>
+                            <label class="form-label" for="contact-phone">Phone Number</label>
+                            <input type="tel" id="contact-phone" class="input" placeholder="e.g. +251912345678">
+                        </div>
+                        <div>
+                            <label class="form-label" for="contact-tag">Role / Note</label>
+                            <input type="text" id="contact-tag" class="input" placeholder="e.g. Team / Client">
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary" style="width:100%;" id="btn-save-contact">Save Contact</button>
+                        </div>
+                    </div>
+                    <div class="feedback-line" id="feedback-msg"></div>
+                </section>
+
+                <!-- MESSAGE COMPOSER -->
+                <section class="surface-card" id="card-message-composer">
+                    <div class="surface-title">WhatsApp Message Template</div>
+                    <input type="text" id="wa-template" class="input" value="Hello, reaching out from Mawliid." placeholder="Write the message to send on WhatsApp...">
+                </section>
+
+                <!-- CONTACTS TABLE -->
+                <section class="surface-card" id="card-contacts-list">
+                    <div class="surface-title">Registered Directory (<span id="table-count">0</span>)</div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Role / Note</th>
+                                    <th>WhatsApp Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contacts-tbody">
+                                <tr><td colspan="4" class="empty-state">No contacts registered yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
         </div>
     </div>
 
     <script>
         (function() {
-            const STORAGE_KEY = 'mawliid_wa_direct_v2';
-            let list = [];
+            const STORAGE_KEY = 'mawliid_global_wa_system_v1';
+            let records = [];
+
             try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) list = JSON.parse(saved) || [];
-            } catch (err) {
-                list = [];
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) records = JSON.parse(raw) || [];
+            } catch (e) {
+                records = [];
             }
 
-            function saveList() {
+            function saveRecords() {
                 try {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-                } catch (err) {}
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+                } catch (e) {}
             }
 
-            function showStatus(text, error) {
-                const el = document.getElementById('status-line');
-                el.style.color = error ? '#dc2626' : '#15803d';
-                el.textContent = text;
+            function setFeedback(msg, isError) {
+                const el = document.getElementById('feedback-msg');
+                el.style.color = isError ? '#dc2626' : '#15803d';
+                el.textContent = msg;
             }
 
-            function cleanPhone(raw) {
-                let d = String(raw || '').replace(/[^0-9]/g, '');
-                if (d.startsWith('00')) d = d.slice(2);
-                if (d.length === 9 && (d.startsWith('9') || d.startsWith('7'))) {
-                    d = '251' + d;
+            function formatInternationalPhone(rawPhone) {
+                let digits = String(rawPhone || '').replace(/[^0-9]/g, '');
+                if (!digits) return '';
+                if (digits.startsWith('00')) digits = digits.slice(2);
+                if (digits.length === 10 && digits.startsWith('09')) {
+                    digits = '251' + digits.slice(1);
+                } else if (digits.length === 9 && (digits.startsWith('9') || digits.startsWith('7'))) {
+                    digits = '251' + digits;
                 }
-                return d;
+                return digits;
             }
 
-            function sendWA(item) {
-                const digits = cleanPhone(item.phone);
-                if (!digits) {
-                    showStatus('Number-ka sax maaha. Geli number telefoon oo sax ah.', true);
+            function dispatchWhatsApp(person) {
+                const intlNumber = formatInternationalPhone(person.phone);
+                if (!intlNumber) {
+                    setFeedback('Invalid phone number for ' + person.name + '.', true);
                     return;
                 }
-                const msg = document.getElementById('wa-msg').value.trim() || 'Asc.';
-                const url = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(msg);
-                showStatus('Waxaa loo furay WhatsApp: ' + item.name + ' (+' + digits + ')', false);
-                window.open(url, '_blank', 'noopener,noreferrer');
+                const msgText = document.getElementById('wa-template').value.trim() || 'Hello.';
+                const waUrl = 'https://api.whatsapp.com/send?phone=' + intlNumber + '&text=' + encodeURIComponent(msgText);
+                setFeedback('Opening WhatsApp for ' + person.name + ' (+' + intlNumber + ')...', false);
+                window.open(waUrl, '_blank', 'noopener,noreferrer');
             }
 
-            function esc(str) {
-                return String(str || '')
+            function escapeHtml(value) {
+                return String(value || '')
                     .replace(/&/g, '&amp;')
                     .replace(/</g, '&lt;')
                     .replace(/>/g, '&gt;')
                     .replace(/"/g, '&quot;');
             }
 
-            function render() {
-                document.getElementById('c-count').textContent = list.length;
-                const tbody = document.getElementById('c-tbody');
-                if (!list.length) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="empty">Weli cidna lama diiwaangelin.</td></tr>';
+            function renderDirectory() {
+                const query = (document.getElementById('search-box').value || '').trim().toLowerCase();
+                const filtered = records.filter(function(item) {
+                    if (!query) return true;
+                    return item.name.toLowerCase().includes(query) ||
+                           item.phone.toLowerCase().includes(query) ||
+                           (item.tag || '').toLowerCase().includes(query);
+                });
+
+                const validCount = records.filter(function(r) { return Boolean(formatInternationalPhone(r.phone)); }).length;
+                document.getElementById('metric-total').textContent = records.length;
+                document.getElementById('metric-ready').textContent = validCount;
+                document.getElementById('table-count').textContent = filtered.length;
+
+                const tbody = document.getElementById('contacts-tbody');
+                if (!filtered.length) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No matching contacts found.</td></tr>';
                     return;
                 }
 
-                tbody.innerHTML = list.map(function(item, i) {
+                tbody.innerHTML = filtered.map(function(person) {
+                    const realIndex = records.indexOf(person);
                     return '<tr>' +
-                        '<td><strong>' + esc(item.name) + '</strong></td>' +
-                        '<td>' + esc(item.phone) + '</td>' +
-                        '<td>' + esc(item.note || '-') + '</td>' +
+                        '<td><strong>' + escapeHtml(person.name) + '</strong></td>' +
+                        '<td>' + escapeHtml(person.phone) + '</td>' +
+                        '<td>' + escapeHtml(person.tag || 'General') + '</td>' +
                         '<td>' +
-                            '<button type="button" class="btn btn-green send-wa" data-i="' + i + '">Dir WhatsApp</button> ' +
-                            '<button type="button" class="btn btn-red del-wa" data-i="' + i + '">Tirtir</button>' +
+                            '<button type="button" class="btn btn-whatsapp send-wa-row" data-idx="' + realIndex + '">Send WhatsApp</button> ' +
+                            '<button type="button" class="btn btn-delete del-wa-row" data-idx="' + realIndex + '">Delete</button>' +
                         '</td>' +
                     '</tr>';
                 }).join('');
 
-                tbody.querySelectorAll('.send-wa').forEach(function(btn) {
-                    btn.onclick = function() {
-                        const idx = parseInt(this.getAttribute('data-i'), 10);
-                        if (list[idx]) sendWA(list[idx]);
-                    };
+                tbody.querySelectorAll('.send-wa-row').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const idx = parseInt(this.getAttribute('data-idx'), 10);
+                        if (records[idx]) dispatchWhatsApp(records[idx]);
+                    });
                 });
 
-                tbody.querySelectorAll('.del-wa').forEach(function(btn) {
-                    btn.onclick = function() {
-                        const idx = parseInt(this.getAttribute('data-i'), 10);
-                        list.splice(idx, 1);
-                        saveList();
-                        render();
-                        showStatus('Waa la tirtiray.', false);
-                    };
+                tbody.querySelectorAll('.del-wa-row').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const idx = parseInt(this.getAttribute('data-idx'), 10);
+                        records.splice(idx, 1);
+                        saveRecords();
+                        renderDirectory();
+                        setFeedback('Contact removed.', false);
+                    });
                 });
             }
 
-            document.getElementById('btn-enter').onclick = function() {
-                const uname = document.getElementById('user-name-inp').value.trim() || 'Mawliid';
-                document.getElementById('active-user-title').textContent = 'Nidaamka Diiwaangelinta & WhatsApp — ' + uname;
-                document.getElementById('login-card').classList.add('hidden');
-                document.getElementById('main-system').classList.remove('hidden');
-            };
+            // Login form submission
+            document.getElementById('auth-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('auth-user').value.trim() || 'Mawliid';
+                document.getElementById('sidebar-operator').textContent = username;
+                document.getElementById('metric-user').textContent = username;
+                document.getElementById('auth-screen').classList.add('hidden');
+                document.getElementById('workspace-screen').classList.add('active');
+                renderDirectory();
+            });
 
-            document.getElementById('btn-toggle-login').onclick = function() {
-                const loginCard = document.getElementById('login-card');
-                const mainSys = document.getElementById('main-system');
-                const isHidden = loginCard.classList.contains('hidden');
-                if (isHidden) {
-                    loginCard.classList.remove('hidden');
-                    mainSys.classList.add('hidden');
-                } else {
-                    loginCard.classList.add('hidden');
-                    mainSys.classList.remove('hidden');
-                }
-            };
+            // Sign out to outside login screen
+            document.getElementById('btn-sign-out').addEventListener('click', function() {
+                document.getElementById('workspace-screen').classList.remove('active');
+                document.getElementById('auth-screen').classList.remove('hidden');
+                document.getElementById('auth-pass').value = '';
+            });
 
-            document.getElementById('btn-add').onclick = function() {
-                const nameEl = document.getElementById('c-name');
-                const phoneEl = document.getElementById('c-phone');
-                const noteEl = document.getElementById('c-note');
+            // Save contact
+            document.getElementById('btn-save-contact').addEventListener('click', function() {
+                const nameInput = document.getElementById('contact-name');
+                const phoneInput = document.getElementById('contact-phone');
+                const tagInput = document.getElementById('contact-tag');
 
-                const name = nameEl.value.trim();
-                const phone = phoneEl.value.trim();
-                const note = noteEl.value.trim();
+                const name = nameInput.value.trim();
+                const phone = phoneInput.value.trim();
+                const tag = tagInput.value.trim();
 
                 if (!name) {
-                    showStatus('Fadlan qor magaca qofka.', true);
-                    nameEl.focus();
-                    return;
-                }
-                if (!cleanPhone(phone)) {
-                    showStatus('Fadlan qor number telefoon oo sax ah.', true);
-                    phoneEl.focus();
+                    setFeedback('Please enter a full name.', true);
+                    nameInput.focus();
                     return;
                 }
 
-                list.push({ name: name, phone: phone, note: note });
-                saveList();
-                render();
+                if (!formatInternationalPhone(phone)) {
+                    setFeedback('Please enter a valid phone number.', true);
+                    phoneInput.focus();
+                    return;
+                }
 
-                nameEl.value = '';
-                phoneEl.value = '';
-                noteEl.value = '';
-                showStatus('Waa la kaydiyey ' + name + '. Guji "Dir WhatsApp".', false);
-            };
+                records.unshift({ name: name, phone: phone, tag: tag });
+                saveRecords();
+                renderDirectory();
 
-            render();
+                nameInput.value = '';
+                phoneInput.value = '';
+                tagInput.value = '';
+                setFeedback('Saved ' + name + ' (' + phone + '). Click "Send WhatsApp" to message.', false);
+            });
+
+            document.getElementById('search-box').addEventListener('input', renderDirectory);
+
+            document.getElementById('nav-directory').addEventListener('click', function() {
+                document.getElementById('nav-directory').classList.add('active');
+                document.getElementById('nav-template').classList.remove('active');
+                document.getElementById('card-contacts-list').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            document.getElementById('nav-template').addEventListener('click', function() {
+                document.getElementById('nav-template').classList.add('active');
+                document.getElementById('nav-directory').classList.remove('active');
+                document.getElementById('card-message-composer').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            renderDirectory();
         })();
     </script>
 </body>
