@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Contacts &amp; People Directory</title>
+    <title>Mawliid Contacts &amp; WhatsApp System</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,61 +16,44 @@
             background: #f1f5f9;
             color: #0f172a;
             min-height: 100vh;
-            padding: 24px 16px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .header-card {
-            background: #0f172a;
-            color: #ffffff;
-            padding: 20px 24px;
-            border-radius: 12px;
-            margin-bottom: 18px;
+        /* OUTSIDE LOGIN SCREEN */
+        #login-screen {
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .header-card h1 {
-            font-size: 1.35rem;
-        }
-
-        .badge {
-            background: #16a34a;
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            justify-content: center;
             padding: 20px;
-            margin-bottom: 18px;
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+            background: #0f172a;
         }
 
-        .card h2 {
-            font-size: 1.05rem;
-            margin-bottom: 12px;
+        #login-screen.hidden {
+            display: none;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 10px;
+        .login-box {
+            background: #ffffff;
+            color: #0f172a;
+            width: 100%;
+            max-width: 390px;
+            border-radius: 12px;
+            padding: 26px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
         }
 
-        .input {
+        .login-box h1 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .login-box p {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+
+        .field {
             width: 100%;
             padding: 10px 12px;
             border: 1px solid #cbd5e1;
@@ -80,19 +63,81 @@
             background: #ffffff;
         }
 
-        .btn-add {
+        .login-field {
+            margin-bottom: 12px;
+        }
+
+        .btn-primary {
             background: #2563eb;
             color: #ffffff;
             border: none;
             padding: 10px 16px;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             cursor: pointer;
         }
 
-        .btn-add:hover {
+        .btn-primary:hover {
             background: #1d4ed8;
+        }
+
+        /* INSIDE SYSTEM */
+        #system-screen {
+            display: none;
+            padding: 24px 16px;
+        }
+
+        #system-screen.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .top-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-logout {
+            background: #e2e8f0;
+            color: #0f172a;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.84rem;
+            cursor: pointer;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .card h2 {
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
         }
 
         .btn-wa {
@@ -121,11 +166,10 @@
             cursor: pointer;
         }
 
-        .status-msg {
+        .status {
             margin-top: 10px;
-            font-size: 0.84rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: #15803d;
             min-height: 20px;
         }
 
@@ -137,7 +181,7 @@
         }
 
         th, td {
-            padding: 11px 12px;
+            padding: 10px 12px;
             border-bottom: 1px solid #e2e8f0;
             text-align: left;
         }
@@ -149,184 +193,134 @@
             text-transform: uppercase;
         }
 
-        .empty-row {
-            color: #64748b;
+        .empty {
             text-align: center;
+            color: #64748b;
             padding: 18px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-card">
-            <div>
-                <h1>Shabakadda Diiwaangelinta &amp; Fariinta WhatsApp</h1>
-                <div style="font-size:0.84rem; color:#cbd5e1; margin-top:3px;">
-                    Ku diiwaangeli qofka iyo lambarkiisa, kadibna si toos ah WhatsApp ugu dir.
+
+    <!-- 1. DIBADDA LAGA SOO GALO -->
+    <div id="login-screen">
+        <form class="login-box" id="login-form">
+            <h1>Gelitaanka Nidaamka</h1>
+            <p>Gali magacaaga iyo sirta (password) si aad gudaha u gasho.</p>
+            <input type="text" id="login-username" class="field login-field" placeholder="Magaca (tusaale: Mawliid)" required>
+            <input type="password" id="login-password" class="field login-field" placeholder="Password" required>
+            <button type="submit" class="btn-primary" style="width:100%;">Gal Gudaha</button>
+        </form>
+    </div>
+
+    <!-- 2. GUDAHA NIDAAMKA -->
+    <div id="system-screen">
+        <div class="container">
+            <div class="top-card">
+                <div>
+                    <strong id="welcome-user">Ku soo dhawoow, Mawliid</strong>
+                    <div style="font-size:0.82rem; color:#64748b;">Shabakadda Diiwaangelinta &amp; Diridda WhatsApp</div>
                 </div>
+                <button type="button" class="btn-logout" id="btn-logout">Ka Bax (Logout)</button>
             </div>
-            <div class="badge" id="total-badge">0 Qof</div>
-        </div>
 
-        <!-- DIIWAANGELINTA QOFKA -->
-        <div class="card">
-            <h2>1. Diiwaangeli Qof Cusub</h2>
-            <div class="form-grid">
-                <input type="text" id="person-name" class="input" placeholder="Magaca qofka *">
-                <input type="tel" id="person-phone" class="input" placeholder="Number-ka WhatsApp (tusaale: +2519...)*">
-                <input type="text" id="person-note" class="input" placeholder="Faallo / Xil (ikhtiyaari)">
-                <button type="button" class="btn-add" id="btn-save-person">+ Kaydi Qofka</button>
+            <div class="card">
+                <h2>Diiwaangeli Qof &amp; Number-kiisa WhatsApp</h2>
+                <div class="grid-3">
+                    <input type="text" id="p-name" class="field" placeholder="Magaca qofka *">
+                    <input type="tel" id="p-phone" class="field" placeholder="Number-ka (tusaale: +251912345678) *">
+                    <input type="text" id="p-note" class="field" placeholder="Faallo / Xil">
+                    <button type="button" class="btn-primary" id="btn-add-person">Ku Dar Liiska</button>
+                </div>
+                <div class="status" id="status-box"></div>
             </div>
-            <div class="status-msg" id="status-msg"></div>
-        </div>
 
-        <!-- FARRIINTA WHATSAPP -->
-        <div class="card">
-            <h2>2. Qor Farriinta Loo Dirayo WhatsApp</h2>
-            <input type="text" id="wa-message" class="input" placeholder="Qor fariinta aad WhatsApp ugu diri rabto (tusaale: Asc, waa Mawliid)..." value="Salaan, waxaa kula soo xiriiraya Mawliid.">
-        </div>
+            <div class="card">
+                <h2>Farriinta Loo Dirayo WhatsApp</h2>
+                <input type="text" id="wa-text" class="field" value="Asc, waan ku salaamay." placeholder="Qor fariinta aad WhatsApp ugu dirayso...">
+            </div>
 
-        <!-- LIISKA DADKA LA DIIWAANGELIYEY -->
-        <div class="card">
-            <h2>3. Dadka Diiwaangashan (<span id="count-label">0</span>)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Magaca</th>
-                        <th>Number-ka</th>
-                        <th>Faallo</th>
-                        <th>Ficil</th>
-                    </tr>
-                </thead>
-                <tbody id="people-tbody">
-                    <tr><td colspan="4" class="empty-row">Weli cidna lama diiwaangelin.</td></tr>
-                </tbody>
-            </table>
+            <div class="card">
+                <h2>Dadka Diiwaangashan (<span id="p-count">0</span>)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Magaca</th>
+                            <th>Number-ka</th>
+                            <th>Faallo</th>
+                            <th>Ficil</th>
+                        </tr>
+                    </thead>
+                    <tbody id="p-tbody">
+                        <tr><td colspan="4" class="empty">Weli cidna lama diiwaangelin.</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const STORAGE_KEY = 'mawliid_whatsapp_people_v1';
-            let people = [];
-
+            const KEY = 'mawliid_simple_whatsapp_contacts_v1';
+            let contacts = [];
             try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (raw) people = JSON.parse(raw) || [];
+                const raw = localStorage.getItem(KEY);
+                if (raw) contacts = JSON.parse(raw) || [];
             } catch (e) {
-                people = [];
+                contacts = [];
             }
 
-            function savePeople() {
+            function persist() {
                 try {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(people));
+                    localStorage.setItem(KEY, JSON.stringify(contacts));
                 } catch (e) {}
             }
 
-            function setStatus(text, isError) {
-                const el = document.getElementById('status-msg');
-                el.style.color = isError ? '#dc2626' : '#15803d';
-                el.textContent = text;
+            function setStatus(msg, isErr) {
+                const box = document.getElementById('status-box');
+                box.style.color = isErr ? '#dc2626' : '#15803d';
+                box.textContent = msg;
             }
 
-            function cleanDigits(phone) {
-                return (phone || '').replace(/[^0-9]/g, '');
+            function normalizePhone(rawPhone) {
+                let digits = (rawPhone || '').replace(/[^0-9]/g, '');
+                if (digits.startsWith('00')) digits = digits.slice(2);
+                if (digits.length === 9 && (digits.startsWith('9') || digits.startsWith('7'))) {
+                    digits = '251' + digits;
+                }
+                return digits;
             }
 
-            function sendWhatsApp(person) {
-                const digits = cleanDigits(person.phone);
+            function openWhatsAppFor(contact) {
+                const digits = normalizePhone(contact.phone);
                 if (!digits) {
-                    setStatus('Number-ka qofkan sax maaha.', true);
+                    setStatus('Number-ka sax maaha. Fadlan geli number leh furaha waddanka (tusaale +251...).', true);
                     return;
                 }
-                const customMsg = document.getElementById('wa-message').value.trim();
-                const finalMsg = customMsg || ('Salaan ' + person.name + ', waxaa kula soo xiriiraya Mawliid.');
-                const url = 'https://wa.me/' + digits + '?text=' + encodeURIComponent(finalMsg);
-                setStatus('Waxaa loo furay WhatsApp: ' + person.name + ' (' + person.phone + ')', false);
-                window.open(url, '_blank', 'noopener,noreferrer');
+                const message = document.getElementById('wa-text').value.trim() || 'Asc.';
+                const waUrl = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(message);
+                setStatus('Waxaa loo dirayaa WhatsApp: ' + contact.name + ' (+' + digits + ')', false);
+                window.open(waUrl, '_blank', 'noopener,noreferrer');
             }
 
-            function renderTable() {
-                document.getElementById('count-label').textContent = people.length;
-                document.getElementById('total-badge').textContent = people.length + ' Qof';
-
-                const tbody = document.getElementById('people-tbody');
-                if (!people.length) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="empty-row">Weli cidna lama diiwaangelin.</td></tr>';
-                    return;
-                }
-
-                tbody.innerHTML = people.map(function(p, idx) {
-                    return '<tr>' +
-                        '<td><strong>' + escapeHtml(p.name) + '</strong></td>' +
-                        '<td>' + escapeHtml(p.phone) + '</td>' +
-                        '<td>' + escapeHtml(p.note || '-') + '</td>' +
-                        '<td>' +
-                            '<button type="button" class="btn-wa send-btn" data-idx="' + idx + '">Dir WhatsApp</button> ' +
-                            '<button type="button" class="btn-del del-btn" data-idx="' + idx + '">Tirtir</button>' +
-                        '</td>' +
-                    '</tr>';
-                }).join('');
-
-                tbody.querySelectorAll('.send-btn').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        const idx = parseInt(this.getAttribute('data-idx'), 10);
-                        if (people[idx]) sendWhatsApp(people[idx]);
-                    });
-                });
-
-                tbody.querySelectorAll('.del-btn').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        const idx = parseInt(this.getAttribute('data-idx'), 10);
-                        people.splice(idx, 1);
-                        savePeople();
-                        renderTable();
-                        setStatus('Qofkii waa laga saaray liiska.', false);
-                    });
-                });
-            }
-
-            function escapeHtml(str) {
-                return String(str)
+            function esc(str) {
+                return String(str || '')
                     .replace(/&/g, '&amp;')
                     .replace(/</g, '&lt;')
                     .replace(/>/g, '&gt;')
                     .replace(/"/g, '&quot;');
             }
 
-            document.getElementById('btn-save-person').addEventListener('click', function() {
-                const nameInput = document.getElementById('person-name');
-                const phoneInput = document.getElementById('person-phone');
-                const noteInput = document.getElementById('person-note');
-
-                const name = nameInput.value.trim();
-                const phone = phoneInput.value.trim();
-                const note = noteInput.value.trim();
-
-                if (!name) {
-                    setStatus('Fadlan qor magaca qofka.', true);
-                    nameInput.focus();
+            function render() {
+                document.getElementById('p-count').textContent = contacts.length;
+                const tbody = document.getElementById('p-tbody');
+                if (!contacts.length) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="empty">Weli cidna lama diiwaangelin.</td></tr>';
                     return;
                 }
 
-                if (!cleanDigits(phone)) {
-                    setStatus('Fadlan qor number telefoon oo sax ah.', true);
-                    phoneInput.focus();
-                    return;
-                }
-
-                people.push({ name: name, phone: phone, note: note });
-                savePeople();
-                renderTable();
-
-                nameInput.value = '';
-                phoneInput.value = '';
-                noteInput.value = '';
-                setStatus('Waa la diiwaangeliyey: ' + name + ' (' + phone + '). Hadda guji "Dir WhatsApp".', false);
-            });
-
-            renderTable();
-        });
-    </script>
-</body>
-</html>
+                tbody.innerHTML = contacts.map(function(c, i) {
+                    return '<tr>' +
+                        '<td><strong>' + esc(c.name) + '</strong></td>' +
+                        '<td>' + esc(c.phone) + '</td>' +
+                        '<td>' + esc(c.note || '-') + '</td>' +
